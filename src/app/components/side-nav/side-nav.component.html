@@ -1,0 +1,100 @@
+<div class="main bg-dark">
+  <div class="card ">
+    <div class="card-header bg-danger p-3"></div>
+    <div class="card-body bg-dark">
+      <img src="assets/images/profile.jpg" alt="" class="profile-pic" />
+      <h5 class="text-center text-light">Mark Daquis</h5>
+      <h6 class="text-center text-secondary">Instructor</h6>
+    </div>
+  </div>
+
+  <div class="card mt-2">
+    <div class="card-body bg-dark p-0">
+      <div class="list-group bg-dark">
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+          [routerLink]="['/dashboard']"
+          routerLinkActive="router-link-active"
+        >
+          <i class="icon ion-md-school text-light mr-3"></i
+          ><span class="text-light">Dashboard</span>
+        </button>
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+          [routerLink]="['/students']"
+          routerLinkActive="router-link-active"
+        >
+          <i class="icon ion-ios-contacts text-light mr-3"></i
+          ><span class="text-light">Students</span>
+        </button>
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+        >
+          <i class="icon ion-ios-paper text-light mr-3"></i
+          ><span class="text-light">Activities</span>
+        </button>
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+        >
+          <i class="icon ion-ios-bookmarks text-light mr-3"></i
+          ><span class="text-light">Libraries</span>
+        </button>
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+          [routerLink]="['/grades']"
+          routerLinkActive="router-link-active"
+        >
+          <i class="icon ion-md-pie text-light mr-3"></i
+          ><span class="text-light">Grades</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-2">
+    <div class="card-body bg-dark p-0">
+      <div class="list-group bg-dark">
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+        >
+          <i class="icon ion-ios-contact text-light mr-3"></i
+          ><span class="text-light">Profile</span>
+        </button>
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+        >
+          <i class="icon ion-md-chatboxes text-light mr-3"></i
+          ><span class="text-light">Messages</span>
+        </button>
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+        >
+          <i class="icon ion-md-settings text-light mr-3"></i
+          ><span class="text-light">Settings</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-2">
+    <div class="card-body bg-dark p-0">
+      <div class="list-group bg-dark">
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+        >
+          <i class="icon ion-md-log-out text-light mr-3"></i
+          ><span class="text-light">Logout</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+.logo {
+  position: fixed;
+  z-index: 99;
+  top: 25px;
+  left: 270px;
+}
+
+.top-nav {
+  margin-left: 250px;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+nav {
+  height: 50px;
+  padding: 10px;
+}
+
+.title {
+  width: 100%;
+  color: white;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-left: 70px;
+}
+
+.notif-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}

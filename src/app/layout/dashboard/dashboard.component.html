@@ -1,0 +1,68 @@
+<app-top-nav [title]="title"> </app-top-nav>
+<app-side-nav> </app-side-nav>
+<div class="main">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card bg-dark mb-2 p-1">
+        <textarea name="" id="" rows="5" class="w-100 p-2"></textarea>
+        <div class="card-footer p-2">
+          <div class="float-right">
+            <select [(ngModel)]="model" placeholder="Select class">
+              <option value="">Class 1</option>
+              <option value="">Class 2</option>
+              <option value="">Class 3</option>
+            </select>
+            <button class="btn btn-dark ml-2">
+              <i class="icon ion-md-attach"></i>
+            </button>
+            <button class="btn btn-dark">POST</button>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-2">
+        <img src="assets/images/class.jpg" alt="" class="card-img-top" />
+        <div class="card-body">
+          <div class="media">
+            <img
+              src="assets/images/profile.jpg"
+              class="profile-img mr-3 rounded-circle"
+              alt="..."
+            />
+            <div class="media-body">
+              <h5 class="mt-0">Media heading</h5>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Id,
+              fugiat porro. Totam nihil et atque asperiores, praesentium
+              suscipit sit ullam.
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="float-right">
+            <button class="btn btn-light">
+              <i class="icon ion-ios-text"></i>
+            </button>
+            <button class="btn btn-light">
+              <i class="icon ion-ios-thumbs-up"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-dark">
+        <div class="card-header text-light">
+          <i class="fa fa-bell mr-2"></i>Notification
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Morbi leo risus</li>
+            <li class="list-group-item">Porta ac consectetur ac</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+.main {
+  padding: 10px;
+  h5 {
+    margin: 40px 0 0;
+    font-size: 14px;
+  }
+
+  h6 {
+    font-size: 12px;
+  }
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+}
+
+.profile-pic {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.side-nav {
+}
