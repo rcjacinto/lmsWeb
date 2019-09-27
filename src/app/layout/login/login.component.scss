@@ -1,0 +1,58 @@
+.main {
+  min-height: calc(100vh);
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)),
+    url(../../../assets/images/class.jpg) no-repeat center;
+  background-size: cover;
+  padding-top: 80px;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.main h1 {
+  font-size: 55px;
+  text-shadow: 2px 2px 5px black;
+}
+
+.main p {
+  font-size: 20px;
+  text-shadow: 2px 2px 2px black;
+  color: bisque;
+}
+
+.main input {
+  box-shadow: 2px 2px 5px black;
+  background-color: transparent;
+  padding: 5px;
+  color: bisque;
+}
+
+.logo {
+  max-height: 20vh;
+  margin: 10px auto 25px;
+  display: block;
+}
+
+#login-row {
+  background: url(../../../assets/images/connection-contemporary.jpg) no-repeat
+    left;
+  background-size: contain;
+}
+
+#login-right {
+  background-image: linear-gradient(
+    to left,
+    #212121,
+    #212121,
+    #212121,
+    transparent
+  );
+}
+
+#register {
+  background: url(../../../assets/images/artificial-flowers.jpg) no-repeat right;
+  background-size: contain;
+}
+
+#register-left {
+  background-image: linear-gradient(to right, #212121, #212121, transparent);
+}

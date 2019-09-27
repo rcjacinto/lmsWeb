@@ -1,1 +1,199 @@
-<p>login works!</p>
+<div class="main h-100 w-100">
+  <img src="assets/images/trimex.png" class="logo" />
+  <h1 class="text-center">
+    <span class="text-danger">LMS </span> <span class="text-light">ONLINE</span>
+  </h1>
+  <p class="text-center">
+    Enhancing Teaching Approaches on Selected Program in Senior High School
+    Utilizing Android Mobile Application: With Learning Management System
+  </p>
+  <hr />
+  <div class="text-center mt-3 mb-5">
+    <p class="text-danger">Join now</p>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-4">
+        <input
+          type="submit"
+          data-dismiss="modal"
+          data-toggle="modal"
+          data-target=".login"
+          value="Login"
+          class="hover-primary
+        w-100 mb-2 rounded text-white border-primary"
+        />
+      </div>
+      <div class="col-sm-4">
+        <input
+          type="submit"
+          data-dismiss="modal"
+          data-toggle="modal"
+          data-target=".register"
+          value="Register"
+          class="hover-primary w-100
+        mb-2 rounded text-white border-primary"
+        />
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade register"
+  tabIndex="-1"
+  role="dialog"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="row" id="register">
+        <div class="col-lg-6 rounded-left" id="register-left">
+          <form class="px-3" onSubmit="{registerAccount}">
+            <div class="clearfix mb-4">
+              <h2 class="mb-4">
+                <strong class="text-secondary float-left">
+                  <span class="text-light">Register</span> -
+                  <span class="text-primary text-capitalize">{{ role }}</span>
+                </strong>
+              </h2>
+            </div>
+            <div class="form-group row">
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="First name"
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Last name"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="email@example.com"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Password"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Confirm password"
+              />
+            </div>
+            <hr />
+
+            <div class="form-group" *ngIf="role == 'student'">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Classroom Code"
+              />
+            </div>
+
+            <div class="form-group">
+              <input
+                type="submit"
+                class="form-control btn btn-danger"
+                value="Register"
+              />
+            </div>
+            <hr class="mx-auto bg-secondary w-50" />
+            <div class="form-group text-center mb-3">
+              <button
+                class="btn bg-transparent text-primary"
+                (click)="changeRole()"
+              >
+                {{ role == 'instructor' ? 'Im a Student' : 'Im an Instructor' }}
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-6 rounded-right bg-transparent">
+          <button
+            class="btn bg-transparent border-secondary rounded-circle py-1 px-2 float-right text-light mt-3"
+          >
+            <i class="fa fa-times smaller" data-dismiss="modal"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade login"
+  tabIndex="-1"
+  role="dialog"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="row" id="login-row">
+        <div class="col-lg-6 rounded-left bg-transparent"></div>
+        <div class="col-lg-6 rounded-right" id="login-right">
+          <form class="px-3">
+            <div class="clearfix mb-4">
+              <button
+                class="btn bg-transparent border-secondary rounded-circle py-1 px-2 float-right text-light mt-3"
+              >
+                <i class="fa fa-times smaller" data-dismiss="modal"></i>
+              </button>
+              <h1 class="mb-4">
+                <strong class="text-light float-left">
+                  <a>Login</a>
+                </strong>
+              </h1>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="email@example.com"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Password"
+              />
+            </div>
+            <hr />
+            <div class="form-group">
+              <input
+                type="button"
+                class="form-control btn btn-danger"
+                value="Login"
+              />
+            </div>
+            <div class="form-group text-center mb-5">
+              <p class="text-secondary">or</p>
+              <a href=".register" data-dismiss="modal" data-toggle="modal">
+                Register
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
