@@ -17,7 +17,14 @@ import { ProfileComponent } from './layout/profile/profile.component';
 import { MessagesComponent } from './layout/messages/messages.component';
 import { SettingsComponent } from './layout/settings/settings.component';
 import { LoginComponent } from './layout/login/login.component';
-
+import { MetaReducer, StoreModule } from '@ngrx/store';
+import { storageSyncReducer, reducers } from './store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from 'src/environments/environment';
+const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +45,12 @@ import { LoginComponent } from './layout/login/login.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [],
   bootstrap: [AppComponent]
