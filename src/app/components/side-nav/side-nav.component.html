@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div class="card mt-2">
+  <div class="card mt-2" *ngIf="false">
     <div class="card-body bg-dark p-0">
       <div class="list-group bg-dark">
         <button
@@ -32,6 +32,8 @@
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
+          [routerLink]="['/activities']"
+          routerLinkActive="router-link-active"
         >
           <i class="icon ion-ios-paper text-light mr-3"></i
           ><span class="text-light">Activities</span>
@@ -39,6 +41,8 @@
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
+          [routerLink]="['/library']"
+          routerLinkActive="router-link-active"
         >
           <i class="icon ion-ios-bookmarks text-light mr-3"></i
           ><span class="text-light">Libraries</span>
@@ -51,6 +55,54 @@
         >
           <i class="icon ion-md-pie text-light mr-3"></i
           ><span class="text-light">Grades</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-2" *ngIf="true">
+    <div class="card-body bg-dark p-0">
+      <div class="list-group bg-dark">
+        <a
+          href="#classes"
+          data-toggle="collapse"
+          aria-expanded="false"
+          class="list-group-item list-group-item-action bg-dark text-light dropdown-toggle"
+          ><i class="icon ion-md-bookmarks mr-3"></i> Classes
+        </a>
+        <ul class="collapse list-unstyled" id="classes">
+          <li>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action bg-dark"
+            >
+              <i class="icon ion-md-bookmark text-light mr-3"></i
+              ><span class="text-light">Class 1</span>
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action bg-dark"
+            >
+              <i class="icon ion-md-bookmark text-light mr-3"></i
+              ><span class="text-light">Class 2</span>
+            </button>
+          </li>
+        </ul>
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+        >
+          <i class="icon ion-md-add text-light mr-3"></i
+          ><span class="text-light">Add Class</span>
+        </button>
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+        >
+          <i class="icon ion-ios-cog text-light mr-3"></i
+          ><span class="text-light">Manage Class</span>
         </button>
       </div>
     </div>
