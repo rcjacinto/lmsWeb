@@ -6,26 +6,31 @@ import {
 } from '@ngrx/store';
 import { storageSync } from '@larscom/ngrx-store-storagesync';
 import * as fromUser from './user/user.reducer';
+import * as fromClasses from './classes/classes.reducer';
 import { User } from '../models/user.model';
+import { Class } from '../models/class.model';
 
 export interface RootState {
   users: User;
+  class: Class;
 }
 
 export const reducers: ActionReducerMap<RootState> = {
-  users: fromUser.reducer
+  users: fromUser.reducer,
+  class: fromClasses.reducer
 };
 
 export function storageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return storageSync<RootState>({
-    features: [{ stateKey: 'users' }],
+    features: [{ stateKey: 'users' }, { stateKey: 'classs' }],
     storage: window.localStorage
   })(reducer);
 }
 
 export const selectUserState = createFeatureSelector<User>('users');
+export const selectClassState = createFeatureSelector<Class>('class');
 
 export const selectUser = createSelector(
   selectUserState,
@@ -50,4 +55,10 @@ export const selectName = createSelector(
 export const selectProfilePic = createSelector(
   selectUser,
   user => user.image
+);
+
+// classes
+export const selectClass = createSelector(
+  selectClassState,
+  state => state
 );
