@@ -20,6 +20,7 @@ import { MetaReducer, StoreModule } from '@ngrx/store';
 import { storageSyncReducer, reducers } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 // Firebase Module
 import { environment } from 'src/environments/environment';
@@ -63,7 +64,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     StoreDevtoolsModule.instrument(),
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-    NgbModule
+    NgbModule,
+    NgxSpinnerModule
   ],
   providers: [AuthGuard, AngularFireStorage],
   bootstrap: [AppComponent]

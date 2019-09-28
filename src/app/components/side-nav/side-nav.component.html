@@ -2,13 +2,30 @@
   <div class="card ">
     <div class="card-header bg-danger p-3"></div>
     <div class="card-body bg-dark">
-      <img src="assets/images/profile.jpg" alt="" class="profile-pic" />
-      <h5 class="text-center text-light">Mark Daquis</h5>
-      <h6 class="text-center text-secondary">Instructor</h6>
+      <img [src]="user.image" alt="" class="profile-pic" />
+      <h5 class="text-center text-light">
+        {{ user.name.first }} {{ user.name.last }}
+      </h5>
+      <h6 class="text-center text-secondary text-capitalize">
+        {{ user.role }}
+      </h6>
     </div>
   </div>
 
-  <div class="card mt-2" *ngIf="false">
+  <div class="card mt-2" *ngIf="selectedClass.name.trim() !== ''">
+    <button
+      type="button"
+      class="list-group-item list-group-item-action bg-dark"
+      (click)="resetClass()"
+      [routerLink]="['/dashboard']"
+      routerLinkActive="router-link-active"
+    >
+      <i [class]="'icon ion-md-bookmarks mr-3 text-' + selectedClass.color"></i
+      ><span class="text-light">{{ selectedClass.name }}</span>
+    </button>
+  </div>
+
+  <div class="card mt-2" *ngIf="selectedClass.name.trim() !== ''">
     <div class="card-body bg-dark p-0">
       <div class="list-group bg-dark">
         <button
@@ -17,7 +34,7 @@
           [routerLink]="['/dashboard']"
           routerLinkActive="router-link-active"
         >
-          <i class="icon ion-md-school text-light mr-3"></i
+          <i [class]="'icon ion-md-school mr-3 text-' + selectedClass.color"></i
           ><span class="text-light">Dashboard</span>
         </button>
         <button
@@ -26,7 +43,9 @@
           [routerLink]="['/students']"
           routerLinkActive="router-link-active"
         >
-          <i class="icon ion-ios-contacts text-light mr-3"></i
+          <i
+            [class]="'icon ion-ios-contacts mr-3 text-' + selectedClass.color"
+          ></i
           ><span class="text-light">Students</span>
         </button>
         <button
@@ -35,7 +54,7 @@
           [routerLink]="['/activities']"
           routerLinkActive="router-link-active"
         >
-          <i class="icon ion-ios-paper text-light mr-3"></i
+          <i [class]="'icon ion-ios-paper mr-3 text-' + selectedClass.color"></i
           ><span class="text-light">Activities</span>
         </button>
         <button
@@ -44,7 +63,9 @@
           [routerLink]="['/library']"
           routerLinkActive="router-link-active"
         >
-          <i class="icon ion-ios-bookmarks text-light mr-3"></i
+          <i
+            [class]="'icon ion-ios-bookmarks mr-3 text-' + selectedClass.color"
+          ></i
           ><span class="text-light">Libraries</span>
         </button>
         <button
@@ -53,14 +74,14 @@
           [routerLink]="['/grades']"
           routerLinkActive="router-link-active"
         >
-          <i class="icon ion-md-pie text-light mr-3"></i
+          <i [class]="'icon ion-md-pie mr-3 text-' + selectedClass.color"></i
           ><span class="text-light">Grades</span>
         </button>
       </div>
     </div>
   </div>
 
-  <div class="card mt-2" *ngIf="true">
+  <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
     <div class="card-body bg-dark p-0">
       <div class="list-group bg-dark">
         <a
@@ -71,28 +92,24 @@
           ><i class="icon ion-md-bookmarks mr-3"></i> Classes
         </a>
         <ul class="collapse list-unstyled" id="classes">
-          <li>
+          <li *ngFor="let class of classList">
             <button
               type="button"
               class="list-group-item list-group-item-action bg-dark"
+              (click)="setSelectedClass(class)"
             >
-              <i class="icon ion-md-bookmark text-light mr-3"></i
-              ><span class="text-light">Class 1</span>
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              class="list-group-item list-group-item-action bg-dark"
-            >
-              <i class="icon ion-md-bookmark text-light mr-3"></i
-              ><span class="text-light">Class 2</span>
+              <i
+                class="icon ion-md-bookmark mr-3"
+                [class]="'icon ion-md-bookmark mr-3 text-' + class.color"
+              ></i
+              ><span class="text-light">{{ class.name }}</span>
             </button>
           </li>
         </ul>
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
+          (click)="openAddClassModal(addClassModal)"
         >
           <i class="icon ion-md-add text-light mr-3"></i
           ><span class="text-light">Add Class</span>
@@ -150,3 +167,67 @@
     </div>
   </div>
 </div>
+
+<ng-template #addClassModal let-c="close" let-d="dismiss">
+  <div class="modal-header bg-dark">
+    <h4 class="modal-title text-light">Add Class</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    >
+      <span aria-hidden="true" class="text-light">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="">Class name:</span>
+      </div>
+      <input type="text" class="form-control" [(ngModel)]="newClassname" />
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="">Description:</span>
+      </div>
+      <input type="text" class="form-control" [(ngModel)]="newDescription" />
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" for="inputColors">Class Color:</span>
+      </div>
+      <select
+        [class]="
+          newColor != 'yellow'
+            ? 'custom-select text-light bg-' + newColor
+            : 'custom-select text-dark bg-' + newColor
+        "
+        id="inputColors"
+        [(ngModel)]="newColor"
+      >
+        <option selected>Choose...</option>
+        <option value="red">Red</option>
+        <option value="orange">Orange</option>
+        <option value="yellow">Yellow</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+        <option value="grey">Grey</option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="addNewClass()">
+      Save
+    </button>
+  </div>
+</ng-template>
+<ngx-spinner
+  bdOpacity="0.5"
+  bdColor="rgba(51,51,51,0.6)"
+  size="default"
+  color="#fff"
+  type="ball-pulse-sync"
+  [fullScreen]="true"
+>
+</ngx-spinner>

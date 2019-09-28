@@ -18,7 +18,7 @@ export class ClassService {
 
   private classes: Observable<Class[]>;
 
-  constructor(db: AngularFirestore, public store: Store<RootState>) {
+  constructor(public db: AngularFirestore, public store: Store<RootState>) {
     this.userData$.subscribe(user => {
       this.classCollection = db.collection<Class>('class', ref =>
         ref
@@ -38,8 +38,23 @@ export class ClassService {
     });
   }
 
-  getclass() {
-    return this.classes;
+  getAllclasses(user_id) {
+    return this.db
+      .collection<Class>('class', ref =>
+        ref
+          .where('instructor.id', '==', user_id)
+          .orderBy('date.created', 'desc')
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
   }
 
   getClass(id) {

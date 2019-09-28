@@ -24,7 +24,7 @@ export function storageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return storageSync<RootState>({
-    features: [{ stateKey: 'users' }, { stateKey: 'classs' }],
+    features: [{ stateKey: 'users' }, { stateKey: 'class' }],
     storage: window.localStorage
   })(reducer);
 }

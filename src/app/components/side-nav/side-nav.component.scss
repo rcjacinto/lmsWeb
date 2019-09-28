@@ -14,6 +14,7 @@
   left: 0;
   width: 250px;
   height: 100%;
+  overflow: scroll;
 }
 
 .profile-pic {
@@ -24,7 +25,4 @@
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-}
-
-.side-nav {
 }
