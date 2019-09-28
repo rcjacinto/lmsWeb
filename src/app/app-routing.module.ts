@@ -9,6 +9,7 @@ import { ProfileComponent } from './layout/profile/profile.component';
 import { MessagesComponent } from './layout/messages/messages.component';
 import { SettingsComponent } from './layout/settings/settings.component';
 import { LoginComponent } from './layout/login/login.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -18,39 +19,48 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'grades',
-    component: GradesComponent
+    component: GradesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'students',
-    component: StudentsComponent
+    component: StudentsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'library',
-    component: LibraryComponent
+    component: LibraryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'activities',
-    component: ActivitiesComponent
+    component: ActivitiesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'messages',
-    component: MessagesComponent
+    component: MessagesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'settings',
-    component: SettingsComponent
+    component: SettingsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
