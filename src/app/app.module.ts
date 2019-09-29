@@ -33,6 +33,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AuthGuard } from './services/auth.guard';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreateActivityComponent } from './layout/create-activity/create-activity.component';
 const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 
 @NgModule({
@@ -48,7 +49,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     ProfileComponent,
     MessagesComponent,
     SettingsComponent,
-    LoginComponent
+    LoginComponent,
+    CreateActivityComponent
   ],
   imports: [
     CommonModule,

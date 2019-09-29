@@ -48,7 +48,7 @@
           ></i
           ><span class="text-light">Students</span>
         </button>
-        <button
+        <!-- <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
           [routerLink]="['/activities']"
@@ -56,7 +56,63 @@
         >
           <i [class]="'icon ion-ios-paper mr-3 text-' + selectedClass.color"></i
           ><span class="text-light">Activities</span>
-        </button>
+        </button> -->
+        <div class="list-group bg-dark">
+          <a
+            href="#activities"
+            data-toggle="collapse"
+            aria-expanded="false"
+            class="list-group-item list-group-item-action bg-dark text-light dropdown-toggle"
+            ><i
+              [class]="'icon ion-ios-paper mr-3 text-' + selectedClass.color"
+            ></i>
+            Activities
+          </a>
+          <ul class="collapse list-unstyled m-0" id="activities">
+            <li>
+              <button
+                type="button"
+                class="list-group-item list-group-item-action bg-dark"
+                [routerLink]="['/activities/quiz']"
+                routerLinkActive="router-link-active"
+              >
+                <i
+                  [class]="
+                    'icon ion-ios-create mx-3 text-' + selectedClass.color
+                  "
+                ></i
+                ><span class="text-light">Quizzes</span>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="list-group-item list-group-item-action bg-dark"
+                [routerLink]="['/activities/exams']"
+                routerLinkActive="router-link-active"
+              >
+                <i
+                  [class]="
+                    'icon ion-ios-journal mx-3 text-' + selectedClass.color
+                  "
+                ></i
+                ><span class="text-light">Exams</span>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="list-group-item list-group-item-action bg-dark"
+                [routerLink]="['/activities/exams']"
+                routerLinkActive="router-link-active"
+              >
+                <i class="icon ion-md-add mx-3 text-light"></i
+                ><span class="text-light">Create</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
