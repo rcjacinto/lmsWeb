@@ -1,3 +1,87 @@
-<app-top-nav [title]="title"> </app-top-nav>
+<app-top-nav title="Grades"> </app-top-nav>
 <app-side-nav> </app-side-nav>
-<div class="main container"></div>
+<div class="main">
+  <div class="row">
+    <div class="col-md-8">
+      <input
+        type="text"
+        class="form-control mb-3"
+        placeholder="Search Student ..."
+      />
+      <hr />
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active">Prelim</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light">Midterm</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light">Pre-Finals</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light">Finals</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light">Total</a>
+        </li>
+      </ul>
+      <div class="bg-light p-3">
+        <div class="row">
+          <div class="col">
+            <table class="table table-light">
+              <thead>
+                <tr>
+                  <th scope="col">Student</th>
+                  <th scope="col">Performance (60%)</th>
+                  <th scope="col">Quiz (10%)</th>
+                  <th scope="col">Exams (30%)</th>
+                  <th scope="col">Total (100%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Hiroshi Cruz</td>
+                  <td class="text-center">60%</td>
+                  <td class="text-center">10%</td>
+                  <td class="text-center">30%</td>
+                  <td class="text-center">100%</td>
+                </tr>
+                <tr>
+                  <td>Hiroshi Cruz</td>
+                  <td class="text-center">60%</td>
+                  <td class="text-center">10%</td>
+                  <td class="text-center">30%</td>
+                  <td class="text-center">100%</td>
+                </tr>
+                <tr>
+                  <td>Hiroshi Cruz</td>
+                  <td class="text-center">60%</td>
+                  <td class="text-center">10%</td>
+                  <td class="text-center">30%</td>
+                  <td class="text-center">100%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-dark">
+        <div class="card-header text-light">
+          <i class="fa fa-bell mr-2"></i>Notification
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Morbi leo risus</li>
+            <li class="list-group-item">Porta ac consectetur ac</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
