@@ -10,6 +10,7 @@ import { MessagesComponent } from './layout/messages/messages.component';
 import { SettingsComponent } from './layout/settings/settings.component';
 import { LoginComponent } from './layout/login/login.component';
 import { AuthGuard } from './services/auth.guard';
+import { CreateActivityComponent } from './layout/create-activity/create-activity.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'create-activities',
+    component: CreateActivityComponent
   }
 ];
 

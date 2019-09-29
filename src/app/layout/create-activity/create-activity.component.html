@@ -1,0 +1,238 @@
+<app-top-nav title="Create Activity"> </app-top-nav>
+<app-side-nav> </app-side-nav>
+<div class="main">
+  <div class="row">
+    <div class="col-md-6">
+      <div class=" form-row mb-3">
+        <div class="col">
+          <label class="text-light">Type</label>
+          <select
+            name=""
+            id=""
+            class="custom-select"
+            [(ngModel)]="activityType"
+          >
+            <option value="quiz" checked>Quiz</option>
+            <option value="exam">Exam</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="text-light">Term</label>
+          <select name="" id="" class="custom-select" [(ngModel)]="term">
+            <option value="prelim" checked>Prelim</option>
+            <option value="midterm">Midterm</option>
+            <option value="pre-finals">Pre-Finals</option>
+            <option value="finals">Finals</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="text-light">Title</label>
+        <input type="text" class="form-control" [(ngModel)]="title" />
+      </div>
+      <div class="form-group">
+        <label class="text-light">Instruction</label>
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="5"
+          class="form-control"
+          [(ngModel)]="instruction"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label class="text-light">Time Limit</label>
+        <ng5-slider [(value)]="timeLimit" [options]="options"></ng5-slider>
+      </div>
+
+      <div class="card mb-2" *ngIf="questions.length > 0">
+        <table class="table table-striped">
+          <thead class="bg-dark text-light">
+            <tr>
+              <th>#</th>
+              <th>Question</th>
+              <th>Pts</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let q of questions">
+              <td>{{ q.number }}</td>
+              <td>
+                {{ q.text }}
+              </td>
+              <td>{{ q.points }}</td>
+              <td>
+                <button class="btn btn-danger btn-sm m-1 float-right">
+                  <i class="fa fa-trash-o small"></i>
+                </button>
+                <button class="btn btn-secondary btn-sm m-1 float-right">
+                  <i class="fa fa-pencil-square-o small"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <button
+          class="btn btn-primary w-100"
+          *ngIf="questions.length > 0"
+          (click)="saveActivity()"
+        >
+          Save <span class="text-capitalize">{{ activityType }}</span
+          ><i class="fa fa-fw fa-save"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="text-light">Question #</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="question.number"
+        />
+      </div>
+      <div class="form-group">
+        <label class="text-light">Question Type</label>
+        <select [(ngModel)]="question.type" class="custom-select">
+          <option value="mc">Multiple Choices</option>
+          <option value="sa">Short Answer</option>
+          <option value="tof">True or False</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="text-light">Question Text</label>
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="5"
+          class="form-control"
+          [(ngModel)]="question.text"
+        ></textarea>
+      </div>
+      <div [ngSwitch]="question.type">
+        <div class="mc-options" *ngSwitchCase="'mc'">
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">A</span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="mcOptions[0].value"
+            />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <input
+                  type="radio"
+                  name="mc-correct"
+                  checked
+                  (click)="setAsCorrectAnswer(0)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">B</span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="mcOptions[1].value"
+            />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <input
+                  type="radio"
+                  name="mc-correct"
+                  (click)="setAsCorrectAnswer(1)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">C</span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="mcOptions[2].value"
+            />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <input
+                  type="radio"
+                  name="mc-correct"
+                  (click)="setAsCorrectAnswer(2)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">D</span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="mcOptions[3].value"
+            />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <input
+                  type="radio"
+                  name="mc-correct"
+                  (click)="setAsCorrectAnswer(3)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tof-options" *ngSwitchCase="'tof'">
+          <div class="form-group">
+            <label class="text-light">Correct Answer</label>
+            <select
+              name=""
+              id=""
+              class="custom-select"
+              [(ngModel)]="tofCorrectAnswer.value"
+            >
+              <option value="true">True</option>
+              <option value="false">False</option>
+            </select>
+          </div>
+        </div>
+        <div class="sa-answer" *ngSwitchCase="'sa'">
+          <div class="form-group">
+            <label class="text-light">Correct Answer</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="saAnswer.value"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="text-light">Points</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="question.points"
+        />
+      </div>
+
+      <button class="btn btn-primary w-100" (click)="addQuestion()">
+        <i class="fa fa-fw fa-plus"></i> Add Question
+      </button>
+    </div>
+  </div>
+</div>
