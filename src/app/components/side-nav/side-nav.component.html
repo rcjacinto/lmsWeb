@@ -20,8 +20,8 @@
       [routerLink]="['/dashboard']"
       routerLinkActive="router-link-active"
     >
-      <i [class]="'icon ion-md-bookmarks mr-3 text-' + selectedClass.color"></i
-      ><span class="text-light">{{ selectedClass.name }}</span>
+      <i [class]="'icon ion-md-school mr-3 text-' + selectedClass.color"></i
+      ><span class="text-light">Dashboard</span>
     </button>
   </div>
 
@@ -34,8 +34,10 @@
           [routerLink]="['/dashboard']"
           routerLinkActive="router-link-active"
         >
-          <i [class]="'icon ion-md-school mr-3 text-' + selectedClass.color"></i
-          ><span class="text-light">Dashboard</span>
+          <i
+            [class]="'icon ion-md-bookmarks mr-3 text-' + selectedClass.color"
+          ></i
+          ><span class="text-light">{{ selectedClass.name }}</span>
         </button>
         <button
           type="button"
