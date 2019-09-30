@@ -1,4 +1,11 @@
-<app-top-nav title="Activities"> </app-top-nav>
+<app-top-nav
+  [title]="
+    'Activities - ' +
+    activityType.charAt(0).toUpperCase() +
+    activityType.slice(1)
+  "
+>
+</app-top-nav>
 <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="row">

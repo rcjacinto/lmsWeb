@@ -27,6 +27,7 @@ export class ActivitiesComponent implements OnInit {
     private store: Store<RootState>
   ) {
     this.route.paramMap.subscribe((map: any) => {
+      this.isOnView = false;
       console.log(map.params);
       this.loading = true;
       this.activityType = map.params.type;
