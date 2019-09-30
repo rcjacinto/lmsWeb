@@ -128,6 +128,7 @@ export class CreateActivityComponent implements OnInit {
         console.log(this.questions);
         this.clearQuestionFields();
         this.toastr.success('Question added');
+        this.sortQuestions();
       } else {
         this.toastr.error('Please fill all the options');
       }
@@ -141,12 +142,14 @@ export class CreateActivityComponent implements OnInit {
         this.questions.push(JSON.parse(JSON.stringify(this.question)));
         this.clearQuestionFields();
         this.toastr.success('Question added');
+        this.sortQuestions();
       } else {
         this.toastr.error('Please fill all fields');
       }
     } else if (this.question.type == 'tof') {
       this.question.options.push(this.tofCorrectAnswer);
       this.questions.push(JSON.parse(JSON.stringify(this.question)));
+      this.sortQuestions();
       this.clearQuestionFields();
       this.toastr.success('Question added');
     }
@@ -266,5 +269,11 @@ export class CreateActivityComponent implements OnInit {
     this.instruction = '';
     this.timeLimit = 10;
     this.questions = [];
+  }
+
+  sortQuestions() {
+    this.questions.sort((a, b) => {
+      return a.number - b.number;
+    });
   }
 }
