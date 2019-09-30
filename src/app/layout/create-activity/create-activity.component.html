@@ -3,6 +3,10 @@
 <div class="main">
   <div class="row">
     <div class="col-md-6">
+      <div class="form-group">
+        <label class="text-light">Title</label>
+        <input type="text" class="form-control" [(ngModel)]="title" />
+      </div>
       <div class=" form-row mb-3">
         <div class="col">
           <label class="text-light">Type</label>
@@ -26,11 +30,6 @@
           </select>
         </div>
       </div>
-
-      <div class="form-group">
-        <label class="text-light">Title</label>
-        <input type="text" class="form-control" [(ngModel)]="title" />
-      </div>
       <div class="form-group">
         <label class="text-light">Instruction</label>
         <textarea
@@ -41,6 +40,29 @@
           class="form-control"
           [(ngModel)]="instruction"
         ></textarea>
+      </div>
+      <div class="form-group">
+        <label class="text-light">Deadline</label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            [(ngModel)]="deadline"
+            ngbDatepicker
+            #d="ngbDatepicker"
+            readonly
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-dark calendar"
+              (click)="d.toggle()"
+              type="button"
+            >
+              <i class="fa fa-calendar-o" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label class="text-light">Time Limit</label>

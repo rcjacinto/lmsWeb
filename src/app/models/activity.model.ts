@@ -7,12 +7,18 @@ export interface Activity {
   instruction: string;
   time_limit: number;
   questions: Question[];
-  instructor: {
-    name: string;
+  class: {
     id: string;
+    name: string;
+  };
+  instructor: {
+    id: string;
+    name: string;
   };
   date: {
     created: Date;
     modified: Date;
   };
+  deadline?: Date;
+  submits?: any[];
 }

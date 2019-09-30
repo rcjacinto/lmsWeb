@@ -6,8 +6,9 @@ import { Activity } from 'src/app/models/activity.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { select, Store } from '@ngrx/store';
-import { selectUser, RootState } from 'src/app/store';
+import { selectUser, RootState, selectClass } from 'src/app/store';
 import { User } from 'src/app/models/user.model';
+import { Class } from 'src/app/models/class.model';
 
 @Component({
   selector: 'app-create-activity',
@@ -16,12 +17,15 @@ import { User } from 'src/app/models/user.model';
 })
 export class CreateActivityComponent implements OnInit {
   userData$ = this.store.pipe(select(selectUser));
+  selectedClassData$ = this.store.pipe(select(selectClass));
+  selectedClass: Class;
   user: User;
   activityType = 'quiz';
   title = '';
   term = 'prelim';
   instruction = '';
   timeLimit = 10;
+  deadline: any;
   questions: Question[] = [];
   question: Question = {
     type: 'mc',
@@ -92,6 +96,9 @@ export class CreateActivityComponent implements OnInit {
     this.userData$.subscribe(user => {
       this.user = user;
     });
+    this.selectedClassData$.subscribe(sClass => {
+      this.selectedClass = sClass;
+    });
   }
 
   ngOnInit() {}
@@ -146,6 +153,12 @@ export class CreateActivityComponent implements OnInit {
   }
 
   saveActivity() {
+    if (this.deadline === undefined) {
+      return this.toastr.error('Please select date for the deadline');
+    }
+    const newDeadline = `${this.deadline.year}-${this.deadline.month}-${this.deadline.day} 11:59 PM`;
+    console.log(new Date(newDeadline));
+
     if (
       this.title.trim() == '' ||
       this.instruction.trim() == '' ||
@@ -161,6 +174,10 @@ export class CreateActivityComponent implements OnInit {
         term: this.term,
         time_limit: this.timeLimit,
         title: this.title,
+        class: {
+          name: this.selectedClass.name,
+          id: this.selectedClass.id
+        },
         instructor: {
           name: this.user.name.first + ' ' + this.user.name.last,
           id: this.user.id
@@ -168,8 +185,10 @@ export class CreateActivityComponent implements OnInit {
         date: {
           created: new Date(),
           modified: new Date()
-        }
+        },
+        deadline: new Date(newDeadline)
       };
+
       this.spinner.show();
       this.activityService
         .addActivity(newActivity)
