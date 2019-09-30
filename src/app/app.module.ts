@@ -22,6 +22,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { Ng5SliderModule } from 'ng5-slider';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 // Firebase Module
 import { environment } from 'src/environments/environment';
@@ -69,7 +70,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     ToastrModule.forRoot(),
     NgbModule,
     NgxSpinnerModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    NgxSkeletonLoaderModule
   ],
   providers: [AuthGuard, AngularFireStorage],
   bootstrap: [AppComponent]

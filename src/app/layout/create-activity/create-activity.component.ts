@@ -169,6 +169,7 @@ export class CreateActivityComponent implements OnInit {
 
     if (this.questions.length > 0) {
       const newActivity: Activity = {
+        type: this.activityType,
         instruction: this.instruction,
         questions: this.questions,
         term: this.term,

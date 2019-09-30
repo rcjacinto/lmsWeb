@@ -4,6 +4,7 @@ export interface Activity {
   id?: string;
   term: string;
   title: string;
+  type: string;
   instruction: string;
   time_limit: number;
   questions: Question[];

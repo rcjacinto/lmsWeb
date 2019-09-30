@@ -15,7 +15,7 @@ export class ActivityService {
 
   private activity: Observable<Activity[]>;
 
-  constructor(db: AngularFirestore) {
+  constructor(private db: AngularFirestore) {
     this.activityCollection = db.collection<Activity>('activity');
 
     this.activity = this.activityCollection.snapshotChanges().pipe(
@@ -35,6 +35,26 @@ export class ActivityService {
 
   getActivity(id) {
     return this.activityCollection.doc<Activity>(id).valueChanges();
+  }
+
+  getActivityByType(classId, type) {
+    return this.db
+      .collection<Activity>('activity', ref =>
+        ref
+          .where('class.id', '==', classId)
+          .where('type', '==', type)
+          .orderBy('date.modified', 'desc')
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
   }
 
   updateActivity(activity: Activity, id: string) {
