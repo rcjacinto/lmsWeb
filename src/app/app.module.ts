@@ -31,11 +31,13 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { ChartsModule } from 'ng2-charts';
 
 import { AuthGuard } from './services/auth.guard';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateActivityComponent } from './layout/create-activity/create-activity.component';
+import { ViewActivityComponent } from './components/view-activity/view-activity.component';
 const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 
 @NgModule({
@@ -52,7 +54,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     MessagesComponent,
     SettingsComponent,
     LoginComponent,
-    CreateActivityComponent
+    CreateActivityComponent,
+    ViewActivityComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +74,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     NgbModule,
     NgxSpinnerModule,
     Ng5SliderModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    ChartsModule
   ],
   providers: [AuthGuard, AngularFireStorage],
   bootstrap: [AppComponent]

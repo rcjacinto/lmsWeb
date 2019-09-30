@@ -17,6 +17,10 @@ export class ActivitiesComponent implements OnInit {
   activityList: Activity[];
   activityType: string;
   loading = false;
+
+  isOnView = false;
+  selectedActivity: Activity;
+
   constructor(
     private route: ActivatedRoute,
     private activityService: ActivityService,
@@ -41,4 +45,14 @@ export class ActivitiesComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  setSelectedActivity(activity) {
+    console.log(activity);
+    this.isOnView = true;
+    this.selectedActivity = activity;
+  }
+
+  clearSelectedActivity() {
+    this.isOnView = false;
+  }
 }

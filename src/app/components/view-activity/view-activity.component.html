@@ -1,0 +1,65 @@
+<div class="chart mb-3 card">
+  <div class="card-header bg-dark">
+    <p class="text-center m-0 text-center text-light">Exam Pie Chart</p>
+  </div>
+  <div class="card-body">
+    <canvas
+      baseChart
+      [data]="pieChartData"
+      [labels]="pieChartLabels"
+      [chartType]="pieChartType"
+      [options]="pieChartOptions"
+      [colors]="pieChartColors"
+      [legend]="pieChartLegend"
+    >
+    </canvas>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <table class="table">
+    <thead>
+      <tr class="bg-dark">
+        <th colspan="13" class="text-center text-light">Item Analysis</th>
+      </tr>
+      <tr>
+        <th>#</th>
+        <th>Correct Students</th>
+        <th>Incorrect Students</th>
+        <th>Student Graph</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="row">1</td>
+        <td>12%</td>
+        <td>5%</td>
+        <td>
+          <button class="btn btn-primary btn-sm w-100">
+            View
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td scope="row">2</td>
+        <td>12%</td>
+        <td>5%</td>
+        <td>
+          <button class="btn btn-primary btn-sm w-100">
+            View
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td scope="row">3</td>
+        <td>12%</td>
+        <td>5%</td>
+        <td>
+          <button class="btn btn-primary btn-sm w-100">
+            View
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

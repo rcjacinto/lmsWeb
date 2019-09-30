@@ -2,12 +2,13 @@
 <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8" *ngIf="!isOnView">
       <!-- activity list -->
       <div class="activity-list" *ngIf="!loading">
         <div
           class="card p-3 btn text-left mb-2"
           *ngFor="let activity of activityList"
+          (click)="setSelectedActivity(activity)"
         >
           <div class="row">
             <div class="col-md-5">
@@ -162,7 +163,6 @@
           </div>
         </div>
       </div>
-
       <!-- no activity div -->
       <div
         class="no-activity card bg-secondary p-5"
@@ -170,6 +170,12 @@
       >
         <h1 class="text-grey text-center">No Ongoing {{ activityType }}</h1>
       </div>
+    </div>
+    <div class="col-md-8" *ngIf="isOnView">
+      <app-view-activity></app-view-activity>
+      <button (click)="clearSelectedActivity()" class="btn btn-dark w-100">
+        Back
+      </button>
     </div>
     <div class="col-md-4">
       <div class="card bg-dark">
