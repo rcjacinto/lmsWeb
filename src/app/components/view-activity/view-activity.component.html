@@ -78,45 +78,94 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td scope="row">1</td>
-        <td>Multiple Choices</td>
+      <tr *ngFor="let question of activity.questions">
+        <td scope="row">{{ question.number }}</td>
         <td>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum,
-          distinctio.
+          {{
+            question.type == 'mc'
+              ? 'Multiple Question'
+              : question.type == 'sa'
+              ? 'Short Answer'
+              : 'True or False'
+          }}
         </td>
         <td>
-          <button class="btn btn-secondary btn-sm">
-            <i class="fa fa-eye"></i>
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td scope="row">2</td>
-        <td>Short Answer</td>
-        <td>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum,
-          distinctio.
+          {{ question.text }}
         </td>
         <td>
-          <button class="btn btn-secondary btn-sm">
-            <i class="fa fa-eye"></i>
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td scope="row">3</td>
-        <td>True or False</td>
-        <td>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum,
-          distinctio.
-        </td>
-        <td>
-          <button class="btn btn-secondary btn-sm ">
-            <i class="fa fa-eye"></i>
+          <button
+            class="btn btn-primary btn-sm w-100"
+            (click)="openModal(answersModal, question)"
+          >
+            View
           </button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+<ng-template #answersModal let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <div [ngSwitch]="selectedQuestion.type">
+      <div class="mc-options" *ngSwitchCase="'mc'">
+        <div
+          class="input-group input-group-sm mb-3"
+          *ngFor="let options of selectedQuestion.options"
+        >
+          <div class="input-group-prepend">
+            <span
+              class="input-group-text"
+              [ngClass]="{ 'bg-dark text-light': options.isCorrect }"
+              >{{ options.key }}</span
+            >
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            readonly
+            [value]="options.value"
+            [ngClass]="{ 'bg-dark text-light': options.isCorrect }"
+          />
+          <div class="input-group-append">
+            <div
+              class="input-group-text"
+              [ngClass]="{ 'bg-dark': options.isCorrect }"
+            >
+              <input
+                type="radio"
+                name="mc-correct"
+                [checked]="options.isCorrect"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tof-options" *ngSwitchCase="'tof'">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text ">Correct Answer</span>
+          </div>
+          <input
+            type="text"
+            class="form-control text-capitalize bg-dark text-light"
+            readonly
+            [value]="selectedQuestion.options[0].value"
+          />
+        </div>
+      </div>
+      <div class="sa-answer" *ngSwitchCase="'sa'">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text ">Correct Answer</span>
+          </div>
+          <input
+            type="text"
+            class="form-control text-capitalize bg-dark text-light"
+            readonly
+            [value]="selectedQuestion.options[0].value"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

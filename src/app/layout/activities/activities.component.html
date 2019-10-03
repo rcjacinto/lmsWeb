@@ -35,6 +35,7 @@
           <hr />
           <div class="row">
             <div class="col-md-5">
+              <span class="text-capitalize">{{ activity.type }}</span> |
               {{ activity.deadline.seconds * 1000 | date: 'dd MMM yyyy' }}
             </div>
             <div class="col-md-3">{{ activity.time_limit }} mins</div>
@@ -179,7 +180,7 @@
       </div>
     </div>
     <div class="col-md-8" *ngIf="isOnView">
-      <app-view-activity></app-view-activity>
+      <app-view-activity [activity]="selectedActivity"></app-view-activity>
       <button (click)="clearSelectedActivity()" class="btn btn-dark w-100">
         Back
       </button>

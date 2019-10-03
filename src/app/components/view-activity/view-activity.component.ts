@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { Activity } from 'src/app/models/activity.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Question } from 'src/app/models/question.model';
 
 @Component({
   selector: 'app-view-activity',
@@ -8,6 +11,8 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./view-activity.component.scss']
 })
 export class ViewActivityComponent implements OnInit {
+  @Input() activity: Activity;
+  selectedQuestion: Question;
   public pieChartOptions: ChartOptions = {
     responsive: true,
     legend: {
@@ -35,9 +40,11 @@ export class ViewActivityComponent implements OnInit {
       ]
     }
   ];
-  constructor() {}
+  constructor(private modalService: NgbModal) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.activity);
+  }
 
   public chartClicked({
     event,
@@ -68,5 +75,12 @@ export class ViewActivityComponent implements OnInit {
   changeLegendPosition() {
     this.pieChartOptions.legend.position =
       this.pieChartOptions.legend.position === 'left' ? 'top' : 'left';
+  }
+
+  openModal(content, question: Question) {
+    this.selectedQuestion = question;
+    this.modalService.open(content, {
+      centered: true
+    });
   }
 }
