@@ -1,1 +1,126 @@
-<p>profile works!</p>
+<app-top-nav title="Profile"> </app-top-nav>
+<app-side-nav> </app-side-nav>
+<div class="main">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card bg-dark mb-2">
+        <div class="card-header bg-danger p-2 pt-3">
+          <h5 class="text-light user-name">
+            {{ newUser.name.first }} {{ newUser.name.last }}
+          </h5>
+        </div>
+        <div class="card-body bg-dark p-2 pb-4">
+          <img
+            [src]="newUser.image"
+            alt=""
+            class="profile-pic border border-dark"
+          />
+          <input type="file" hidden #fileInput (change)="uploadImage($event)" />
+          <button
+            class="btn bg-dark py-1 px-2 upload-btn border border-danger"
+            (click)="fileInput.click()"
+          >
+            <i class="fa fa-folder-open text-light"></i>
+          </button>
+          <h6 class="text-secondary user-email">
+            {{ newUser.email }}
+          </h6>
+        </div>
+      </div>
+
+      <div class="card bg-dark mb-2">
+        <div class="card-header bg-danger px-3 px-2 text-light text-center">
+          <span>Account <i class="fa fa-edit text-light"></i></span>
+        </div>
+        <div class="card-body bg-dark p-2 pb-4">
+          <div class=" form-row mb-3">
+            <div class="col-md-5">
+              <label class="text-light">First Name</label>
+              <input
+                type="text"
+                class="form-control text-catitalize"
+                [(ngModel)]="newUser.name.first"
+              />
+            </div>
+            <div class="col-md-5">
+              <label class="text-light">Last Name</label>
+              <input
+                type="text"
+                class="form-control text-catitalize"
+                [(ngModel)]="newUser.name.last"
+              />
+            </div>
+            <div class="col-md-2">
+              <label class="text-light">M.I.</label>
+              <input
+                type="text"
+                class="form-control text-catitalize"
+                [(ngModel)]="newUser.name.mi"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="text-light">Adress</label>
+            <textarea
+              name=""
+              id=""
+              cols="30"
+              rows="2"
+              class="form-control"
+              [(ngModel)]="newUser.address"
+            ></textarea>
+          </div>
+          <div class="form-group form-row">
+            <div class="col-md-6">
+              <label class="text-light">Contact #</label>
+              <input
+                type="text"
+                class="form-control text-catitalize"
+                [(ngModel)]="newUser.mobile"
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="text-light">Gender</label>
+              <select id="" class="custom-select" [(ngModel)]="newUser.gender">
+                <option value="male">Male</option>
+                <option value="male">Female</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        class="btn btn-dark border border-danger w-100"
+        (click)="updateProfile()"
+      >
+        Update
+      </button>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-dark">
+        <div class="card-header text-light">
+          <i class="fa fa-bell mr-2"></i>Notification
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Morbi leo risus</li>
+            <li class="list-group-item">Porta ac consectetur ac</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngx-spinner
+  bdOpacity="0.5"
+  bdColor="rgba(51,51,51,0.6)"
+  size="default"
+  color="#fff"
+  type="ball-pulse-sync"
+  [fullScreen]="true"
+>
+</ngx-spinner>

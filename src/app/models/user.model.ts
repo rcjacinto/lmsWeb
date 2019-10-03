@@ -7,7 +7,7 @@ export interface User {
     mi: string;
   };
   gender: string;
-  dob: string;
+  dob: any;
   address: string;
   mobile: number;
   email: string;

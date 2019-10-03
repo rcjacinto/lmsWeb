@@ -8,6 +8,10 @@ import { SetClass } from 'src/app/store/classes/classes.action';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
+import { Question } from 'src/app/models/question.model';
+import { initialState } from 'src/app/store/user/user.reducer';
+import { SetUser } from 'src/app/store/user/user.action';
 
 @Component({
   selector: 'app-side-nav',
@@ -30,7 +34,8 @@ export class SideNavComponent implements OnInit {
     private config: NgbModalConfig,
     private modalService: NgbModal,
     private spinner: NgxSpinnerService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private authService: AuthService
   ) {
     this.userData$.subscribe(user => {
       console.log(user);
@@ -42,7 +47,6 @@ export class SideNavComponent implements OnInit {
     });
     this.classService.getAllclasses(this.user.id).subscribe(classData => {
       console.log(classData);
-
       this.classList = classData;
     });
   }
@@ -54,7 +58,7 @@ export class SideNavComponent implements OnInit {
   }
 
   resetClass() {
-    const initialState: Class = {
+    const clear: Class = {
       name: '',
       description: '',
       color: '',
@@ -68,13 +72,19 @@ export class SideNavComponent implements OnInit {
         name: ''
       }
     };
-    this.store.dispatch(new SetClass(initialState));
+    this.store.dispatch(new SetClass(clear));
   }
 
   openModal(content) {
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'lg',
+      centered: true
+    });
+  }
+
+  openLogoutModal(modal) {
+    this.modalService.open(modal, {
       centered: true
     });
   }
@@ -126,5 +136,13 @@ export class SideNavComponent implements OnInit {
       result += chars[Math.floor(Math.random() * chars.length)];
     }
     return result;
+  }
+
+  logOut() {
+    this.authService.doLogout().then(() => {
+      this.store.dispatch(new SetUser(initialState));
+      this.resetClass();
+      this.modalService.dismissAll();
+    });
   }
 }

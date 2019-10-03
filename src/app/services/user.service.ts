@@ -37,8 +37,8 @@ export class UserService {
     return this.usersCollection.doc<User>(id).valueChanges();
   }
 
-  updateUser(user: User, id: string) {
-    return this.usersCollection.doc(id).update(user);
+  updateUser(user: User) {
+    return this.usersCollection.doc(user.id).update(user);
   }
 
   addUser(user: User) {

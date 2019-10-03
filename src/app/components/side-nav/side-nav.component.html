@@ -1,7 +1,7 @@
 <div class="main bg-dark">
   <div class="card ">
     <div class="card-header bg-danger pt-4"></div>
-    <div class="card-body bg-dark p-2">
+    <div class="card-body bg-dark pt-3 pb-2">
       <img [src]="user.image" alt="" class="profile-pic" />
       <h5 class="text-center text-light">
         {{ user.name.first }} {{ user.name.last }}
@@ -154,6 +154,8 @@
             <button
               type="button"
               class="list-group-item list-group-item-action bg-dark"
+              [routerLink]="['/dashboard']"
+              routerLinkActive="router-link-active"
               (click)="setSelectedClass(class)"
             >
               <i
@@ -189,6 +191,8 @@
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
+          [routerLink]="['/profile']"
+          routerLinkActive="router-link-active"
         >
           <i class="icon ion-ios-contact text-light mr-3"></i
           ><span class="text-light">Profile</span>
@@ -201,13 +205,6 @@
           ><span class="text-light">Messages</span>
         </button>
 
-        <button
-          type="button"
-          class="list-group-item list-group-item-action bg-dark"
-        >
-          <i class="icon ion-md-settings text-light mr-3"></i
-          ><span class="text-light">Settings</span>
-        </button>
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
@@ -226,6 +223,7 @@
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
+          (click)="openLogoutModal(logoutModal)"
         >
           <i class="icon ion-md-log-out text-light mr-3"></i
           ><span class="text-light">Logout</span>
@@ -301,6 +299,19 @@
     <div class="copyright text-light">
       ALL RIGHTS RESERVE | COPYRIGHT &copy; 2019 TRIMEX COLLEGES
     </div>
+  </div>
+</ng-template>
+
+<ng-template #logoutModal let-modal>
+  <div class="modal-header">Confirm</div>
+  <div class="modal-body">
+    Are you sure you want to logout?
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary m-2" (click)="modal.dismiss()">
+      Cancel
+    </button>
+    <button class="btn btn-danger mx-2" (click)="logOut()">Logout</button>
   </div>
 </ng-template>
 <ngx-spinner
