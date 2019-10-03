@@ -1,0 +1,59 @@
+.main {
+  margin-left: 250px;
+  padding: 80px 20px;
+  background-color: #6c757d;
+}
+
+.profile-img {
+  width: 50px;
+}
+
+.gc {
+  background-color: rgba(0, 0, 0, 0.233);
+}
+
+.received {
+  background-color: #f1f1f1;
+  text-align: left;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  font-size: 12px;
+  margin-right: 100px;
+}
+
+.receipient,
+.sender {
+  font-size: 10px;
+}
+
+.sent {
+  background-color: #ffffff;
+  text-align: left;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  font-size: 12px;
+  margin-left: 100px;
+}
+
+.messages {
+  height: 75vh;
+  overflow: auto;
+  background-color: rgba(255, 255, 255, 0.541);
+}
+
+.class-group {
+  height: 75vh;
+  overflow: auto;
+}
+
+.class-group::-webkit-scrollbar {
+  width: 0px; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+.messages::-webkit-scrollbar {
+  width: 0px; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
