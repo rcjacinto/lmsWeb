@@ -183,7 +183,7 @@
     </div>
   </div>
 
-  <div class="card mt-2">
+  <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
     <div class="card-body bg-dark p-0">
       <div class="list-group bg-dark">
         <button
@@ -200,6 +200,14 @@
           <i class="icon ion-md-chatboxes text-light mr-3"></i
           ><span class="text-light">Messages</span>
         </button>
+
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+        >
+          <i class="icon ion-md-settings text-light mr-3"></i
+          ><span class="text-light">Settings</span>
+        </button>
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
@@ -207,13 +215,6 @@
         >
           <i class="icon ion-md-information-circle-outline text-light mr-3"></i
           ><span class="text-light">About</span>
-        </button>
-        <button
-          type="button"
-          class="list-group-item list-group-item-action bg-dark"
-        >
-          <i class="icon ion-md-settings text-light mr-3"></i
-          ><span class="text-light">Settings</span>
         </button>
       </div>
     </div>
@@ -297,6 +298,9 @@
       <li>Hiroshi Cruz</li>
       <li>Shaina Masinahon</li>
     </ul>
+    <div class="copyright text-light">
+      ALL RIGHTS RESERVE | COPYRIGHT &copy; 2019 TRIMEX COLLEGES
+    </div>
   </div>
 </ng-template>
 <ngx-spinner

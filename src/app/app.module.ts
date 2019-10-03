@@ -38,6 +38,7 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateActivityComponent } from './layout/create-activity/create-activity.component';
 import { ViewActivityComponent } from './components/view-activity/view-activity.component';
+import { FooterComponent } from './components/footer/footer.component';
 const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 
 @NgModule({
@@ -55,7 +56,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     SettingsComponent,
     LoginComponent,
     CreateActivityComponent,
-    ViewActivityComponent
+    ViewActivityComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
