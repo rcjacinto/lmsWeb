@@ -14,6 +14,8 @@ import { CreateActivityComponent } from './layout/create-activity/create-activit
 import { ManageClassComponent } from './layout/manage-class/manage-class.component';
 import { ManageInstructorsComponent } from './layout/manage-instructors/manage-instructors.component';
 import { ManageStudentsComponent } from './layout/manage-students/manage-students.component';
+import { ViewInstructorProfileComponent } from './layout/view-instructor-profile/view-instructor-profile.component';
+import { ViewStudentProfileComponent } from './layout/view-student-profile/view-student-profile.component';
 
 const routes: Routes = [
   {
@@ -85,6 +87,14 @@ const routes: Routes = [
   {
     path: 'manage-students',
     component: ManageStudentsComponent
+  },
+  {
+    path: 'view-instructor-profile',
+    component: ViewInstructorProfileComponent
+  },
+  {
+    path: 'view-student-profile',
+    component: ViewStudentProfileComponent
   }
 ];
 
