@@ -1,7 +1,7 @@
 <div class="main bg-dark">
   <div class="card ">
-    <div class="card-header bg-danger p-3"></div>
-    <div class="card-body bg-dark">
+    <div class="card-header bg-danger pt-4"></div>
+    <div class="card-body bg-dark p-2">
       <img [src]="user.image" alt="" class="profile-pic" />
       <h5 class="text-center text-light">
         {{ user.name.first }} {{ user.name.last }}
@@ -167,7 +167,7 @@
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
-          (click)="openAddClassModal(addClassModal)"
+          (click)="openModal(addClassModal)"
         >
           <i class="icon ion-md-add text-light mr-3"></i
           ><span class="text-light">Add Class</span>
@@ -199,6 +199,14 @@
         >
           <i class="icon ion-md-chatboxes text-light mr-3"></i
           ><span class="text-light">Messages</span>
+        </button>
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+          (click)="openModal(aboutModal)"
+        >
+          <i class="icon ion-md-information-circle-outline text-light mr-3"></i
+          ><span class="text-light">About</span>
         </button>
         <button
           type="button"
@@ -278,6 +286,17 @@
     <button type="button" class="btn btn-outline-dark" (click)="addNewClass()">
       Save
     </button>
+  </div>
+</ng-template>
+
+<ng-template #aboutModal let-c="close" let-d="dismiss">
+  <div class="modal-body bg-dark about">
+    <ul class="list-unstyled ml-5  text-light developers">
+      <li class="mb-3">Developers:</li>
+      <li>Anthony Veloria</li>
+      <li>Hiroshi Cruz</li>
+      <li>Shaina Masinahon</li>
+    </ul>
   </div>
 </ng-template>
 <ngx-spinner

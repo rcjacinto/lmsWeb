@@ -71,8 +71,12 @@ export class SideNavComponent implements OnInit {
     this.store.dispatch(new SetClass(initialState));
   }
 
-  openAddClassModal(content) {
-    this.modalService.open(content);
+  openModal(content) {
+    this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'lg',
+      centered: true
+    });
   }
 
   addNewClass() {
