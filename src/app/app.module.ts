@@ -40,6 +40,8 @@ import { CreateActivityComponent } from './layout/create-activity/create-activit
 import { ViewActivityComponent } from './components/view-activity/view-activity.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ManageClassComponent } from './layout/manage-class/manage-class.component';
+import { ManageInstructorsComponent } from './layout/manage-instructors/manage-instructors.component';
+import { ManageStudentsComponent } from './layout/manage-students/manage-students.component';
 const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 
 @NgModule({
@@ -59,7 +61,9 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     CreateActivityComponent,
     ViewActivityComponent,
     FooterComponent,
-    ManageClassComponent
+    ManageClassComponent,
+    ManageInstructorsComponent,
+    ManageStudentsComponent
   ],
   imports: [
     CommonModule,

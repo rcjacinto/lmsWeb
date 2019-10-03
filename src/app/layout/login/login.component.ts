@@ -67,15 +67,11 @@ export class LoginComponent implements OnInit {
         this.userService.getUser(res.user.uid).subscribe(user => {
           console.log(user);
           user.id = res.user.uid;
-          if (user.role === 'instructor') {
-            this.store.dispatch(new SetUser(user));
-            this.dismissModal();
-            this.router.navigate(['/dashboard']);
-            this.showSuccess('Login Success!', 'Welcome!');
-            this.initForm();
-          } else {
-            alert('not yet');
-          }
+          this.store.dispatch(new SetUser(user));
+          this.dismissModal();
+          this.router.navigate(['/dashboard']);
+          this.showSuccess('Login Success!', 'Welcome!');
+          this.initForm();
           this.loading = false;
         });
       })

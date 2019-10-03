@@ -1,7 +1,6 @@
-<div class="main bg-dark">
-
+<div class="main bg-dark" *ngIf="user.role === 'instructor'">
   <!-- Profile Picture -->
-  
+
   <div class="card ">
     <div class="card-header bg-danger pt-4"></div>
     <div class="card-body bg-dark pt-3 pb-2">
@@ -65,7 +64,7 @@
           ></i
           ><span class="text-light">Students</span>
         </button>
-       
+
         <div class="list-group bg-dark">
           <a
             href="#activities"
@@ -197,6 +196,116 @@
         >
           <i class="icon ion-ios-cog text-light mr-3"></i
           ><span class="text-light">Manage Class</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile | Messages | About -->
+
+  <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
+    <div class="card-body bg-dark p-0">
+      <div class="list-group bg-dark">
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+          [routerLink]="['/profile']"
+          routerLinkActive="router-link-active"
+        >
+          <i class="icon ion-ios-contact text-light mr-3"></i
+          ><span class="text-light">Profile</span>
+        </button>
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+          [routerLink]="['/messages']"
+          routerLinkActive="router-link-active"
+        >
+          <i class="icon ion-md-chatboxes text-light mr-3"></i
+          ><span class="text-light">Messages</span>
+        </button>
+
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+          (click)="openModal(aboutModal)"
+        >
+          <i class="icon ion-md-information-circle-outline text-light mr-3"></i
+          ><span class="text-light">About</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logout -->
+
+  <div class="card mt-2">
+    <div class="card-body bg-dark p-0">
+      <div class="list-group bg-dark">
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+          (click)="openSmModal(logoutModal)"
+        >
+          <i class="icon ion-md-log-out text-light mr-3"></i
+          ><span class="text-light">Logout</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main bg-dark" *ngIf="user.role === 'student'"></div>
+
+<div class="main bg-dark" *ngIf="user.role === 'admin'">
+  <div class="card ">
+    <div class="card-header bg-danger pt-4"></div>
+    <div class="card-body bg-dark pt-3 pb-2">
+      <img [src]="user.image" alt="" class="profile-pic" />
+      <h5 class="text-center text-light">
+        {{ user.name.first }} {{ user.name.last }}
+      </h5>
+      <h6 class="text-center text-secondary text-capitalize mt-1">
+        {{ user.role }}
+      </h6>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="card mt-2">
+    <button
+      type="button"
+      class="list-group-item list-group-item-action bg-dark"
+      [routerLink]="['/dashboard']"
+      routerLinkActive="router-link-active"
+    >
+      <i class="icon ion-md-school mr-3 text-light"></i
+      ><span class="text-light">Dashboard</span>
+    </button>
+  </div>
+
+  <!-- Instructors | Student -->
+
+  <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
+    <div class="card-body bg-dark p-0">
+      <div class="list-group bg-dark">
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+          [routerLink]="['/manage-instructors']"
+          routerLinkActive="router-link-active"
+        >
+          <i class="icon ion-ios-contact text-light mr-3"></i
+          ><span class="text-light">Instructors</span>
+        </button>
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+          [routerLink]="['/manage-students']"
+          routerLinkActive="router-link-active"
+        >
+          <i class="icon ion-md-chatboxes text-light mr-3"></i
+          ><span class="text-light">Student</span>
         </button>
       </div>
     </div>

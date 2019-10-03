@@ -12,6 +12,8 @@ import { LoginComponent } from './layout/login/login.component';
 import { AuthGuard } from './services/auth.guard';
 import { CreateActivityComponent } from './layout/create-activity/create-activity.component';
 import { ManageClassComponent } from './layout/manage-class/manage-class.component';
+import { ManageInstructorsComponent } from './layout/manage-instructors/manage-instructors.component';
+import { ManageStudentsComponent } from './layout/manage-students/manage-students.component';
 
 const routes: Routes = [
   {
@@ -75,6 +77,14 @@ const routes: Routes = [
   {
     path: 'manage-class',
     component: ManageClassComponent
+  },
+  {
+    path: 'manage-instructors',
+    component: ManageInstructorsComponent
+  },
+  {
+    path: 'manage-students',
+    component: ManageStudentsComponent
   }
 ];
 
