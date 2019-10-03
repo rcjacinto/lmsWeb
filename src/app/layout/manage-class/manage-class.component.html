@@ -1,0 +1,178 @@
+<app-top-nav title="Manage Class"> </app-top-nav>
+<app-side-nav> </app-side-nav>
+<div class="main">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card bg-dark p-5" *ngIf="false">
+        <h2 class="text-center text-light">
+          No Class Created
+        </h2>
+        <p class="text-center text-light">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
+          nulla perspiciatis id voluptates placeat dolores soluta numquam
+          corporis ipsam quo?
+        </p>
+      </div>
+
+      <div class="loading-div" *ngIf="loading">
+        <div class="card bg-dark mb-3">
+          <div class="card-header ">
+            <div class="w-75">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+            <div class="w-50">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+          </div>
+          <div class="card-body bg-light">
+            <ngx-skeleton-loader count="1" appearance="line">
+            </ngx-skeleton-loader>
+          </div>
+        </div>
+        <div class="card bg-dark mb-3">
+          <div class="card-header ">
+            <div class="w-75">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+            <div class="w-50">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+          </div>
+          <div class="card-body bg-light">
+            <ngx-skeleton-loader count="1" appearance="line">
+            </ngx-skeleton-loader>
+          </div>
+        </div>
+        <div class="card bg-dark mb-3">
+          <div class="card-header ">
+            <div class="w-75">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+            <div class="w-50">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+          </div>
+          <div class="card-body bg-light">
+            <ngx-skeleton-loader count="1" appearance="line">
+            </ngx-skeleton-loader>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-dark mb-3" *ngFor="let class of classList">
+        <div class="card-header py-2 pl-4 pr-0">
+          <i
+            [class]="'icon ion-ios-bookmark bookmark-icon text-' + class.color"
+          ></i>
+          <div class="text-light">
+            {{ class.name }}
+            <button
+              class="btn bg-transparent float-right text-light mr-2"
+              (click)="setSelectedClass(updateClassModal, class)"
+            >
+              <i class="fa fa-pencil-square-o"></i>
+            </button>
+          </div>
+          <span class="text-secondary class-code">Code: {{ class.code }}</span>
+        </div>
+        <div class="card-body bg-light">
+          {{ class.description }}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-dark">
+        <div class="card-header text-light">
+          <i class="fa fa-bell mr-2"></i>Notification
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Morbi leo risus</li>
+            <li class="list-group-item">Porta ac consectetur ac</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #updateClassModal let-c="close" let-d="dismiss">
+  <div class="modal-header bg-dark">
+    <h4 class="modal-title text-light">Add Class</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    >
+      <span aria-hidden="true" class="text-light">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="">Class name:</span>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="selectedClass.name"
+      />
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="">Description:</span>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="selectedClass.description"
+      />
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" for="inputColors">Class Color:</span>
+      </div>
+      <select
+        [class]="
+          selectedClass.color != 'yellow'
+            ? 'custom-select text-light bg-' + selectedClass.color
+            : 'custom-select text-dark bg-' + selectedClass.color
+        "
+        [(ngModel)]="selectedClass.color"
+      >
+        <option selected>Choose...</option>
+        <option value="red">Red</option>
+        <option value="orange">Orange</option>
+        <option value="yellow">Yellow</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+        <option value="grey">Grey</option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="updateClass()">
+      Update
+    </button>
+  </div>
+</ng-template>
+
+<ngx-spinner
+  bdOpacity="0.5"
+  bdColor="rgba(51,51,51,0.6)"
+  size="default"
+  color="#fff"
+  type="ball-pulse-sync"
+  [fullScreen]="true"
+>
+</ngx-spinner>

@@ -34,10 +34,18 @@
           [routerLink]="['/dashboard']"
           routerLinkActive="router-link-active"
         >
-          <i
-            [class]="'icon ion-md-bookmarks mr-3 text-' + selectedClass.color"
-          ></i
-          ><span class="text-light">{{ selectedClass.name }}</span>
+          <div class="row">
+            <div class="col-md-2">
+              <i
+                [class]="
+                  'icon ion-md-bookmark mr-3 text-' + selectedClass.color
+                "
+              ></i>
+            </div>
+            <div class="col-md-10">
+              <span class="text-light">{{ selectedClass.name }}</span>
+            </div>
+          </div>
         </button>
         <button
           type="button"
@@ -158,18 +166,24 @@
               routerLinkActive="router-link-active"
               (click)="setSelectedClass(class)"
             >
-              <i
-                class="icon ion-md-bookmark mr-3"
-                [class]="'icon ion-md-bookmark mr-3 text-' + class.color"
-              ></i
-              ><span class="text-light">{{ class.name }}</span>
+              <div class="row">
+                <div class="col-md-2">
+                  <i
+                    class="icon ion-md-bookmark mr-3"
+                    [class]="'icon ion-md-bookmark mr-3 text-' + class.color"
+                  ></i>
+                </div>
+                <div class="col-md-10">
+                  <span class="text-light">{{ class.name }}</span>
+                </div>
+              </div>
             </button>
           </li>
         </ul>
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
-          (click)="openModal(addClassModal)"
+          (click)="openSmModal(addClassModal)"
         >
           <i class="icon ion-md-add text-light mr-3"></i
           ><span class="text-light">Add Class</span>
@@ -177,6 +191,8 @@
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
+          [routerLink]="['/manage-class']"
+          routerLinkActive="router-link-active"
         >
           <i class="icon ion-ios-cog text-light mr-3"></i
           ><span class="text-light">Manage Class</span>
@@ -223,7 +239,7 @@
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
-          (click)="openLogoutModal(logoutModal)"
+          (click)="openSmModal(logoutModal)"
         >
           <i class="icon ion-md-log-out text-light mr-3"></i
           ><span class="text-light">Logout</span>

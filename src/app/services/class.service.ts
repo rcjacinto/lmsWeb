@@ -61,8 +61,8 @@ export class ClassService {
     return this.classCollection.doc<Class>(id).valueChanges();
   }
 
-  updateClass(classes: Class, id: string) {
-    return this.classCollection.doc(id).update(classes);
+  updateClass(classes: Class) {
+    return this.classCollection.doc(classes.id).update(classes);
   }
 
   addClass(classes: Class) {

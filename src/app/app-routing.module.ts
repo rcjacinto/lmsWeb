@@ -11,6 +11,7 @@ import { SettingsComponent } from './layout/settings/settings.component';
 import { LoginComponent } from './layout/login/login.component';
 import { AuthGuard } from './services/auth.guard';
 import { CreateActivityComponent } from './layout/create-activity/create-activity.component';
+import { ManageClassComponent } from './layout/manage-class/manage-class.component';
 
 const routes: Routes = [
   {
@@ -70,6 +71,10 @@ const routes: Routes = [
   {
     path: 'create-activities',
     component: CreateActivityComponent
+  },
+  {
+    path: 'manage-class',
+    component: ManageClassComponent
   }
 ];
 

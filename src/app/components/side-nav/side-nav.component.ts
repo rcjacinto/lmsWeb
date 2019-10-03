@@ -77,13 +77,12 @@ export class SideNavComponent implements OnInit {
 
   openModal(content) {
     this.modalService.open(content, {
-      ariaLabelledBy: 'modal-basic-title',
       size: 'lg',
       centered: true
     });
   }
 
-  openLogoutModal(modal) {
+  openSmModal(modal) {
     this.modalService.open(modal, {
       centered: true
     });
