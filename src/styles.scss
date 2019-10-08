@@ -8,9 +8,17 @@ body {
   height: 100%;
   background-color: #6c757d;
 }
+
 body {
   margin: 0;
   font-family: Monda, 'Roboto', sans-serif;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
 }
 
 .text-red {

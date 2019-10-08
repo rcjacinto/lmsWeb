@@ -38,7 +38,8 @@
 }
 
 .messages {
-  height: 75vh;
+  position: relative;
+  height: 65vh;
   overflow: auto;
   background-color: rgba(255, 255, 255, 0.541);
 }
@@ -56,4 +57,16 @@
 .messages::-webkit-scrollbar {
   width: 0px; /* Remove scrollbar space */
   background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+.message-input {
+  font-size: 12px;
+}
+
+.w-10 {
+  width: 10% !important;
+}
+
+.w-65 {
+  width: 65% !important;
 }
