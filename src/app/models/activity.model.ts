@@ -22,4 +22,5 @@ export interface Activity {
   };
   deadline?: Date;
   submits?: any[];
+  status: number;
 }

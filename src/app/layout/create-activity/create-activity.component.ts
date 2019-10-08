@@ -155,7 +155,7 @@ export class CreateActivityComponent implements OnInit {
     }
   }
 
-  saveActivity() {
+  saveActivity(status) {
     if (this.deadline === undefined) {
       return this.toastr.error('Please select date for the deadline');
     }
@@ -190,7 +190,8 @@ export class CreateActivityComponent implements OnInit {
           created: new Date(),
           modified: new Date()
         },
-        deadline: new Date(newDeadline)
+        deadline: new Date(newDeadline),
+        status
       };
 
       this.spinner.show();
