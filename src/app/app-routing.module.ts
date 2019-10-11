@@ -17,6 +17,7 @@ import { ManageStudentsComponent } from './layout/manage-students/manage-student
 import { ViewInstructorProfileComponent } from './layout/view-instructor-profile/view-instructor-profile.component';
 import { ViewStudentProfileComponent } from './layout/view-student-profile/view-student-profile.component';
 import { ViewClassComponent } from './layout/view-class/view-class.component';
+import { TakeExamComponent } from './layout/take-exam/take-exam.component';
 
 const routes: Routes = [
   {
@@ -75,31 +76,43 @@ const routes: Routes = [
   },
   {
     path: 'create-activities',
-    component: CreateActivityComponent
+    component: CreateActivityComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'manage-class',
-    component: ManageClassComponent
+    component: ManageClassComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'manage-instructors',
-    component: ManageInstructorsComponent
+    component: ManageInstructorsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'manage-students',
-    component: ManageStudentsComponent
+    component: ManageStudentsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'view-instructor-profile',
-    component: ViewInstructorProfileComponent
+    component: ViewInstructorProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'view-student-profile',
-    component: ViewStudentProfileComponent
+    component: ViewStudentProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'view-class',
-    component: ViewClassComponent
+    component: ViewClassComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'take-exam',
+    component: TakeExamComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

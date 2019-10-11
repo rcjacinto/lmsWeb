@@ -1,0 +1,215 @@
+<app-top-nav title=""> </app-top-nav>
+<app-side-nav> </app-side-nav>
+<div class="main">
+  <div class="container" *ngIf="!timerStarted">
+    <div class="card bg-light p-3 text-left mb-2">
+      <div class="row">
+        <div class="col-md-5">
+          <img
+            src="https://cdn-images-1.medium.com/max/800/0*ngXgBNNdx6iiWP8q.png"
+            class="mr-3 activities-img w-100"
+            alt="..."
+          />
+        </div>
+        <div class="col-md-7">
+          <h5 class="overflow-wrap">
+            {{ activity.title }}
+          </h5>
+          <p class="overflow-wrap"></p>
+          <p class="overflow-wrap">
+            {{ activity.instruction }}
+          </p>
+          <hr />
+          <p>
+            <i [class]="'fa fa-bookmark text-' + selectedClass.color"></i>
+            {{ selectedClass.name }} | {{ selectedClass.instructor?.name }}
+          </p>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-5">
+          <span class="text-capitalize"
+            >{{ activity.questions?.length }} Questions</span
+          >
+        </div>
+        <div class="col-md-3">{{ activity.time_limit }} mins</div>
+        <div class="col-md-4">
+          {{ computeTotalPoints(activity.questions) }} points
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-dark w-100 mb-2" (click)="startActivity()">
+        Start
+      </button>
+      <button
+        class="btn bg-grey w-100 mb-2"
+        [routerLink]="['/view-class']"
+        routerLinkActive="router-link-active"
+      >
+        Back
+      </button>
+    </div>
+  </div>
+
+  <div class="contaier" *ngIf="timerStarted">
+    <div class="card p-2 mb-2 bg-dark text-light">
+      <div class="d-flex">
+        <div class="mx-2 mt-2">
+          <i class="fa fa-book check" aria-hidden="true"></i>
+        </div>
+        <div class="ml-2">
+          <div>
+            Title:
+            <span class="text-secondary"> {{ activity.title }} </span>
+          </div>
+          <div>
+            Type:
+            <span class="text-secondary text-capitalize"
+              >{{ activity.type }} | {{ activity.term }}</span
+            >
+          </div>
+          <div>
+            Deadline:
+            <span class="text-secondary"
+              >{{
+                activity.deadline.seconds * 1000 | date: 'dd MMM yyyy'
+              }}
+              11:59 PM</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="w-100 btn-group-vertical question-nums mb-3" role="group">
+          <button
+            type="button"
+            class="btn w-100 "
+            *ngFor="let question of activity.questions"
+            [ngClass]="{
+              'btn-dark': question.number == selectedQuestion?.number
+            }"
+            (click)="setSelectedQuestion(question)"
+          >
+            Question #{{ question.number }}
+          </button>
+        </div>
+        <div>
+          <button
+            class="btn btn-dark border border-danger w-100"
+            (click)="submit()"
+          >
+            Submmit
+          </button>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="card bg-light py-2 px-3 mb-2">
+          {{
+            selectedQuestion.type == 'mc'
+              ? 'Multiple Questions'
+              : selectedQuestion.type == 'sa'
+              ? 'Short Answer'
+              : 'True or False'
+          }}
+          ({{ selectedQuestion.points }} points)
+        </div>
+        <div class="card bg-light py-2 px-3 text-capitalize question-text">
+          {{ selectedQuestion.text }}
+        </div>
+        <hr />
+        <!-- Options -->
+
+        <div [ngSwitch]="selectedQuestion.type">
+          <div *ngSwitchCase="'mc'">
+            <div class="mc">
+              <div
+                class="input-group input-group-sm mb-3"
+                *ngFor="let option of selectedQuestion?.options"
+              >
+                <div class="input-group-prepend">
+                  <span class="input-group-text">{{ option.key }}</span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control btn text-left"
+                  [value]="option.value"
+                  readonly
+                  (click)="setMcAnswer(option)"
+                  [ngClass]="{
+                    'bg-dark text-light':
+                      selectedQuestion.answer?.key == option.key
+                  }"
+                />
+              </div>
+            </div>
+          </div>
+          <div *ngSwitchCase="'tof'">
+            <div class="tof">
+              <div class="form-group">
+                <label class="text-light">Answer</label>
+                <select
+                  class="custom-select bg-light"
+                  (change)="setTofAnswer($event)"
+                >
+                  <option value=""></option>
+                  <option
+                    [value]="true"
+                    [selected]="selectedQuestion.answer?.value == true"
+                    >True</option
+                  >
+                  <option
+                    [value]="false"
+                    [selected]="selectedQuestion.answer?.value == false"
+                    >False</option
+                  >
+                </select>
+              </div>
+            </div>
+          </div>
+          <div *ngSwitchCase="'sa'">
+            <div class="sa">
+              <div class="form-group">
+                <label class="text-light">Answer</label>
+                <input
+                  type="text"
+                  class="form-control bg-light"
+                  [value]="
+                    selectedQuestion.answer
+                      ? selectedQuestion.answer?.value
+                      : ''
+                  "
+                  (keyup)="setSaAnswer($event)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-dark float-left" (click)="prevQuestion()">
+              <i class="fa fa-angle-left"></i> Prev
+            </button>
+          </div>
+
+          <div class="col timer py-2 px-3 text-center text-light">
+            <i class="fa fa-clock-o"></i> {{ activity?.time_limit }}
+          </div>
+
+          <div class="col">
+            <button class="btn btn-dark float-right" (click)="nextQuestion()">
+              Next <i class="fa fa-angle-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

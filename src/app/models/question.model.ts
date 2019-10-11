@@ -4,4 +4,5 @@ export interface Question {
   text: string;
   options: any[];
   points: number;
+  answer?: any;
 }

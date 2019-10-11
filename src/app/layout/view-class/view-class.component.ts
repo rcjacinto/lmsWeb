@@ -5,6 +5,7 @@ import { Class } from 'src/app/models/class.model';
 import { Activity } from 'src/app/models/activity.model';
 import { ActivityService } from 'src/app/services/activity.service';
 import { UserService } from 'src/app/services/user.service';
+import { SetExam } from 'src/app/store/exam/exam.action';
 
 @Component({
   selector: 'app-view-class',
@@ -51,4 +52,8 @@ export class ViewClassComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  takeExam(activity) {
+    this.store.dispatch(new SetExam(activity));
+  }
 }

@@ -12,12 +12,13 @@ import { map } from 'rxjs/operators';
 })
 export class ActivityService {
   private activityCollection: AngularFirestoreCollection<Activity>;
+  private submitsCollection: AngularFirestoreCollection<Activity>;
 
   private activity: Observable<Activity[]>;
 
   constructor(private db: AngularFirestore) {
     this.activityCollection = db.collection<Activity>('activity');
-
+    this.submitsCollection = db.collection<Activity>('submits');
     this.activity = this.activityCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -84,5 +85,15 @@ export class ActivityService {
 
   removeActivity(id) {
     return this.activityCollection.doc(id).delete();
+  }
+
+  // Activity Submits
+
+  addSubmit(submit) {
+    return this.submitsCollection.add(submit);
+  }
+
+  updateSubmit(submit) {
+    return this.submitsCollection.doc(submit.id).update(submit);
   }
 }

@@ -67,7 +67,12 @@
             </div>
           </div>
           <div class="card bg-dark" *ngIf="user.role == 'student'">
-            <button class="btn btn-dark float-right">
+            <button
+              class="btn btn-dark float-right"
+              [routerLink]="['/take-exam']"
+              routerLinkActive="router-link-active"
+              (click)="takeExam(activity)"
+            >
               <span class="text-capitalize">Start {{ activity.type }}</span>
             </button>
           </div>
@@ -202,10 +207,10 @@
       </div>
       <!-- no activity div -->
       <div
-        class="no-activity card bg-secondary p-5"
-        *ngIf="!loading && activityList.length < 1"
+        class="card bg-light text-center mb-2 p-3"
+        *ngIf="!loading && members.length == 0"
       >
-        <h1 class="text-grey text-center">No Ongoing {{ activityType }}</h1>
+        No ongoing activity
       </div>
     </div>
     <div class="col-md-4">

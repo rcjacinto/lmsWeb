@@ -7,30 +7,37 @@ import {
 import { storageSync } from '@larscom/ngrx-store-storagesync';
 import * as fromUser from './user/user.reducer';
 import * as fromClasses from './classes/classes.reducer';
+import * as fromExam from './exam/exam.reducer';
 import { User } from '../models/user.model';
 import { Class } from '../models/class.model';
+import { Activity } from '../models/activity.model';
 
 export interface RootState {
   users: User;
   class: Class;
+  exam: Activity;
 }
 
 export const reducers: ActionReducerMap<RootState> = {
   users: fromUser.reducer,
-  class: fromClasses.reducer
+  class: fromClasses.reducer,
+  exam: fromExam.reducer
 };
 
 export function storageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return storageSync<RootState>({
-    features: [{ stateKey: 'users' }, { stateKey: 'class' }],
+    features: [
+      { stateKey: 'users' },
+      { stateKey: 'class' },
+      { stateKey: 'exam' }
+    ],
     storage: window.localStorage
   })(reducer);
 }
 
 export const selectUserState = createFeatureSelector<User>('users');
-export const selectClassState = createFeatureSelector<Class>('class');
 
 export const selectUser = createSelector(
   selectUserState,
@@ -58,7 +65,17 @@ export const selectProfilePic = createSelector(
 );
 
 // classes
+
+export const selectClassState = createFeatureSelector<Class>('class');
 export const selectClass = createSelector(
   selectClassState,
+  state => state
+);
+
+// exam
+
+export const selectExamState = createFeatureSelector<Activity>('exam');
+export const selectExam = createSelector(
+  selectExamState,
   state => state
 );
