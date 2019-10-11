@@ -1,4 +1,7 @@
-<div class="main bg-dark" *ngIf="user.role === 'instructor'">
+<div
+  class="main bg-dark"
+  *ngIf="user.role === 'instructor' || user.role === 'student'"
+>
   <!-- Profile Picture -->
 
   <div class="card ">
@@ -9,7 +12,7 @@
         {{ user.name.first }} {{ user.name.last }}
       </h5>
       <h6 class="text-center text-secondary text-capitalize">
-        {{ user.role }}
+        {{ user.role == 'instructor' ? user.role : user.student_number }}
       </h6>
     </div>
   </div>
@@ -20,38 +23,39 @@
     <button
       type="button"
       class="list-group-item list-group-item-action bg-dark"
-      (click)="resetClass()"
-      [routerLink]="['/dashboard']"
+      [routerLink]="['/view-class']"
       routerLinkActive="router-link-active"
     >
-      <i [class]="'icon ion-md-school mr-3 text-' + selectedClass.color"></i
-      ><span class="text-light">Dashboard</span>
+      <div class="row">
+        <div class="col-md-2">
+          <i
+            [class]="'icon ion-md-bookmark mr-3 text-' + selectedClass.color"
+          ></i>
+        </div>
+        <div class="col-md-10">
+          <span class="text-light">{{ selectedClass.name }}</span>
+        </div>
+      </div>
     </button>
   </div>
 
   <!-- SELECTED CLASS -->
 
-  <div class="card mt-2" *ngIf="selectedClass.name.trim() !== ''">
+  <div
+    class="card mt-2"
+    *ngIf="selectedClass.name.trim() !== '' && user.role == 'instructor'"
+  >
     <div class="card-body bg-dark p-0">
       <div class="list-group bg-dark">
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
+          (click)="resetClass()"
           [routerLink]="['/dashboard']"
           routerLinkActive="router-link-active"
         >
-          <div class="row">
-            <div class="col-md-2">
-              <i
-                [class]="
-                  'icon ion-md-bookmark mr-3 text-' + selectedClass.color
-                "
-              ></i>
-            </div>
-            <div class="col-md-10">
-              <span class="text-light">{{ selectedClass.name }}</span>
-            </div>
-          </div>
+          <i [class]="'icon ion-md-school mr-3 text-' + selectedClass.color"></i
+          ><span class="text-light">Dashboard</span>
         </button>
         <button
           type="button"
@@ -145,6 +149,81 @@
     </div>
   </div>
 
+  <div
+    class="card mt-2"
+    *ngIf="selectedClass.name.trim() !== '' && user.role == 'student'"
+  >
+    <div class="card-body bg-dark p-0">
+      <div class="list-group bg-dark">
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+          (click)="resetClass()"
+          [routerLink]="['/dashboard']"
+          routerLinkActive="router-link-active"
+        >
+          <i [class]="'icon ion-md-school mr-3 text-' + selectedClass.color"></i
+          ><span class="text-light">Dashboard</span>
+        </button>
+
+        <div class="list-group bg-dark">
+          <a
+            href="#activities"
+            data-toggle="collapse"
+            aria-expanded="false"
+            class="list-group-item list-group-item-action bg-dark text-light dropdown-toggle"
+            ><i
+              [class]="'icon ion-ios-paper mr-3 text-' + selectedClass.color"
+            ></i>
+            My Activities
+          </a>
+          <ul class="collapse list-unstyled m-0" id="activities">
+            <li>
+              <button
+                type="button"
+                class="list-group-item list-group-item-action bg-dark"
+                [routerLink]="['/activities/quiz']"
+                routerLinkActive="router-link-active"
+              >
+                <i
+                  [class]="
+                    'icon ion-ios-create mx-3 text-' + selectedClass.color
+                  "
+                ></i
+                ><span class="text-light">Quiz</span>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="list-group-item list-group-item-action bg-dark"
+                [routerLink]="['/activities/exams']"
+                routerLinkActive="router-link-active"
+              >
+                <i
+                  [class]="
+                    'icon ion-ios-journal mx-3 text-' + selectedClass.color
+                  "
+                ></i
+                ><span class="text-light">Exams</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+          [routerLink]="['/grades']"
+          routerLinkActive="router-link-active"
+        >
+          <i [class]="'icon ion-md-pie mr-3 text-' + selectedClass.color"></i
+          ><span class="text-light">My Grades</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Class List -->
 
   <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
@@ -155,14 +234,23 @@
           data-toggle="collapse"
           aria-expanded="false"
           class="list-group-item list-group-item-action bg-dark text-light dropdown-toggle"
-          ><i class="icon ion-md-bookmarks mr-3"></i> Classes
+          ><i class="icon ion-md-bookmarks mr-3"></i
+          >{{ user.role == 'instructor' ? 'Classes' : 'My Classes' }}
         </a>
         <ul class="collapse list-unstyled" id="classes">
+          <li *ngIf="classList?.length == 0">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-10 mt-2">
+                <span class="text-secondary">No class added</span>
+              </div>
+            </div>
+          </li>
           <li *ngFor="let class of classList">
             <button
               type="button"
               class="list-group-item list-group-item-action bg-dark"
-              [routerLink]="['/dashboard']"
+              [routerLink]="['/view-class']"
               routerLinkActive="router-link-active"
               (click)="setSelectedClass(class)"
             >
@@ -186,13 +274,16 @@
           (click)="openSmModal(addClassModal)"
         >
           <i class="icon ion-md-add text-light mr-3"></i
-          ><span class="text-light">Add Class</span>
+          ><span class="text-light">{{
+            user.role == 'instructor' ? 'Add Class' : 'Join Class'
+          }}</span>
         </button>
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
           [routerLink]="['/manage-class']"
           routerLinkActive="router-link-active"
+          *ngIf="user.role == 'instructor'"
         >
           <i class="icon ion-ios-cog text-light mr-3"></i
           ><span class="text-light">Manage Class</span>
@@ -254,8 +345,6 @@
     </div>
   </div>
 </div>
-
-<div class="main bg-dark" *ngIf="user.role === 'student'"></div>
 
 <div class="main bg-dark" *ngIf="user.role === 'admin'">
   <div class="card ">
@@ -369,7 +458,9 @@
 
 <ng-template #addClassModal let-c="close" let-d="dismiss">
   <div class="modal-header bg-dark">
-    <h4 class="modal-title text-light">Add Class</h4>
+    <h4 class="modal-title text-light">
+      {{ user.role == 'instructor' ? 'Add Class' : 'Join Class' }}
+    </h4>
     <button
       type="button"
       class="close"
@@ -380,43 +471,57 @@
     </button>
   </div>
   <div class="modal-body">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="">Class name:</span>
+    <div *ngIf="user.role == 'instructor'">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="">Class name:</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="newClassname" />
       </div>
-      <input type="text" class="form-control" [(ngModel)]="newClassname" />
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="">Description:</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="newDescription" />
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" for="inputColors">Class Color:</span>
+        </div>
+        <select
+          [class]="
+            newColor != 'yellow'
+              ? 'custom-select text-light bg-' + newColor
+              : 'custom-select text-dark bg-' + newColor
+          "
+          id="inputColors"
+          [(ngModel)]="newColor"
+        >
+          <option selected>Choose...</option>
+          <option value="red">Red</option>
+          <option value="orange">Orange</option>
+          <option value="yellow">Yellow</option>
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+          <option value="grey">Grey</option>
+        </select>
+      </div>
     </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="">Description:</span>
+    <div *ngIf="user.role == 'student'">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="">Class code:</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="newClassCode" />
       </div>
-      <input type="text" class="form-control" [(ngModel)]="newDescription" />
-    </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" for="inputColors">Class Color:</span>
-      </div>
-      <select
-        [class]="
-          newColor != 'yellow'
-            ? 'custom-select text-light bg-' + newColor
-            : 'custom-select text-dark bg-' + newColor
-        "
-        id="inputColors"
-        [(ngModel)]="newColor"
-      >
-        <option selected>Choose...</option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="blue">Blue</option>
-        <option value="green">Green</option>
-        <option value="grey">Grey</option>
-      </select>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="addNewClass()">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="user.role == 'instructor' ? addNewClass() : joinClass()"
+    >
       Save
     </button>
   </div>
@@ -437,11 +542,11 @@
 </ng-template>
 
 <ng-template #logoutModal let-modal>
-  <div class="modal-header">Confirm</div>
+  <div class="modal-header bg-dark text-light">Confirm</div>
   <div class="modal-body">
     Are you sure you want to logout?
   </div>
-  <div class="modal-footer">
+  <div class="modal-footer ">
     <button class="btn btn-secondary m-2" (click)="modal.dismiss()">
       Cancel
     </button>

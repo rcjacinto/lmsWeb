@@ -1,0 +1,248 @@
+<app-top-nav title="Class"> </app-top-nav>
+<app-side-nav> </app-side-nav>
+<div class="main">
+  <div class="row">
+    <div class="col-md-8">
+      <!-- Class Info -->
+      <div class="card bg-dark mb-3">
+        <div class="card-header py-2 pl-4 pr-0">
+          <i
+            [class]="
+              'icon ion-ios-bookmark bookmark-icon text-' + selectedClass.color
+            "
+          ></i>
+          <div class="text-light">
+            <h5>
+              {{ selectedClass.name }}
+            </h5>
+          </div>
+          <span class="text-secondary class-code"
+            >Instructor: {{ selectedClass.instructor.name }}</span
+          >
+        </div>
+        <div class="card-body bg-light">
+          <p>{{ selectedClass.description }}</p>
+        </div>
+      </div>
+
+      <!-- Recent Activities -->
+      <p class="text-light mt-1">Recent Activities</p>
+      <hr />
+      <div class="activity-list" *ngIf="!loading">
+        <div class="mb-2" *ngFor="let activity of activityList">
+          <div
+            class="card bg-light p-3 text-left"
+            (click)="
+              user.role == 'instructor' ? setSelectedActivity(activity) : ''
+            "
+            [ngClass]="{ btn: user.role == 'instructor' }"
+          >
+            <div class="row">
+              <div class="col-md-5">
+                <img
+                  src="https://cdn-images-1.medium.com/max/800/0*ngXgBNNdx6iiWP8q.png"
+                  class="mr-3 activities-img"
+                  alt="..."
+                />
+              </div>
+              <div class="col-md-7">
+                <h5 class="overflow-wrap">{{ activity.title }}</h5>
+                <p class="overflow-wrap">
+                  {{ activity.instruction }}
+                </p>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-md-5">
+                {{ activity.deadline.seconds * 1000 | date: 'dd MMM yyyy' }} |
+                <span class="text-capitalize"
+                  >{{ activity.questions?.length }} Questions</span
+                >
+              </div>
+              <div class="col-md-3">{{ activity.time_limit }} mins</div>
+              <div class="col-md-4">
+                Submits: {{ activity.submits ? activity.submits.length : 0 }}
+              </div>
+            </div>
+          </div>
+          <div class="card bg-dark" *ngIf="user.role == 'student'">
+            <button class="btn btn-dark float-right">
+              <span class="text-capitalize">Start {{ activity.type }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- loading divs -->
+      <div class="loading-div" *ngIf="loading">
+        <div class="card bg-light p-3 btn text-left mb-2">
+          <div class="row">
+            <div class="col-md-5 overflow-hidden">
+              <ngx-skeleton-loader
+                count="1"
+                [theme]="{
+                  'border-radius': '0',
+                  height: '90px',
+                  width: '100%'
+                }"
+                appearance="circle"
+              >
+              </ngx-skeleton-loader>
+            </div>
+            <div class="col-md-7 pt-2">
+              <h5 class="overflow-wrap">
+                <ngx-skeleton-loader count="1" appearance="line">
+                </ngx-skeleton-loader>
+              </h5>
+              <p class="overflow-wrap">
+                <ngx-skeleton-loader count="1" appearance="line">
+                </ngx-skeleton-loader>
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-md-5">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+            <div class="col-md-3">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+            <div class="col-md-4">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+          </div>
+        </div>
+        <div class="card p-3 btn text-left mb-2">
+          <div class="row">
+            <div class="col-md-5 overflow-hidden">
+              <ngx-skeleton-loader
+                count="1"
+                [theme]="{
+                  'border-radius': '0',
+                  height: '90px',
+                  width: '100%'
+                }"
+                appearance="circle"
+              >
+              </ngx-skeleton-loader>
+            </div>
+            <div class="col-md-7 pt-2">
+              <h5 class="overflow-wrap">
+                <ngx-skeleton-loader count="1" appearance="line">
+                </ngx-skeleton-loader>
+              </h5>
+              <p class="overflow-wrap">
+                <ngx-skeleton-loader count="1" appearance="line">
+                </ngx-skeleton-loader>
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-md-5">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+            <div class="col-md-3">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+            <div class="col-md-4">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+          </div>
+        </div>
+        <div class="card p-3 btn text-left mb-2">
+          <div class="row">
+            <div class="col-md-5 overflow-hidden">
+              <ngx-skeleton-loader
+                count="1"
+                [theme]="{
+                  'border-radius': '0',
+                  height: '90px',
+                  width: '100%'
+                }"
+                appearance="circle"
+              >
+              </ngx-skeleton-loader>
+            </div>
+            <div class="col-md-7 pt-2">
+              <h5 class="overflow-wrap">
+                <ngx-skeleton-loader count="1" appearance="line">
+                </ngx-skeleton-loader>
+              </h5>
+              <p class="overflow-wrap">
+                <ngx-skeleton-loader count="1" appearance="line">
+                </ngx-skeleton-loader>
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-md-5">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+            <div class="col-md-3">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+            <div class="col-md-4">
+              <ngx-skeleton-loader count="1" appearance="line">
+              </ngx-skeleton-loader>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- no activity div -->
+      <div
+        class="no-activity card bg-secondary p-5"
+        *ngIf="!loading && activityList.length < 1"
+      >
+        <h1 class="text-grey text-center">No Ongoing {{ activityType }}</h1>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-dark">
+        <div class="card-header text-light p-2">
+          <i class="fa fa-fw fa-id-badge"></i> Class Members
+        </div>
+        <div class="card-body p-2">
+          <p class="text-secondary pl-4" *ngIf="false">No Members</p>
+          <ul class="list-group">
+            <li class="list-group-item d-flex bg-light p-2 mb-2">
+              <img
+                src="assets/images/profile.jpg"
+                class="mr-3 profile-img rounded-circle"
+                alt="..."
+              />
+              <div>
+                <div class="stud-name">Hiroshi cruz</div>
+                <div class="stud-id">16-A0001</div>
+              </div>
+            </li>
+            <li class="list-group-item d-flex bg-light p-1">
+              <img
+                src="assets/images/profile.jpg"
+                class="mr-3 profile-img rounded-circle"
+                alt="..."
+              />
+              <div>
+                <div class="stud-name">Hiroshi cruz</div>
+                <div class="stud-id">16-A0001</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

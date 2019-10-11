@@ -3,58 +3,58 @@
 <div class="main">
   <div class="row">
     <div class="col-md-8">
-      <div class="card p-3 btn text-left mb-2">
+      <div
+        class="card bg-light text-center mb-2 p-3"
+        *ngIf="!loading && members.legth == 0"
+      >
+        No Student in this Class
+      </div>
+
+      <div class="card p-3 btn text-left mb-2 bg-light" *ngIf="loading">
         <div class="media">
-          <img
-            src="assets/images/profile.jpg"
-            class="mr-3 profile-img rounded-circle"
-            alt="..."
-          />
-          <div class="media-body">
-            <h5 class="mt-0">Hiroshi Cruz</h5>
-            <p>16-A0029 | BSIT</p>
-            <i class="fa fa-id-badge stud-logo"></i>
+          <div class="mr-3 profile-img overflow-auto">
+            <ngx-skeleton-loader
+              animated="true"
+              count="1"
+              [theme]="{
+                'border-radius': '0',
+                height: '90px',
+                width: '100%'
+              }"
+              appearance="circle"
+            >
+            </ngx-skeleton-loader>
+          </div>
+          <div class="media-body pt-2">
+            <ngx-skeleton-loader animated="true" count="1" appearance="line">
+            </ngx-skeleton-loader
+            ><br />
+            <ngx-skeleton-loader animated="true" count="1" appearance="line">
+            </ngx-skeleton-loader>
           </div>
         </div>
       </div>
-      <div class="card p-3 btn text-left mb-2">
+
+      <div
+        class="card p-3 btn text-left mb-2 bg-light"
+        *ngFor="let member of members"
+      >
         <div class="media">
-          <img
-            src="assets/images/profile.jpg"
-            class="mr-3 profile-img rounded-circle"
-            alt="..."
-          />
-          <div class="media-body">
-            <h5 class="mt-0">Hiroshi Cruz</h5>
-            <p>16-A0029 | BSIT</p>
-            <i class="fa fa-id-badge stud-logo"></i>
+          <div class="mr-3 profile-img rounded-circle">
+            <img
+              [src]="member.image"
+              class="mr-3 profile-img rounded-circle"
+              alt="..."
+            />
           </div>
-        </div>
-      </div>
-      <div class="card p-3 btn text-left mb-2">
-        <div class="media">
-          <img
-            src="assets/images/profile.jpg"
-            class="mr-3 profile-img rounded-circle"
-            alt="..."
-          />
           <div class="media-body">
-            <h5 class="mt-0">Hiroshi Cruz</h5>
-            <p>16-A0029 | BSIT</p>
-            <i class="fa fa-id-badge stud-logo"></i>
-          </div>
-        </div>
-      </div>
-      <div class="card p-3 btn text-left mb-2">
-        <div class="media">
-          <img
-            src="assets/images/profile.jpg"
-            class="mr-3 profile-img rounded-circle"
-            alt="..."
-          />
-          <div class="media-body">
-            <h5 class="mt-0">Hiroshi Cruz</h5>
-            <p>16-A0029 | BSIT</p>
+            <h5 class="mt-0">
+              {{ member.name?.first }} {{ member.name?.last }}
+            </h5>
+            <p>
+              {{ member.student_number }}
+              {{ member.course ? '| ' + member.course : '' }}
+            </p>
             <i class="fa fa-id-badge stud-logo"></i>
           </div>
         </div>

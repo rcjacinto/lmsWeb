@@ -94,6 +94,7 @@ export class ProfileComponent implements OnInit {
 
   updateProfile() {
     this.spinner.show();
+    this.newUser.date.modified = new Date();
     this.userService.updateUser(this.newUser).then(() => {
       this.store.dispatch(new SetUser(this.newUser));
       this.newUser = JSON.parse(JSON.stringify(this.user));

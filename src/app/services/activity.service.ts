@@ -37,6 +37,23 @@ export class ActivityService {
     return this.activityCollection.doc<Activity>(id).valueChanges();
   }
 
+  getActivityByClass(classId) {
+    return this.db
+      .collection<Activity>('activity', ref =>
+        ref.where('class.id', '==', classId).orderBy('date.modified', 'desc')
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+  }
+
   getActivityByType(classId, type) {
     return this.db
       .collection<Activity>('activity', ref =>

@@ -18,71 +18,77 @@
         <div class="card bg-dark mb-3">
           <div class="card-header ">
             <div class="w-75">
-              <ngx-skeleton-loader count="1" appearance="line">
+              <ngx-skeleton-loader animate="true" count="1" appearance="line">
               </ngx-skeleton-loader>
             </div>
             <div class="w-50">
-              <ngx-skeleton-loader count="1" appearance="line">
+              <ngx-skeleton-loader animate="true" count="1" appearance="line">
               </ngx-skeleton-loader>
             </div>
           </div>
           <div class="card-body bg-light">
-            <ngx-skeleton-loader count="1" appearance="line">
+            <ngx-skeleton-loader animate="true" count="1" appearance="line">
             </ngx-skeleton-loader>
           </div>
         </div>
         <div class="card bg-dark mb-3">
           <div class="card-header ">
             <div class="w-75">
-              <ngx-skeleton-loader count="1" appearance="line">
+              <ngx-skeleton-loader animate="true" count="1" appearance="line">
               </ngx-skeleton-loader>
             </div>
             <div class="w-50">
-              <ngx-skeleton-loader count="1" appearance="line">
+              <ngx-skeleton-loader animate="true" count="1" appearance="line">
               </ngx-skeleton-loader>
             </div>
           </div>
           <div class="card-body bg-light">
-            <ngx-skeleton-loader count="1" appearance="line">
+            <ngx-skeleton-loader count="1" animate="true" appearance="line">
             </ngx-skeleton-loader>
           </div>
         </div>
         <div class="card bg-dark mb-3">
           <div class="card-header ">
             <div class="w-75">
-              <ngx-skeleton-loader count="1" appearance="line">
+              <ngx-skeleton-loader animate="true" count="1" appearance="line">
               </ngx-skeleton-loader>
             </div>
             <div class="w-50">
-              <ngx-skeleton-loader count="1" appearance="line">
+              <ngx-skeleton-loader animate="true" count="1" appearance="line">
               </ngx-skeleton-loader>
             </div>
           </div>
           <div class="card-body bg-light">
-            <ngx-skeleton-loader count="1" appearance="line">
+            <ngx-skeleton-loader animate="true" count="1" appearance="line">
             </ngx-skeleton-loader>
           </div>
         </div>
       </div>
 
-      <div class="card bg-dark mb-3" *ngFor="let class of classList">
-        <div class="card-header py-2 pl-4 pr-0">
-          <i
-            [class]="'icon ion-ios-bookmark bookmark-icon text-' + class.color"
-          ></i>
-          <div class="text-light">
-            {{ class.name }}
-            <button
-              class="btn bg-transparent float-right text-light mr-2"
-              (click)="setSelectedClass(updateClassModal, class)"
+      <div>
+        <div class="card bg-dark mb-3" *ngFor="let class of classList">
+          <div class="card-header py-2 pl-4 pr-0">
+            <i
+              [class]="
+                'icon ion-ios-bookmark bookmark-icon text-' + class.color
+              "
+            ></i>
+            <div class="text-light">
+              {{ class.name }}
+              <button
+                class="btn bg-transparent float-right text-light mr-2"
+                (click)="setSelectedClass(updateClassModal, class)"
+              >
+                <i class="fa fa-pencil-square-o"></i>
+              </button>
+            </div>
+            <span class="text-secondary class-code"
+              >Code: {{ class.code }}</span
             >
-              <i class="fa fa-pencil-square-o"></i>
-            </button>
           </div>
-          <span class="text-secondary class-code">Code: {{ class.code }}</span>
-        </div>
-        <div class="card-body bg-light">
-          {{ class.description }}
+          <div class="card-body bg-light">
+            {{ class.description }}
+          </div>
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import {
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
 import { User } from '../models/user.model';
+import { Student } from '../models/student.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +48,11 @@ export class UserService {
 
   removeUser(id) {
     return this.usersCollection.doc(id).delete();
+  }
+
+  // For students
+
+  addStudent(student: Student) {
+    return this.usersCollection.doc(student.id).set(student);
   }
 }

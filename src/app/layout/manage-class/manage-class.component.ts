@@ -29,10 +29,26 @@ export class ManageClassComponent implements OnInit {
     this.loading = true;
     this.userData$.subscribe(user => {
       this.user = user;
-      this.classService.getAllclasses(this.user.id).subscribe(list => {
-        this.classList = list;
-        this.loading = false;
-      });
+      if (this.user.id !== '') {
+        switch (user.role) {
+          case 'instructor':
+            this.classService
+              .getAllclasses(this.user.id)
+              .subscribe(classData => {
+                this.classList = classData;
+                this.loading = false;
+              });
+            break;
+          case 'student':
+            this.classService
+              .getClassByStudentId(user.id)
+              .subscribe(classData => {
+                this.classList = classData;
+                this.loading = false;
+              });
+            break;
+        }
+      }
     });
   }
 

@@ -13,7 +13,8 @@ export const initialState: Class = {
   instructor: {
     id: '',
     name: ''
-  }
+  },
+  members: []
 };
 
 export function reducer(state = initialState, action: ClassActions): Class {

@@ -28,19 +28,18 @@ export class ActivitiesComponent implements OnInit {
   ) {
     this.route.paramMap.subscribe((map: any) => {
       this.isOnView = false;
-      console.log(map.params);
       this.loading = true;
       this.activityType = map.params.type;
       this.selectedClass$.subscribe(data => {
         this.selectedClass = data;
-        this.activityService
-          .getActivityByType(this.selectedClass.id, this.activityType)
-          .subscribe(list => {
-            console.log(list);
-
-            this.activityList = list;
-            this.loading = false;
-          });
+        if (this.selectedClass.id !== '') {
+          this.activityService
+            .getActivityByType(this.selectedClass.id, this.activityType)
+            .subscribe(list => {
+              this.activityList = list;
+              this.loading = false;
+            });
+        }
       });
     });
   }

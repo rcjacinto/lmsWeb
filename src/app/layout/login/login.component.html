@@ -11,6 +11,7 @@
       <div class="col-sm-2"></div>
       <div class="col-sm-4">
         <button
+          id="loginButton"
           class="hover-primary btn bg-transparent
         w-100 mb-2 rounded text-white border-primary"
           (click)="openModal(loginModal)"
@@ -33,6 +34,7 @@
   </div>
 </div>
 
+<!-- LOGIN -->
 <ng-template #loginModal let-modal>
   <div class="row" id="login-row">
     <div class="col-lg-6 rounded-left bg-transparent"></div>
@@ -43,7 +45,7 @@
       >
         <i class="fa fa-times smaller"></i>
       </button>
-      <form class="px-3" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <form class="px-3" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="clearfix mb-4">
           <h1 class="mb-4">
             <strong class="text-light float-left">
@@ -59,13 +61,13 @@
             type="email"
             formControlName="email"
           />
-          <div *ngIf="submitted && f.email.errors?.required">
+          <div *ngIf="submitted && login.email.errors?.required">
             <div class="text-danger px-3 pt-2">
               <i class="fa fa-exclamation-circle text-danger"></i>
               Email is required
             </div>
           </div>
-          <div *ngIf="submitted && f.email.errors?.email">
+          <div *ngIf="submitted && login.email.errors?.email">
             <div class="text-danger px-3 pt-2">
               <i class="fa fa-exclamation-circle text-danger"></i>
               Email must be a valid email address
@@ -79,7 +81,7 @@
             placeholder="Password"
             formControlName="password"
           />
-          <div *ngIf="submitted && f.password.errors?.required">
+          <div *ngIf="submitted && login.password.errors?.required">
             <div class="text-danger px-3 pt-2">
               <i class="fa fa-exclamation-circle text-danger"></i>
               Password is required
@@ -108,10 +110,15 @@
   </div>
 </ng-template>
 
+<!-- REGISTER -->
 <ng-template #registerModal let-modal>
   <div class="row" id="register">
     <div class="col-lg-6 rounded-left" id="register-left">
-      <form class="px-3" onSubmit="{registerAccount}">
+      <form
+        class="px-3"
+        [formGroup]="studRegisterForm"
+        (ngSubmit)="registerAccount()"
+      >
         <div class="clearfix mb-4">
           <h2 class="mb-4">
             <strong class="text-secondary float-left">
@@ -120,66 +127,105 @@
             </strong>
           </h2>
         </div>
-        <div class="form-group">
+        <div class="form-group d-flex">
           <input
             type="text"
             class="form-control"
             placeholder="Student Id"
-            *ngIf="role == 'student'"
+            formControlName="studid"
           />
+          <i
+            class="fa fa-exclamation-circle text-danger ml-2"
+            *ngIf="submitted && student.studid.errors?.required"
+          ></i>
         </div>
         <div class="form-group row">
-          <div class="col">
-            <input type="text" class="form-control" placeholder="First name" />
+          <div class="col d-flex">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="First name"
+              formControlName="fname"
+            />
+            <i
+              class="fa fa-exclamation-circle text-danger ml-2"
+              *ngIf="submitted && student.fname.errors?.required"
+            ></i>
           </div>
-          <div class="col">
-            <input type="text" class="form-control" placeholder="Last name" />
+          <div class="col d-flex">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Last name"
+              formControlName="lname"
+            />
+            <i
+              class="fa fa-exclamation-circle text-danger ml-2"
+              *ngIf="submitted && student.lname.errors?.required"
+            ></i>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group d-flex">
           <input
             type="text"
             class="form-control"
             placeholder="email@example.com"
+            formControlName="email"
           />
+          <i
+            class="fa fa-exclamation-circle text-danger ml-2"
+            *ngIf="submitted && student.email.errors?.required"
+          ></i>
+
+          <i
+            class="fa fa-envelope-o text-danger ml-2"
+            *ngIf="submitted && student.email.errors?.email"
+          ></i>
         </div>
-        <div class="form-group">
-          <input type="password" class="form-control" placeholder="Password" />
+        <div class="form-group d-flex">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <i
+            class="fa fa-exclamation-circle text-danger ml-2"
+            *ngIf="submitted && student.password.errors?.required"
+          ></i>
         </div>
-        <div class="form-group">
+        <div class="form-group d-flex">
           <input
             type="password"
             class="form-control"
             placeholder="Confirm password"
+            formControlName="password2"
           />
+          <i
+            class="fa fa-exclamation-circle text-danger ml-2"
+            *ngIf="submitted && student.password2.errors?.required"
+          ></i>
         </div>
         <hr />
 
-        <div class="form-group" *ngIf="role == 'student'">
+        <!-- <div class="form-group" *ngIf="role == 'student'">
           <input
             type="text"
             class="form-control"
             placeholder="Classroom Code"
           />
-        </div>
+        </div> -->
 
         <div class="form-group">
-          <input
-            type="submit"
-            class="form-control btn btn-danger"
-            value="Register"
-          />
+          <input type="submit" class="w-100 btn btn-danger" value="Register" />
         </div>
         <hr class="mx-auto bg-secondary w-50" />
-        <div class="form-group text-center mb-3">
-          <button
-            class="btn bg-transparent text-primary"
-            (click)="changeRole()"
-          >
-            {{ role == 'instructor' ? 'Im a Student' : 'Im an Instructor' }}
-          </button>
-        </div>
       </form>
+      <div class="form-group text-center mb-3">
+        <button class="btn bg-transparent text-primary" (click)="changeRole()">
+          {{ role == 'instructor' ? 'Im a Student' : 'Im an Instructor' }}
+        </button>
+      </div>
     </div>
     <div class="col-lg-6 rounded-right bg-transparent">
       <button
@@ -191,3 +237,13 @@
     </div>
   </div>
 </ng-template>
+
+<ngx-spinner
+  bdOpacity="0.5"
+  bdColor="rgba(51,51,51,0.6)"
+  size="default"
+  color="#fff"
+  type="ball-pulse-sync"
+  [fullScreen]="true"
+>
+</ngx-spinner>

@@ -12,6 +12,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Question } from 'src/app/models/question.model';
 import { initialState } from 'src/app/store/user/user.reducer';
 import { SetUser } from 'src/app/store/user/user.action';
+import { Student } from 'src/app/models/student.model';
+import { UserService } from 'src/app/services/user.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-side-nav',
@@ -21,12 +24,13 @@ import { SetUser } from 'src/app/store/user/user.action';
 export class SideNavComponent implements OnInit {
   userData$ = this.store.pipe(select(selectUser));
   classData$ = this.store.pipe(select(selectClass));
-  user: User;
+  user: any;
   selectedClass: Class;
   classList: Class[];
-  newClassname: string = '';
-  newDescription: string = '';
-  newColor: string = '';
+  newClassname = '';
+  newDescription = '';
+  newColor = '';
+  newClassCode = '';
   colorClass = 'bg-red text-light';
   constructor(
     private store: Store<RootState>,
@@ -38,16 +42,28 @@ export class SideNavComponent implements OnInit {
     private authService: AuthService
   ) {
     this.userData$.subscribe(user => {
-      console.log(user);
       this.user = user;
+      if (user.id !== '') {
+        switch (user.role) {
+          case 'instructor':
+            this.classService
+              .getAllclasses(this.user.id)
+              .subscribe(classData => {
+                this.classList = classData;
+              });
+            break;
+          case 'student':
+            this.classService
+              .getClassByStudentId(user.id)
+              .subscribe(classData => {
+                this.classList = classData;
+              });
+            break;
+        }
+      }
     });
     this.classData$.subscribe(res => {
-      console.log(res);
       this.selectedClass = res;
-    });
-    this.classService.getAllclasses(this.user.id).subscribe(classData => {
-      console.log(classData);
-      this.classList = classData;
     });
   }
 
@@ -59,6 +75,7 @@ export class SideNavComponent implements OnInit {
 
   resetClass() {
     const clear: Class = {
+      id: '',
       name: '',
       description: '',
       color: '',
@@ -70,7 +87,8 @@ export class SideNavComponent implements OnInit {
       instructor: {
         id: '',
         name: ''
-      }
+      },
+      members: []
     };
     this.store.dispatch(new SetClass(clear));
   }
@@ -89,8 +107,6 @@ export class SideNavComponent implements OnInit {
   }
 
   addNewClass() {
-    console.log(this.newColor);
-
     if (
       this.newClassname.trim() === '' ||
       this.newDescription.trim() === '' ||
@@ -115,7 +131,8 @@ export class SideNavComponent implements OnInit {
       instructor: {
         name: `${this.user.name.first} ${this.user.name.last}`,
         id: this.user.id
-      }
+      },
+      members: []
     };
     this.classService.addClass(newClass);
     this.toastr.success('Classcode: ' + code, 'success');
@@ -125,6 +142,34 @@ export class SideNavComponent implements OnInit {
     this.spinner.hide();
     this.modalService.dismissAll();
     this.store.dispatch(new SetClass(newClass));
+  }
+
+  joinClass() {
+    if (this.newClassCode.trim() == '') {
+      return;
+    }
+    this.spinner.show();
+    this.classService
+      .getClassByCode(this.newClassCode)
+      .pipe(take(1))
+      .subscribe(snapshot => {
+        if (snapshot.length > 0) {
+          const newClass: Class = snapshot[0];
+          if (newClass.members.includes(this.user.id)) {
+            this.toastr.error('Already a member of this class');
+            this.spinner.hide();
+          } else {
+            newClass.members.push(this.user.id);
+            this.classService.updateClass(newClass).then(() => {
+              this.spinner.hide();
+              this.toastr.success('Class added');
+            });
+          }
+        } else {
+          this.spinner.hide();
+          this.toastr.error('Please check the class code!');
+        }
+      });
   }
 
   randomCode() {
@@ -138,7 +183,9 @@ export class SideNavComponent implements OnInit {
   }
 
   logOut() {
-    this.authService.doLogout().then(() => {
+    this.authService.doLogout().then(res => {
+      console.log(res);
+
       this.store.dispatch(new SetUser(initialState));
       this.resetClass();
       this.modalService.dismissAll();

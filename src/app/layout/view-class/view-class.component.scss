@@ -1,0 +1,46 @@
+.main {
+  margin-left: 250px;
+  padding: 80px 20px;
+  background-color: #6c757d;
+}
+
+.profile-img {
+  width: 40px;
+}
+
+.bookmark-icon {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  height: 100px;
+  font-size: 26px;
+}
+
+.instructor-name {
+  font-size: 12px;
+}
+
+.stud-logo {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 50px;
+}
+
+.stud-id {
+  font-size: 12px;
+}
+
+.activities-img {
+  width: 100%;
+}
+
+.overflow-wrap {
+  overflow-wrap: break-word !important;
+  white-space: pre-wrap;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}

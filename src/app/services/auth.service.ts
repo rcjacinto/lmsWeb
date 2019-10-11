@@ -30,11 +30,11 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       this.afAuth.auth
         .signOut()
-        .then(() => {
-          resolve();
+        .then(res => {
+          resolve(res);
         })
         .catch(error => {
-          reject();
+          reject(error);
         });
     });
   }

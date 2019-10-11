@@ -16,6 +16,7 @@ import { ManageInstructorsComponent } from './layout/manage-instructors/manage-i
 import { ManageStudentsComponent } from './layout/manage-students/manage-students.component';
 import { ViewInstructorProfileComponent } from './layout/view-instructor-profile/view-instructor-profile.component';
 import { ViewStudentProfileComponent } from './layout/view-student-profile/view-student-profile.component';
+import { ViewClassComponent } from './layout/view-class/view-class.component';
 
 const routes: Routes = [
   {
@@ -95,6 +96,10 @@ const routes: Routes = [
   {
     path: 'view-student-profile',
     component: ViewStudentProfileComponent
+  },
+  {
+    path: 'view-class',
+    component: ViewClassComponent
   }
 ];
 
