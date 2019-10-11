@@ -22,11 +22,11 @@ export class StudentsComponent implements OnInit {
       this.user = user;
     });
 
-    this.classData$.subscribe(async sc => {
+    this.classData$.subscribe(sc => {
       this.selectedClass = sc;
       if (this.selectedClass.id !== '') {
         this.members = [];
-        await this.selectedClass.members.forEach(member => {
+        this.selectedClass.members.forEach(member => {
           this.userService.getUser(member).subscribe(user => {
             this.members.push(user);
             this.loading = false;
@@ -34,6 +34,9 @@ export class StudentsComponent implements OnInit {
         });
       }
     });
+    setTimeout(() => {
+      this.loading = false;
+    }, 3000);
   }
 
   ngOnInit() {}

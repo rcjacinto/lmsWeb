@@ -4,6 +4,7 @@ import { RootState, selectUser, selectClass } from 'src/app/store';
 import { Class } from 'src/app/models/class.model';
 import { Activity } from 'src/app/models/activity.model';
 import { ActivityService } from 'src/app/services/activity.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-view-class',
@@ -16,10 +17,12 @@ export class ViewClassComponent implements OnInit {
   user: any;
   selectedClass: Class;
   activityList: Activity[] = [];
+  members = [];
   loading = false;
   constructor(
     public store: Store<RootState>,
-    public activityService: ActivityService
+    public activityService: ActivityService,
+    public userService: UserService
   ) {
     this.loading = true;
     this.userData$.subscribe(user => {
@@ -34,6 +37,14 @@ export class ViewClassComponent implements OnInit {
         this.activityService.getActivityByClass(sc.id).subscribe(activities => {
           this.activityList = activities;
           this.loading = false;
+        });
+
+        this.members = [];
+        this.selectedClass.members.forEach(member => {
+          this.userService.getUser(member).subscribe(user => {
+            this.members.push(user);
+            this.loading = false;
+          });
         });
       }
     });

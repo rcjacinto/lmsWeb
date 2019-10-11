@@ -214,28 +214,27 @@
           <i class="fa fa-fw fa-id-badge"></i> Class Members
         </div>
         <div class="card-body p-2">
-          <p class="text-secondary pl-4" *ngIf="false">No Members</p>
+          <p class="text-secondary pl-4" *ngIf="members.length == 0">
+            No Members
+          </p>
           <ul class="list-group">
-            <li class="list-group-item d-flex bg-light p-2 mb-2">
+            <li
+              class="list-group-item d-flex bg-light p-2 mb-2"
+              *ngFor="let member of members"
+            >
               <img
-                src="assets/images/profile.jpg"
+                [src]="member.image"
                 class="mr-3 profile-img rounded-circle"
                 alt="..."
               />
               <div>
-                <div class="stud-name">Hiroshi cruz</div>
-                <div class="stud-id">16-A0001</div>
-              </div>
-            </li>
-            <li class="list-group-item d-flex bg-light p-1">
-              <img
-                src="assets/images/profile.jpg"
-                class="mr-3 profile-img rounded-circle"
-                alt="..."
-              />
-              <div>
-                <div class="stud-name">Hiroshi cruz</div>
-                <div class="stud-id">16-A0001</div>
+                <div class="stud-name">
+                  {{ member.name.first }} {{ member.name.last }}
+                </div>
+                <div class="stud-id">
+                  {{ member.student_number }}
+                  {{ member.course ? '| ' + member.course : '' }}
+                </div>
               </div>
             </li>
           </ul>
