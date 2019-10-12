@@ -9,25 +9,51 @@
             src="https://cdn-images-1.medium.com/max/800/0*ngXgBNNdx6iiWP8q.png"
             class="mr-3 activities-img w-100"
             alt="..."
+            *ngIf="!loading"
           />
+          <ngx-skeleton-loader
+            count="1"
+            [theme]="{
+              'border-radius': '0',
+              height: '100%',
+              width: '100%'
+            }"
+            appearance="circle"
+            *ngIf="loading"
+          >
+          </ngx-skeleton-loader>
         </div>
         <div class="col-md-7">
           <h5 class="overflow-wrap">
             {{ activity.title }}
+
+            <ngx-skeleton-loader count="1" appearance="line" *ngIf="loading">
+            </ngx-skeleton-loader>
           </h5>
           <p class="overflow-wrap"></p>
           <p class="overflow-wrap">
             {{ activity.instruction }}
+            <ngx-skeleton-loader count="1" appearance="line" *ngIf="loading">
+            </ngx-skeleton-loader>
           </p>
           <hr />
           <p>
-            <i [class]="'fa fa-bookmark text-' + selectedClass.color"></i>
-            {{ selectedClass.name }} | {{ selectedClass.instructor?.name }}
+            <span *ngIf="!loading">
+              <i [class]="'fa fa-bookmark text-' + selectedClass.color"></i>
+              {{ selectedClass.name }} |
+              {{ selectedClass.instructor?.name }}</span
+            >
+            <ngx-skeleton-loader count="1" appearance="line" *ngIf="loading">
+            </ngx-skeleton-loader>
           </p>
         </div>
       </div>
       <hr />
-      <div class="row">
+      <div *ngIf="loading">
+        <ngx-skeleton-loader count="1" appearance="line" *ngIf="loading">
+        </ngx-skeleton-loader>
+      </div>
+      <div class="row" *ngIf="!loading">
         <div class="col-md-5">
           <span class="text-capitalize"
             >{{ activity.questions?.length }} Questions</span
@@ -39,7 +65,7 @@
         </div>
       </div>
     </div>
-    <div>
+    <div *ngIf="!loading">
       <button class="btn btn-dark w-100 mb-2" (click)="startActivity()">
         {{ continuing ? 'Continue' : 'Start' }}
       </button>
