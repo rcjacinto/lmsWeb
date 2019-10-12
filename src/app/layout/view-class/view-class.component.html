@@ -75,8 +75,13 @@
               [routerLink]="['/take-exam']"
               routerLinkActive="router-link-active"
               (click)="takeExam(activity)"
+              [disabled]="today > convertToDate(activity.deadline?.seconds)"
             >
-              <span class="text-capitalize">Start {{ activity.type }}</span>
+              <span class="text-capitalize">{{
+                today > convertToDate(activity.deadline?.seconds)
+                  ? 'Ended'
+                  : 'Start'
+              }}</span>
             </button>
           </div>
         </div>

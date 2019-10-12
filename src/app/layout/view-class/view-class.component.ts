@@ -20,6 +20,7 @@ export class ViewClassComponent implements OnInit {
   activityList: Activity[] = [];
   members = [];
   loading = false;
+  today = new Date();
   constructor(
     public store: Store<RootState>,
     public activityService: ActivityService,
@@ -33,10 +34,9 @@ export class ViewClassComponent implements OnInit {
     this.classData$.subscribe(sc => {
       this.selectedClass = sc;
       if (this.selectedClass.id !== '') {
-        console.log(this.selectedClass.id);
-
         this.activityService.getActivityByClass(sc.id).subscribe(activities => {
           this.activityList = activities;
+
           this.loading = false;
         });
 
@@ -55,5 +55,9 @@ export class ViewClassComponent implements OnInit {
 
   takeExam(activity) {
     this.store.dispatch(new SetExam(activity));
+  }
+
+  convertToDate(date) {
+    return new Date(date * 1000);
   }
 }

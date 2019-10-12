@@ -30,6 +30,9 @@ export class TakeExamComponent implements OnInit {
   selectedQuestion: Question;
   submit: Submit;
   countdownTimer: any;
+  today = new Date();
+  cIcon = '<i class="fa fa-check"></i>';
+  xIcon = '<i class="fa fa-close"></i>';
 
   constructor(
     public store: Store<RootState>,
@@ -59,7 +62,6 @@ export class TakeExamComponent implements OnInit {
             this.loading = false;
             this.continuing = this.submit.status == 1;
           } else {
-            console.log('start');
             this.activity = data;
             this.submit = {
               activity: data,
@@ -79,6 +81,8 @@ export class TakeExamComponent implements OnInit {
             });
           }
           this.selectedQuestion = this.activity.questions[0];
+          console.log(this.today);
+          console.log(new Date(this.activity.deadline.seconds * 1000));
         });
     });
   }
@@ -136,7 +140,7 @@ export class TakeExamComponent implements OnInit {
     const answer = {
       key: 'answer',
       value: value.trim(),
-      is_correct: isCorrect
+      isCorrect
     };
     this.selectedQuestion.answer = answer;
     this.submit.date.modified = new Date();
@@ -149,7 +153,7 @@ export class TakeExamComponent implements OnInit {
     const answer = {
       key: 'answer',
       value,
-      is_correct: isCorrect
+      isCorrect
     };
     this.selectedQuestion.answer = answer;
     this.submit.date.modified = new Date();
@@ -160,7 +164,7 @@ export class TakeExamComponent implements OnInit {
     this.spinner.show();
     this.timerStop();
     this.submit.score = 0;
-    this.submit.status = 1;
+    this.submit.status = 2;
     this.submit.activity.questions.forEach(question => {
       if (question.answer.is_correct) {
         this.submit.score += question.points;
@@ -169,6 +173,8 @@ export class TakeExamComponent implements OnInit {
     this.submit.date.submitted = new Date();
 
     this.activityService.updateSubmit(this.submit).then(() => {
+      console.log(this.submit);
+
       this.submitted = true;
       this.spinner.hide();
       this.toastr.success('Activity submitted!');
@@ -192,5 +198,9 @@ export class TakeExamComponent implements OnInit {
 
   trunc(num: number) {
     return Math.trunc(num);
+  }
+
+  convertToDate(date) {
+    return new Date(date * 1000);
   }
 }
