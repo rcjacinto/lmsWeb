@@ -41,7 +41,7 @@
     </div>
     <div>
       <button class="btn btn-dark w-100 mb-2" (click)="startActivity()">
-        Start
+        {{ continuing ? 'Continue' : 'Start' }}
       </button>
       <button
         class="btn bg-grey w-100 mb-2"
@@ -101,7 +101,7 @@
         <div>
           <button
             class="btn btn-dark border border-danger w-100"
-            (click)="submit()"
+            (click)="submitActivity()"
           >
             Submmit
           </button>
@@ -158,13 +158,13 @@
                 >
                   <option value=""></option>
                   <option
-                    [value]="true"
-                    [selected]="selectedQuestion.answer?.value == true"
+                    value="true"
+                    [selected]="selectedQuestion.answer?.value == 'true'"
                     >True</option
                   >
                   <option
-                    [value]="false"
-                    [selected]="selectedQuestion.answer?.value == false"
+                    value="false"
+                    [selected]="selectedQuestion.answer?.value == 'false'"
                     >False</option
                   >
                 </select>
@@ -200,7 +200,10 @@
           </div>
 
           <div class="col timer py-2 px-3 text-center text-light">
-            <i class="fa fa-clock-o"></i> {{ activity?.time_limit }}
+            <i class="fa fa-clock-o"></i>
+            {{ trunc(submit?.timer_left / 60) }}:{{
+              submit?.timer_left % 60 | number: '2.0'
+            }}
           </div>
 
           <div class="col">

@@ -4,21 +4,23 @@ import {
   AngularFirestore
 } from '@angular/fire/firestore';
 import { Activity } from '../models/activity.model';
+import { Submit } from '../models/submit.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Student } from '../models/student.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActivityService {
   private activityCollection: AngularFirestoreCollection<Activity>;
-  private submitsCollection: AngularFirestoreCollection<Activity>;
+  private submitsCollection: AngularFirestoreCollection<Submit>;
 
   private activity: Observable<Activity[]>;
 
   constructor(private db: AngularFirestore) {
     this.activityCollection = db.collection<Activity>('activity');
-    this.submitsCollection = db.collection<Activity>('submits');
+    this.submitsCollection = db.collection<Submit>('submits');
     this.activity = this.activityCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -89,11 +91,31 @@ export class ActivityService {
 
   // Activity Submits
 
-  addSubmit(submit) {
+  getSubmit(student: Student, activityId) {
+    return this.db
+      .collection<Submit>('submits', ref =>
+        ref
+          .where('student.id', '==', student.id)
+          .where('activity.id', '==', activityId)
+          .limit(1)
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+  }
+
+  addSubmit(submit: Submit) {
     return this.submitsCollection.add(submit);
   }
 
-  updateSubmit(submit) {
+  updateSubmit(submit: Submit) {
     return this.submitsCollection.doc(submit.id).update(submit);
   }
 }

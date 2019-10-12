@@ -1,7 +1,7 @@
 import { ExamActions, ExamActionTypes } from './exam.action';
 import { Activity } from 'src/app/models/activity.model';
 
-export const initialState: Activity = {
+export const actInitialState: Activity = {
   id: '',
   class: {
     id: '',
@@ -24,13 +24,16 @@ export const initialState: Activity = {
   }
 };
 
-export function reducer(state = initialState, action: ExamActions): Activity {
+export function reducer(
+  state = actInitialState,
+  action: ExamActions
+): Activity {
   switch (action.type) {
     case ExamActionTypes.SetExam:
       state = action.payload;
       return state;
     case ExamActionTypes.RemoveExam:
-      state = initialState;
+      state = actInitialState;
       return state;
     default:
       return state;
