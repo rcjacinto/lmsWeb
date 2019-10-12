@@ -55,14 +55,17 @@
             <hr />
             <div class="row">
               <div class="col-md-5">
-                {{ activity.deadline.seconds * 1000 | date: 'dd MMM yyyy' }} |
-                <span class="text-capitalize"
-                  >{{ activity.questions?.length }} Questions</span
-                >
+                <span class="text-capitalize">
+                  Type: {{ activity.type }} | Term: {{ activity.term }}
+                </span>
               </div>
-              <div class="col-md-3">{{ activity.time_limit }} mins</div>
+              <div class="col-md-3">
+                {{ activity.questions?.length }} Questions |
+                {{ activity.time_limit }} mins
+              </div>
               <div class="col-md-4">
-                Submits: {{ activity.submits ? activity.submits.length : 0 }}
+                Submits: {{ activity.submits ? activity.submits.length : 0 }} |
+                {{ activity.deadline.seconds * 1000 | date: 'dd MMM yyyy' }}
               </div>
             </div>
           </div>

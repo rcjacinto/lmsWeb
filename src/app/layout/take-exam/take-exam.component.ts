@@ -8,6 +8,8 @@ import { Submit } from 'src/app/models/submit.model';
 import { ActivityService } from 'src/app/services/activity.service';
 import { take } from 'rxjs/operators';
 import { actInitialState } from 'src/app/store/exam/exam.reducer';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-take-exam',
@@ -22,14 +24,18 @@ export class TakeExamComponent implements OnInit {
   selectedClass: Class;
   activity: Activity = actInitialState;
   loading = false;
+  continuing = false;
+  submitted = false;
   timerStarted = false;
   selectedQuestion: Question;
   submit: Submit;
-  continuing = false;
+  countdownTimer: any;
 
   constructor(
     public store: Store<RootState>,
-    public activityService: ActivityService
+    public activityService: ActivityService,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService
   ) {
     this.loading = true;
     this.userData$.subscribe(user => {
@@ -119,6 +125,7 @@ export class TakeExamComponent implements OnInit {
 
   setMcAnswer(answer) {
     this.selectedQuestion.answer = answer;
+    this.submit.date.modified = new Date();
     this.activityService.updateSubmit(this.submit);
   }
 
@@ -132,12 +139,12 @@ export class TakeExamComponent implements OnInit {
       is_correct: isCorrect
     };
     this.selectedQuestion.answer = answer;
+    this.submit.date.modified = new Date();
     this.activityService.updateSubmit(this.submit);
   }
 
   setTofAnswer(event) {
     const value = event.target.value;
-
     const isCorrect = value == this.selectedQuestion.options[0].value;
     const answer = {
       key: 'answer',
@@ -145,22 +152,42 @@ export class TakeExamComponent implements OnInit {
       is_correct: isCorrect
     };
     this.selectedQuestion.answer = answer;
+    this.submit.date.modified = new Date();
     this.activityService.updateSubmit(this.submit);
   }
 
   submitActivity() {
-    console.log(this.activity);
+    this.spinner.show();
+    this.timerStop();
+    this.submit.score = 0;
     this.submit.status = 1;
-    this.activityService.updateSubmit(this.submit);
+    this.submit.activity.questions.forEach(question => {
+      if (question.answer.is_correct) {
+        this.submit.score += question.points;
+      }
+    });
+    this.submit.date.submitted = new Date();
+
+    this.activityService.updateSubmit(this.submit).then(() => {
+      this.submitted = true;
+      this.spinner.hide();
+      this.toastr.success('Activity submitted!');
+    });
   }
 
   timerStart() {
-    setInterval(() => {
+    this.countdownTimer = setInterval(() => {
       if (this.submit.timer_left > 0) {
         this.submit.timer_left--;
         this.activityService.updateSubmit(this.submit);
+      } else {
+        this.timerStop();
       }
     }, 1000);
+  }
+
+  timerStop() {
+    clearInterval(this.countdownTimer);
   }
 
   trunc(num: number) {

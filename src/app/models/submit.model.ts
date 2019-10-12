@@ -12,4 +12,5 @@ export interface Submit {
   };
   student: Student;
   timer_left: number;
+  score?: number;
 }

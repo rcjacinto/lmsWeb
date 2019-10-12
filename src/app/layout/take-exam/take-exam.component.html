@@ -80,7 +80,7 @@
   </div>
 
   <div class="contaier" *ngIf="timerStarted">
-    <div class="card p-2 mb-2 bg-dark text-light">
+    <div class="card p-2 mb-2 bg-dark text-light" *ngIf="!submitted">
       <div class="d-flex">
         <div class="mx-2 mt-2">
           <i class="fa fa-book check" aria-hidden="true"></i>
@@ -108,8 +108,37 @@
         </div>
       </div>
     </div>
+
+    <div class="card p-2 mb-2 bg-dark text-light" *ngIf="submitted">
+      <div class="d-flex">
+        <div class="mx-2 mt-2">
+          <i
+            class="fa fa-check-square-o check text-success"
+            aria-hidden="true"
+          ></i>
+        </div>
+        <div class="ml-2">
+          <div>
+            Title:
+            <span class="text-secondary"> {{ activity.title }} </span>
+          </div>
+          <div>
+            Your Score:
+            <span class="text-secondary text-capitalize">
+              {{ submit.score }} Points
+            </span>
+          </div>
+          <div>
+            Date Submitted:
+            <span class="text-secondary">
+              {{ submit.date.submitted | date: 'dd MMM yyyy hh:mm a' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
     <hr />
-    <div class="row">
+    <div class="row" *ngIf="!submitted">
       <div class="col-sm-3">
         <div class="w-100 btn-group-vertical question-nums mb-3" role="group">
           <button
@@ -242,3 +271,15 @@
     </div>
   </div>
 </div>
+
+<!-- Spinner -->
+
+<ngx-spinner
+  bdOpacity="0.5"
+  bdColor="rgba(51,51,51,0.6)"
+  size="default"
+  color="#fff"
+  type="ball-pulse-sync"
+  [fullScreen]="true"
+>
+</ngx-spinner>
