@@ -20,7 +20,7 @@ export interface Activity {
     created: Date;
     modified: Date;
   };
-  deadline?: Date;
+  deadline?: any;
   submits?: any[];
   status: number;
 }

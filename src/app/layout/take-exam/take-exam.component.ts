@@ -193,8 +193,13 @@ export class TakeExamComponent implements OnInit {
             .getActivity(this.submit.activity.id)
             .pipe(take(1))
             .subscribe(act => {
-              act.submits.push(newSubmit);
-              this.activityService.updateActivity(act);
+              const newAct = act;
+              newAct.id = this.submit.activity.id;
+              if (!newAct.submits) {
+                newAct.submits = [];
+              }
+              newAct.submits.push(newSubmit);
+              this.activityService.updateActivity(newAct);
             });
         });
     });

@@ -48,7 +48,7 @@ export class StudentActivitiesComponent implements OnInit {
 
   setSelectedSubmit(submit: Submit) {
     const today = new Date();
-    const dl = this.convertToDate(submit.activity.deadline);
+    const dl = this.convertToDate(submit.activity.deadline.seconds);
 
     if (today > dl) {
       this.selectedSubmit = submit;

@@ -8,7 +8,7 @@ export interface Submit {
   date: {
     started: Date;
     modified: Date;
-    submitted: Date;
+    submitted: any;
   };
   student: Student;
   timer_left: number;
