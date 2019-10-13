@@ -11,6 +11,8 @@ import { UserService } from 'src/app/services/user.service';
 import { SetUser } from 'src/app/store/user/user.action';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { ClassService } from 'src/app/services/class.service';
+import { take } from 'rxjs/operators';
 
 export interface FileData {
   name: string;
@@ -51,7 +53,8 @@ export class ProfileComponent implements OnInit {
     private storage: AngularFireStorage,
     private userService: UserService,
     private spinner: NgxSpinnerService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private classService: ClassService
   ) {
     this.userData$.subscribe(user => {
       console.log(user);
@@ -98,6 +101,19 @@ export class ProfileComponent implements OnInit {
     this.userService.updateUser(this.newUser).then(() => {
       this.store.dispatch(new SetUser(this.newUser));
       this.newUser = JSON.parse(JSON.stringify(this.user));
+      this.classService
+        .getAllclasses(this.user.id)
+        .pipe(take(1))
+        .subscribe(classList => {
+          classList.forEach(list => {
+            list.instructor = {
+              id: this.user.id,
+              name: this.user.name.first + ' ' + this.user.name.last
+            };
+
+            this.classService.updateClass(list);
+          });
+        });
       this.toastr.success('Profile updated!');
       this.spinner.hide();
     });
