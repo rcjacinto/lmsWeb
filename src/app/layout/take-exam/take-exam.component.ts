@@ -53,7 +53,7 @@ export class TakeExamComponent implements OnInit {
   ngOnInit() {
     this.activityData$.pipe(take(1)).subscribe(async data => {
       await this.activityService
-        .getSubmit(this.user, data.id)
+        .getSubmit(this.user.id, data.id)
         .pipe(take(1))
         .subscribe(async sub => {
           if (sub.length > 0) {
@@ -72,7 +72,8 @@ export class TakeExamComponent implements OnInit {
               },
               status: 0,
               student: this.user,
-              timer_left: data.time_limit * 60
+              timer_left: data.time_limit * 60,
+              total_items: 0
             };
             await this.activityService.addSubmit(this.submit).then(res => {
               console.log(res);
@@ -81,8 +82,6 @@ export class TakeExamComponent implements OnInit {
             });
           }
           this.selectedQuestion = this.activity.questions[0];
-          console.log(this.today);
-          console.log(new Date(this.activity.deadline.seconds * 1000));
         });
     });
   }
@@ -163,21 +162,34 @@ export class TakeExamComponent implements OnInit {
   submitActivity() {
     this.spinner.show();
     this.timerStop();
-    this.submit.score = 0;
-    this.submit.status = 2;
-    this.submit.activity.questions.forEach(question => {
-      if (question.answer.is_correct) {
-        this.submit.score += question.points;
+    const newSubmit = JSON.parse(JSON.stringify(this.submit));
+    newSubmit.total_items = 0;
+    newSubmit.score = 0;
+    newSubmit.activity.questions.forEach((question: Question) => {
+      newSubmit.total_items += question.points;
+      if (!question.answer) {
+        question.answer = {
+          key: '',
+          value: 'No answer',
+          isCorrect: false
+        };
+      }
+      if (question.answer.isCorrect) {
+        newSubmit.score += question.points;
       }
     });
-    this.submit.date.submitted = new Date();
-
-    this.activityService.updateSubmit(this.submit).then(() => {
-      console.log(this.submit);
-
+    newSubmit.date.submitted = new Date();
+    newSubmit.status = 2;
+    this.activityService.updateSubmit(newSubmit).then(() => {
       this.submitted = true;
-      this.spinner.hide();
-      this.toastr.success('Activity submitted!');
+      this.activityService
+        .getSubmit(this.user.id, this.submit.activity.id)
+        .pipe(take(1))
+        .subscribe(sub => {
+          this.submit = sub[0];
+          this.spinner.hide();
+          this.toastr.success('Activity submitted!');
+        });
     });
   }
 
@@ -188,6 +200,8 @@ export class TakeExamComponent implements OnInit {
         this.activityService.updateSubmit(this.submit);
       } else {
         this.timerStop();
+        this.toastr.show('Times Up!');
+        this.submitActivity();
       }
     }, 1000);
   }

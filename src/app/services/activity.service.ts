@@ -91,11 +91,11 @@ export class ActivityService {
 
   // Activity Submits
 
-  getSubmit(student: Student, activityId) {
+  getSubmit(studId, activityId) {
     return this.db
       .collection<Submit>('submits', ref =>
         ref
-          .where('student.id', '==', student.id)
+          .where('student.id', '==', studId)
           .where('activity.id', '==', activityId)
           .limit(1)
       )

@@ -128,13 +128,16 @@
           <div>
             Your Score:
             <span class="text-secondary text-capitalize">
-              {{ submit.score }} Points
+              {{ submit.score }} / {{ submit.total_items }} Points
             </span>
           </div>
           <div>
             Date Submitted:
             <span class="text-secondary">
-              {{ submit.date.submitted | date: 'dd MMM yyyy hh:mm a' }}
+              {{
+                submit.date.submitted?.seconds * 1000
+                  | date: 'dd MMM yyyy hh:mm a'
+              }}
             </span>
           </div>
         </div>
@@ -292,7 +295,7 @@
           <div>
             Your Score:
             <span class="text-secondary text-capitalize">
-              {{ submit.score }} Points
+              {{ submit.score }} / {{ submit.total_items }} Points
             </span>
           </div>
           <div>
