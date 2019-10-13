@@ -30,13 +30,7 @@
       <hr />
       <div class="activity-list" *ngIf="!loading">
         <div class="mb-2" *ngFor="let activity of activityList">
-          <div
-            class="card bg-light p-3 text-left"
-            (click)="
-              user.role == 'instructor' ? setSelectedActivity(activity) : ''
-            "
-            [ngClass]="{ btn: user.role == 'instructor' }"
-          >
+          <div class="card bg-light p-3 text-left">
             <div class="row">
               <div class="col-md-5">
                 <img
@@ -54,12 +48,12 @@
             </div>
             <hr />
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <span class="text-capitalize">
                   Type: {{ activity.type }} | Term: {{ activity.term }}
                 </span>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 {{ activity.questions?.length }} Questions |
                 {{ activity.time_limit }} mins
               </div>
@@ -216,7 +210,7 @@
       <!-- no activity div -->
       <div
         class="card bg-light text-center mb-2 p-3"
-        *ngIf="!loading && members.length == 0"
+        *ngIf="!loading && activityList.length == 0"
       >
         No ongoing activity
       </div>

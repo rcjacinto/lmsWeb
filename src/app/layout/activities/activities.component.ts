@@ -5,6 +5,7 @@ import { RootState, selectClass } from 'src/app/store';
 import { Store, select } from '@ngrx/store';
 import { Class } from 'src/app/models/class.model';
 import { Activity } from 'src/app/models/activity.model';
+import { Submit } from 'src/app/models/submit.model';
 
 @Component({
   selector: 'app-activities',
@@ -14,12 +15,14 @@ import { Activity } from 'src/app/models/activity.model';
 export class ActivitiesComponent implements OnInit {
   selectedClass$ = this.store.pipe(select(selectClass));
   selectedClass: Class;
+  allActivities: Activity[];
   activityList: Activity[];
-  activityType: string;
-  loading = false;
-
-  isOnView = false;
   selectedActivity: Activity;
+  activityType: string;
+  submitList: Submit[];
+  loading = false;
+  isOnView = false;
+  term = 'prelim';
 
   constructor(
     private route: ActivatedRoute,
@@ -36,7 +39,10 @@ export class ActivitiesComponent implements OnInit {
           this.activityService
             .getActivityByType(this.selectedClass.id, this.activityType)
             .subscribe(list => {
-              this.activityList = list;
+              this.allActivities = list;
+              this.activityList = this.allActivities.filter(
+                li => li.term == this.term
+              );
               this.loading = false;
             });
         }
@@ -47,9 +53,20 @@ export class ActivitiesComponent implements OnInit {
   ngOnInit() {}
 
   setSelectedActivity(activity) {
-    console.log(activity);
     this.isOnView = true;
+    this.loading = true;
     this.selectedActivity = activity;
+    this.activityService
+      .getSubmitByActivity(this.selectedActivity.id)
+      .subscribe(submits => {
+        this.submitList = submits;
+        this.loading = false;
+      });
+  }
+
+  setSelectedTerm(term) {
+    this.term = term;
+    this.activityList = this.allActivities.filter(li => li.term == this.term);
   }
 
   clearSelectedActivity() {

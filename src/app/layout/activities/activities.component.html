@@ -9,6 +9,40 @@
 <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="row">
+    <div class="col-md-4" *ngIf="!isOnView">
+      <div class="card-body p-0">
+        <ul class="list-group">
+          <li
+            class="list-group-item cursor"
+            (click)="!loading ? setSelectedTerm('prelim') : ''"
+            [ngClass]="{ 'bg-dark text-light': term == 'prelim' }"
+          >
+            Prelim
+          </li>
+          <li
+            class="list-group-item cursor"
+            (click)="!loading ? setSelectedTerm('midterm') : ''"
+            [ngClass]="{ 'bg-dark text-light': term == 'midterm' }"
+          >
+            Midterm
+          </li>
+          <li
+            class="list-group-item cursor"
+            (click)="!loading ? setSelectedTerm('pre-finals') : ''"
+            [ngClass]="{ 'bg-dark text-light': term == 'pre-finals' }"
+          >
+            Pre-Finals
+          </li>
+          <li
+            class="list-group-item cursor"
+            (click)="!loading ? setSelectedTerm('finals') : ''"
+            [ngClass]="{ 'bg-dark text-light': term == 'finals' }"
+          >
+            Finals
+          </li>
+        </ul>
+      </div>
+    </div>
     <div class="col-md-8" *ngIf="!isOnView">
       <!-- activity list -->
       <div class="activity-list" *ngIf="!loading">
@@ -173,30 +207,48 @@
       </div>
       <!-- no activity div -->
       <div
-        class="no-activity card bg-secondary p-5"
+        class="no-activity rounded bg-light p-4 "
         *ngIf="!loading && activityList.length < 1"
       >
-        <h1 class="text-grey text-center">No Ongoing {{ activityType }}</h1>
+        <p class="text-secondary text-center m-0">
+          No {{ activityType }} on {{ term }}
+        </p>
       </div>
     </div>
     <div class="col-md-8" *ngIf="isOnView">
-      <app-view-activity [activity]="selectedActivity"></app-view-activity>
-      <button (click)="clearSelectedActivity()" class="btn btn-dark w-100">
-        Back
-      </button>
+      <div *ngIf="!loading">
+        <app-view-activity
+          [activity]="selectedActivity"
+          [submits]="submitList"
+          [selectedClass]="selectedClass"
+        >
+        </app-view-activity
+        ><button (click)="clearSelectedActivity()" class="btn btn-dark w-100">
+          Back
+        </button>
+      </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" *ngIf="isOnView">
       <div class="card bg-dark">
         <div class="card-header text-light">
-          <i class="fa fa-bell mr-2"></i>Notification
+          <i class="fa fa-calendar-check-o fa-fw" aria-hidden="true"></i>
+          Submits
         </div>
         <div class="card-body p-0">
           <ul class="list-group">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+            <li
+              class="list-group-item text-secondary"
+              *ngIf="submitList?.length == 0"
+            >
+              No Submissions yet
+            </li>
+            <li
+              class="list-group-item cursor"
+              *ngFor="let submit of submitList"
+            >
+              {{ submit.student.student_number }} |
+              {{ submit.student.name.first }} {{ submit.student.name.last }}
+            </li>
           </ul>
         </div>
       </div>

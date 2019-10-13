@@ -163,6 +163,7 @@ export class SideNavComponent implements OnInit {
             this.classService.updateClass(newClass).then(() => {
               this.spinner.hide();
               this.toastr.success('Class added');
+              this.modalService.dismissAll();
             });
           }
         } else {

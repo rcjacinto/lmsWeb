@@ -189,6 +189,13 @@ export class TakeExamComponent implements OnInit {
           this.submit = sub[0];
           this.spinner.hide();
           this.toastr.success('Activity submitted!');
+          this.activityService
+            .getActivity(this.submit.activity.id)
+            .pipe(take(1))
+            .subscribe(act => {
+              act.submits.push(newSubmit);
+              this.activityService.updateActivity(act);
+            });
         });
     });
   }

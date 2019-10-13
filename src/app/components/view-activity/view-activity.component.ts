@@ -4,6 +4,9 @@ import { Label } from 'ng2-charts';
 import { Activity } from 'src/app/models/activity.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Question } from 'src/app/models/question.model';
+import { Submit } from 'src/app/models/submit.model';
+import { ClassService } from 'src/app/services/class.service';
+import { Class } from 'src/app/models/class.model';
 
 @Component({
   selector: 'app-view-activity',
@@ -12,7 +15,12 @@ import { Question } from 'src/app/models/question.model';
 })
 export class ViewActivityComponent implements OnInit {
   @Input() activity: Activity;
+  @Input() submits: Submit[];
+  @Input() selectedClass: Class;
   selectedQuestion: Question;
+  studentCount = 0;
+  unsubmitted = 0;
+  submitted = 0;
   public pieChartOptions: ChartOptions = {
     responsive: true,
     legend: {
@@ -43,7 +51,20 @@ export class ViewActivityComponent implements OnInit {
   constructor(private modalService: NgbModal) {}
 
   ngOnInit() {
-    console.log(this.activity);
+    console.log(this.selectedClass);
+    this.studentCount = this.selectedClass.members.length;
+    let passed = 0;
+    let failed = 0;
+    this.submitted = this.submits.length;
+    this.unsubmitted = this.studentCount - this.submitted;
+    this.submits.forEach(submit => {
+      if (submit.score > submit.total_items / 2) {
+        passed++;
+      } else {
+        failed++;
+      }
+    });
+    this.pieChartData = [passed, failed, this.unsubmitted];
   }
 
   public chartClicked({
@@ -82,5 +103,39 @@ export class ViewActivityComponent implements OnInit {
     this.modalService.open(content, {
       centered: true
     });
+  }
+
+  getCorrectPercent(question: Question) {
+    let correct = 0;
+    this.submits.forEach(submit => {
+      submit.activity.questions.forEach(q => {
+        if (question.number == q.number) {
+          if (q.answer.isCorrect) {
+            correct++;
+          }
+        }
+      });
+    });
+    if (this.submitted == 0) {
+      return 0;
+    }
+    return Math.round((correct / this.submitted) * 100);
+  }
+
+  getInCorrectPercent(question: Question) {
+    let incorrect = 0;
+    this.submits.forEach(submit => {
+      submit.activity.questions.forEach(q => {
+        if (question.number == q.number) {
+          if (!q.answer.isCorrect) {
+            incorrect++;
+          }
+        }
+      });
+    });
+    if (this.submitted == 0) {
+      return 0;
+    }
+    return Math.round((incorrect / this.submitted) * 100);
   }
 }

@@ -77,8 +77,29 @@ export class ActivityService {
       );
   }
 
-  updateActivity(activity: Activity, id: string) {
-    return this.activityCollection.doc(id).update(activity);
+  getActivityByTerm(classId, type, term) {
+    return this.db
+      .collection<Activity>('activity', ref =>
+        ref
+          .where('class.id', '==', classId)
+          .where('type', '==', type)
+          .where('term', '==', term)
+          .orderBy('date.modified', 'desc')
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+  }
+
+  updateActivity(activity: Activity) {
+    return this.activityCollection.doc(activity.id).update(activity);
   }
 
   addActivity(activity: Activity) {
@@ -119,6 +140,26 @@ export class ActivityService {
           .where('activity.class.id', '==', classId)
           .where('status', '==', 2)
           .orderBy('date.submitted', 'desc')
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+  }
+
+  getSubmitByActivity(activityId) {
+    return this.db
+      .collection<Submit>('submits', ref =>
+        ref
+          .where('activity.id', '==', activityId)
+          .where('status', '==', 2)
+          .orderBy('date.submitted', 'asc')
       )
       .snapshotChanges()
       .pipe(

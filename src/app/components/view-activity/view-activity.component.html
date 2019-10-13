@@ -24,41 +24,15 @@
       </tr>
       <tr>
         <th>#</th>
-        <th>Correct Students</th>
-        <th>Incorrect Students</th>
-        <th>Student Graph</th>
+        <th class="text-center">Correct Students</th>
+        <th class="text-center">Incorrect Students</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td scope="row">1</td>
-        <td>12%</td>
-        <td>5%</td>
-        <td>
-          <button class="btn btn-primary btn-sm  w-100">
-            View
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td scope="row">2</td>
-        <td>12%</td>
-        <td>5%</td>
-        <td>
-          <button class="btn btn-primary btn-sm  w-100">
-            View
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td scope="row">3</td>
-        <td>12%</td>
-        <td>5%</td>
-        <td>
-          <button class="btn btn-primary btn-sm  w-100">
-            View
-          </button>
-        </td>
+      <tr *ngFor="let question of activity.questions">
+        <td>{{ question.number }}</td>
+        <td class="text-center">{{ getCorrectPercent(question) }}%</td>
+        <td class="text-center">{{ getInCorrectPercent(question) }}%</td>
       </tr>
     </tbody>
   </table>
@@ -115,7 +89,7 @@
           <div class="input-group-prepend">
             <span
               class="input-group-text"
-              [ngClass]="{ 'bg-dark text-light': options.isCorrect }"
+              [ngClass]="{ 'bg-success text-light': options.isCorrect }"
               >{{ options.key }}</span
             >
           </div>
@@ -124,20 +98,8 @@
             class="form-control"
             readonly
             [value]="options.value"
-            [ngClass]="{ 'bg-dark text-light': options.isCorrect }"
+            [ngClass]="{ 'bg-success text-light': options.isCorrect }"
           />
-          <div class="input-group-append">
-            <div
-              class="input-group-text"
-              [ngClass]="{ 'bg-dark': options.isCorrect }"
-            >
-              <input
-                type="radio"
-                name="mc-correct"
-                [checked]="options.isCorrect"
-              />
-            </div>
-          </div>
         </div>
       </div>
       <div class="tof-options" *ngSwitchCase="'tof'">
@@ -147,7 +109,7 @@
           </div>
           <input
             type="text"
-            class="form-control text-capitalize bg-dark text-light"
+            class="form-control text-capitalize bg-success text-light"
             readonly
             [value]="selectedQuestion.options[0].value"
           />
@@ -160,7 +122,7 @@
           </div>
           <input
             type="text"
-            class="form-control text-capitalize bg-dark text-light"
+            class="form-control text-capitalize bg-success text-light"
             readonly
             [value]="selectedQuestion.options[0].value"
           />
