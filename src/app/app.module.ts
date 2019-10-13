@@ -47,6 +47,7 @@ import { ViewInstructorProfileComponent } from './layout/view-instructor-profile
 import { ViewClassComponent } from './layout/view-class/view-class.component';
 import { TakeExamComponent } from './layout/take-exam/take-exam.component';
 import { StudentActivitiesComponent } from './layout/student-activities/student-activities.component';
+import { StudentProfileComponent } from './layout/student-profile/student-profile.component';
 const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 
 @NgModule({
@@ -73,7 +74,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     ViewInstructorProfileComponent,
     ViewClassComponent,
     TakeExamComponent,
-    StudentActivitiesComponent
+    StudentActivitiesComponent,
+    StudentProfileComponent
   ],
   imports: [
     CommonModule,

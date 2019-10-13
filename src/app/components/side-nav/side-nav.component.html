@@ -267,7 +267,7 @@
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
-          [routerLink]="['/profile']"
+          [routerLink]="user.role === 'student' ? ['/student-profile'] : ['/profile']"
           routerLinkActive="router-link-active"
         >
           <i class="icon ion-ios-contact text-light mr-3"></i
