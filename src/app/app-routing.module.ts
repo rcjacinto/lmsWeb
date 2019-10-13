@@ -18,6 +18,7 @@ import { ViewInstructorProfileComponent } from './layout/view-instructor-profile
 import { ViewStudentProfileComponent } from './layout/view-student-profile/view-student-profile.component';
 import { ViewClassComponent } from './layout/view-class/view-class.component';
 import { TakeExamComponent } from './layout/take-exam/take-exam.component';
+import { StudentActivitiesComponent } from './layout/student-activities/student-activities.component';
 
 const routes: Routes = [
   {
@@ -112,6 +113,11 @@ const routes: Routes = [
   {
     path: 'take-exam',
     component: TakeExamComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'student-activities',
+    component: StudentActivitiesComponent,
     canActivate: [AuthGuard]
   }
 ];

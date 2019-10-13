@@ -111,6 +111,27 @@ export class ActivityService {
       );
   }
 
+  getSubmits(studId, classId) {
+    return this.db
+      .collection<Submit>('submits', ref =>
+        ref
+          .where('student.id', '==', studId)
+          .where('activity.class.id', '==', classId)
+          .where('status', '==', 2)
+          .orderBy('date.submitted', 'desc')
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+  }
+
   addSubmit(submit: Submit) {
     return this.submitsCollection.add(submit);
   }

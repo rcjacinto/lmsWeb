@@ -1,0 +1,82 @@
+<app-top-nav title=""> </app-top-nav> <app-side-nav> </app-side-nav>
+<div class="main">
+  <div class="container">
+    <div
+      class="card cursor p-2 mb-2 bg-dark text-light"
+      *ngFor="let submit of submitList"
+    >
+      <div class="d-flex">
+        <div class="mx-2 mt-2">
+          <i
+            class="fa fa-check-square-o check text-success"
+            aria-hidden="true"
+          ></i>
+        </div>
+        <div class="ml-2">
+          <div>
+            {{ submit.activity.title }}
+          </div>
+          <div class="text-capitalize">
+            {{ submit.activity.type }} | {{ submit.activity.term }}
+          </div>
+          <div>
+            Your Score: <span class="text-success">{{ submit.score }}</span> /
+            20 points
+          </div>
+          <div>
+            Date Submitted:
+            {{
+              submit.date.submitted.seconds * 1000 | date: 'dd MMM yyyy hh:mm a'
+            }}
+            <span class="text-secondary">
+              <!-- {{
+                submit.date.submitted.seconds * 1000
+                  | date: 'dd MMM yyyy hh:mm a'
+              }} -->
+            </span>
+          </div>
+        </div>
+        <img src="assets/images/passed.png" alt="" class="status" />
+      </div>
+    </div>
+
+    <div class="card cursor p-2 mb-2 bg-dark text-light">
+      <div class="d-flex">
+        <div class="mx-2 mt-2">
+          <i class="fas fa-frown check text-secondary" aria-hidden="true"></i>
+        </div>
+        <div class="ml-2">
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing.
+          </div>
+          <div>
+            Quiz | Prelim
+          </div>
+          <div>Your Score: <span class="text-danger">20</span> / 20 points</div>
+          <div>
+            Date Submitted:12 Oct 2019
+            <span class="text-secondary">
+              <!-- {{
+                    submit.date.submitted.seconds * 1000
+                      | date: 'dd MMM yyyy hh:mm a'
+                  }} -->
+            </span>
+          </div>
+        </div>
+        <img src="assets/images/failed.png" alt="" class="status" />
+      </div>
+    </div>
+
+    <div class="card cursor p-2 mb-2 bg-dark text-light" *ngIf="loading">
+      <div class="d-flex">
+        <div class="mx-2 mt-2">
+          <i class="fas fa-spinner check text-secondary" aria-hidden="true"></i>
+        </div>
+        <div class="w-50 ml-2">
+          <ngx-skeleton-loader animated="true" count="3" appearance="line">
+          </ngx-skeleton-loader>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
