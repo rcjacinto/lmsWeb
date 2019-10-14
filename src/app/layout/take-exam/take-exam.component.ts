@@ -198,7 +198,7 @@ export class TakeExamComponent implements OnInit {
               if (!newAct.submits) {
                 newAct.submits = [];
               }
-              newAct.submits.push(newSubmit);
+              newAct.submits.push(this.submit.id);
               this.activityService.updateActivity(newAct);
             });
         });
