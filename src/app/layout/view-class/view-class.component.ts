@@ -41,12 +41,14 @@ export class ViewClassComponent implements OnInit {
         });
 
         this.members = [];
-        this.selectedClass.members.forEach(member => {
-          this.userService.getUser(member).subscribe(user => {
-            this.members.push(user);
-            this.loading = false;
+        if (this.selectedClass.members) {
+          this.selectedClass.members.forEach(member => {
+            this.userService.getUser(member).subscribe(user => {
+              this.members.push(user);
+              this.loading = false;
+            });
           });
-        });
+        }
       }
     });
   }
