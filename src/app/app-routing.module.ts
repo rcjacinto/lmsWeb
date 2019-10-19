@@ -20,6 +20,7 @@ import { ViewClassComponent } from './layout/view-class/view-class.component';
 import { TakeExamComponent } from './layout/take-exam/take-exam.component';
 import { StudentActivitiesComponent } from './layout/student-activities/student-activities.component';
 import { StudentProfileComponent } from './layout/student-profile/student-profile.component';
+import { StudentParentsComponent } from './layout/student-parents/student-parents.component';
 
 const routes: Routes = [
   {
@@ -124,6 +125,11 @@ const routes: Routes = [
   {
     path: 'student-profile',
     component: StudentProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'student-parents',
+    component: StudentParentsComponent,
     canActivate: [AuthGuard]
   }
 ];

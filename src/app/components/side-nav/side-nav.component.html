@@ -267,7 +267,9 @@
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
-          [routerLink]="user.role === 'student' ? ['/student-profile'] : ['/profile']"
+          [routerLink]="
+            user.role === 'student' ? ['/student-profile'] : ['/profile']
+          "
           routerLinkActive="router-link-active"
         >
           <i class="icon ion-ios-contact text-light mr-3"></i
@@ -278,9 +280,21 @@
           class="list-group-item list-group-item-action bg-dark"
           [routerLink]="['/messages']"
           routerLinkActive="router-link-active"
+          *ngIf="user.role === 'instructor'"
         >
           <i class="icon ion-md-chatboxes text-light mr-3"></i
           ><span class="text-light">Messages</span>
+        </button>
+
+        <button
+          type="button"
+          class="list-group-item list-group-item-action bg-dark"
+          [routerLink]="['/student-parents']"
+          routerLinkActive="router-link-active"
+          *ngIf="user.role === 'student'"
+        >
+          <i class="icon ion-ios-contacts text-light mr-3"></i
+          ><span class="text-light">Parents</span>
         </button>
 
         <button
