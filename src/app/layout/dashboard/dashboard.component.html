@@ -2,47 +2,131 @@
 <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="row">
-    <div class="col-md-8">
-      <div class="card bg-dark mb-2 p-1">
-        <textarea name="" id="" rows="5" class="w-100 p-2"></textarea>
-        <div class="card-footer p-2">
-          <div class="float-right">
-            <button class="btn btn-dark ml-2">
-              <i class="icon ion-md-attach"></i>
-            </button>
-            <button class="btn btn-dark">POST</button>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-2">
-        <img src="assets/images/class.jpg" alt="" class="card-img-top" />
-        <div class="card-body">
-          <div class="media">
-            <img
-              src="assets/images/profile.jpg"
-              class="profile-img mr-3 rounded-circle"
-              alt="..."
-            />
-            <div class="media-body">
-              <h5 class="mt-0">Media heading</h5>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Id,
-              fugiat porro. Totam nihil et atque asperiores, praesentium
-              suscipit sit ullam.
+    <div class="col-md-8" *ngIf="selectedClass?.id != ''">
+      <!-- Add post -->
+      <div class="card bg-dark p-1 mb-2">
+        <div class="card bg-light">
+          <textarea [(ngModel)]="message" rows="3" class="w-100 p-2"></textarea>
+          <div class="px-2">
+            <div class="float-right">
+              <button class="btn btn-light">
+                <i class="icon ion-md-attach"></i>
+              </button>
+              <button class="btn btn-sm btn-primary" (click)="addPost()">
+                Submit
+              </button>
+            </div>
+            <div class="float-left mt-1 text-secondary">
+              <select class="form-control-sm border-0" [(ngModel)]="postType">
+                <option value="0">Post</option>
+                <option value="1">Announcement</option>
+                <option value="2">Assignment</option>
+              </select>
             </div>
           </div>
         </div>
-        <div class="card-footer">
-          <div class="float-right">
-            <button class="btn btn-light">
-              <i class="icon ion-ios-text"></i>
-            </button>
-            <button class="btn btn-light">
-              <i class="icon ion-ios-thumbs-up"></i>
-            </button>
+      </div>
+      <hr />
+
+      <!-- Posts -->
+      <div class="card mb-2 pt-2" *ngIf="postsList.length == 0">
+        <h1 class="text-center">
+          <i class="fa fa-bullhorn text-secondary" aria-hidden="true"></i>
+        </h1>
+        <h3 class="text-center text-secondary mb-0">
+          No Posts or Activities Yet
+        </h3>
+        <p class="text-center text-secondary">
+          Click POST to add new Announcement or Assignment
+        </p>
+      </div>
+      <div class="card mb-2" *ngFor="let post of postsList">
+        <div class="media m-2">
+          <a class="pr-3" href="#">
+            <img [src]="post.posted_by.image" alt="" width="50px" />
+          </a>
+          <div class="media-body">
+            <strong class="text-primary"
+              >{{ post.posted_by.name.first }} {{ post.posted_by.name.last }}
+            </strong>
+
+            {{
+              post.type == 1
+                ? 'Posted an Announcement to '
+                : post.type == 2
+                ? 'Posted an Assignement to '
+                : post.type == 3
+                ? 'Posted an Activity to'
+                : post.type == 4
+                ? post.submit.activity.type == 'quiz'
+                  ? 'Submitted a Quiz'
+                  : 'Submitted an Exam'
+                : 'Submitted a post to'
+            }}
+            <strong
+              ><i
+                [class]="'icon ion-ios-bookmark text-' + post.posted_to.color"
+              ></i>
+              {{ post.posted_to.name }}</strong
+            >.
+            <div class="text-muted smaller">
+              {{
+                convertToDate(post.date.created.seconds)
+                  | date: 'MMM dd yyyy hh:mm a'
+              }}
+            </div>
+
+            <div class="card p-2 bg-light">
+              <div>{{ post.message }}</div>
+              <div *ngIf="post.type == 3">
+                <div class="text-capitalize">
+                  Type: {{ post.activity.type }} | {{ post.activity.term }}
+                </div>
+                <div>Title: {{ post.activity.title }}</div>
+                <div>Instruction: {{ post.activity.instruction }}</div>
+                <div>
+                  Deadline:
+                  {{
+                    convertToDate(post.activity.deadline.seconds)
+                      | date: 'MMM dd yyyy hh:mm a'
+                  }}
+                </div>
+              </div>
+              <div *ngIf="post.type == 4">
+                <div class="text-capitalize">
+                  Type: {{ post.submit.activity.type }} |
+                  {{ post.submit.activity.term }}
+                </div>
+                <div>Title: {{ post.submit.activity.title }}</div>
+                <div>Score: {{ post.submit.score }}</div>
+                <div>
+                  Date Submitted:
+                  {{
+                    convertToDate(post.submit.date.submitted.seconds)
+                      | date: 'MMM dd yyyy hh:mm a'
+                  }}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="col-md-8" *ngIf="selectedClass?.id == ''">
+      <div class="card mb-2 pt-2" *ngIf="postsList.length == 0">
+        <h1 class="text-center">
+          <i class="icon ion-ios-bookmarks"></i>
+        </h1>
+        <h3 class="text-center text-secondary mb-0">
+          No Class Selected
+        </h3>
+        <p class="text-center text-secondary">
+          Click Classes to select or Add new Class
+        </p>
+      </div>
+    </div>
+
+    <!-- Notif -->
     <div class="col-md-4">
       <div class="card bg-dark">
         <div class="card-header text-light">
@@ -62,3 +146,15 @@
   </div>
   <app-footer></app-footer>
 </div>
+
+<!-- Spinner -->
+
+<ngx-spinner
+  bdOpacity="0.5"
+  bdColor="rgba(51,51,51,0.6)"
+  size="default"
+  color="#fff"
+  type="ball-pulse-sync"
+  [fullScreen]="true"
+>
+</ngx-spinner>

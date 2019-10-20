@@ -10,6 +10,8 @@ import { take } from 'rxjs/operators';
 import { actInitialState } from 'src/app/store/exam/exam.reducer';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Post } from 'src/app/models/posts.model';
+import { PostsService } from 'src/app/services/posts.service';
 
 @Component({
   selector: 'app-take-exam',
@@ -37,6 +39,7 @@ export class TakeExamComponent implements OnInit {
   constructor(
     public store: Store<RootState>,
     public activityService: ActivityService,
+    public postService: PostsService,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService
   ) {
@@ -200,6 +203,21 @@ export class TakeExamComponent implements OnInit {
               }
               newAct.submits.push(this.submit.id);
               this.activityService.updateActivity(newAct);
+              const newPost: Post = {
+                id: '',
+                attachments: [],
+                message: '',
+                posted_by: this.user,
+                posted_to: this.selectedClass,
+                type: 4,
+                date: {
+                  created: new Date(),
+                  modified: new Date()
+                },
+                submit: newSubmit
+              };
+
+              this.postService.addPost(newPost);
             });
         });
     });

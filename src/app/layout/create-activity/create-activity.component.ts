@@ -9,6 +9,8 @@ import { select, Store } from '@ngrx/store';
 import { selectUser, RootState, selectClass } from 'src/app/store';
 import { User } from 'src/app/models/user.model';
 import { Class } from 'src/app/models/class.model';
+import { PostsService } from 'src/app/services/posts.service';
+import { Post } from 'src/app/models/posts.model';
 
 @Component({
   selector: 'app-create-activity',
@@ -91,7 +93,8 @@ export class CreateActivityComponent implements OnInit {
     private activityService: ActivityService,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
-    private store: Store<RootState>
+    private store: Store<RootState>,
+    private postService: PostsService
   ) {
     this.userData$.subscribe(user => {
       this.user = user;
@@ -200,6 +203,21 @@ export class CreateActivityComponent implements OnInit {
         .then(res => {
           this.toastr.success('Activity added Successfully');
           this.clearActivityFields();
+          const newPost: Post = {
+            id: '',
+            attachments: [],
+            message: '',
+            posted_by: this.user,
+            posted_to: this.selectedClass,
+            type: 3,
+            date: {
+              created: new Date(),
+              modified: new Date()
+            },
+            activity: newActivity
+          };
+
+          this.postService.addPost(newPost);
           this.spinner.hide();
         })
         .catch(err => {

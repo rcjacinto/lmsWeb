@@ -16,4 +16,5 @@ export interface User {
     created: Date;
     modified: Date;
   };
+  status?: string;
 }
