@@ -53,10 +53,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let question of activity.questions">
-        <td scope="row">{{ question.number }}</td>
+        <td scope="row">{{ question?.number }}</td>
         <td>
           {{
-            question.type == 'mc'
+            question?.type == 'mc'
               ? 'Multiple Question'
               : question.type == 'sa'
               ? 'Short Answer'
@@ -64,7 +64,7 @@
           }}
         </td>
         <td>
-          {{ question.text }}
+          {{ question?.text }}
         </td>
         <td>
           <button
