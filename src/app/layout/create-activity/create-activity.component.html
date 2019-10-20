@@ -80,17 +80,25 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let q of questions">
+            <tr *ngFor="let q of questions; let i = index">
               <td>{{ q.number }}</td>
               <td>
                 {{ q.text }}
               </td>
               <td>{{ q.points }}</td>
               <td>
-                <button class="btn btn-danger btn-sm m-1 float-right">
+                <button
+                  class="btn btn-danger btn-sm m-1 float-right"
+                  (click)="deleteQuestion(i)"
+                  [disabled]="editing"
+                >
                   <i class="fa fa-trash-o small"></i>
                 </button>
-                <button class="btn btn-secondary btn-sm m-1 float-right">
+                <button
+                  class="btn btn-secondary btn-sm m-1 float-right"
+                  (click)="editQuestion(q, i)"
+                  [disabled]="editing"
+                >
                   <i class="fa fa-pencil-square-o small"></i>
                 </button>
               </td>
@@ -162,6 +170,7 @@
                 <input
                   type="radio"
                   name="mc-correct"
+                  id="A"
                   checked
                   (click)="setAsCorrectAnswer(0)"
                 />
@@ -182,6 +191,7 @@
                 <input
                   type="radio"
                   name="mc-correct"
+                  id="B"
                   (click)="setAsCorrectAnswer(1)"
                 />
               </div>
@@ -201,6 +211,7 @@
                 <input
                   type="radio"
                   name="mc-correct"
+                  id="C"
                   (click)="setAsCorrectAnswer(2)"
                 />
               </div>
@@ -220,6 +231,7 @@
                 <input
                   type="radio"
                   name="mc-correct"
+                  id="D"
                   (click)="setAsCorrectAnswer(3)"
                 />
               </div>
@@ -260,8 +272,19 @@
         />
       </div>
 
-      <button class="btn btn-primary w-100" (click)="addQuestion()">
+      <button
+        class="btn btn-primary w-100"
+        (click)="addQuestion()"
+        *ngIf="!editing"
+      >
         <i class="fa fa-fw fa-plus"></i> Add Question
+      </button>
+      <button
+        class="btn btn-primary w-100 mb-2"
+        (click)="updateQuestion()"
+        *ngIf="editing"
+      >
+        Update
       </button>
     </div>
   </div>

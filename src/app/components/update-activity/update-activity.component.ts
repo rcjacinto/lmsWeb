@@ -329,6 +329,13 @@ export class UpdateActivityComponent implements OnInit {
       text: ''
     };
 
+    if (this.question.type == 'mc') {
+      setTimeout(() => {
+        const radio = document.getElementById('A') as HTMLInputElement;
+        radio.checked = true;
+      }, 500);
+    }
+
     this.mcOptions = [
       {
         key: 'A',

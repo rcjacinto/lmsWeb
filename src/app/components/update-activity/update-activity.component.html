@@ -96,6 +96,7 @@
               <button
                 class="btn btn-secondary btn-sm m-1 float-right"
                 (click)="editQuestion(q, i)"
+                [disabled]="editing"
               >
                 <i class="fa fa-pencil-square-o small"></i>
               </button>

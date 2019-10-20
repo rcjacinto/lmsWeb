@@ -89,6 +89,7 @@ export class CreateActivityComponent implements OnInit {
       return value + ' mins';
     }
   };
+  editing: boolean;
   constructor(
     private activityService: ActivityService,
     private spinner: NgxSpinnerService,
@@ -296,5 +297,100 @@ export class CreateActivityComponent implements OnInit {
     this.questions.sort((a, b) => {
       return a.number - b.number;
     });
+  }
+
+  editQuestion(question, i) {
+    console.log(question);
+
+    this.editing = true;
+    this.setQuestion(question);
+    switch (question.type) {
+      case 'mc':
+        this.mcOptions = question.options;
+        this.mcOptions.forEach(opt => {
+          const radio = document.getElementById(opt.key) as HTMLInputElement;
+          radio.checked = opt.isCorrect;
+        });
+        break;
+      case 'sa':
+        this.saAnswer = question.options[0];
+        break;
+      case 'tof':
+        this.tofCorrectAnswer = question.options[0];
+        break;
+      default:
+        break;
+    }
+    this.index = i;
+  }
+
+  deleteQuestion(i) {
+    this.questions.splice(i, 1);
+  }
+
+  updateQuestion() {
+    this.editing = false;
+    this.clearQuestion();
+    this.toastr.success('Question updated');
+  }
+
+  cancelUpdate() {
+    this.editing = false;
+  }
+
+  setQuestion(question) {
+    this.question = question;
+  }
+
+  clearQuestion() {
+    this.question = {
+      type: 'mc',
+      number: this.questions.length + 1,
+      options: [],
+      points: 1,
+      text: ''
+    };
+
+    if (this.question.type == 'mc') {
+      setTimeout(() => {
+        const radio = document.getElementById('A') as HTMLInputElement;
+        radio.checked = true;
+      }, 500);
+    }
+
+    this.mcOptions = [
+      {
+        key: 'A',
+        value: '',
+        isCorrect: true
+      },
+      {
+        key: 'B',
+        value: '',
+        isCorrect: false
+      },
+      {
+        key: 'C',
+        value: '',
+        isCorrect: false
+      },
+      {
+        key: 'D',
+        value: '',
+        isCorrect: false
+      }
+    ];
+
+    this.tofCorrectAnswer = {
+      key: 'answer',
+      value: 'true',
+      isCorrect: true
+    };
+
+    this.saAnswer = {
+      key: 'answer',
+      value: '',
+      isCorrect: true
+    };
   }
 }
