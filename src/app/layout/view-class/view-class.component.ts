@@ -34,11 +34,13 @@ export class ViewClassComponent implements OnInit {
     this.classData$.subscribe(sc => {
       this.selectedClass = sc;
       if (this.selectedClass.id !== '') {
-        this.activityService.getActivityByClass(sc.id).subscribe(activities => {
-          this.activityList = activities;
+        this.activityService
+          .getActivityByStatus(sc.id, 1)
+          .subscribe(activities => {
+            this.activityList = activities;
 
-          this.loading = false;
-        });
+            this.loading = false;
+          });
 
         this.members = [];
         if (this.selectedClass.members) {

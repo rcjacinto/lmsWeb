@@ -57,12 +57,33 @@ export class ActivityService {
       );
   }
 
+  getActivityByStatus(classId, status) {
+    return this.db
+      .collection<Activity>('activity', ref =>
+        ref
+          .where('class.id', '==', classId)
+          .where('status', '==', status)
+          .orderBy('date.modified', 'desc')
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+  }
+
   getActivityByType(classId, type) {
     return this.db
       .collection<Activity>('activity', ref =>
         ref
           .where('class.id', '==', classId)
           .where('type', '==', type)
+          .where('status', '==', 1)
           .orderBy('date.modified', 'desc')
       )
       .snapshotChanges()

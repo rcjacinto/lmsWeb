@@ -1,36 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { Options } from 'ng5-slider';
-import { Question } from '../../models/question.model';
-import { ActivityService } from 'src/app/services/activity.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { Activity } from 'src/app/models/activity.model';
+import { Options } from 'ng5-slider';
+import { Question } from 'src/app/models/question.model';
+import { User } from 'src/app/models/user.model';
+import { select, Store } from '@ngrx/store';
+import { selectUser, selectClass, RootState } from 'src/app/store';
+import { Class } from 'src/app/models/class.model';
+import { ActivityService } from 'src/app/services/activity.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { select, Store } from '@ngrx/store';
-import { selectUser, RootState, selectClass } from 'src/app/store';
-import { User } from 'src/app/models/user.model';
-import { Class } from 'src/app/models/class.model';
 import { PostsService } from 'src/app/services/posts.service';
 import { Post } from 'src/app/models/posts.model';
 
 @Component({
-  selector: 'app-create-activity',
-  templateUrl: './create-activity.component.html',
-  styleUrls: ['./create-activity.component.scss']
+  selector: 'app-update-activity',
+  templateUrl: './update-activity.component.html',
+  styleUrls: ['./update-activity.component.scss']
 })
-export class CreateActivityComponent implements OnInit {
+export class UpdateActivityComponent implements OnInit {
+  @Input() activity: Activity;
+  @Input() back;
   userData$ = this.store.pipe(select(selectUser));
   selectedClassData$ = this.store.pipe(select(selectClass));
   selectedClass: Class;
   user: User;
-  activityType = 'quiz';
-  title = '';
-  term = 'prelim';
-  instruction = '';
-  timeLimit = 10;
-  deadline: any;
-  questions: Question[] = [];
+  loading = false;
+  editing = false;
+  index = 0;
+
   question: Question = {
-    type: 'mc',
+    type: '',
     number: 1,
     options: [],
     points: 1,
@@ -104,7 +103,17 @@ export class CreateActivityComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.activity);
+
+    this.question = {
+      type: 'mc',
+      number: this.activity.questions.length + 1,
+      options: [],
+      points: 1,
+      text: ''
+    };
+  }
 
   addQuestion() {
     let error = false;
@@ -127,8 +136,8 @@ export class CreateActivityComponent implements OnInit {
 
       if (!error) {
         this.question.options = [...this.mcOptions];
-        this.questions.push(JSON.parse(JSON.stringify(this.question)));
-        console.log(this.questions);
+        this.activity.questions.push(JSON.parse(JSON.stringify(this.question)));
+        console.log(this.activity.questions);
         this.clearQuestionFields();
         this.toastr.success('Question added');
         this.sortQuestions();
@@ -142,7 +151,7 @@ export class CreateActivityComponent implements OnInit {
 
       if (!error) {
         this.question.options.push(this.saAnswer);
-        this.questions.push(JSON.parse(JSON.stringify(this.question)));
+        this.activity.questions.push(JSON.parse(JSON.stringify(this.question)));
         this.clearQuestionFields();
         this.toastr.success('Question added');
         this.sortQuestions();
@@ -151,7 +160,7 @@ export class CreateActivityComponent implements OnInit {
       }
     } else if (this.question.type == 'tof') {
       this.question.options.push(this.tofCorrectAnswer);
-      this.questions.push(JSON.parse(JSON.stringify(this.question)));
+      this.activity.questions.push(JSON.parse(JSON.stringify(this.question)));
       this.sortQuestions();
       this.clearQuestionFields();
       this.toastr.success('Question added');
@@ -159,68 +168,49 @@ export class CreateActivityComponent implements OnInit {
   }
 
   saveActivity(status) {
-    if (this.deadline === undefined) {
+    if (this.activity.deadline === undefined) {
       return this.toastr.error('Please select date for the deadline');
     }
-    const newDeadline = `${this.deadline.year}-${this.deadline.month}-${this.deadline.day} 11:59 PM`;
+    const newDeadline = `${this.activity.deadline.year}-${this.activity.deadline.month}-${this.activity.deadline.day} 11:59 PM`;
     console.log(new Date(newDeadline));
 
     if (
-      this.title.trim() == '' ||
-      this.instruction.trim() == '' ||
-      this.term.trim() == ''
+      this.activity.title.trim() == '' ||
+      this.activity.instruction.trim() == '' ||
+      this.activity.term.trim() == ''
     ) {
       return this.toastr.error('Please fill all fields');
     }
 
-    if (this.questions.length > 0) {
-      const newActivity: Activity = {
-        type: this.activityType,
-        instruction: this.instruction,
-        questions: this.questions,
-        term: this.term,
-        time_limit: this.timeLimit,
-        title: this.title,
-        class: {
-          name: this.selectedClass.name,
-          id: this.selectedClass.id
-        },
-        instructor: {
-          name: this.user.name.first + ' ' + this.user.name.last,
-          id: this.user.id
-        },
+    if (status > 0 && this.activity.status == 0) {
+      const newPost: Post = {
+        id: '',
+        attachments: [],
+        message: '',
+        posted_by: this.user,
+        posted_to: this.selectedClass,
+        type: 3,
         date: {
           created: new Date(),
           modified: new Date()
         },
-        deadline: new Date(newDeadline),
-        status
+        activity: this.activity
       };
 
+      this.postService.addPost(newPost);
+    }
+
+    this.activity.status = status;
+
+    if (this.activity.questions.length > 0) {
       this.spinner.show();
       this.activityService
-        .addActivity(newActivity)
+        .updateActivity(this.activity)
         .then(res => {
           this.toastr.success('Activity added Successfully');
-          this.clearActivityFields();
-          if (status > 0) {
-            const newPost: Post = {
-              id: '',
-              attachments: [],
-              message: '',
-              posted_by: this.user,
-              posted_to: this.selectedClass,
-              type: 3,
-              date: {
-                created: new Date(),
-                modified: new Date()
-              },
-              activity: newActivity
-            };
 
-            this.postService.addPost(newPost);
-          }
           this.spinner.hide();
+          this.back();
         })
         .catch(err => {
           this.toastr.error(err);
@@ -239,9 +229,101 @@ export class CreateActivityComponent implements OnInit {
   }
 
   clearQuestionFields() {
+    this.clearQuestion();
+
+    this.mcOptions = [
+      {
+        key: 'A',
+        value: '',
+        isCorrect: true
+      },
+      {
+        key: 'B',
+        value: '',
+        isCorrect: false
+      },
+      {
+        key: 'C',
+        value: '',
+        isCorrect: false
+      },
+      {
+        key: 'D',
+        value: '',
+        isCorrect: false
+      }
+    ];
+
+    this.tofCorrectAnswer = {
+      key: 'answer',
+      value: 'true',
+      isCorrect: true
+    };
+
+    this.saAnswer = {
+      key: 'answer',
+      value: '',
+      isCorrect: true
+    };
+  }
+
+  sortQuestions() {
+    this.activity.questions.sort((a, b) => {
+      return a.number - b.number;
+    });
+  }
+
+  convertToDate(date) {
+    return new Date(date * 1000);
+  }
+
+  editQuestion(question, i) {
+    console.log(question);
+
+    this.editing = true;
+    this.setQuestion(question);
+    switch (question.type) {
+      case 'mc':
+        this.mcOptions = question.options;
+        this.mcOptions.forEach(opt => {
+          const radio = document.getElementById(opt.key) as HTMLInputElement;
+          radio.checked = opt.isCorrect;
+        });
+        break;
+      case 'sa':
+        this.saAnswer = question.options[0];
+        break;
+      case 'tof':
+        this.tofCorrectAnswer = question.options[0];
+        break;
+      default:
+        break;
+    }
+    this.index = i;
+  }
+
+  deleteQuestion(i) {
+    this.activity.questions.splice(i, 1);
+  }
+
+  updateQuestion() {
+    this.editing = false;
+    this.clearQuestion();
+    this.toastr.success('Question updated');
+  }
+
+  cancelUpdate() {
+    this.editing = false;
+  }
+
+  setQuestion(question) {
+    this.question = question;
+  }
+
+  clearQuestion() {
     this.question = {
       type: 'mc',
-      number: this.questions.length + 1,
+      number: this.activity.questions.length + 1,
       options: [],
       points: 1,
       text: ''
@@ -281,20 +363,5 @@ export class CreateActivityComponent implements OnInit {
       value: '',
       isCorrect: true
     };
-  }
-
-  clearActivityFields() {
-    this.title = '';
-    this.term = 'prelim';
-    this.activityType = 'quiz';
-    this.instruction = '';
-    this.timeLimit = 10;
-    this.questions = [];
-  }
-
-  sortQuestions() {
-    this.questions.sort((a, b) => {
-      return a.number - b.number;
-    });
   }
 }
