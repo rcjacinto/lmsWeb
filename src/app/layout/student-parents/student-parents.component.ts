@@ -9,6 +9,7 @@ import { Parent } from 'src/app/models/parent.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { SetUser } from 'src/app/store/user/user.action';
 
 @Component({
   selector: 'app-student-parents',
@@ -18,8 +19,10 @@ import { User } from 'src/app/models/user.model';
 export class StudentParentsComponent implements OnInit {
   userData$ = this.store.pipe(select(selectUser));
   user: any;
-  name = '';
+  first = '';
+  last = '';
   email = '';
+  mi = '';
   password = '';
   password2 = '';
   parentList: Parent[] = [];
@@ -37,11 +40,11 @@ export class StudentParentsComponent implements OnInit {
     public spinner: NgxSpinnerService,
     public toastr: ToastrService
   ) {
-    this.userData$.subscribe(user => {
+    this.userData$.subscribe((user: Student) => {
       this.user = user;
-      this.parentService.getParentsByStudent(user.id).subscribe(parents => {
-        this.parentList = parents;
-      });
+      if (!user.parents) {
+        this.user.parents = [];
+      }
     });
   }
 
@@ -49,7 +52,8 @@ export class StudentParentsComponent implements OnInit {
 
   registerParent() {
     if (
-      this.name.trim() == '' ||
+      this.first.trim() == '' ||
+      this.last.trim() == '' ||
       this.email.trim() == '' ||
       this.password.trim() == '' ||
       this.password2.trim() == ''
@@ -72,23 +76,45 @@ export class StudentParentsComponent implements OnInit {
       .then(data => {
         const newParent: Parent = {
           id: data.user.uid,
-          name: this.name,
+          name: {
+            first: this.first,
+            last: this.last,
+            mi: this.mi
+          },
           email: this.email,
-          student: this.user,
-          role: 'parent'
+          student: [this.user.id],
+          role: 'parent',
+          image: 'assets/images/profile.jpg',
+          address: '',
+          dob: '',
+          gender: '',
+          mobile: 0,
+          date: {
+            created: new Date(),
+            modified: new Date()
+          }
         };
-        this.parentService
-          .addParent(newParent)
-          .then(() => {
-            this.toastr.success('Parent registered!');
-            this.spinner.hide();
-            this.clearFields();
-          })
-          .catch(err => {
-            this.toastr.error(err);
-            this.spinner.hide();
-          });
-        this.userService.addParent(newParent);
+
+        if (this.user.parents) {
+          this.user.parents.push(newParent);
+        } else {
+          this.user.parents = [newParent];
+        }
+
+        this.userService.addParent(newParent).then(() => {
+          this.userService
+            .updateUser(this.user)
+            .then(() => {
+              this.toastr.success('Parent registered!');
+              this.spinner.hide();
+              this.clearFields();
+              this.store.dispatch(new SetUser(this.user));
+            })
+            .catch(err => {
+              this.toastr.error(err);
+              this.spinner.hide();
+            });
+        });
       })
       .catch(err => {
         this.toastr.error(err);
@@ -97,7 +123,9 @@ export class StudentParentsComponent implements OnInit {
   }
 
   clearFields() {
-    this.name = '';
+    this.first = '';
+    this.last = '';
+    this.mi = '';
     this.email = '';
     this.password = '';
     this.password2 = '';

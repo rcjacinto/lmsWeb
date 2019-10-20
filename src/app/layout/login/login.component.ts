@@ -156,6 +156,7 @@ export class LoginComponent implements OnInit {
             mobile: 0,
             role: 'student',
             classes: [],
+            parents: [],
             date: {
               created: new Date(),
               modified: new Date()

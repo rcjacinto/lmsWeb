@@ -1,9 +1,6 @@
 import { Student } from './student.model';
+import { User } from './user.model';
 
-export interface Parent {
-  id?: string;
-  email: string;
-  name: string;
-  student: Student;
-  role?: string;
+export interface Parent extends User {
+  student: string[];
 }

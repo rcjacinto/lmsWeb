@@ -8,13 +8,31 @@
           <span>Register Parent </span>
         </div>
         <div class="card-body bg-dark p-2 pb-4">
-          <div class="form-group">
-            <label class="text-light">Parent Name</label>
-            <input
-              type="text"
-              class="form-control text-catitalize"
-              [(ngModel)]="name"
-            />
+          <div class="form-row mb-3">
+            <div class="col-md-5">
+              <label class="text-light">First Name</label>
+              <input
+                type="text"
+                class="form-control text-catitalize"
+                [(ngModel)]="first"
+              />
+            </div>
+            <div class="col-md-5">
+              <label class="text-light">Last Name</label>
+              <input
+                type="text"
+                class="form-control text-catitalize"
+                [(ngModel)]="last"
+              />
+            </div>
+            <div class="col-md-2">
+              <label class="text-light">M.I.</label>
+              <input
+                type="text"
+                class="form-control text-catitalize"
+                [(ngModel)]="mi"
+              />
+            </div>
           </div>
           <div class="form-group">
             <label class="text-light">Email</label>
@@ -57,13 +75,15 @@
         <div class="card-body p-0">
           <ul class="list-group">
             <li
-              *ngIf="parentList.length == 0"
+              *ngIf="user?.parents.length == 0"
               class="list-group-item text-center"
             >
               No registered Parent
             </li>
-            <li class="list-group-item" *ngFor="let parent of parentList">
-              {{ parent.name }}
+            <li class="list-group-item" *ngFor="let parent of user?.parents">
+              {{ parent.name.first }} {{ parent.name.last }}
+              <br />
+              <span class="text-secondary">{{ parent.email }}</span>
             </li>
           </ul>
         </div>
