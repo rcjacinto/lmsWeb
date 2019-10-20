@@ -60,6 +60,15 @@
           />
         </div>
       </div>
+      <div
+        class="card cursor p-2 mb-2 bg-dark text-light"
+        *ngIf="submitList.length == 0"
+      >
+        <div class="text-secondary text-center">
+          <i class="fa fa-list-alt check" aria-hidden="true"></i>
+        </div>
+        <h3 class="text-center text-secondary">No Activities Yet</h3>
+      </div>
     </div>
 
     <div *ngIf="!loading && onView">

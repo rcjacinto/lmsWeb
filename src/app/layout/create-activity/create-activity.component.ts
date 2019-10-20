@@ -321,7 +321,6 @@ export class CreateActivityComponent implements OnInit {
       default:
         break;
     }
-    this.index = i;
   }
 
   deleteQuestion(i) {
