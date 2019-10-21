@@ -20,6 +20,7 @@ import { Student } from 'src/app/models/student.model';
 export class LoginComponent implements OnInit {
   role = 'student';
   studRegisterForm: FormGroup;
+  instructorRegisterForm: FormGroup;
   loginForm: FormGroup;
   loginIsClicked = false;
   submitted = false;
@@ -54,6 +55,14 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
       password2: ['', [Validators.required]]
     });
+
+    this.instructorRegisterForm = this.formBuilder.group({
+      fname: ['', [Validators.required]],
+      lname: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      password2: ['', [Validators.required]]
+    });
   }
 
   get login() {
@@ -65,7 +74,7 @@ export class LoginComponent implements OnInit {
   }
 
   get instructor() {
-    return this.studRegisterForm.controls;
+    return this.instructorRegisterForm.controls;
   }
 
   changeRole() {

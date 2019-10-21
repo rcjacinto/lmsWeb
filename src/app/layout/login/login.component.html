@@ -118,6 +118,7 @@
         class="px-3"
         [formGroup]="studRegisterForm"
         (ngSubmit)="registerAccount()"
+        *ngIf="role == 'student'"
       >
         <div class="clearfix mb-4">
           <h2 class="mb-4">
@@ -215,6 +216,103 @@
             placeholder="Classroom Code"
           />
         </div> -->
+
+        <div class="form-group">
+          <input type="submit" class="w-100 btn btn-danger" value="Register" />
+        </div>
+        <hr class="mx-auto bg-secondary w-50" />
+      </form>
+
+      <form
+        class="px-3"
+        [formGroup]="instructorRegisterForm"
+        (ngSubmit)="registerAccount()"
+        *ngIf="role == 'instructor'"
+      >
+        <div class="clearfix mb-4">
+          <h2 class="mb-4">
+            <strong class="text-secondary float-left">
+              <span class="text-light">Register</span> -
+              <span class="text-primary text-capitalize">{{ role }}</span>
+            </strong>
+          </h2>
+        </div>
+        <div class="form-group row">
+          <div class="col d-flex">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="First name"
+              formControlName="fname"
+            />
+            <i
+              class="fa fa-exclamation-circle text-danger ml-2"
+              *ngIf="submitted && instructor.fname.errors?.required"
+            ></i>
+          </div>
+          <div class="col d-flex">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Last name"
+              formControlName="lname"
+            />
+            <i
+              class="fa fa-exclamation-circle text-danger ml-2"
+              *ngIf="submitted && instructor.lname.errors?.required"
+            ></i>
+          </div>
+        </div>
+        <div class="form-group d-flex">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="email@example.com"
+            formControlName="email"
+          />
+          <i
+            class="fa fa-exclamation-circle text-danger ml-2"
+            *ngIf="submitted && instructor.email.errors?.required"
+          ></i>
+
+          <i
+            class="fa fa-envelope-o text-danger ml-2"
+            *ngIf="submitted && instructor.email.errors?.email"
+          ></i>
+        </div>
+        <div class="form-group d-flex">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <i
+            class="fa fa-exclamation-circle text-danger ml-2"
+            *ngIf="submitted && instructor.password.errors?.required"
+          ></i>
+        </div>
+        <div class="form-group d-flex">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Confirm password"
+            formControlName="password2"
+          />
+          <i
+            class="fa fa-exclamation-circle text-danger ml-2"
+            *ngIf="submitted && instructor.password2.errors?.required"
+          ></i>
+        </div>
+        <hr />
+
+        <!-- <div class="form-group" *ngIf="role == 'student'">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Classroom Code"
+                />
+              </div> -->
 
         <div class="form-group">
           <input type="submit" class="w-100 btn btn-danger" value="Register" />
