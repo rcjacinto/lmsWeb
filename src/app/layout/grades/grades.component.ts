@@ -31,6 +31,7 @@ export class GradesComponent implements OnInit {
   examList: Activity[];
   submitList: Submit[];
   studentGrades: any[];
+  search = '';
 
   constructor(
     public store: Store<RootState>,
