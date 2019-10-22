@@ -36,7 +36,7 @@ export class ViewActivityComponent implements OnInit {
     }
   };
   public pieChartLabels: Label[] = ['Passed', 'Failed', 'Unsubmitted'];
-  public pieChartData: number[] = [12, 5, 3];
+  public pieChartData: number[] = [0, 0, 0];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartColors = [

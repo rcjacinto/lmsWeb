@@ -6,7 +6,8 @@
       <input
         type="text"
         class="form-control bg-secondary mb-3 search-input"
-        placeholder="Search Student ..."
+        placeholder="Search Student name or Student ID ..."
+        [(ngModel)]="search"
       />
       <hr />
       <ul class="nav nav-tabs">
@@ -71,24 +72,81 @@
           <div class="col">
             <table class="table table-light table-striped">
               <thead>
-                <tr>
-                  <th scope="col">Student</th>
-                  <th scope="col">Performance (60%)</th>
-                  <th scope="col">Quiz (10%)</th>
-                  <th scope="col">Exams (30%)</th>
-                  <th scope="col">Total (100%)</th>
-                  <th scope="col"></th>
+                <tr *ngIf="selectedTerm != 'total'">
+                  <th class="text-center" scope="col">Student</th>
+                  <th class="text-center" scope="col">Performance (60%)</th>
+                  <th class="text-center" scope="col">Quiz (10%)</th>
+                  <th class="text-center" scope="col">Exams (30%)</th>
+                  <th class="text-center" scope="col">Total (100%)</th>
+                  <th class="text-center" scope="col"></th>
+                </tr>
+                <tr *ngIf="selectedTerm == 'total'">
+                  <th class="text-center" scope="col"></th>
+                  <th class="text-center" scope="col" colspan="2">50%</th>
+                  <th class="text-center" scope="col" colspan="2">50%</th>
+                  <th class="text-center" scope="col">100%</th>
+                  <th class="text-center" scope="col"></th>
+                </tr>
+                <tr *ngIf="selectedTerm == 'total'">
+                  <th class="text-center" scope="col">Student</th>
+                  <th class="text-center" scope="col">Prelim (30%)</th>
+                  <th class="text-center" scope="col">Midterm (70%)</th>
+                  <th class="text-center" scope="col">Pre-Finals (30%)</th>
+                  <th class="text-center" scope="col">Finals (70%)</th>
+                  <th class="text-center" scope="col">Final Grade</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr *ngFor="let student of students">
-                  <td>{{ student.name.first }} {{ student.name.last }}</td>
-                  <td class="text-center">60%</td>
-                  <td class="text-center">10%</td>
-                  <td class="text-center">30%</td>
-                  <td class="text-center">100%</td>
+              <tbody *ngIf="selectedTerm != 'total'">
+                <tr *ngIf="loading">
+                  <td colspan="13" class="text-center">
+                    Loading...
+                  </td>
+                </tr>
+                <tr *ngFor="let grade of grades | filter: search">
+                  <td>
+                    {{ grade.student.name.first }} {{ grade.student.name.last }}
+                  </td>
+                  <td class="text-center">
+                    {{ grade.performance | number: '1.1-2' }}%
+                  </td>
+                  <td class="text-center">
+                    {{ grade.quiz | number: '1.1-2' }}%
+                  </td>
+                  <td class="text-center">
+                    {{ grade.exams | number: '1.1-2' }}%
+                  </td>
+                  <td class="text-center">
+                    {{ grade.total | number: '1.1-2' }}%
+                  </td>
                   <td class="text-center">
                     <button class="btn btn-sm btn-dark">VIEW</button>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="selectedTerm == 'total'">
+                <tr *ngIf="loading">
+                  <td colspan="13" class="text-center">
+                    Loading...
+                  </td>
+                </tr>
+                <tr *ngFor="let grade of grades | filter: search">
+                  <td>
+                    {{ grade.student.name.first }} {{ grade.student.name.last }}
+                  </td>
+                  <td class="text-center">
+                    {{ grade.prelim | number: '1.1-2' }}%
+                  </td>
+                  <td class="text-center">
+                    {{ grade.midterm | number: '1.1-2' }}%
+                  </td>
+                  <td class="text-center">
+                    {{ grade.prefinals | number: '1.1-2' }}%
+                  </td>
+                  <td class="text-center">
+                    {{ grade.finals | number: '1.1-2' }}%
+                  </td>
+                  <td class="text-center">
+                    {{ grade.average | number: '1.1-2' }}%
                   </td>
                 </tr>
               </tbody>

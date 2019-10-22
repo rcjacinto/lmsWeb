@@ -50,6 +50,8 @@ import { StudentActivitiesComponent } from './layout/student-activities/student-
 import { StudentProfileComponent } from './layout/student-profile/student-profile.component';
 import { StudentParentsComponent } from './layout/student-parents/student-parents.component';
 import { UpdateActivityComponent } from './components/update-activity/update-activity.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 
 @NgModule({
@@ -99,7 +101,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     NgxSpinnerModule,
     Ng5SliderModule,
     NgxSkeletonLoaderModule,
-    ChartsModule
+    ChartsModule,
+    Ng2SearchPipeModule
   ],
   providers: [AuthGuard, AngularFireStorage],
   bootstrap: [AppComponent]

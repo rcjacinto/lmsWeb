@@ -33,8 +33,6 @@ export class DashboardComponent implements OnInit {
     this.classData$.subscribe(data => {
       this.selectedClass = data;
       this.postService.getPostsByClass(data.id).subscribe(posts => {
-        console.log(posts);
-
         this.postsList = posts;
       });
     });

@@ -98,13 +98,13 @@ export class ActivityService {
       );
   }
 
-  getActivityByTerm(classId, type, term) {
+  getActivityByTerm(classId, term) {
     return this.db
       .collection<Activity>('activity', ref =>
         ref
           .where('class.id', '==', classId)
-          .where('type', '==', type)
           .where('term', '==', term)
+          .where('status', '==', 1)
           .orderBy('date.modified', 'desc')
       )
       .snapshotChanges()
@@ -159,6 +159,29 @@ export class ActivityService {
         ref
           .where('student.id', '==', studId)
           .where('activity.class.id', '==', classId)
+          .where('status', '==', 2)
+          .orderBy('date.submitted', 'desc')
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+  }
+
+  getSubmitsByType(studId, classId, type, term) {
+    return this.db
+      .collection<Submit>('submits', ref =>
+        ref
+          .where('student.id', '==', studId)
+          .where('activity.class.id', '==', classId)
+          .where('activity.type', '==', type)
+          .where('activity.term', '==', term)
           .where('status', '==', 2)
           .orderBy('date.submitted', 'desc')
       )
