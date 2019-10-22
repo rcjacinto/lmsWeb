@@ -7,6 +7,7 @@ import { Question } from 'src/app/models/question.model';
 import { Submit } from 'src/app/models/submit.model';
 import { ClassService } from 'src/app/services/class.service';
 import { Class } from 'src/app/models/class.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-activity',
@@ -48,7 +49,7 @@ export class ViewActivityComponent implements OnInit {
       ]
     }
   ];
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private router: Router) {}
 
   ngOnInit() {
     console.log(this.selectedClass);
@@ -137,5 +138,11 @@ export class ViewActivityComponent implements OnInit {
       return 0;
     }
     return Math.round((incorrect / this.submitted) * 100);
+  }
+
+  viewActivity(submit) {
+    this.router.navigate(['/view-student-activity'], {
+      queryParams: { submit: JSON.stringify(submit) }
+    });
   }
 }

@@ -1,0 +1,234 @@
+<app-top-nav title=""> </app-top-nav>
+<app-side-nav> </app-side-nav>
+<div class="main">
+  <div class="container">
+    <div *ngIf="!loading">
+      <div class="card p-2 mb-2 bg-dark text-light">
+        <div class="d-flex">
+          <div class="mx-2 mt-2">
+            <i
+              class="fa fa-check-square-o check text-success"
+              aria-hidden="true"
+              *ngIf="passed(submit?.score, submit?.total_items)"
+            ></i>
+            <i
+              class="fas fa-frown check text-secondary"
+              aria-hidden="true"
+              *ngIf="!passed(submit?.score, submit?.total_items)"
+            ></i>
+          </div>
+          <div class="ml-2">
+            <div>
+              {{ submit?.activity?.title }}
+            </div>
+            <div class="text-capitalize">
+              {{ submit?.activity?.type }} |
+              {{ submit?.activity?.term }}
+            </div>
+            <div>
+              Score:
+              <span
+                [ngClass]="{
+                  'text-success': passed(submit?.score, submit?.total_items),
+                  'text-danger': !passed(submit?.score, submit?.total_items)
+                }"
+                >{{ submit?.score }}</span
+              >
+              / {{ submit?.total_items }} Points
+            </div>
+            <div>
+              Date Submitted:
+              {{
+                submit?.date?.submitted.seconds * 1000
+                  | date: 'dd MMM yyyy hh:mm a'
+              }}
+            </div>
+          </div>
+          <img
+            src="assets/images/passed.png"
+            alt=""
+            class="status"
+            *ngIf="passed(submit?.score, submit?.total_items)"
+          />
+          <img
+            src="assets/images/failed.png"
+            alt=""
+            class="status"
+            *ngIf="!passed(submit?.score, submit?.total_items)"
+          />
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-3">
+          <button class="btn btn-dark border w-100" (click)="back()">
+            <i class="fa fa-fw fa-reply"></i> Back to Activities
+          </button>
+          <hr />
+          <div class="w-100 btn-group-vertical question-nums mb-3" role="group">
+            <button
+              type="button"
+              class="btn w-100 "
+              *ngFor="let question of submit?.activity?.questions"
+              [ngClass]="{
+                'btn-dark': question.number == selectedQuestion?.number
+              }"
+              (click)="setSelectedQuestion(question)"
+            >
+              Question #{{ question.number }}
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="card bg-light py-2 px-3 mb-2">
+            {{
+              selectedQuestion?.type == 'mc'
+                ? 'Multiple Questions'
+                : selectedQuestion?.type == 'sa'
+                ? 'Short Answer'
+                : 'True or False'
+            }}
+            ({{ selectedQuestion?.points }} points)
+          </div>
+          <div class="card bg-light py-2 px-3 text-capitalize question-text">
+            {{ selectedQuestion?.text }}
+          </div>
+          <hr />
+          <!-- Options -->
+
+          <div [ngSwitch]="selectedQuestion?.type">
+            <div *ngSwitchCase="'mc'">
+              <div class="mc">
+                <div
+                  class="input-group input-group-sm mb-3"
+                  *ngFor="let option of selectedQuestion?.options"
+                >
+                  <div class="input-group-prepend">
+                    <span
+                      class="input-group-text"
+                      [ngClass]="{
+                        'bg-success text-light': option.isCorrect,
+                        'bg-danger text-light': !option.isCorrect
+                      }"
+                    >
+                      <i
+                        class="fa fa-check"
+                        *ngIf="
+                          selectedQuestion.answer?.key == option.key &&
+                          selectedQuestion.answer.isCorrect
+                        "
+                      ></i>
+                      <i
+                        class="fa fa-close"
+                        *ngIf="
+                          selectedQuestion.answer?.key == option.key &&
+                          !selectedQuestion.answer.isCorrect
+                        "
+                      ></i>
+                      <span
+                        *ngIf="selectedQuestion.answer?.key != option.key"
+                        >{{ option.key }}</span
+                      >
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control btn text-left"
+                    [value]="option.value"
+                    readonly
+                    [ngClass]="{
+                      'bg-dark text-light':
+                        selectedQuestion.answer?.key == option.key
+                    }"
+                  />
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'tof'">
+              <div class="tof">
+                <div class="form-group">
+                  <label class="text-light"
+                    >Correct Answer:
+                    <strong class="text-capitalize text-success">
+                      {{ (selectedQuestion?.options)[0].value }}
+                    </strong></label
+                  >
+                  <div class="form-control text-capitalize">
+                    {{ selectedQuestion.answer?.value }}
+                    <i
+                      class="fa fa-check float-right mt-1 text-success"
+                      *ngIf="selectedQuestion.answer?.isCorrect"
+                    ></i>
+                    <i
+                      class="fa fa-close float-right mt-1 text-danger"
+                      *ngIf="!selectedQuestion.answer?.isCorrect"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'sa'">
+              <div class="sa">
+                <div class="form-group">
+                  <label class="text-light"
+                    >Correct Answer:
+                    <strong class="text-capitalize text-success">
+                      {{ (selectedQuestion?.options)[0].value }}
+                    </strong></label
+                  >
+                  <div class="form-control text-capitalize">
+                    {{ selectedQuestion.answer?.value }}
+                    <i
+                      class="fa fa-check float-right mt-1 text-success"
+                      *ngIf="selectedQuestion.answer?.isCorrect"
+                    ></i>
+                    <i
+                      class="fa fa-close float-right mt-1 text-danger"
+                      *ngIf="!selectedQuestion.answer?.isCorrect"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+
+            <div class="row">
+              <div class="col">
+                <button
+                  class="btn btn-dark float-left"
+                  (click)="prevQuestion()"
+                >
+                  <i class="fa fa-angle-left"></i> Prev
+                </button>
+              </div>
+
+              <div class="col timer py-2 px-3 text-center text-light"></div>
+
+              <div class="col">
+                <button
+                  class="btn btn-dark float-right"
+                  (click)="nextQuestion()"
+                >
+                  Next <i class="fa fa-angle-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card cursor p-2 mb-2 bg-dark text-light" *ngIf="loading">
+      <div class="d-flex">
+        <div class="mx-2 mt-2">
+          <i class="fas fa-spinner check text-secondary" aria-hidden="true"></i>
+        </div>
+        <div class="w-50 ml-2">
+          <ngx-skeleton-loader animated="true" count="3" appearance="line">
+          </ngx-skeleton-loader>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
