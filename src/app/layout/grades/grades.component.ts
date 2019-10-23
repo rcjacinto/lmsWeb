@@ -32,6 +32,7 @@ export class GradesComponent implements OnInit {
   submitList: Submit[];
   studentGrades: any[];
   search = '';
+  performanceUpdate: any;
 
   constructor(
     public store: Store<RootState>,
@@ -60,6 +61,11 @@ export class GradesComponent implements OnInit {
   async getAllStudentGrades(term) {
     this.loading = true;
     this.grades = [];
+    if (this.selectedClass.members.length == 0) {
+      setTimeout(() => {
+        return (this.loading = false);
+      }, 2000);
+    }
     this.selectedClass.members.forEach(member => {
       this.userService.getUser(member).subscribe(async (user: any) => {
         if (term != 'total') {
@@ -96,7 +102,7 @@ export class GradesComponent implements OnInit {
     });
   }
 
-  getStudentGrades(user, term) {
+  getStudentGrades(student, term) {
     return new Promise<any>((res, rej) => {
       this.activityService
         .getActivityByTerm(this.selectedClass.id, term)
@@ -116,7 +122,7 @@ export class GradesComponent implements OnInit {
           });
 
           const quiz = await this.getSubmitGrades(
-            user.id,
+            student.id,
             'quiz',
             quizTotalEarnablePoints,
             10,
@@ -124,17 +130,36 @@ export class GradesComponent implements OnInit {
           );
 
           const exams = await this.getSubmitGrades(
-            user.id,
+            student.id,
             'exams',
             examsTotalEarnablePoints,
             30,
             term
           );
+          let performance;
+          const performances: any = await this.getPerformanceGrade(
+            student,
+            term
+          );
+          if (performances.length > 0) {
+            performance = performances[0];
+            console.log(performance);
+          } else {
+            const newPerformance = {
+              class_id: this.selectedClass.id,
+              student_id: student.id,
+              grade: 0,
+              term
+            };
+            if (this.selectedTerm != 'total') {
+              this.activityService.addPerformance(newPerformance);
+            }
+            performance = newPerformance;
+          }
 
-          const performance = 60;
-          const grade = performance + quiz + exams;
+          const grade = performance.grade + quiz + exams;
           const newGrade = {
-            student: user,
+            student,
             performance,
             quiz,
             exams,
@@ -164,5 +189,33 @@ export class GradesComponent implements OnInit {
           resolve(grade);
         });
     });
+  }
+
+  getPerformanceGrade(student, term) {
+    return new Promise((res, rej) => {
+      this.activityService
+        .getPerformanceByStudent(this.selectedClass.id, student.id, term)
+        .subscribe((stud: any) => {
+          res(stud);
+        });
+    });
+  }
+
+  updatePerformance() {
+    if (!this.performanceUpdate.grade) {
+      this.performanceUpdate.grade = 0;
+    }
+
+    if (this.performanceUpdate.grade > 60) {
+      return this.toastr.error('Maximum 60% performance only');
+    }
+
+    this.activityService.updatePerformance(this.performanceUpdate).then(() => {
+      this.getAllStudentGrades(this.selectedTerm);
+    });
+  }
+
+  setPerfomanceUpdate(performance) {
+    this.performanceUpdate = JSON.parse(JSON.stringify(performance));
   }
 }

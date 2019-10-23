@@ -102,12 +102,42 @@
                     Loading...
                   </td>
                 </tr>
+                <tr *ngIf="!loading && grades.length == 0">
+                  <td colspan="13" class="text-center">
+                    No Student in this class
+                  </td>
+                </tr>
                 <tr *ngFor="let grade of grades | filter: search">
                   <td>
                     {{ grade.student.name.first }} {{ grade.student.name.last }}
                   </td>
                   <td class="text-center">
-                    {{ grade.performance | number: '1.1-2' }}%
+                    {{ grade.performance.grade | number: '1.1-2' }}%
+                    <div class="btn-group dropright">
+                      <button
+                        type="button"
+                        class="btn bg-transparent btn-sm dropdown-toggle"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        (click)="setPerfomanceUpdate(grade.performance)"
+                      >
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                      </button>
+                      <div class="dropdown-menu p-1" *ngIf="performanceUpdate">
+                        <form>
+                          <label for="">Input Grade</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            [ngModelOptions]="{ standalone: true }"
+                            [(ngModel)]="performanceUpdate.grade"
+                            (keyup.enter)="updatePerformance()"
+                            [readonly]="loading"
+                          />
+                        </form>
+                      </div>
+                    </div>
                   </td>
                   <td class="text-center">
                     {{ grade.quiz | number: '1.1-2' }}%
@@ -127,6 +157,11 @@
                 <tr *ngIf="loading">
                   <td colspan="13" class="text-center">
                     Loading...
+                  </td>
+                </tr>
+                <tr *ngIf="!loading && grades.length == 0">
+                  <td colspan="13" class="text-center">
+                    No Student in this class
                   </td>
                 </tr>
                 <tr *ngFor="let grade of grades | filter: search">
@@ -155,6 +190,7 @@
         </div>
       </div>
     </div>
+    <!-- Notif -->
     <div class="col-md-4">
       <div class="card bg-dark">
         <div class="card-header text-light">
@@ -162,11 +198,13 @@
         </div>
         <div class="card-body p-0">
           <ul class="list-group">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+            <!-- <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Morbi leo risus</li>
+                <li class="list-group-item">Porta ac consectetur ac</li> -->
+            <li class="list-group-item pl-3 text-secondary">
+              No New Notification
+            </li>
           </ul>
         </div>
       </div>

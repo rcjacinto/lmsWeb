@@ -15,12 +15,14 @@ import { Student } from '../models/student.model';
 export class ActivityService {
   private activityCollection: AngularFirestoreCollection<Activity>;
   private submitsCollection: AngularFirestoreCollection<Submit>;
+  private performanceCollection: AngularFirestoreCollection<any>;
 
   private activity: Observable<Activity[]>;
 
   constructor(private db: AngularFirestore) {
     this.activityCollection = db.collection<Activity>('activity');
     this.submitsCollection = db.collection<Submit>('submits');
+    this.performanceCollection = db.collection<Submit>('performance');
     this.activity = this.activityCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -223,5 +225,35 @@ export class ActivityService {
 
   updateSubmit(submit: Submit) {
     return this.submitsCollection.doc(submit.id).update(submit);
+  }
+
+  // Performance Grade
+
+  getPerformanceByStudent(classId, studId, term) {
+    return this.db
+      .collection('performance', ref =>
+        ref
+          .where('class_id', '==', classId)
+          .where('student_id', '==', studId)
+          .where('term', '==', term)
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+  }
+
+  addPerformance(grade) {
+    return this.performanceCollection.add(grade);
+  }
+
+  updatePerformance(grade) {
+    return this.performanceCollection.doc(grade.id).update(grade);
   }
 }
