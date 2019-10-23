@@ -22,6 +22,7 @@ import { StudentActivitiesComponent } from './layout/student-activities/student-
 import { StudentProfileComponent } from './layout/student-profile/student-profile.component';
 import { StudentParentsComponent } from './layout/student-parents/student-parents.component';
 import { ViewStudentActivityComponent } from './components/view-student-activity/view-student-activity.component';
+import { StudentGradesComponent } from './layout/student-grades/student-grades.component';
 
 const routes: Routes = [
   {
@@ -136,6 +137,11 @@ const routes: Routes = [
   {
     path: 'view-student-activity',
     component: ViewStudentActivityComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'view-student-grade',
+    component: StudentGradesComponent,
     canActivate: [AuthGuard]
   }
 ];

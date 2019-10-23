@@ -17,14 +17,19 @@
     </div>
   </div>
 
-
   <div class="card mt-2" *ngIf="selectedClass.name.trim() !== ''">
-    <button type="button" class="list-group-item list-group-item-action bg-dark" (click)="resetClass()"
-      [routerLink]="['/dashboard']" routerLinkActive="router-link-active">
-      <i class="icon ion-md-bookmarks mr-3 text-light"></i><span class="text-light">Classes</span>
+    <button
+      type="button"
+      class="list-group-item list-group-item-action bg-dark"
+      (click)="resetClass()"
+      [routerLink]="['/dashboard']"
+      routerLinkActive="router-link-active"
+    >
+      <i class="icon ion-md-bookmarks mr-3 text-light"></i
+      ><span class="text-light">Classes</span>
     </button>
   </div>
-  
+
   <!-- Dashboard Button -->
 
   <div class="card mt-2" *ngIf="selectedClass.name.trim() !== ''">
@@ -187,7 +192,7 @@
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
-          [routerLink]="['/grades']"
+          [routerLink]="['/view-student-grade']"
           routerLinkActive="router-link-active"
         >
           <i [class]="'icon ion-md-pie mr-3 text-' + selectedClass.color"></i
@@ -197,7 +202,6 @@
     </div>
   </div>
 
- 
   <!-- Class List -->
 
   <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
@@ -314,7 +318,6 @@
       </div>
     </div>
   </div>
-  
 
   <!-- Logout -->
 
