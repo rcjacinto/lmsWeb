@@ -54,6 +54,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ViewStudentActivityComponent } from './components/view-student-activity/view-student-activity.component';
 import { UpdatePerformanceComponent } from './components/update-performance/update-performance.component';
 import { StudentGradesComponent } from './layout/student-grades/student-grades.component';
+import { MyStudentComponent } from './layout/my-student/my-student.component';
 
 const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 
@@ -87,7 +88,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     UpdateActivityComponent,
     ViewStudentActivityComponent,
     UpdatePerformanceComponent,
-    StudentGradesComponent
+    StudentGradesComponent,
+    MyStudentComponent
   ],
   imports: [
     CommonModule,

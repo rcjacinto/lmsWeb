@@ -104,7 +104,11 @@ export class LoginComponent implements OnInit {
             user.id = res.user.uid;
             this.store.dispatch(new SetUser(user));
             this.dismissModal();
-            this.router.navigate(['/dashboard']);
+            if (user.role == 'parent') {
+              this.router.navigate(['/view-my-student']);
+            } else {
+              this.router.navigate(['/dashboard']);
+            }
             this.showSuccess('Login Success!', 'Welcome!');
             this.initForms();
             this.loading = false;

@@ -460,32 +460,20 @@
     </div>
   </div>
 
-  <!-- Dashboard -->
-  <div class="card mt-2">
-    <button
-      type="button"
-      class="list-group-item list-group-item-action bg-dark"
-      [routerLink]="['/dashboard']"
-      routerLinkActive="router-link-active"
-    >
-      <i class="icon ion-md-school mr-3 text-light"></i
-      ><span class="text-light">Dashboard</span>
-    </button>
-  </div>
-
-  <!-- Instructors | Student -->
-
   <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
     <div class="card-body bg-dark p-0">
       <div class="list-group bg-dark">
         <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
-          [routerLink]="['/manage-students']"
+          [routerLink]="['/view-my-student']"
           routerLinkActive="router-link-active"
+          *ngIf="!loading"
         >
           <i class="icon ion-ios-contacts text-light mr-3"></i
-          ><span class="text-light">Your Students</span>
+          ><span class="text-light"
+            >{{ student?.name.first }} {{ student?.name.last }}</span
+          >
         </button>
       </div>
     </div>

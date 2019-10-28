@@ -1,0 +1,205 @@
+<app-top-nav title="Student Grades"> </app-top-nav>
+<app-side-nav> </app-side-nav>
+<div class="main">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card bg-dark mb-2">
+        <div class="card-header bg-danger p-2 pt-3">
+          <h5 class="text-light user-name">
+            {{ student?.name.first }} {{ student?.name.last }} |
+            {{ student?.email }}
+          </h5>
+        </div>
+        <div class="card-body bg-dark p-2 pb-4">
+          <img
+            [src]="student?.image"
+            alt=""
+            class="profile-pic border border-dark"
+          />
+
+          <h6 class="text-secondary user-email">
+            {{ student?.student_number }}
+          </h6>
+        </div>
+      </div>
+
+      <div class="card bg-dark mb-2">
+        <div class="card-header bg-danger px-3 px-2 text-light text-center">
+          <select
+            [(ngModel)]="selectedIndex"
+            class="custom-select bg-danger text-light"
+            (change)="getAllStudentGrades(selectedTerm)"
+            [disabled]="loading"
+          >
+            <option *ngFor="let cl of classlist; let i = index" [value]="i">{{
+              cl.name
+            }}</option>
+          </select>
+        </div>
+        <div class="card-body bg-dark p-2 pb-4">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [ngClass]="{
+                  active: selectedTerm == 'prelim',
+                  'text-light': selectedTerm != 'prelim'
+                }"
+                (click)="setSelectedTerm('prelim')"
+                >Prelim</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [ngClass]="{
+                  active: selectedTerm == 'midterm',
+                  'text-light': selectedTerm != 'midterm'
+                }"
+                (click)="setSelectedTerm('midterm')"
+                >Midterm</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [ngClass]="{
+                  active: selectedTerm == 'pre-finals',
+                  'text-light': selectedTerm != 'pre-finals'
+                }"
+                (click)="setSelectedTerm('pre-finals')"
+                >Pre-Finals</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [ngClass]="{
+                  active: selectedTerm == 'finals',
+                  'text-light': selectedTerm != 'finals'
+                }"
+                (click)="setSelectedTerm('finals')"
+                >Finals</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [ngClass]="{
+                  active: selectedTerm == 'total',
+                  'text-light': selectedTerm != 'total'
+                }"
+                (click)="setSelectedTerm('total')"
+                >Total</a
+              >
+            </li>
+          </ul>
+          <div class="bg-light p-3">
+            <div class="row">
+              <div class="col">
+                <table class="table table-light table-striped">
+                  <thead>
+                    <tr *ngIf="selectedTerm != 'total'">
+                      <th class="text-center" scope="col">
+                        Performance (60%)
+                      </th>
+                      <th class="text-center" scope="col">Quiz (10%)</th>
+                      <th class="text-center" scope="col">Exams (30%)</th>
+                      <th class="text-center" scope="col">Total (100%)</th>
+                    </tr>
+
+                    <tr *ngIf="selectedTerm == 'total'">
+                      <th class="text-center" scope="col">Prelim (30%)</th>
+                      <th class="text-center" scope="col">Midterm (70%)</th>
+                      <th class="text-center" scope="col">
+                        Pre-Finals (30%)
+                      </th>
+                      <th class="text-center" scope="col">Finals (70%)</th>
+                      <th class="text-center" scope="col">Final Grade</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="selectedTerm != 'total'">
+                    <tr *ngIf="loading">
+                      <td colspan="13" class="text-center">
+                        Loading...
+                      </td>
+                    </tr>
+
+                    <tr *ngFor="let grade of grades">
+                      <td class="text-center">
+                        {{ grade.performance.grade | number: '1.1-2' }}%
+                      </td>
+                      <td class="text-center">
+                        {{ grade.quiz | number: '1.1-2' }}%
+                      </td>
+                      <td class="text-center">
+                        {{ grade.exams | number: '1.1-2' }}%
+                      </td>
+                      <td class="text-center">
+                        {{ grade.total | number: '1.1-2' }}%
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody *ngIf="selectedTerm == 'total'">
+                    <tr *ngIf="loading">
+                      <td colspan="13" class="text-center">
+                        Loading...
+                      </td>
+                    </tr>
+
+                    <tr *ngFor="let grade of grades">
+                      <td class="text-center">
+                        {{ grade.prelim | number: '1.1-2' }}%
+                      </td>
+                      <td class="text-center">
+                        {{ grade.midterm | number: '1.1-2' }}%
+                      </td>
+                      <td class="text-center">
+                        {{ grade.prefinals | number: '1.1-2' }}%
+                      </td>
+                      <td class="text-center">
+                        {{ grade.finals | number: '1.1-2' }}%
+                      </td>
+                      <td class="text-center">
+                        {{ grade.average | number: '1.1-2' }}%
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Notif -->
+    <div class="col-md-4">
+      <div class="card bg-dark">
+        <div class="card-header text-light">
+          <i class="fa fa-bell mr-2"></i>Notification
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group">
+            <!-- <li class="list-group-item">Cras justo odio</li>
+                      <li class="list-group-item">Dapibus ac facilisis in</li>
+                      <li class="list-group-item">Morbi leo risus</li>
+                      <li class="list-group-item">Porta ac consectetur ac</li> -->
+            <li class="list-group-item pl-3 text-secondary">
+              No New Notification
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngx-spinner
+  bdOpacity="0.5"
+  bdColor="rgba(51,51,51,0.6)"
+  size="default"
+  color="#fff"
+  type="ball-pulse-sync"
+  [fullScreen]="true"
+>
+</ngx-spinner>

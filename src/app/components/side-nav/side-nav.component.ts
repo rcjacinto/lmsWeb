@@ -32,6 +32,8 @@ export class SideNavComponent implements OnInit {
   newColor = '';
   newClassCode = '';
   colorClass = 'bg-red text-light';
+  student: Student;
+  loading = false;
   constructor(
     private store: Store<RootState>,
     private classService: ClassService,
@@ -39,9 +41,11 @@ export class SideNavComponent implements OnInit {
     private modalService: NgbModal,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) {
-    this.userData$.subscribe(user => {
+    this.loading = true;
+    this.userData$.subscribe((user: any) => {
       this.user = user;
       if (user.id !== '') {
         switch (user.role) {
@@ -50,6 +54,7 @@ export class SideNavComponent implements OnInit {
               .getAllclasses(this.user.id)
               .subscribe(classData => {
                 this.classList = classData;
+                this.loading = false;
               });
             break;
           case 'student':
@@ -57,7 +62,14 @@ export class SideNavComponent implements OnInit {
               .getClassByStudentId(user.id)
               .subscribe(classData => {
                 this.classList = classData;
+                this.loading = false;
               });
+            break;
+          case 'parent':
+            this.userService.getUser(user.student[0]).subscribe((stud: any) => {
+              this.student = stud;
+              this.loading = false;
+            });
             break;
         }
       }
