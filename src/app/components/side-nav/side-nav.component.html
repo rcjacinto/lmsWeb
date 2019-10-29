@@ -285,7 +285,7 @@
           <i class="icon ion-ios-contact text-light mr-3"></i
           ><span class="text-light">Profile</span>
         </button>
-        <button
+        <!-- <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
           [routerLink]="['/messages']"
@@ -294,7 +294,7 @@
         >
           <i class="icon ion-md-chatboxes text-light mr-3"></i
           ><span class="text-light">Messages</span>
-        </button>
+        </button> -->
 
         <button
           type="button"
@@ -352,7 +352,7 @@
   </div>
 
   <!-- Dashboard -->
-  <div class="card mt-2">
+  <!-- <div class="card mt-2">
     <button
       type="button"
       class="list-group-item list-group-item-action bg-dark"
@@ -362,9 +362,7 @@
       <i class="icon ion-md-school mr-3 text-light"></i
       ><span class="text-light">Dashboard</span>
     </button>
-  </div>
-
-  <!-- Instructors | Student -->
+  </div> -->
 
   <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
     <div class="card-body bg-dark p-0">
@@ -405,7 +403,7 @@
           <i class="icon ion-ios-contact text-light mr-3"></i
           ><span class="text-light">Profile</span>
         </button>
-        <button
+        <!-- <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
           [routerLink]="['/messages']"
@@ -413,7 +411,7 @@
         >
           <i class="icon ion-md-chatboxes text-light mr-3"></i
           ><span class="text-light">Messages</span>
-        </button>
+        </button> -->
 
         <button
           type="button"
@@ -493,7 +491,7 @@
           <i class="icon ion-ios-contact text-light mr-3"></i
           ><span class="text-light">Profile</span>
         </button>
-        <button
+        <!-- <button
           type="button"
           class="list-group-item list-group-item-action bg-dark"
           [routerLink]="['/messages']"
@@ -501,7 +499,7 @@
         >
           <i class="icon ion-md-chatboxes text-light mr-3"></i
           ><span class="text-light">Messages</span>
-        </button>
+        </button> -->
 
         <button
           type="button"
@@ -576,13 +574,13 @@
           id="inputColors"
           [(ngModel)]="newColor"
         >
-          <option selected>Choose...</option>
-          <option value="red">Red</option>
-          <option value="orange">Orange</option>
-          <option value="yellow">Yellow</option>
-          <option value="blue">Blue</option>
-          <option value="green">Green</option>
-          <option value="grey">Grey</option>
+          <option class="text-dark" selected>Choose...</option>
+          <option class="text-dark" value="red">Red</option>
+          <option class="text-dark" value="orange">Orange</option>
+          <option class="text-dark" value="yellow">Yellow</option>
+          <option class="text-dark" value="blue">Blue</option>
+          <option class="text-dark" value="green">Green</option>
+          <option class="text-dark" value="grey">Grey</option>
         </select>
       </div>
     </div>

@@ -44,7 +44,7 @@ export class UserService {
   }
 
   addUser(user: User) {
-    return this.usersCollection.add(user);
+    return this.usersCollection.doc(user.id).set(user);
   }
 
   removeUser(id) {

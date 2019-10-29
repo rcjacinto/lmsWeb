@@ -11,6 +11,8 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { take, last } from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Student } from 'src/app/models/student.model';
+import { Instructor } from 'src/app/models/instructor.model';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -104,12 +106,22 @@ export class LoginComponent implements OnInit {
             user.id = res.user.uid;
             this.store.dispatch(new SetUser(user));
             this.dismissModal();
-            if (user.role == 'parent') {
+            if (user.role == 'instructor') {
+              if (user.status == 1) {
+                this.router.navigate(['/dashboard']);
+              } else {
+                this.toastr.info(
+                  'Please wait until account is verified by admin.'
+                );
+              }
+            } else if (user.role == 'parent') {
               this.router.navigate(['/view-my-student']);
-            } else {
-              this.router.navigate(['/dashboard']);
+              this.showSuccess('Login Success!', 'Welcome!');
+            } else if (user.role == 'admin') {
+              this.router.navigate(['/manage-instructors']);
+              this.showSuccess('Login Success!', 'Welcome!');
             }
-            this.showSuccess('Login Success!', 'Welcome!');
+
             this.initForms();
             this.loading = false;
             this.spinner.hide();
@@ -173,11 +185,88 @@ export class LoginComponent implements OnInit {
             date: {
               created: new Date(),
               modified: new Date()
-            }
+            },
+            status: 1
           };
 
           this.userService
             .addStudent(newStudent)
+            .then(() => {
+              this.toastr.success('Register success!');
+              this.dismissModal();
+
+              this.loginForm.controls['email'].setValue(email);
+              this.loginForm.controls['password'].setValue(password);
+
+              const btn = document.querySelector('#loginButton');
+              const evt = new MouseEvent('click', {
+                bubbles: true,
+                cancelable: true,
+                view: window
+              });
+              btn.dispatchEvent(evt);
+              this.spinner.hide();
+              this.loading = false;
+            })
+            .catch(err => {
+              this.toastr.error(err);
+              this.spinner.hide();
+              this.loading = false;
+            });
+        })
+        .catch(err => {
+          this.toastr.error(err);
+          this.spinner.hide();
+          this.loading = false;
+        });
+    } else if (this.role == 'instructor') {
+      const {
+        fname,
+        lname,
+        email,
+        password,
+        password2
+      } = this.instructorRegisterForm.value;
+
+      if (this.instructorRegisterForm.invalid) {
+        return;
+      }
+
+      if (password != password2) {
+        return this.toastr.error('Password did not match!');
+      }
+
+      this.spinner.show();
+      this.loading = true;
+
+      this.authService
+        .doRegister(this.instructorRegisterForm.value)
+        .then(data => {
+          console.log(data);
+
+          const newInstructor: User = {
+            id: data.user.uid,
+            email,
+            name: {
+              first: fname,
+              last: lname,
+              mi: ''
+            },
+            status: 0,
+            address: '',
+            dob: new Date(),
+            gender: '',
+            image: 'assets/images/profile.jpg',
+            mobile: 0,
+            role: 'instructor',
+            date: {
+              created: new Date(),
+              modified: new Date()
+            }
+          };
+
+          this.userService
+            .addUser(newInstructor)
             .then(() => {
               this.toastr.success('Register success!');
               this.dismissModal();
