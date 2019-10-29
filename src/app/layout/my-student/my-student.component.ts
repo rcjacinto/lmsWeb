@@ -49,6 +49,7 @@ export class MyStudentComponent implements OnInit {
     public activityService: ActivityService,
     public classService: ClassService
   ) {
+    spinner.show();
     this.userData$.subscribe((user: any) => {
       this.user = user;
       console.log(user);
@@ -64,6 +65,7 @@ export class MyStudentComponent implements OnInit {
             this.selectedClass = classes[0];
             await this.getAllStudentGrades(this.selectedTerm);
             console.log(await this.grades);
+            spinner.hide();
           });
       });
     });
