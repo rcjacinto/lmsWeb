@@ -56,6 +56,8 @@ import { UpdatePerformanceComponent } from './components/update-performance/upda
 import { StudentGradesComponent } from './layout/student-grades/student-grades.component';
 import { MyStudentComponent } from './layout/my-student/my-student.component';
 import { ManageParentsComponent } from './components/manage-parents/manage-parents.component';
+import { ViewInstructorClassesComponent } from './layout/view-instructor-classes/view-instructor-classes.component';
+import { ViewStudentParentListComponent } from './layout/view-student-parent-list/view-student-parent-list.component';
 
 const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 
@@ -91,7 +93,9 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     UpdatePerformanceComponent,
     StudentGradesComponent,
     MyStudentComponent,
-    ManageParentsComponent
+    ManageParentsComponent,
+    ViewInstructorClassesComponent,
+    ViewStudentParentListComponent
   ],
   imports: [
     CommonModule,

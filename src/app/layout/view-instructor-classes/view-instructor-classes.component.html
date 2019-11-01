@@ -1,0 +1,44 @@
+<!-- Class Info -->
+<div class="card bg-dark mb-3">
+  <div class="py-2 pl-4 pr-0">
+    <i
+      [class]="
+        'icon ion-ios-bookmark bookmark-icon text-' + selectedClass.color
+      "
+    ></i>
+    <div class="text-light">
+      <h5>
+        {{ selectedClass.name }}
+      </h5>
+    </div>
+    <span class="text-secondary class-code"
+      >Description: {{ selectedClass.description }}</span
+    >
+  </div>
+</div>
+
+<div class="card bg-dark">
+  <div class="card-header text-light p-2">
+    <i class="fa fa-fw fa-id-badge"></i> Class Members
+  </div>
+
+  <div class="card-body p-2">
+    <input
+      type="text"
+      class="form-control mb-2"
+      placeholder="Search student"
+      [(ngModel)]="searchStudent"
+    />
+
+    <p class="text-secondary pl-4" *ngIf="members.length == 0">
+      No Members
+    </p>
+    <ul class="list-group">
+      <app-view-student-profile
+        *ngFor="let member of members | filter: searchStudent"
+        [member]="member"
+      ></app-view-student-profile>
+    </ul>
+  </div>
+  <div class="card-footer"></div>
+</div>

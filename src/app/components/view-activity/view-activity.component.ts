@@ -120,7 +120,8 @@ export class ViewActivityComponent implements OnInit {
     if (this.submitted == 0) {
       return 0;
     }
-    return Math.round((correct / this.submitted) * 100);
+    return correct;
+    // return Math.round((correct / this.submitted) * 100);
   }
 
   getInCorrectPercent(question: Question) {
@@ -137,7 +138,8 @@ export class ViewActivityComponent implements OnInit {
     if (this.submitted == 0) {
       return 0;
     }
-    return Math.round((incorrect / this.submitted) * 100);
+    return incorrect;
+    // return Math.round((incorrect / this.submitted) * 100);
   }
 
   viewActivity(submit) {

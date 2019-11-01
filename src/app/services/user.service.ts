@@ -17,7 +17,7 @@ export class UserService {
 
   private users: Observable<User[]>;
 
-  constructor(db: AngularFirestore) {
+  constructor(private db: AngularFirestore) {
     this.usersCollection = db.collection<User>('users');
 
     this.users = this.usersCollection.snapshotChanges().pipe(
@@ -57,9 +57,83 @@ export class UserService {
     return this.usersCollection.doc(student.id).set(student);
   }
 
+  getAllStudents() {
+    return this.db.collection<Student>('users');
+  }
+
   // For Parent
 
   addParent(parent: Parent) {
     return this.usersCollection.doc(parent.id).set(parent);
+  }
+
+  // For instructors
+
+  getAllInstructors() {
+    return this.db
+      .collection<Student>('users', ref =>
+        ref.where('role', '==', 'instructor')
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+  }
+
+  getInstructorByStatus(status) {
+    return this.db
+      .collection<Student>('users', ref =>
+        ref.where('role', '==', 'instructor').where('status', '>', status)
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+  }
+
+  getApprovedInstructor() {
+    return this.db
+      .collection<Student>('users', ref =>
+        ref.where('role', '==', 'instructor').where('status', '>', 0)
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+  }
+
+  getUnapprovedInstructor() {
+    return this.db
+      .collection<Student>('users', ref =>
+        ref.where('role', '==', 'instructor').where('status', '==', 0)
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
   }
 }

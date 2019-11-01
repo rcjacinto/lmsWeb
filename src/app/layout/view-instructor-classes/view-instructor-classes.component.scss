@@ -1,3 +1,21 @@
+.profile-img {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.bookmark-icon {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  height: 100px;
+  font-size: 26px;
+}
+
+.instructor-name {
+  font-size: 12px;
+}
+
 .stud-logo {
   position: absolute;
   right: 20px;
@@ -21,19 +39,4 @@
 
 .overflow-hidden {
   overflow: hidden;
-}
-
-.profile-img {
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
-}
-
-.stud-li {
-  cursor: pointer;
-}
-
-.stud-li:hover {
-  background-color: #2d2d2d !important;
-  color: white;
 }

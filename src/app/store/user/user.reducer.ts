@@ -22,7 +22,8 @@ export const initialState: User = {
   },
   image: '',
   gender: '',
-  address: ''
+  address: '',
+  status: 0
 };
 
 export function reducer(state = initialState, action: UserActions): User {

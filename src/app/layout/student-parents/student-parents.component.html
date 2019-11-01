@@ -1,103 +1,82 @@
-<app-top-nav title="Parents"> </app-top-nav>
-<app-side-nav> </app-side-nav>
-<div class="main">
-  <div class="row">
-    <div class="col-md-8">
-      <div class="card bg-dark mb-2">
-        <div class="card-header bg-danger px-3 px-2 text-light text-center">
-          <span>Register Parent </span>
+<div class="">
+  <div class="card bg-dark w-100 mb-2">
+    <div class="card-header text-light">
+      <i class="icon ion-ios-people mr-2"></i> Registered Parents
+    </div>
+    <div class="card-body p-0">
+      <ul class="list-group">
+        <li *ngIf="parentList.length == 0" class="list-group-item text-center">
+          No registered Parent
+        </li>
+        <li class="list-group-item" *ngFor="let parent of parentList">
+          {{ parent.name.first }} {{ parent.name.last }}
+          <br />
+          <span class="text-secondary">{{ parent.email }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card bg-dark mb-2">
+    <div class="card-header bg-danger px-3 px-2 text-light text-center">
+      <span>Register Student Parent </span>
+    </div>
+    <div class="card-body bg-dark p-2 pb-4">
+      <div class="form-row mb-3">
+        <div class="col-md-5">
+          <label class="text-light">First Name</label>
+          <input
+            type="text"
+            class="form-control text-catitalize"
+            [(ngModel)]="first"
+          />
         </div>
-        <div class="card-body bg-dark p-2 pb-4">
-          <div class="form-row mb-3">
-            <div class="col-md-5">
-              <label class="text-light">First Name</label>
-              <input
-                type="text"
-                class="form-control text-catitalize"
-                [(ngModel)]="first"
-              />
-            </div>
-            <div class="col-md-5">
-              <label class="text-light">Last Name</label>
-              <input
-                type="text"
-                class="form-control text-catitalize"
-                [(ngModel)]="last"
-              />
-            </div>
-            <div class="col-md-2">
-              <label class="text-light">M.I.</label>
-              <input
-                type="text"
-                class="form-control text-catitalize"
-                [(ngModel)]="mi"
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="text-light">Email</label>
-            <input
-              type="email"
-              class="form-control text-catitalize"
-              [(ngModel)]="email"
-            />
-          </div>
-          <div class="form-group">
-            <label class="text-light">Password</label>
-            <input
-              type="password"
-              class="form-control text-catitalize"
-              [(ngModel)]="password"
-            />
-          </div>
-          <div class="form-group">
-            <label class="text-light">Confirm</label>
-            <input
-              type="password"
-              class="form-control text-catitalize"
-              [(ngModel)]="password2"
-            />
-          </div>
+        <div class="col-md-5">
+          <label class="text-light">Last Name</label>
+          <input
+            type="text"
+            class="form-control text-catitalize"
+            [(ngModel)]="last"
+          />
+        </div>
+        <div class="col-md-2">
+          <label class="text-light">M.I.</label>
+          <input
+            type="text"
+            class="form-control text-catitalize"
+            [(ngModel)]="mi"
+          />
         </div>
       </div>
-      <button
-        class="btn btn-dark border border-danger w-100"
-        (click)="registerParent()"
-      >
-        Register
-      </button>
-    </div>
-    <div class="col-md-4">
-      <div class="card bg-dark">
-        <div class="card-header text-light">
-          <i class="icon ion-ios-people mr-2"></i> Registered Parents
-        </div>
-        <div class="card-body p-0">
-          <ul class="list-group">
-            <li
-              *ngIf="user?.parents.length == 0"
-              class="list-group-item text-center"
-            >
-              No registered Parent
-            </li>
-            <li class="list-group-item" *ngFor="let parent of user?.parents">
-              {{ parent.name.first }} {{ parent.name.last }}
-              <br />
-              <span class="text-secondary">{{ parent.email }}</span>
-            </li>
-          </ul>
-        </div>
+      <div class="form-group">
+        <label class="text-light">Email</label>
+        <input
+          type="email"
+          class="form-control text-catitalize"
+          [(ngModel)]="email"
+        />
+      </div>
+      <div class="form-group">
+        <label class="text-light">Password</label>
+        <input
+          type="password"
+          class="form-control text-catitalize"
+          [(ngModel)]="password"
+        />
+      </div>
+      <div class="form-group">
+        <label class="text-light">Confirm</label>
+        <input
+          type="password"
+          class="form-control text-catitalize"
+          [(ngModel)]="password2"
+        />
       </div>
     </div>
   </div>
+  <button
+    class="btn btn-dark border border-danger w-100 mb-2"
+    (click)="registerParent()"
+  >
+    Register
+  </button>
 </div>
-
-<ngx-spinner
-  bdOpacity="0.5"
-  bdColor="rgba(51,51,51,0.6)"
-  size="default"
-  color="#fff"
-  type="ball-pulse-sync"
-  [fullScreen]="true"
->
-</ngx-spinner>

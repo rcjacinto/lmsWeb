@@ -31,8 +31,8 @@
     <tbody>
       <tr *ngFor="let question of activity.questions">
         <td>{{ question.number }}</td>
-        <td class="text-center">{{ getCorrectPercent(question) }}%</td>
-        <td class="text-center">{{ getInCorrectPercent(question) }}%</td>
+        <td class="text-center">{{ getCorrectPercent(question) }}</td>
+        <td class="text-center">{{ getInCorrectPercent(question) }}</td>
       </tr>
     </tbody>
   </table>

@@ -85,7 +85,6 @@
                   <th class="text-center" scope="col" colspan="2">50%</th>
                   <th class="text-center" scope="col" colspan="2">50%</th>
                   <th class="text-center" scope="col">100%</th>
-                  <th class="text-center" scope="col"></th>
                 </tr>
                 <tr *ngIf="selectedTerm == 'total'">
                   <th class="text-center" scope="col">Student</th>
@@ -147,9 +146,6 @@
                   </td>
                   <td class="text-center">
                     {{ grade.total | number: '1.1-2' }}%
-                  </td>
-                  <td class="text-center">
-                    <button class="btn btn-sm btn-dark">VIEW</button>
                   </td>
                 </tr>
               </tbody>

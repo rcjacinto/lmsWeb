@@ -109,10 +109,17 @@ export class LoginComponent implements OnInit {
             if (user.role == 'instructor') {
               if (user.status == 1) {
                 this.router.navigate(['/dashboard']);
+              } else if (user.status == 0) {
+                this.toastr.info(
+                  'Please wait until account is verified by admin.'
+                );
+              } else if (user.status == 2) {
+                this.toastr.error('Account deactivated. Please contact admin!');
               } else {
                 this.toastr.info(
                   'Please wait until account is verified by admin.'
                 );
+                s;
               }
             } else if (user.role == 'parent') {
               this.router.navigate(['/view-my-student']);

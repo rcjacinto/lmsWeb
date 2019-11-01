@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { selectUser, RootState } from 'src/app/store';
 import { Student } from 'src/app/models/student.model';
@@ -17,8 +17,7 @@ import { SetUser } from 'src/app/store/user/user.action';
   styleUrls: ['./student-parents.component.scss']
 })
 export class StudentParentsComponent implements OnInit {
-  userData$ = this.store.pipe(select(selectUser));
-  user: any;
+  @Input() student: Student;
   first = '';
   last = '';
   email = '';
@@ -26,29 +25,26 @@ export class StudentParentsComponent implements OnInit {
   password = '';
   password2 = '';
   parentList: Parent[] = [];
-  // parent = {
-  //   id: '',
-  //   name: '',
-  //   email: '',
-  //   password: ''
-  // };
+  onAddParent = false;
+
   constructor(
-    public store: Store<RootState>,
     public parentService: ParentService,
     public userService: UserService,
     public authService: AuthService,
     public spinner: NgxSpinnerService,
     public toastr: ToastrService
-  ) {
-    this.userData$.subscribe((user: Student) => {
-      this.user = user;
-      if (!user.parents) {
-        this.user.parents = [];
-      }
-    });
+  ) {}
+
+  addParent() {
+    this.onAddParent = !this.onAddParent;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.student.parents) {
+      this.parentList = this.student.parents;
+    }
+    console.log(this.parentList);
+  }
 
   registerParent() {
     if (
@@ -82,7 +78,7 @@ export class StudentParentsComponent implements OnInit {
             mi: this.mi
           },
           email: this.email,
-          student: [this.user.id],
+          student: [this.student.id],
           role: 'parent',
           image: 'assets/images/profile.jpg',
           address: '',
@@ -92,23 +88,23 @@ export class StudentParentsComponent implements OnInit {
           date: {
             created: new Date(),
             modified: new Date()
-          }
+          },
+          status: 1
         };
 
-        if (this.user.parents) {
-          this.user.parents.push(newParent);
+        if (this.student.parents) {
+          this.student.parents.push(newParent);
         } else {
-          this.user.parents = [newParent];
+          this.student.parents = [newParent];
         }
 
         this.userService.addParent(newParent).then(() => {
           this.userService
-            .updateUser(this.user)
+            .updateUser(this.student)
             .then(() => {
               this.toastr.success('Parent registered!');
               this.spinner.hide();
               this.clearFields();
-              this.store.dispatch(new SetUser(this.user));
             })
             .catch(err => {
               this.toastr.error(err);
@@ -129,5 +125,9 @@ export class StudentParentsComponent implements OnInit {
     this.email = '';
     this.password = '';
     this.password2 = '';
+  }
+
+  cancel() {
+    this.addParent();
   }
 }

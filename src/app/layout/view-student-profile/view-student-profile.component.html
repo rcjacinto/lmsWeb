@@ -1,3 +1,107 @@
-<app-top-nav title="Profile"> </app-top-nav>
-<app-side-nav> </app-side-nav>
-<div class="main"></div>
+<li
+  class="list-group-item d-flex bg-light p-2 mb-2 stud-li"
+  (click)="viewStudent()"
+>
+  <img
+    [src]="member?.image"
+    class="mr-3 profile-img rounded-circle"
+    alt="..."
+  />
+  <div>
+    <div class="stud-name">
+      {{ member.name.first }} {{ member.name.last }} |
+      {{ member.email }}
+    </div>
+    <div class="stud-id">
+      {{ member.student_number }}
+      {{ member.course ? '| ' + member.course : '' }}
+    </div>
+  </div>
+</li>
+<li class="list-group-item bg-light p-0 rounded mb-5" *ngIf="onViewStudent">
+  <div class="card bg-dark mb-2">
+    <div class="card-header p-1 text-light text-center">
+      <select
+        class="form-control bg-dark text-light"
+        [(ngModel)]="student.status"
+      >
+        <option value="1">Active</option>
+        <option value="2">Inactive</option>
+      </select>
+    </div>
+    <div class="card-body bg-dark p-2">
+      <div class="form-row mb-3">
+        <div class="col-md-5">
+          <label class="text-light">First Name</label>
+          <input
+            type="text"
+            class="form-control text-catitalize"
+            [(ngModel)]="student.name.first"
+          />
+        </div>
+        <div class="col-md-5">
+          <label class="text-light">Last Name</label>
+          <input
+            type="text"
+            class="form-control text-catitalize"
+            [(ngModel)]="student.name.last"
+          />
+        </div>
+        <div class="col-md-2">
+          <label class="text-light">M.I.</label>
+          <input
+            type="text"
+            class="form-control text-catitalize"
+            [(ngModel)]="student.name.mi"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="text-light">Course</label>
+        <input
+          type="text"
+          class="form-control text-catitalize"
+          [(ngModel)]="student.course"
+        />
+      </div>
+      <div class="form-group">
+        <label class="text-light">Adress</label>
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="2"
+          class="form-control"
+          [(ngModel)]="student.address"
+        ></textarea>
+      </div>
+      <div class="form-group form-row">
+        <div class="col-md-6">
+          <label class="text-light">Contact #</label>
+          <input
+            type="text"
+            class="form-control text-catitalize"
+            [(ngModel)]="student.mobile"
+          />
+        </div>
+        <div class="col-md-6">
+          <label class="text-light">Gender</label>
+          <select id="" class="custom-select" [(ngModel)]="student.gender">
+            <option value="male">Male</option>
+            <option value="male">Female</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="p-1">
+      <button
+        class="btn btn-primary btn-sm w-100 mb-2"
+        (click)="updateProfile()"
+      >
+        Update
+      </button>
+    </div>
+  </div>
+  <app-student-parents [student]="member" class="w-100"></app-student-parents>
+</li>
+<hr *ngIf="onViewStudent" />
