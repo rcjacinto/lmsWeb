@@ -119,7 +119,6 @@ export class LoginComponent implements OnInit {
                 this.toastr.info(
                   'Please wait until account is verified by admin.'
                 );
-                s;
               }
             } else if (user.role == 'parent') {
               this.router.navigate(['/view-my-student']);

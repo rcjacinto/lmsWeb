@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/models/user.model';
 import { Student } from 'src/app/models/student.model';
 import { ClassService } from 'src/app/services/class.service';
 import { Class } from 'src/app/models/class.model';
-import { Instructor } from 'src/app/models/instructor.model';
-import { on } from 'cluster';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 
