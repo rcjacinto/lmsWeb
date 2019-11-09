@@ -18,6 +18,7 @@ export class ViewInstructorProfileComponent implements OnInit {
   studentList: Student[] = [];
   loading = true;
   onClassView = false;
+  searchClass = '';
   constructor(
     private classService: ClassService,
     private userService: UserService,
