@@ -98,40 +98,39 @@ export class LoginComponent implements OnInit {
       .doLogin(this.loginForm.value)
       .then(res => {
         console.log(res);
-        this.userService
-          .getUser(res.user.uid)
-          .pipe(take(1))
-          .subscribe(user => {
-            console.log(user);
-            user.id = res.user.uid;
-            this.store.dispatch(new SetUser(user));
-            this.dismissModal();
-            if (user.role == 'instructor') {
-              if (user.status == 1) {
-                this.router.navigate(['/dashboard']);
-              } else if (user.status == 0) {
-                this.toastr.info(
-                  'Please wait until account is verified by admin.'
-                );
-              } else if (user.status == 2) {
-                this.toastr.error('Account deactivated. Please contact admin!');
-              } else {
-                this.toastr.info(
-                  'Please wait until account is verified by admin.'
-                );
-              }
-            } else if (user.role == 'parent') {
-              this.router.navigate(['/view-my-student']);
-              this.showSuccess('Login Success!', 'Welcome!');
-            } else if (user.role == 'admin') {
-              this.router.navigate(['/manage-instructors']);
-              this.showSuccess('Login Success!', 'Welcome!');
+        this.userService.getUser(res.user.uid).pipe(take(1)).subscribe(user => {
+          console.log(user);
+          user.id = res.user.uid;
+          this.store.dispatch(new SetUser(user));
+          this.dismissModal();
+          if (user.role == 'instructor') {
+            if (user.status == 1) {
+              this.router.navigate(['/dashboard']);
+            } else if (user.status == 0) {
+              this.toastr.info(
+                'Please wait until account is verified by admin.'
+              );
+            } else if (user.status == 2) {
+              this.toastr.error('Account deactivated. Please contact admin!');
+            } else {
+              this.toastr.info(
+                'Please wait until account is verified by admin.'
+              );
             }
+          } else if (user.role == 'parent') {
+            this.router.navigate(['/view-my-student']);
+            this.showSuccess('Login Success!', 'Welcome!');
+          } else if (user.role == 'admin') {
+            this.router.navigate(['/manage-instructors']);
+            this.showSuccess('Login Success!', 'Welcome!');
+          } else if (user.role == 'student') {
+            this.router.navigate(['/dashboard']);
+          }
 
-            this.initForms();
-            this.loading = false;
-            this.spinner.hide();
-          });
+          this.initForms();
+          this.loading = false;
+          this.spinner.hide();
+        });
       })
       .catch(err => {
         console.log(err);
