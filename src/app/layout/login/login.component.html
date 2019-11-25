@@ -1,7 +1,7 @@
 <div class="main h-100 w-100">
   <img src="assets/images/trimex.png" class="logo" />
   <h1 class="text-center">
-    <span class="text-danger">LMS </span> <span class="text-light">KONEK</span>
+    <span class="text-danger">LMS </span> <span class="text-light">Suite</span>
   </h1>
 
   <hr />
@@ -95,7 +95,7 @@
             class="form-control btn btn-danger"
             [disabled]="loading"
           >
-            {{ loading ? '' : 'Login' }}
+            {{ loading ? "" : "Login" }}
             <i class="fa fa-spinner" *ngIf="loading"></i>
           </button>
         </div>
@@ -321,7 +321,7 @@
       </form>
       <div class="form-group text-center mb-3">
         <button class="btn bg-transparent text-primary" (click)="changeRole()">
-          {{ role == 'instructor' ? 'Im a Student' : 'Im an Instructor' }}
+          {{ role == "instructor" ? "Im a Student" : "Im an Instructor" }}
         </button>
       </div>
     </div>
