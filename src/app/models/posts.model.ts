@@ -1,7 +1,7 @@
-import { Class } from './class.model';
-import { Instructor } from './instructor.model';
-import { Activity } from './activity.model';
-import { Submit } from './submit.model';
+import { Class } from "./class.model";
+import { Instructor } from "./instructor.model";
+import { Activity } from "./activity.model";
+import { Submit } from "./submit.model";
 
 export enum PostType {
   Post = 0,
@@ -14,7 +14,7 @@ export interface Post {
   id: string;
   posted_by: any;
   posted_to: Class;
-  attachments: string[];
+  attachments: any[];
   message: string;
   type: number;
   date: {

@@ -7,3 +7,33 @@
 .profile-img {
   width: 70px;
 }
+
+.upload-file {
+  width: 150px;
+  border-radius: 5px;
+}
+
+.remove-file-btn {
+  position: absolute;
+  top: -7px;
+  right: 3px;
+}
+
+.upload-container {
+  overflow: auto;
+  width: 100%;
+}
+
+.progress-bar {
+  font-size: 7px !important;
+}
+
+.file-name {
+  width: 150px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  font-size: 8px;
+  text-align: center;
+}
