@@ -31,7 +31,10 @@
                 Submit
               </button>
             </div>
-            <div class="float-left mt-1 text-secondary">
+            <div
+              class="float-left mt-1 text-secondary"
+              *ngIf="user.role == 'instructor'"
+            >
               <select class="form-control-sm border-0" [(ngModel)]="postType">
                 <option value="0">Post</option>
                 <option value="1">Announcement</option>
