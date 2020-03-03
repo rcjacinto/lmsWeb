@@ -1,12 +1,5 @@
 <div class="main h-100 w-100">
-  <img src="assets/images/trimex.png" class="logo" />
-  <h1 class="text-center">
-    <span class="text-danger">LMS </span> <span class="text-light">Suite</span>
-  </h1>
-
-  <hr />
-  <div class="text-center mt-3 mb-5">
-    <p class="text-danger">Join now</p>
+ <!-- <div class="text-center mt-3 mb-5">
     <div class="row">
       <div class="col-sm-2"></div>
       <div class="col-sm-4">
@@ -31,25 +24,15 @@
       <div class="col-sm-4"></div>
       <div class="col-sm-2"></div>
     </div>
-  </div>
-</div>
-
-<!-- LOGIN -->
-<ng-template #loginModal let-modal>
-  <div class="row" id="login-row">
-    <div class="col-lg-6 rounded-left bg-transparent"></div>
-    <div class="col-lg-6 rounded-right" id="login-right">
-      <button
-        class="btn bg-transparent border-secondary rounded-circle py-1 px-2 float-right text-light mt-3"
-        (click)="dismissModal()"
-      >
-        <i class="fa fa-times smaller"></i>
-      </button>
+  </div> -->
+  <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4 rounded" id="login-right">
       <form class="px-3" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="clearfix mb-4">
-          <h1 class="mb-4">
-            <strong class="text-light float-left">
-              Login
+          <h1 class="mb-5 mt-5">
+            <strong class="text-tertiary float-left">
+              Learning Management System
             </strong>
           </h1>
         </div>
@@ -87,12 +70,15 @@
               Password is required
             </div>
           </div>
+          <div class="p-2">
+            <p class="text-info float-right">Forgot Password</p>
+          </div>
         </div>
         <hr />
         <div class="form-group">
           <button
             type="submit"
-            class="form-control btn btn-danger"
+            class="form-control btn btn-primary"
             [disabled]="loading"
           >
             {{ loading ? "" : "Login" }}
@@ -101,14 +87,15 @@
         </div>
         <div class="form-group text-center mb-5">
           <p class="text-secondary">or</p>
-          <a class="text-primary" (click)="openModal(registerModal)">
+          <button class="form-control btn btn-outline-secondary" (click)="openModal(registerModal)">
             Register
-          </a>
+          </button>
         </div>
       </form>
     </div>
   </div>
-</ng-template>
+</div>
+
 
 <!-- REGISTER -->
 <ng-template #registerModal let-modal>

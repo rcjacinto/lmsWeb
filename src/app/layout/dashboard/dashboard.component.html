@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-8" *ngIf="selectedClass?.id != ''">
       <!-- Add post -->
-      <div class="card bg-dark p-1 mb-2">
+      <div class="card p-1 mb-2">
         <div class="card bg-light">
           <textarea [(ngModel)]="message" rows="3" class="w-100 p-2"></textarea>
           <div class="px-2">
@@ -172,7 +172,7 @@
     <div class="col-md-8" *ngIf="selectedClass?.id == ''">
       <div class="card mb-2 pt-2" *ngIf="postsList.length == 0">
         <h1 class="text-center">
-          <i class="icon ion-ios-bookmarks"></i>
+          <i class="icon ion-md-people"></i>
         </h1>
         <h3 class="text-center text-secondary mb-0">
           No Class Selected
@@ -185,8 +185,8 @@
 
     <!-- Notif -->
     <div class="col-md-4">
-      <div class="card bg-dark">
-        <div class="card-header text-light">
+      <div class="card bg-light">
+        <div class="card-header text-dark">
           <i class="fa fa-bell mr-2"></i>Notification
         </div>
         <div class="card-body p-0">

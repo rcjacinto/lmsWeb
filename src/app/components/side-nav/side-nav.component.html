@@ -1,32 +1,44 @@
 <div
-  class="main bg-dark"
+  class="main bg-white"
   *ngIf="user.role === 'instructor' || user.role === 'student'"
 >
   <!-- Profile Picture -->
 
-  <div class="card ">
-    <div class="card-header bg-danger pt-4"></div>
-    <div class="card-body bg-dark pt-3 pb-2">
+  <div class="card side-header">
+    <div class="pt-5 pb-2">
       <img [src]="user.image" alt="" class="profile-pic" />
-      <h5 class="text-center text-light">
+      <h5 class="text-left text-light pl-3 pt-4">
         {{ user.name.first }} {{ user.name.last }}
       </h5>
-      <h6 class="text-center text-secondary text-capitalize">
+      <h6 class="text-left pl-3 text-light text-capitalize">
         {{ user.role == 'instructor' ? user.role : user.student_number }}
       </h6>
+      <a
+      class="text-light float-right pr-2 profile-link"
+      [routerLink]="['/profile']"
+      routerLinkActive="router-link-active"
+      >View Profile</a>
     </div>
   </div>
-
+  <button
+    type="button"
+    class="list-group-item list-group-item-action"
+    [routerLink]="['/dashboard']"
+    routerLinkActive="router-link-active"
+  >
+    <i class="icon ion-ios-home  mr-3"></i
+    ><span class="">Dashboard</span>
+  </button>
   <div class="card mt-2" *ngIf="selectedClass.name.trim() !== ''">
     <button
       type="button"
-      class="list-group-item list-group-item-action bg-dark"
+      class="list-group-item list-group-item-action"
       (click)="resetClass()"
       [routerLink]="['/dashboard']"
       routerLinkActive="router-link-active"
     >
-      <i class="icon ion-md-bookmarks mr-3 text-light"></i
-      ><span class="text-light">Classes</span>
+      <i class="icon ion-md-people mr-3 "></i
+      ><span class="">Classes</span>
     </button>
   </div>
 
@@ -35,18 +47,18 @@
   <div class="card mt-2" *ngIf="selectedClass.name.trim() !== ''">
     <button
       type="button"
-      class="list-group-item list-group-item-action bg-dark"
+      class="list-group-item list-group-item-action"
       [routerLink]="['/view-class']"
       routerLinkActive="router-link-active"
     >
       <div class="row">
         <div class="col-md-2">
           <i
-            [class]="'icon ion-md-bookmark mr-3 text-' + selectedClass.color"
+            [class]="'icon ion-md-people mr-3 text-' + selectedClass.color"
           ></i>
         </div>
         <div class="col-md-10">
-          <span class="text-light">{{ selectedClass.name }}</span>
+          <span class="">{{ selectedClass.name }}</span>
         </div>
       </div>
     </button>
@@ -58,35 +70,35 @@
     class="card mt-2"
     *ngIf="selectedClass.name.trim() !== '' && user.role == 'instructor'"
   >
-    <div class="card-body bg-dark p-0">
-      <div class="list-group bg-dark">
+    <div class="card-body p-0">
+      <div class="list-group">
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           [routerLink]="['/dashboard']"
           routerLinkActive="router-link-active"
         >
           <i [class]="'icon ion-md-school mr-3 text-' + selectedClass.color"></i
-          ><span class="text-light">Dashboard</span>
+          ><span class="">Dashboard</span>
         </button>
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           [routerLink]="['/students']"
           routerLinkActive="router-link-active"
         >
           <i
             [class]="'icon ion-ios-contacts mr-3 text-' + selectedClass.color"
           ></i
-          ><span class="text-light">Students</span>
+          ><span class="">Students</span>
         </button>
 
-        <div class="list-group bg-dark">
+        <div class="list-group">
           <a
             href="#activities"
             data-toggle="collapse"
             aria-expanded="false"
-            class="list-group-item list-group-item-action bg-dark text-light dropdown-toggle"
+            class="list-group-item list-group-item-action  dropdown-toggle"
             ><i
               [class]="'icon ion-ios-paper mr-3 text-' + selectedClass.color"
             ></i>
@@ -96,7 +108,7 @@
             <li>
               <button
                 type="button"
-                class="list-group-item list-group-item-action bg-dark"
+                class="list-group-item list-group-item-action"
                 [routerLink]="['/activities/quiz']"
                 routerLinkActive="router-link-active"
               >
@@ -105,13 +117,13 @@
                     'icon ion-ios-create mx-3 text-' + selectedClass.color
                   "
                 ></i
-                ><span class="text-light">Quiz</span>
+                ><span class="">Quiz</span>
               </button>
             </li>
             <li>
               <button
                 type="button"
-                class="list-group-item list-group-item-action bg-dark"
+                class="list-group-item list-group-item-action"
                 [routerLink]="['/activities/exams']"
                 routerLinkActive="router-link-active"
               >
@@ -120,18 +132,18 @@
                     'icon ion-ios-journal mx-3 text-' + selectedClass.color
                   "
                 ></i
-                ><span class="text-light">Exams</span>
+                ><span class="">Exams</span>
               </button>
             </li>
             <li>
               <button
                 type="button"
-                class="list-group-item list-group-item-action bg-dark"
+                class="list-group-item list-group-item-action"
                 [routerLink]="['/create-activities']"
                 routerLinkActive="router-link-active"
               >
-                <i class="icon ion-md-add mx-3 text-light"></i
-                ><span class="text-light">Create</span>
+                <i class="icon ion-md-add mx-3 "></i
+                ><span class="">Create</span>
               </button>
             </li>
           </ul>
@@ -139,23 +151,23 @@
 
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           [routerLink]="['/library']"
           routerLinkActive="router-link-active"
         >
           <i
-            [class]="'icon ion-ios-bookmarks mr-3 text-' + selectedClass.color"
+            [class]="'icon ion-ios-peoples mr-3 text-' + selectedClass.color"
           ></i
-          ><span class="text-light">Libraries</span>
+          ><span class="">Libraries</span>
         </button>
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           [routerLink]="['/grades']"
           routerLinkActive="router-link-active"
         >
           <i [class]="'icon ion-md-pie mr-3 text-' + selectedClass.color"></i
-          ><span class="text-light">Grades</span>
+          ><span class="">Grades</span>
         </button>
       </div>
     </div>
@@ -165,38 +177,38 @@
     class="card mt-2"
     *ngIf="selectedClass.name.trim() !== '' && user.role == 'student'"
   >
-    <div class="card-body bg-dark p-0">
-      <div class="list-group bg-dark">
+    <div class="card-body p-0">
+      <div class="list-group">
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           [routerLink]="['/dashboard']"
           routerLinkActive="router-link-active"
         >
           <i [class]="'icon ion-md-school mr-3 text-' + selectedClass.color"></i
-          ><span class="text-light">Dashboard</span>
+          ><span class="">Dashboard</span>
         </button>
 
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           [routerLink]="['/student-activities']"
           routerLinkActive="router-link-active"
         >
           <i
             [class]="'icon ion-ios-paper mr-3 text-' + selectedClass.color"
           ></i>
-          <span class="text-light">My Activities</span>
+          <span class="">My Activities</span>
         </button>
 
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           [routerLink]="['/view-student-grade']"
           routerLinkActive="router-link-active"
         >
           <i [class]="'icon ion-md-pie mr-3 text-' + selectedClass.color"></i
-          ><span class="text-light">My Grades</span>
+          ><span class="">My Grades</span>
         </button>
       </div>
     </div>
@@ -205,14 +217,14 @@
   <!-- Class List -->
 
   <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
-    <div class="card-body bg-dark p-0">
-      <div class="list-group bg-dark">
+    <div class="card-body p-0">
+      <div class="list-group">
         <a
           href="#classes"
           data-toggle="collapse"
           aria-expanded="false"
-          class="list-group-item list-group-item-action bg-dark text-light dropdown-toggle"
-          ><i class="icon ion-md-bookmarks mr-3"></i
+          class="list-group-item list-group-item-action  dropdown-toggle"
+          ><i class="icon ion-md-people mr-3"></i
           >{{ user.role == 'instructor' ? 'Classes' : 'My Classes' }}
         </a>
         <ul class="collapse list-unstyled" id="classes">
@@ -227,19 +239,19 @@
           <li *ngFor="let class of classList">
             <button
               type="button"
-              class="list-group-item list-group-item-action bg-dark"
+              class="list-group-item list-group-item-action"
               routerLinkActive="router-link-active"
               (click)="setSelectedClass(class)"
             >
               <div class="row">
                 <div class="col-md-2">
                   <i
-                    class="icon ion-md-bookmark mr-3"
-                    [class]="'icon ion-md-bookmark mr-3 text-' + class.color"
+                    class="icon ion-md-people mr-3"
+                    [class]="'icon ion-md-people mr-3 text-' + class.color"
                   ></i>
                 </div>
                 <div class="col-md-10">
-                  <span class="text-light">{{ class.name }}</span>
+                  <span class="">{{ class.name }}</span>
                 </div>
               </div>
             </button>
@@ -247,23 +259,23 @@
         </ul>
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           (click)="openSmModal(addClassModal)"
         >
-          <i class="icon ion-md-add text-light mr-3"></i
-          ><span class="text-light">{{
+          <i class="icon ion-md-add  mr-3"></i
+          ><span class="">{{
             user.role == 'instructor' ? 'Add Class' : 'Join Class'
           }}</span>
         </button>
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           [routerLink]="['/manage-class']"
           routerLinkActive="router-link-active"
           *ngIf="user.role == 'instructor'"
         >
-          <i class="icon ion-ios-cog text-light mr-3"></i
-          ><span class="text-light">Manage Class</span>
+          <i class="icon ion-md-stats  mr-3"></i
+          ><span class="">Manage Class</span>
         </button>
       </div>
     </div>
@@ -272,49 +284,38 @@
   <!-- Profile | Messages | About -->
 
   <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
-    <div class="card-body bg-dark p-0">
-      <div class="list-group bg-dark">
-        <button
-          type="button"
-          class="list-group-item list-group-item-action bg-dark"
-          [routerLink]="
-            user.role === 'student' ? ['/student-profile'] : ['/profile']
-          "
-          routerLinkActive="router-link-active"
-        >
-          <i class="icon ion-ios-contact text-light mr-3"></i
-          ><span class="text-light">Profile</span>
-        </button>
+    <div class="card-body p-0">
+      <div class="list-group">
         <!-- <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           [routerLink]="['/messages']"
           routerLinkActive="router-link-active"
           *ngIf="user.role === 'instructor'"
         >
-          <i class="icon ion-md-chatboxes text-light mr-3"></i
-          ><span class="text-light">Messages</span>
+          <i class="icon ion-md-chatboxes  mr-3"></i
+          ><span class="">Messages</span>
         </button> -->
 
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           [routerLink]="['/student-parents']"
           routerLinkActive="router-link-active"
           *ngIf="user.role === 'student'"
         >
-          <i class="icon ion-ios-contacts text-light mr-3"></i
-          ><span class="text-light">Parents</span>
+          <i class="icon ion-ios-contacts  mr-3"></i
+          ><span class="">Parents</span>
         </button>
 
-        <button
+        <!-- <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           (click)="openModal(aboutModal)"
         >
-          <i class="icon ion-md-information-circle-outline text-light mr-3"></i
-          ><span class="text-light">About</span>
-        </button>
+          <i class="icon ion-md-information-circle-outline  mr-3"></i
+          ><span class="">About</span>
+        </button> -->
       </div>
     </div>
   </div>
@@ -322,27 +323,27 @@
   <!-- Logout -->
 
   <div class="card mt-2">
-    <div class="card-body bg-dark p-0">
-      <div class="list-group bg-dark">
+    <div class="card-body p-0">
+      <div class="list-group">
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
-          (click)="openSmModal(logoutModal)"
+          class="list-group-item list-group-item-action"
+          (click)="logOut()"
         >
-          <i class="icon ion-md-log-out text-light mr-3"></i
-          ><span class="text-light">Logout</span>
+          <i class="icon ion-md-log-out  mr-3"></i
+          ><span class="">Logout</span>
         </button>
       </div>
     </div>
   </div>
 </div>
 <!-- Admin -->
-<div class="main bg-dark" *ngIf="user.role === 'admin'">
+<div class="main" *ngIf="user.role === 'admin'">
   <div class="card ">
     <div class="card-header bg-danger pt-4"></div>
-    <div class="card-body bg-dark pt-3 pb-2">
+    <div class="card-body pt-3 pb-2">
       <img [src]="user.image" alt="" class="profile-pic" />
-      <h5 class="text-center text-light">
+      <h5 class="text-center ">
         {{ user.name.first }} {{ user.name.last }}
       </h5>
       <h6 class="text-center text-secondary text-capitalize mt-1">
@@ -355,88 +356,53 @@
   <!-- <div class="card mt-2">
     <button
       type="button"
-      class="list-group-item list-group-item-action bg-dark"
+      class="list-group-item list-group-item-action"
       [routerLink]="['/dashboard']"
       routerLinkActive="router-link-active"
     >
-      <i class="icon ion-md-school mr-3 text-light"></i
-      ><span class="text-light">Dashboard</span>
+      <i class="icon ion-md-school mr-3 "></i
+      ><span class="">Dashboard</span>
     </button>
   </div> -->
 
   <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
-    <div class="card-body bg-dark p-0">
-      <div class="list-group bg-dark">
+    <div class="card-body p-0">
+      <div class="list-group">
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           [routerLink]="['/manage-instructors']"
           routerLinkActive="router-link-active"
         >
-          <i class="icon ion-md-contact text-light mr-3"></i
-          ><span class="text-light">Instructors</span>
+          <i class="icon ion-md-contact  mr-3"></i
+          ><span class="">Instructors</span>
         </button>
         <!-- <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           [routerLink]="['/manage-students']"
           routerLinkActive="router-link-active"
         >
-          <i class="icon ion-md-contacts text-light mr-3"></i
-          ><span class="text-light">Student</span>
+          <i class="icon ion-md-contacts  mr-3"></i
+          ><span class="">Student</span>
         </button> -->
       </div>
     </div>
   </div>
 
   <!-- Profile | Messages | About -->
-
-  <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
-    <div class="card-body bg-dark p-0">
-      <div class="list-group bg-dark">
-        <button
-          type="button"
-          class="list-group-item list-group-item-action bg-dark"
-          [routerLink]="['/profile']"
-          routerLinkActive="router-link-active"
-        >
-          <i class="icon ion-ios-contact text-light mr-3"></i
-          ><span class="text-light">Profile</span>
-        </button>
-        <!-- <button
-          type="button"
-          class="list-group-item list-group-item-action bg-dark"
-          [routerLink]="['/messages']"
-          routerLinkActive="router-link-active"
-        >
-          <i class="icon ion-md-chatboxes text-light mr-3"></i
-          ><span class="text-light">Messages</span>
-        </button> -->
-
-        <button
-          type="button"
-          class="list-group-item list-group-item-action bg-dark"
-          (click)="openModal(aboutModal)"
-        >
-          <i class="icon ion-md-information-circle-outline text-light mr-3"></i
-          ><span class="text-light">About</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
   <!-- Logout -->
 
   <div class="card mt-2">
-    <div class="card-body bg-dark p-0">
-      <div class="list-group bg-dark">
+    <div class="card-body p-0">
+      <div class="list-group">
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
-          (click)="openSmModal(logoutModal)"
+          class="list-group-item list-group-item-action"
+          (click)="logOut()"
         >
-          <i class="icon ion-md-log-out text-light mr-3"></i
-          ><span class="text-light">Logout</span>
+          <i class="icon ion-md-log-out  mr-3"></i
+          ><span class="">Logout</span>
         </button>
       </div>
     </div>
@@ -444,12 +410,12 @@
 </div>
 
 <!-- Parent -->
-<div class="main bg-dark" *ngIf="user.role === 'parent'">
+<div class="main" *ngIf="user.role === 'parent'">
   <div class="card ">
     <div class="card-header bg-danger pt-4"></div>
-    <div class="card-body bg-dark pt-3 pb-2">
+    <div class="card-body pt-3 pb-2">
       <img [src]="user.image" alt="" class="profile-pic" />
-      <h5 class="text-center text-light">
+      <h5 class="text-center ">
         {{ user.name.first }} {{ user.name.last }}
       </h5>
       <h6 class="text-center text-secondary text-capitalize mt-1">
@@ -459,55 +425,19 @@
   </div>
 
   <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
-    <div class="card-body bg-dark p-0">
-      <div class="list-group bg-dark">
+    <div class="card-body p-0">
+      <div class="list-group">
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
+          class="list-group-item list-group-item-action"
           [routerLink]="['/view-my-student']"
           routerLinkActive="router-link-active"
           *ngIf="!loading"
         >
-          <i class="icon ion-ios-contacts text-light mr-3"></i
-          ><span class="text-light"
+          <i class="icon ion-ios-contacts  mr-3"></i
+          ><span class=""
             >{{ student?.name.first }} {{ student?.name.last }}</span
           >
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Profile | Messages | About -->
-
-  <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
-    <div class="card-body bg-dark p-0">
-      <div class="list-group bg-dark">
-        <button
-          type="button"
-          class="list-group-item list-group-item-action bg-dark"
-          [routerLink]="['/profile']"
-          routerLinkActive="router-link-active"
-        >
-          <i class="icon ion-ios-contact text-light mr-3"></i
-          ><span class="text-light">Profile</span>
-        </button>
-        <!-- <button
-          type="button"
-          class="list-group-item list-group-item-action bg-dark"
-          [routerLink]="['/messages']"
-          routerLinkActive="router-link-active"
-        >
-          <i class="icon ion-md-chatboxes text-light mr-3"></i
-          ><span class="text-light">Messages</span>
-        </button> -->
-
-        <button
-          type="button"
-          class="list-group-item list-group-item-action bg-dark"
-          (click)="openModal(aboutModal)"
-        >
-          <i class="icon ion-md-information-circle-outline text-light mr-3"></i
-          ><span class="text-light">About</span>
         </button>
       </div>
     </div>
@@ -516,15 +446,15 @@
   <!-- Logout -->
 
   <div class="card mt-2">
-    <div class="card-body bg-dark p-0">
-      <div class="list-group bg-dark">
+    <div class="card-body p-0">
+      <div class="list-group">
         <button
           type="button"
-          class="list-group-item list-group-item-action bg-dark"
-          (click)="openSmModal(logoutModal)"
+          class="list-group-item list-group-item-action"
+          (click)="logOut()"
         >
-          <i class="icon ion-md-log-out text-light mr-3"></i
-          ><span class="text-light">Logout</span>
+          <i class="icon ion-md-log-out  mr-3"></i
+          ><span class="">Logout</span>
         </button>
       </div>
     </div>
@@ -534,8 +464,8 @@
 <!-- Modals -->
 
 <ng-template #addClassModal let-c="close" let-d="dismiss">
-  <div class="modal-header bg-dark">
-    <h4 class="modal-title text-light">
+  <div class="modal-header">
+    <h4 class="modal-title ">
       {{ user.role == 'instructor' ? 'Add Class' : 'Join Class' }}
     </h4>
     <button
@@ -544,7 +474,7 @@
       aria-label="Close"
       (click)="d('Cross click')"
     >
-      <span aria-hidden="true" class="text-light">&times;</span>
+      <span aria-hidden="true" class="">&times;</span>
     </button>
   </div>
   <div class="modal-body">
@@ -568,7 +498,7 @@
         <select
           [class]="
             newColor != 'yellow'
-              ? 'custom-select text-light bg-' + newColor
+              ? 'custom-select  bg-' + newColor
               : 'custom-select text-dark bg-' + newColor
           "
           id="inputColors"
@@ -605,29 +535,29 @@
 </ng-template>
 
 <ng-template #aboutModal let-c="close" let-d="dismiss">
-  <div class="modal-body bg-dark about">
-    <ul class="list-unstyled ml-5  text-light developers">
+  <div class="modal-body about">
+    <ul class="list-unstyled ml-5   developers">
       <li class="mb-3">Developers:</li>
       <li>Anthony Veloria</li>
       <li>Hiroshi Cruz</li>
       <li>Shaina Masinahon</li>
     </ul>
-    <div class="copyright text-light">
+    <div class="copyright ">
       ALL RIGHTS RESERVE | COPYRIGHT &copy; 2019 TRIMEX COLLEGES
     </div>
   </div>
 </ng-template>
 
 <ng-template #logoutModal let-modal>
-  <div class="modal-header bg-dark text-light">Confirm</div>
+  <div class="modal-header ">Confirm</div>
   <div class="modal-body">
     Are you sure you want to logout?
   </div>
   <div class="modal-footer ">
-    <button class="btn btn-secondary m-2" (click)="modal.dismiss()">
+    <button class="btn btn-dark m-2" (click)="modal.dismiss()">
       Cancel
     </button>
-    <button class="btn btn-danger mx-2" (click)="logOut()">Logout</button>
+    <button class="btn btn-primary mx-2" (click)="logOut()">Logout</button>
   </div>
 </ng-template>
 
