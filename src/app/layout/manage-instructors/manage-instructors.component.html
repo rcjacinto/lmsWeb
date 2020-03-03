@@ -7,7 +7,7 @@
         type="text"
         name=""
         id=""
-        class="form-control mb-2 bg-dark text-light"
+        class="form-control mb-2 bg-dark text-dark"
         placeholder="Search instructor..."
         [(ngModel)]="instructorFilter"
       />
@@ -19,7 +19,7 @@
         (click)="setSelectedInstructor(instructor)"
       >
         <div class="card-header bg-secondary p-2 pt-3">
-          <h5 class="text-capitalize text-light user-name">
+          <h5 class="text-capitalize text-dark user-name">
             {{ instructor.name.first }}
             {{ instructor.name.last }}
             ({{ instructor.status == 1 ? 'Active' : 'Inactive' }})
@@ -39,7 +39,7 @@
     </div>
     <div class="col-md-4">
       <ul class="list-group" *ngIf="!loading">
-        <li class="list-group-item bg-dark text-light">Requests</li>
+        <li class="list-group-item bg-dark text-dark">Requests</li>
         <li class="list-group-item" *ngIf="!loading && requestList.length == 0">
           No account request
         </li>

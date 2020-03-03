@@ -59,10 +59,10 @@
             (click)="removeFile(i)"
             [disabled]="loading"
           >
-            <i class="fa fa-times text-light" aria-hidden="true"></i>
+            <i class="fa fa-times text-dark" aria-hidden="true"></i>
           </button>
           <div class="overflow-hidden">
-            <span class="text-light file-name">{{ file.name }}</span>
+            <span class="text-dark file-name">{{ file.name }}</span>
           </div>
           <div class="progress-bar bg-transparent" *ngIf="file.uploading">
             <progress-bar
@@ -187,7 +187,6 @@
     <div class="col-md-4">
       <div class="card bg-light">
         <div class="card-header text-dark">
-          <i class="fa fa-bell mr-2"></i>Notification
         </div>
         <div class="card-body p-0">
           <ul class="list-group">

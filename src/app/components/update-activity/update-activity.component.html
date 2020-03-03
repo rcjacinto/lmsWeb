@@ -1,19 +1,19 @@
 <div class="row">
   <div class="col-md-6">
     <div class="form-group">
-      <label class="text-light">Title</label>
+      <label class="text-dark">Title</label>
       <input type="text" class="form-control" [(ngModel)]="activity.title" />
     </div>
     <div class=" form-row mb-3">
       <div class="col">
-        <label class="text-light">Type</label>
+        <label class="text-dark">Type</label>
         <select name="" id="" class="custom-select" [(ngModel)]="activity.type">
           <option value="quiz" checked>Quiz</option>
           <option value="exams">Exam</option>
         </select>
       </div>
       <div class="col">
-        <label class="text-light">Term</label>
+        <label class="text-dark">Term</label>
         <select name="" id="" class="custom-select" [(ngModel)]="activity.term">
           <option value="prelim" checked>Prelim</option>
           <option value="midterm">Midterm</option>
@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="text-light">Instruction</label>
+      <label class="text-dark">Instruction</label>
       <textarea
         name=""
         id=""
@@ -34,7 +34,7 @@
       ></textarea>
     </div>
     <div class="form-group">
-      <label class="text-light">Deadline</label>
+      <label class="text-dark">Deadline</label>
       <div class="input-group">
         <input
           class="form-control"
@@ -61,7 +61,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="text-light">Time Limit</label>
+      <label class="text-dark">Time Limit</label>
       <ng5-slider
         [(value)]="activity.time_limit"
         [options]="options"
@@ -70,7 +70,7 @@
 
     <div class="card mb-2" *ngIf="activity?.questions.length > 0">
       <table class="table table-striped">
-        <thead class="bg-dark text-light">
+        <thead class="bg-dark text-dark">
           <tr>
             <th>#</th>
             <th>Question</th>
@@ -111,7 +111,7 @@
         [class]="'btn w-100 mb-2 bg-' + selectedClass.color"
         *ngIf="activity.questions.length > 0"
         (click)="saveActivity(1)"
-        [ngClass]="{ 'text-light': selectedClass.color != 'yellow' }"
+        [ngClass]="{ 'text-dark': selectedClass.color != 'yellow' }"
       >
         <i class="fa fa-fw fa-wpforms"></i> Post to {{ selectedClass.name }}
       </button>
@@ -131,11 +131,11 @@
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <label class="text-light">Question #</label>
+      <label class="text-dark">Question #</label>
       <input type="number" class="form-control" [(ngModel)]="question.number" />
     </div>
     <div class="form-group">
-      <label class="text-light">Question Type</label>
+      <label class="text-dark">Question Type</label>
       <select [(ngModel)]="question.type" class="custom-select">
         <option value="mc">Multiple Choices</option>
         <option value="sa">Short Answer</option>
@@ -143,7 +143,7 @@
       </select>
     </div>
     <div class="form-group">
-      <label class="text-light">Question Text</label>
+      <label class="text-dark">Question Text</label>
       <textarea
         name=""
         id=""
@@ -239,7 +239,7 @@
       </div>
       <div class="tof-options" *ngSwitchCase="'tof'">
         <div class="form-group">
-          <label class="text-light">Correct Answer</label>
+          <label class="text-dark">Correct Answer</label>
           <select
             name=""
             id=""
@@ -253,7 +253,7 @@
       </div>
       <div class="sa-answer" *ngSwitchCase="'sa'">
         <div class="form-group">
-          <label class="text-light">Correct Answer</label>
+          <label class="text-dark">Correct Answer</label>
           <input
             type="text"
             class="form-control"
@@ -263,7 +263,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="text-light">Points</label>
+      <label class="text-dark">Points</label>
       <input type="number" class="form-control" [(ngModel)]="question.points" />
     </div>
 

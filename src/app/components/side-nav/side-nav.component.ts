@@ -31,7 +31,7 @@ export class SideNavComponent implements OnInit {
   newDescription = '';
   newColor = '';
   newClassCode = '';
-  colorClass = 'bg-red text-light';
+  colorClass = 'bg-red text-dark';
   student: Student;
   loading = false;
   constructor(

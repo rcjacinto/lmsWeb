@@ -4,10 +4,10 @@
   <div class="row">
     <div class="col-md-8">
       <div class="card bg-dark p-5" *ngIf="false">
-        <h2 class="text-center text-light">
+        <h2 class="text-center text-dark">
           No Class Created
         </h2>
-        <p class="text-center text-light">
+        <p class="text-center text-dark">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
           nulla perspiciatis id voluptates placeat dolores soluta numquam
           corporis ipsam quo?
@@ -73,10 +73,10 @@
                 'icon ion-ios-bookmark bookmark-icon text-' + class.color
               "
             ></i>
-            <div class="text-light">
+            <div class="text-dark">
               {{ class.name }}
               <button
-                class="btn bg-transparent float-right text-light mr-2"
+                class="btn bg-transparent float-right text-dark mr-2"
                 (click)="setSelectedClass(updateClassModal, class)"
               >
                 <i class="fa fa-pencil-square-o"></i>
@@ -95,7 +95,7 @@
     <!-- Notif -->
     <div class="col-md-4">
       <div class="card bg-dark">
-        <div class="card-header text-light">
+        <div class="card-header text-dark">
           <i class="fa fa-bell mr-2"></i>Notification
         </div>
         <div class="card-body p-0">
@@ -116,14 +116,14 @@
 
 <ng-template #updateClassModal let-c="close" let-d="dismiss">
   <div class="modal-header bg-dark">
-    <h4 class="modal-title text-light">Add Class</h4>
+    <h4 class="modal-title text-dark">Add Class</h4>
     <button
       type="button"
       class="close"
       aria-label="Close"
       (click)="d('Cross click')"
     >
-      <span aria-hidden="true" class="text-light">&times;</span>
+      <span aria-hidden="true" class="text-dark">&times;</span>
     </button>
   </div>
   <div class="modal-body">
@@ -154,7 +154,7 @@
       <select
         [class]="
           selectedClass.color != 'yellow'
-            ? 'custom-select text-light bg-' + selectedClass.color
+            ? 'custom-select text-dark bg-' + selectedClass.color
             : 'custom-select text-dark bg-' + selectedClass.color
         "
         [(ngModel)]="selectedClass.color"

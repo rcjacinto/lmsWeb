@@ -80,7 +80,7 @@
   </div>
 
   <div class="contaier" *ngIf="timerStarted">
-    <div class="card p-2 mb-2 bg-dark text-light" *ngIf="!submitted">
+    <div class="card p-2 mb-2 bg-dark text-dark" *ngIf="!submitted">
       <div class="d-flex">
         <div class="mx-2 mt-2">
           <i class="fa fa-book check" aria-hidden="true"></i>
@@ -110,7 +110,7 @@
     </div>
 
     <div
-      class="card p-2 mb-2 bg-dark text-light"
+      class="card p-2 mb-2 bg-dark text-dark"
       *ngIf="submitted || submit.status == 2"
     >
       <div class="d-flex">
@@ -202,7 +202,7 @@
                   readonly
                   (click)="setMcAnswer(option)"
                   [ngClass]="{
-                    'bg-dark text-light':
+                    'bg-dark text-dark':
                       selectedQuestion.answer?.key == option.key
                   }"
                 />
@@ -212,7 +212,7 @@
           <div *ngSwitchCase="'tof'">
             <div class="tof">
               <div class="form-group">
-                <label class="text-light">Answer</label>
+                <label class="text-dark">Answer</label>
                 <select
                   class="custom-select bg-light"
                   (change)="setTofAnswer($event)"
@@ -235,7 +235,7 @@
           <div *ngSwitchCase="'sa'">
             <div class="sa">
               <div class="form-group">
-                <label class="text-light">Answer</label>
+                <label class="text-dark">Answer</label>
                 <input
                   type="text"
                   class="form-control bg-light"
@@ -260,7 +260,7 @@
             </button>
           </div>
 
-          <div class="col timer py-2 px-3 text-center text-light">
+          <div class="col timer py-2 px-3 text-center text-dark">
             <i class="fa fa-clock-o"></i>
             {{ trunc(submit?.timer_left / 60) }}:{{
               submit?.timer_left % 60 | number: '2.0'
@@ -279,7 +279,7 @@
 
   <!-- Results -->
   <div *ngIf="!submitted && submit?.status == 2">
-    <div class="card p-2 mb-2 bg-dark text-light">
+    <div class="card p-2 mb-2 bg-dark text-dark">
       <div class="d-flex">
         <div class="mx-2 mt-2">
           <i
@@ -365,8 +365,8 @@
                   <span
                     class="input-group-text"
                     [ngClass]="{
-                      'bg-success text-light': option.isCorrect,
-                      'bg-danger text-light': !option.isCorrect
+                      'bg-success text-dark': option.isCorrect,
+                      'bg-danger text-dark': !option.isCorrect
                     }"
                   >
                     <i
@@ -394,7 +394,7 @@
                   [value]="option.value"
                   readonly
                   [ngClass]="{
-                    'bg-dark text-light':
+                    'bg-dark text-dark':
                       selectedQuestion.answer?.key == option.key
                   }"
                 />
@@ -404,7 +404,7 @@
           <div *ngSwitchCase="'tof'">
             <div class="tof">
               <div class="form-group">
-                <label class="text-light"
+                <label class="text-dark"
                   >Correct Answer:
                   <strong class="text-capitalize text-success">
                     {{ (selectedQuestion?.options)[0].value }}
@@ -427,7 +427,7 @@
           <div *ngSwitchCase="'sa'">
             <div class="sa">
               <div class="form-group">
-                <label class="text-light"
+                <label class="text-dark"
                   >Correct Answer:
                   <strong class="text-capitalize text-success">
                     {{ (selectedQuestion?.options)[0].value }}
@@ -457,7 +457,7 @@
               </button>
             </div>
 
-            <div class="col timer py-2 px-3 text-center text-light"></div>
+            <div class="col timer py-2 px-3 text-center text-dark"></div>
 
             <div class="col">
               <button class="btn btn-dark float-right" (click)="nextQuestion()">

@@ -11,7 +11,7 @@
               'icon ion-ios-bookmark bookmark-icon text-' + selectedClass.color
             "
           ></i>
-          <div class="text-light">
+          <div class="text-dark">
             <h5>
               {{ selectedClass.name }}
             </h5>
@@ -26,7 +26,7 @@
       </div>
 
       <!-- Recent Activities -->
-      <p class="text-light mt-1">Recent Activities</p>
+      <p class="text-dark mt-1">Recent Activities</p>
       <hr />
       <div class="activity-list" *ngIf="!loading">
         <div class="mb-2" *ngFor="let activity of activityList">
@@ -217,7 +217,7 @@
     </div>
     <div class="col-md-4">
       <div class="card bg-dark">
-        <div class="card-header text-light p-2">
+        <div class="card-header text-dark p-2">
           <i class="fa fa-fw fa-id-badge"></i> Class Members
         </div>
         <div class="card-body p-2">

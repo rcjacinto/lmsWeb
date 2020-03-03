@@ -3,7 +3,7 @@
   <div class="container">
     <div *ngIf="!loading && !onView">
       <div
-        class="card cursor p-2 mb-2 bg-dark text-light"
+        class="card cursor p-2 mb-2 bg-dark text-dark"
         *ngFor="let submit of submitList"
         (click)="setSelectedSubmit(submit)"
       >
@@ -72,7 +72,7 @@
     </div>
 
     <div *ngIf="!loading && onView">
-      <div class="card p-2 mb-2 bg-dark text-light">
+      <div class="card p-2 mb-2 bg-dark text-dark">
         <div class="d-flex">
           <div class="mx-2 mt-2">
             <i
@@ -182,8 +182,8 @@
                     <span
                       class="input-group-text"
                       [ngClass]="{
-                        'bg-success text-light': option.isCorrect,
-                        'bg-danger text-light': !option.isCorrect
+                        'bg-success text-dark': option.isCorrect,
+                        'bg-danger text-dark': !option.isCorrect
                       }"
                     >
                       <i
@@ -212,7 +212,7 @@
                     [value]="option.value"
                     readonly
                     [ngClass]="{
-                      'bg-dark text-light':
+                      'bg-dark text-dark':
                         selectedQuestion.answer?.key == option.key
                     }"
                   />
@@ -222,7 +222,7 @@
             <div *ngSwitchCase="'tof'">
               <div class="tof">
                 <div class="form-group">
-                  <label class="text-light"
+                  <label class="text-dark"
                     >Correct Answer:
                     <strong class="text-capitalize text-success">
                       {{ (selectedQuestion?.options)[0].value }}
@@ -245,7 +245,7 @@
             <div *ngSwitchCase="'sa'">
               <div class="sa">
                 <div class="form-group">
-                  <label class="text-light"
+                  <label class="text-dark"
                     >Correct Answer:
                     <strong class="text-capitalize text-success">
                       {{ (selectedQuestion?.options)[0].value }}
@@ -278,7 +278,7 @@
                 </button>
               </div>
 
-              <div class="col timer py-2 px-3 text-center text-light"></div>
+              <div class="col timer py-2 px-3 text-center text-dark"></div>
 
               <div class="col">
                 <button
@@ -294,7 +294,7 @@
       </div>
     </div>
 
-    <div class="card cursor p-2 mb-2 bg-dark text-light" *ngIf="loading">
+    <div class="card cursor p-2 mb-2 bg-dark text-dark" *ngIf="loading">
       <div class="d-flex">
         <div class="mx-2 mt-2">
           <i class="fas fa-spinner check text-secondary" aria-hidden="true"></i>

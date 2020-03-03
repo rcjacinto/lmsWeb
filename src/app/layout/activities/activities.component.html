@@ -15,28 +15,28 @@
           <li
             class="list-group-item cursor"
             (click)="!loading ? setSelectedTerm('prelim') : ''"
-            [ngClass]="{ 'bg-dark text-light': term == 'prelim' }"
+            [ngClass]="{ 'bg-dark text-dark': term == 'prelim' }"
           >
             Prelim
           </li>
           <li
             class="list-group-item cursor"
             (click)="!loading ? setSelectedTerm('midterm') : ''"
-            [ngClass]="{ 'bg-dark text-light': term == 'midterm' }"
+            [ngClass]="{ 'bg-dark text-dark': term == 'midterm' }"
           >
             Midterm
           </li>
           <li
             class="list-group-item cursor"
             (click)="!loading ? setSelectedTerm('pre-finals') : ''"
-            [ngClass]="{ 'bg-dark text-light': term == 'pre-finals' }"
+            [ngClass]="{ 'bg-dark text-dark': term == 'pre-finals' }"
           >
             Pre-Finals
           </li>
           <li
             class="list-group-item cursor"
             (click)="!loading ? setSelectedTerm('finals') : ''"
-            [ngClass]="{ 'bg-dark text-light': term == 'finals' }"
+            [ngClass]="{ 'bg-dark text-dark': term == 'finals' }"
           >
             Finals
           </li>
@@ -230,7 +230,7 @@
     </div>
     <div class="col-md-4" *ngIf="isOnView">
       <div class="card bg-dark">
-        <div class="card-header text-light">
+        <div class="card-header text-dark">
           <i class="fa fa-calendar-check-o fa-fw" aria-hidden="true"></i>
           Submits
         </div>

@@ -5,7 +5,7 @@
     <div class="col-md-8">
       <div class="card bg-dark mb-2">
         <div class="card-header bg-danger p-2 pt-3">
-          <h5 class="text-light user-name">
+          <h5 class="text-dark user-name">
             {{ newUser.name.first }} {{ newUser.name.last }}
           </h5>
         </div>
@@ -20,7 +20,7 @@
             class="btn bg-dark py-1 px-2 upload-btn border border-danger"
             (click)="fileInput.click()"
           >
-            <i class="fa fa-folder-open text-light"></i>
+            <i class="fa fa-folder-open text-dark"></i>
           </button>
           <h6 class="text-secondary user-email">
             {{ newUser.email }}
@@ -29,13 +29,13 @@
       </div>
 
       <div class="card bg-dark mb-2">
-        <div class="card-header bg-danger px-3 px-2 text-light text-center">
-          <span>Account <i class="fa fa-edit text-light"></i></span>
+        <div class="card-header bg-danger px-3 px-2 text-dark text-center">
+          <span>Account <i class="fa fa-edit text-dark"></i></span>
         </div>
         <div class="card-body bg-dark p-2 pb-4">
           <div class=" form-row mb-3">
             <div class="col-md-5">
-              <label class="text-light">First Name</label>
+              <label class="text-dark">First Name</label>
               <input
                 type="text"
                 class="form-control text-catitalize"
@@ -43,7 +43,7 @@
               />
             </div>
             <div class="col-md-5">
-              <label class="text-light">Last Name</label>
+              <label class="text-dark">Last Name</label>
               <input
                 type="text"
                 class="form-control text-catitalize"
@@ -51,7 +51,7 @@
               />
             </div>
             <div class="col-md-2">
-              <label class="text-light">M.I.</label>
+              <label class="text-dark">M.I.</label>
               <input
                 type="text"
                 class="form-control text-catitalize"
@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="text-light">Adress</label>
+            <label class="text-dark">Adress</label>
             <textarea
               name=""
               id=""
@@ -72,7 +72,7 @@
           </div>
           <div class="form-group form-row">
             <div class="col-md-6">
-              <label class="text-light">Contact #</label>
+              <label class="text-dark">Contact #</label>
               <input
                 type="text"
                 class="form-control text-catitalize"
@@ -80,7 +80,7 @@
               />
             </div>
             <div class="col-md-6">
-              <label class="text-light">Gender</label>
+              <label class="text-dark">Gender</label>
               <select id="" class="custom-select" [(ngModel)]="newUser.gender">
                 <option value="male">Male</option>
                 <option value="male">Female</option>
@@ -99,7 +99,7 @@
     <!-- Notif -->
     <div class="col-md-4">
       <div class="card bg-dark">
-        <div class="card-header text-light">
+        <div class="card-header text-dark">
           <i class="fa fa-bell mr-2"></i>Notification
         </div>
         <div class="card-body p-0">

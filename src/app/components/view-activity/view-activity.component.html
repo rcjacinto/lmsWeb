@@ -1,6 +1,6 @@
 <div class="chart mb-3 card">
   <div class="card-header bg-dark">
-    <p class="text-center m-0 text-center text-light">Exam Pie Chart</p>
+    <p class="text-center m-0 text-center text-dark">Exam Pie Chart</p>
   </div>
   <div class="card-body">
     <canvas
@@ -20,7 +20,7 @@
   <table class="table">
     <thead>
       <tr class="bg-dark">
-        <th colspan="13" class="text-center text-light">Item Analysis</th>
+        <th colspan="13" class="text-center text-dark">Item Analysis</th>
       </tr>
       <tr>
         <th>#</th>
@@ -47,7 +47,7 @@
   <table class="table">
     <thead>
       <tr class="bg-dark">
-        <th colspan="13" class="text-center text-light">Submit List</th>
+        <th colspan="13" class="text-center text-dark">Submit List</th>
       </tr>
       <tr>
         <th>ID</th>
@@ -81,7 +81,7 @@
           <div class="input-group-prepend">
             <span
               class="input-group-text"
-              [ngClass]="{ 'bg-success text-light': options.isCorrect }"
+              [ngClass]="{ 'bg-success text-dark': options.isCorrect }"
               >{{ options.key }}</span
             >
           </div>
@@ -90,7 +90,7 @@
             class="form-control"
             readonly
             [value]="options.value"
-            [ngClass]="{ 'bg-success text-light': options.isCorrect }"
+            [ngClass]="{ 'bg-success text-dark': options.isCorrect }"
           />
         </div>
       </div>
@@ -101,7 +101,7 @@
           </div>
           <input
             type="text"
-            class="form-control text-capitalize bg-success text-light"
+            class="form-control text-capitalize bg-success text-dark"
             readonly
             [value]="selectedQuestion.options[0].value"
           />
@@ -114,7 +114,7 @@
           </div>
           <input
             type="text"
-            class="form-control text-capitalize bg-success text-light"
+            class="form-control text-capitalize bg-success text-dark"
             readonly
             [value]="selectedQuestion.options[0].value"
           />

@@ -82,7 +82,7 @@ export class UpdateActivityComponent implements OnInit {
       return '#ffffff';
     },
     translate: (value: number): string => {
-      return `<span class="text-light">${value} mins</span>`;
+      return `<span class="text-dark">${value} mins</span>`;
     },
     ticksTooltip: (value: number): string => {
       return value + ' mins';

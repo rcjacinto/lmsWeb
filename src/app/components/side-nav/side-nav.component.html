@@ -7,14 +7,14 @@
   <div class="card side-header">
     <div class="pt-5 pb-2">
       <img [src]="user.image" alt="" class="profile-pic" />
-      <h5 class="text-left text-light pl-3 pt-4">
+      <h5 class="text-left text-dark pl-3 pt-4">
         {{ user.name.first }} {{ user.name.last }}
       </h5>
-      <h6 class="text-left pl-3 text-light text-capitalize">
+      <h6 class="text-left pl-3 text-dark text-capitalize">
         {{ user.role == 'instructor' ? user.role : user.student_number }}
       </h6>
       <a
-      class="text-light float-right pr-2 profile-link"
+      class="text-dark float-right pr-2 profile-link"
       [routerLink]="['/profile']"
       routerLinkActive="router-link-active"
       >View Profile</a>

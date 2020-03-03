@@ -9,7 +9,7 @@
             class="nav-link"
             [ngClass]="{
               active: selectedTerm == 'prelim',
-              'text-light': selectedTerm != 'prelim'
+              'text-dark': selectedTerm != 'prelim'
             }"
             (click)="setSelectedTerm('prelim')"
             >Prelim</a
@@ -20,7 +20,7 @@
             class="nav-link"
             [ngClass]="{
               active: selectedTerm == 'midterm',
-              'text-light': selectedTerm != 'midterm'
+              'text-dark': selectedTerm != 'midterm'
             }"
             (click)="setSelectedTerm('midterm')"
             >Midterm</a
@@ -31,7 +31,7 @@
             class="nav-link"
             [ngClass]="{
               active: selectedTerm == 'pre-finals',
-              'text-light': selectedTerm != 'pre-finals'
+              'text-dark': selectedTerm != 'pre-finals'
             }"
             (click)="setSelectedTerm('pre-finals')"
             >Pre-Finals</a
@@ -42,7 +42,7 @@
             class="nav-link"
             [ngClass]="{
               active: selectedTerm == 'finals',
-              'text-light': selectedTerm != 'finals'
+              'text-dark': selectedTerm != 'finals'
             }"
             (click)="setSelectedTerm('finals')"
             >Finals</a
@@ -53,7 +53,7 @@
             class="nav-link"
             [ngClass]="{
               active: selectedTerm == 'total',
-              'text-light': selectedTerm != 'total'
+              'text-dark': selectedTerm != 'total'
             }"
             (click)="setSelectedTerm('total')"
             >Total</a
@@ -148,7 +148,7 @@
     <!-- Notif -->
     <div class="col-md-4">
       <div class="card bg-dark">
-        <div class="card-header text-light">
+        <div class="card-header text-dark">
           <i class="fa fa-bell mr-2"></i>Notification
         </div>
         <div class="card-body p-0">

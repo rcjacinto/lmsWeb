@@ -5,7 +5,7 @@
     <div class="col-md-7">
       <div class="card bg-dark mb-2 instructor">
         <div class="card-header bg-secondary p-2 pt-3">
-          <h5 class="text-capitalize text-light user-name">
+          <h5 class="text-capitalize text-dark user-name">
             {{ instructor?.name.first }}
             {{ instructor?.name.last }}
           </h5>
@@ -23,7 +23,7 @@
       </div>
 
       <select
-        class="custom-select w-100 mb-2 text-center instructor bg-dark text-light border-0"
+        class="custom-select w-100 mb-2 text-center instructor bg-dark text-dark border-0"
         [(ngModel)]="profile.status"
         (change)="setStatus()"
       >
@@ -33,7 +33,7 @@
 
       <hr />
       <ul class="list-group" *ngIf="!onClassView">
-        <li class="list-group-item bg-dark text-light">Class List</li>
+        <li class="list-group-item bg-dark text-dark">Class List</li>
         <li class="list-group-item p-2">
           <input
             type="text"
@@ -70,13 +70,13 @@
     </div>
     <div class="col-md-5">
       <div class="card bg-dark mb-2 account">
-        <div class="card-header bg-secondary px-3 px-2 text-light text-center">
-          <span>Profile <i class="fa fa-edit text-light"></i></span>
+        <div class="card-header bg-secondary px-3 px-2 text-dark text-center">
+          <span>Profile <i class="fa fa-edit text-dark"></i></span>
         </div>
         <div class="card-body bg-dark p-2 pb-4">
           <div class=" form-row mb-3">
             <div class="col-md-5">
-              <label class="text-light">First Name</label>
+              <label class="text-dark">First Name</label>
               <input
                 type="text"
                 class="form-control text-catitalize"
@@ -84,7 +84,7 @@
               />
             </div>
             <div class="col-md-5">
-              <label class="text-light">Last Name</label>
+              <label class="text-dark">Last Name</label>
               <input
                 type="text"
                 class="form-control text-catitalize"
@@ -92,7 +92,7 @@
               />
             </div>
             <div class="col-md-2">
-              <label class="text-light">M.I.</label>
+              <label class="text-dark">M.I.</label>
               <input
                 type="text"
                 class="form-control text-catitalize"
@@ -101,7 +101,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="text-light">Adress</label>
+            <label class="text-dark">Adress</label>
             <textarea
               [(ngModel)]="profile.address"
               name=""
@@ -113,7 +113,7 @@
           </div>
           <div class="form-group form-row">
             <div class="col-md-6">
-              <label class="text-light">Contact #</label>
+              <label class="text-dark">Contact #</label>
               <input
                 type="text"
                 class="form-control text-catitalize"
@@ -121,7 +121,7 @@
               />
             </div>
             <div class="col-md-6">
-              <label class="text-light">Gender</label>
+              <label class="text-dark">Gender</label>
               <select id="" class="custom-select" [(ngModel)]="profile.gender">
                 <option value="male">Male</option>
                 <option value="male">Female</option>
