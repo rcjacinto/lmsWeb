@@ -3,13 +3,13 @@
 <div class="main">
   <div class="row">
     <div class="col-md-8">
-      <div class="card bg-dark mb-2">
+      <div class="card bg-primary mb-2">
         <div class="card-header bg-danger p-2 pt-3">
           <h5 class="text-dark user-name">
             {{ newUser.name.first }} {{ newUser.name.last }}
           </h5>
         </div>
-        <div class="card-body bg-dark p-2 pb-4">
+        <div class="card-body bg-primary p-2 pb-4">
           <img
             [src]="newUser.image"
             alt=""
@@ -17,7 +17,7 @@
           />
           <input type="file" hidden #fileInput (change)="uploadImage($event)" />
           <button
-            class="btn bg-dark py-1 px-2 upload-btn border border-danger"
+            class="btn bg-primary py-1 px-2 upload-btn border border-danger"
             (click)="fileInput.click()"
           >
             <i class="fa fa-folder-open text-dark"></i>
@@ -28,11 +28,11 @@
         </div>
       </div>
 
-      <div class="card bg-dark mb-2">
+      <div class="card bg-primary mb-2">
         <div class="card-header bg-danger px-3 px-2 text-dark text-center">
           <span>Account <i class="fa fa-edit text-dark"></i></span>
         </div>
-        <div class="card-body bg-dark p-2 pb-4">
+        <div class="card-body bg-primary p-2 pb-4">
           <div class=" form-row mb-3">
             <div class="col-md-5">
               <label class="text-dark">First Name</label>
@@ -98,7 +98,7 @@
     </div>
     <!-- Notif -->
     <div class="col-md-4">
-      <div class="card bg-dark">
+      <div class="card bg-primary">
         <div class="card-header text-dark">
           <i class="fa fa-bell mr-2"></i>Notification
         </div>

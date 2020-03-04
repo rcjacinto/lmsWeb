@@ -3,7 +3,7 @@
 <div class="main">
   <div class="container">
     <div>
-      <div class="card p-2 mb-2 bg-dark text-dark">
+      <div class="card p-2 mb-2 bg-primary text-dark">
         <div class="d-flex">
           <div class="mx-2 mt-2">
             <i
@@ -138,7 +138,7 @@
                     [value]="option.value"
                     readonly
                     [ngClass]="{
-                      'bg-dark text-dark':
+                      'bg-primary text-dark':
                         selectedQuestion.answer?.key == option.key
                     }"
                   />

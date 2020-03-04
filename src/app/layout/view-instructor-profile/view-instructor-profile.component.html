@@ -3,14 +3,14 @@
 <div class="main">
   <div class="row">
     <div class="col-md-7">
-      <div class="card bg-dark mb-2 instructor">
+      <div class="card bg-primary mb-2 instructor">
         <div class="card-header bg-secondary p-2 pt-3">
           <h5 class="text-capitalize text-dark user-name">
             {{ instructor?.name.first }}
             {{ instructor?.name.last }}
           </h5>
         </div>
-        <div class="card-body bg-dark p-2 pb-4">
+        <div class="card-body bg-primary p-2 pb-4">
           <img
             [src]="instructor.image"
             alt=""
@@ -23,7 +23,7 @@
       </div>
 
       <select
-        class="custom-select w-100 mb-2 text-center instructor bg-dark text-dark border-0"
+        class="custom-select w-100 mb-2 text-center instructor bg-primary text-dark border-0"
         [(ngModel)]="profile.status"
         (change)="setStatus()"
       >
@@ -33,7 +33,7 @@
 
       <hr />
       <ul class="list-group" *ngIf="!onClassView">
-        <li class="list-group-item bg-dark text-dark">Class List</li>
+        <li class="list-group-item bg-primary text-dark">Class List</li>
         <li class="list-group-item p-2">
           <input
             type="text"
@@ -69,11 +69,11 @@
       </div>
     </div>
     <div class="col-md-5">
-      <div class="card bg-dark mb-2 account">
+      <div class="card bg-primary mb-2 account">
         <div class="card-header bg-secondary px-3 px-2 text-dark text-center">
           <span>Profile <i class="fa fa-edit text-dark"></i></span>
         </div>
-        <div class="card-body bg-dark p-2 pb-4">
+        <div class="card-body bg-primary p-2 pb-4">
           <div class=" form-row mb-3">
             <div class="col-md-5">
               <label class="text-dark">First Name</label>

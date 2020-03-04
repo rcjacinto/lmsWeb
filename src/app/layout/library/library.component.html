@@ -7,28 +7,28 @@
           <li
             class="list-group-item cursor"
             (click)="!loading ? setSelectedTerm('prelim') : ''"
-            [ngClass]="{ 'bg-dark text-dark': term == 'prelim' }"
+            [ngClass]="{ 'bg-primary text-dark': term == 'prelim' }"
           >
             Prelim
           </li>
           <li
             class="list-group-item cursor"
             (click)="!loading ? setSelectedTerm('midterm') : ''"
-            [ngClass]="{ 'bg-dark text-dark': term == 'midterm' }"
+            [ngClass]="{ 'bg-primary text-dark': term == 'midterm' }"
           >
             Midterm
           </li>
           <li
             class="list-group-item cursor"
             (click)="!loading ? setSelectedTerm('pre-finals') : ''"
-            [ngClass]="{ 'bg-dark text-dark': term == 'pre-finals' }"
+            [ngClass]="{ 'bg-primary text-dark': term == 'pre-finals' }"
           >
             Pre-Finals
           </li>
           <li
             class="list-group-item cursor"
             (click)="!loading ? setSelectedTerm('finals') : ''"
-            [ngClass]="{ 'bg-dark text-dark': term == 'finals' }"
+            [ngClass]="{ 'bg-primary text-dark': term == 'finals' }"
           >
             Finals
           </li>

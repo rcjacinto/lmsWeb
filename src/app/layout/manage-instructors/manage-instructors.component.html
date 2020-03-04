@@ -7,12 +7,12 @@
         type="text"
         name=""
         id=""
-        class="form-control mb-2 bg-dark text-dark"
+        class="form-control mb-2 bg-primary text-dark"
         placeholder="Search instructor..."
         [(ngModel)]="instructorFilter"
       />
       <div
-        class="card bg-dark mb-2 instructor"
+        class="card bg-primary mb-2 instructor"
         [routerLink]="['/view-instructor-profile']"
         routerLinkActive="router-link-active"
         *ngFor="let instructor of instructorList | filter: instructorFilter"
@@ -25,7 +25,7 @@
             ({{ instructor.status == 1 ? 'Active' : 'Inactive' }})
           </h5>
         </div>
-        <div class="card-body bg-dark p-2 pb-4">
+        <div class="card-body bg-primary p-2 pb-4">
           <img
             [src]="instructor.image"
             alt=""
@@ -39,7 +39,7 @@
     </div>
     <div class="col-md-4">
       <ul class="list-group" *ngIf="!loading">
-        <li class="list-group-item bg-dark text-dark">Requests</li>
+        <li class="list-group-item bg-primary text-dark">Requests</li>
         <li class="list-group-item" *ngIf="!loading && requestList.length == 0">
           No account request
         </li>

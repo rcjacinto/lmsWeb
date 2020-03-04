@@ -3,7 +3,7 @@
   <div class="container">
     <div *ngIf="!loading && !onView">
       <div
-        class="card cursor p-2 mb-2 bg-dark text-dark"
+        class="card cursor p-2 mb-2 bg-primary text-dark"
         *ngFor="let submit of submitList"
         (click)="setSelectedSubmit(submit)"
       >
@@ -72,7 +72,7 @@
     </div>
 
     <div *ngIf="!loading && onView">
-      <div class="card p-2 mb-2 bg-dark text-dark">
+      <div class="card p-2 mb-2 bg-primary text-dark">
         <div class="d-flex">
           <div class="mx-2 mt-2">
             <i
@@ -212,7 +212,7 @@
                     [value]="option.value"
                     readonly
                     [ngClass]="{
-                      'bg-dark text-dark':
+                      'bg-primary text-dark':
                         selectedQuestion.answer?.key == option.key
                     }"
                   />
@@ -294,7 +294,7 @@
       </div>
     </div>
 
-    <div class="card cursor p-2 mb-2 bg-dark text-dark" *ngIf="loading">
+    <div class="card cursor p-2 mb-2 bg-primary text-dark" *ngIf="loading">
       <div class="d-flex">
         <div class="mx-2 mt-2">
           <i class="fas fa-spinner check text-secondary" aria-hidden="true"></i>

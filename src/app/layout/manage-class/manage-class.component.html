@@ -3,7 +3,7 @@
 <div class="main">
   <div class="row">
     <div class="col-md-8">
-      <div class="card bg-dark p-5" *ngIf="false">
+      <div class="card bg-primary p-5" *ngIf="false">
         <h2 class="text-center text-dark">
           No Class Created
         </h2>
@@ -15,7 +15,7 @@
       </div>
 
       <div class="loading-div" *ngIf="loading">
-        <div class="card bg-dark mb-3">
+        <div class="card bg-primary mb-3">
           <div class="card-header ">
             <div class="w-75">
               <ngx-skeleton-loader animate="true" count="1" appearance="line">
@@ -31,7 +31,7 @@
             </ngx-skeleton-loader>
           </div>
         </div>
-        <div class="card bg-dark mb-3">
+        <div class="card bg-primary mb-3">
           <div class="card-header ">
             <div class="w-75">
               <ngx-skeleton-loader animate="true" count="1" appearance="line">
@@ -47,7 +47,7 @@
             </ngx-skeleton-loader>
           </div>
         </div>
-        <div class="card bg-dark mb-3">
+        <div class="card bg-primary mb-3">
           <div class="card-header ">
             <div class="w-75">
               <ngx-skeleton-loader animate="true" count="1" appearance="line">
@@ -66,13 +66,8 @@
       </div>
 
       <div>
-        <div class="card bg-dark mb-3" *ngFor="let class of classList">
+        <div class="card bg-primary mb-3" *ngFor="let class of classList">
           <div class="card-header py-2 pl-4 pr-0">
-            <i
-              [class]="
-                'icon ion-ios-bookmark bookmark-icon text-' + class.color
-              "
-            ></i>
             <div class="text-dark">
               {{ class.name }}
               <button
@@ -94,7 +89,7 @@
     </div>
     <!-- Notif -->
     <div class="col-md-4">
-      <div class="card bg-dark">
+      <div class="card bg-primary">
         <div class="card-header text-dark">
           <i class="fa fa-bell mr-2"></i>Notification
         </div>
@@ -115,7 +110,7 @@
 </div>
 
 <ng-template #updateClassModal let-c="close" let-d="dismiss">
-  <div class="modal-header bg-dark">
+  <div class="modal-header bg-primary">
     <h4 class="modal-title text-dark">Add Class</h4>
     <button
       type="button"

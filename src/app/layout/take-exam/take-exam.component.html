@@ -80,7 +80,7 @@
   </div>
 
   <div class="contaier" *ngIf="timerStarted">
-    <div class="card p-2 mb-2 bg-dark text-dark" *ngIf="!submitted">
+    <div class="card p-2 mb-2 bg-primary text-dark" *ngIf="!submitted">
       <div class="d-flex">
         <div class="mx-2 mt-2">
           <i class="fa fa-book check" aria-hidden="true"></i>
@@ -110,7 +110,7 @@
     </div>
 
     <div
-      class="card p-2 mb-2 bg-dark text-dark"
+      class="card p-2 mb-2 bg-primary text-dark"
       *ngIf="submitted || submit.status == 2"
     >
       <div class="d-flex">
@@ -202,7 +202,7 @@
                   readonly
                   (click)="setMcAnswer(option)"
                   [ngClass]="{
-                    'bg-dark text-dark':
+                    'bg-primary text-dark':
                       selectedQuestion.answer?.key == option.key
                   }"
                 />
@@ -279,7 +279,7 @@
 
   <!-- Results -->
   <div *ngIf="!submitted && submit?.status == 2">
-    <div class="card p-2 mb-2 bg-dark text-dark">
+    <div class="card p-2 mb-2 bg-primary text-dark">
       <div class="d-flex">
         <div class="mx-2 mt-2">
           <i
@@ -394,7 +394,7 @@
                   [value]="option.value"
                   readonly
                   [ngClass]="{
-                    'bg-dark text-dark':
+                    'bg-primary text-dark':
                       selectedQuestion.answer?.key == option.key
                   }"
                 />

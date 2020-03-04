@@ -19,17 +19,17 @@
   </div>
 </li>
 <li class="list-group-item bg-light p-0 rounded mb-5" *ngIf="onViewStudent">
-  <div class="card bg-dark mb-2">
+  <div class="card bg-primary mb-2">
     <div class="card-header p-1 text-dark text-center">
       <select
-        class="form-control bg-dark text-dark"
+        class="form-control bg-primary text-dark"
         [(ngModel)]="student.status"
       >
         <option value="1">Active</option>
         <option value="2">Inactive</option>
       </select>
     </div>
-    <div class="card-body bg-dark p-2">
+    <div class="card-body bg-primary p-2">
       <div class="form-row mb-3">
         <div class="col-md-5">
           <label class="text-dark">First Name</label>
