@@ -1,4 +1,4 @@
-<div class="main h-100 w-100 bg-secondary">
+<div class="main h-100 w-100 bg-light">
  <!-- <div class="text-center mt-3 mb-5">
     <div class="row">
       <div class="col-sm-2"></div>
@@ -77,6 +77,7 @@
         <hr />
         <div class="form-group">
           <button
+            id="loginButton"
             type="submit"
             class="form-control btn btn-primary"
             [disabled]="loading"
@@ -87,7 +88,7 @@
         </div>
         <div class="form-group text-center mb-5">
           <p class="text-secondary">or</p>
-          <button class="form-control btn btn-outline-secondary" (click)="openModal(registerModal)">
+          <button class="form-control btn btn-outline-secondary" type="button" (click)="openModal(registerModal)">
             Register
           </button>
         </div>
@@ -100,7 +101,13 @@
 <!-- REGISTER -->
 <ng-template #registerModal let-modal>
   <div class="row" id="register">
-    <div class="col-lg-6 rounded-left" id="register-left">
+    <div class="col-12 rounded-left" id="register-left">
+      <button
+        class="btn bg-transparent border-secondary rounded-circle py-1 px-2 float-right mr-3 text-dark mt-3"
+        (click)="dismissModal()"
+      >
+        <i class="fa fa-times smaller"></i>
+      </button>
       <form
         class="px-3"
         [formGroup]="studRegisterForm"
@@ -111,7 +118,7 @@
           <h2 class="mb-4">
             <strong class="text-secondary float-left">
               <span class="text-dark">Register</span> -
-              <span class="text-primary text-capitalize">{{ role }}</span>
+              <span class="text-secondary text-capitalize">{{ role }}</span>
             </strong>
           </h2>
         </div>
@@ -205,7 +212,7 @@
         </div> -->
 
         <div class="form-group">
-          <input type="submit" class="w-100 btn btn-danger" value="Register" />
+          <input type="submit" class="w-100 btn btn-primary" value="Register" />
         </div>
         <hr class="mx-auto bg-secondary w-50" />
       </form>
@@ -311,14 +318,6 @@
           {{ role == "instructor" ? "Im a Student" : "Im an Instructor" }}
         </button>
       </div>
-    </div>
-    <div class="col-lg-6 rounded-right bg-transparent">
-      <button
-        class="btn bg-transparent border-secondary rounded-circle py-1 px-2 float-right text-dark mt-3"
-        (click)="dismissModal()"
-      >
-        <i class="fa fa-times smaller"></i>
-      </button>
     </div>
   </div>
 </ng-template>

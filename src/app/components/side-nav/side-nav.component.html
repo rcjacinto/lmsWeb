@@ -10,29 +10,20 @@
       <h5 class="text-left text-dark pl-3 pt-4">
         {{ user.name.first }} {{ user.name.last }}
       </h5>
-      <h6 class="text-left pl-3 text-dark text-capitalize">
+      <h6 class="text-left pl-3 text-light text-capitalize">
         {{ user.role == 'instructor' ? user.role : user.student_number }}
       </h6>
       <a
-      class="text-dark float-right pr-2 profile-link"
+      class="text-light float-right pr-2 profile-link"
       [routerLink]="['/profile']"
       routerLinkActive="router-link-active"
       >View Profile</a>
     </div>
   </div>
-  <button
-    type="button"
-    class="list-group-item list-group-item-action"
-    [routerLink]="['/dashboard']"
-    routerLinkActive="router-link-active"
-  >
-    <i class="icon ion-ios-home  mr-3"></i
-    ><span class="">Dashboard</span>
-  </button>
   <div class="card mt-2" *ngIf="selectedClass.name.trim() !== ''">
     <button
       type="button"
-      class="list-group-item list-group-item-action"
+      class="list-group-item list-group-item-action text-primary"
       (click)="resetClass()"
       [routerLink]="['/dashboard']"
       routerLinkActive="router-link-active"
@@ -47,7 +38,7 @@
   <div class="card mt-2" *ngIf="selectedClass.name.trim() !== ''">
     <button
       type="button"
-      class="list-group-item list-group-item-action"
+      class="list-group-item list-group-item-action bg-primary text-light"
       [routerLink]="['/view-class']"
       routerLinkActive="router-link-active"
     >
@@ -98,7 +89,7 @@
             href="#activities"
             data-toggle="collapse"
             aria-expanded="false"
-            class="list-group-item list-group-item-action  dropdown-toggle"
+            class="list-group-item list-group-item-action dropdown-toggle bg-primary text-light"
             ><i
               [class]="'icon ion-ios-paper mr-3 text-' + selectedClass.color"
             ></i>
@@ -223,9 +214,9 @@
           href="#classes"
           data-toggle="collapse"
           aria-expanded="false"
-          class="list-group-item list-group-item-action  dropdown-toggle"
+          class="list-group-item list-group-item-action text-primary dropdown-toggle"
           ><i class="icon ion-md-people mr-3"></i
-          >{{ user.role == 'instructor' ? 'Classes' : 'My Classes' }}
+          >{{ user.role == 'instructor' ? 'Class List' : 'My Classes' }}
         </a>
         <ul class="collapse list-unstyled" id="classes">
           <li *ngIf="classList?.length == 0">
@@ -259,23 +250,23 @@
         </ul>
         <button
           type="button"
-          class="list-group-item list-group-item-action"
+          class="list-group-item list-group-item-action text-primary"
           (click)="openSmModal(addClassModal)"
         >
-          <i class="icon ion-md-add  mr-3"></i
+          <i class="icon ion-md-add-circle  mr-3"></i
           ><span class="">{{
-            user.role == 'instructor' ? 'Add Class' : 'Join Class'
+            user.role == 'instructor' ? 'New Class' : 'Join Class'
           }}</span>
         </button>
         <button
           type="button"
-          class="list-group-item list-group-item-action"
+          class="list-group-item list-group-item-action bg-primary text-light"
           [routerLink]="['/manage-class']"
           routerLinkActive="router-link-active"
           *ngIf="user.role == 'instructor'"
         >
           <i class="icon ion-md-stats  mr-3"></i
-          ><span class="">Manage Class</span>
+          ><span class="">Class Management</span>
         </button>
       </div>
     </div>
