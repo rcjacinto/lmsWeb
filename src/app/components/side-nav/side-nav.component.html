@@ -7,7 +7,7 @@
   <div class="card side-header">
     <div class="pt-5 pb-2">
       <img [src]="user.image" alt="" class="profile-pic" />
-      <h5 class="text-left text-dark pl-3 pt-4">
+      <h5 class="text-left text-light pl-3 pt-4">
         {{ user.name.first }} {{ user.name.last }}
       </h5>
       <h6 class="text-left pl-3 text-light text-capitalize">
@@ -49,7 +49,7 @@
           ></i>
         </div>
         <div class="col-md-10">
-          <span class="">{{ selectedClass.name }}</span>
+          <span [class]="'text-' + selectedClass.color">{{ selectedClass.name }}</span>
         </div>
       </div>
     </button>
@@ -214,11 +214,11 @@
           href="#classes"
           data-toggle="collapse"
           aria-expanded="false"
-          class="list-group-item list-group-item-action text-primary dropdown-toggle"
+          class="list-group-item list-group-item-action text-primary dropdown-toggle bg-light"
           ><i class="icon ion-md-people mr-3"></i
           >{{ user.role == 'instructor' ? 'Class List' : 'My Classes' }}
         </a>
-        <ul class="collapse list-unstyled" id="classes">
+        <ul class="collapse show list-unstyled" id="classes">
           <li *ngIf="classList?.length == 0">
             <div class="row">
               <div class="col-md-2"></div>
@@ -230,44 +230,55 @@
           <li *ngFor="let class of classList">
             <button
               type="button"
-              class="list-group-item list-group-item-action"
+              class="list-group-item list-group-item-action bg-light"
               routerLinkActive="router-link-active"
               (click)="setSelectedClass(class)"
             >
               <div class="row">
                 <div class="col-md-2">
                   <i
-                    class="icon ion-md-people mr-3"
                     [class]="'icon ion-md-people mr-3 text-' + class.color"
                   ></i>
                 </div>
                 <div class="col-md-10">
-                  <span class="">{{ class.name }}</span>
+                  <span [class]="'text-' + class.color">{{ class.name }}</span>
                 </div>
               </div>
             </button>
           </li>
         </ul>
-        <button
-          type="button"
-          class="list-group-item list-group-item-action text-primary"
-          (click)="openSmModal(addClassModal)"
-        >
-          <i class="icon ion-md-add-circle  mr-3"></i
-          ><span class="">{{
-            user.role == 'instructor' ? 'New Class' : 'Join Class'
-          }}</span>
-        </button>
-        <button
-          type="button"
-          class="list-group-item list-group-item-action bg-primary text-light"
-          [routerLink]="['/manage-class']"
-          routerLinkActive="router-link-active"
-          *ngIf="user.role == 'instructor'"
-        >
-          <i class="icon ion-md-stats  mr-3"></i
-          ><span class="">Class Management</span>
-        </button>
+        <a
+            href="#manage"
+            data-toggle="collapse"
+            aria-expanded="true"
+            class="list-group-item list-group-item-action text-light bg-primary dropdown-toggle"
+            ><i class="icon ion-md-people mr-3"></i>
+            Class Management
+          </a>
+          <ul class="collapse list-unstyled bg-side show" id="manage">
+            <li>
+              <button
+                type="button"
+                class="list-group-item list-group-item-action text-primary"
+                (click)="openSmModal(addClassModal)"
+              >
+                <i class="icon ion-md-add-circle  mr-3"></i
+                ><span class="">New Class</span>
+              </button>
+            </li>
+            <li>
+              <button
+                  type="button"
+                  class="list-group-item list-group-item-action text-primary"
+                  [routerLink]="['/manage-class']"
+                  routerLinkActive="router-link-active"
+                  *ngIf="user.role == 'instructor'"
+                >
+                  <i class="icon ion-md-stats  mr-3"></i
+                  ><span class="">Overview</span>
+                </button>
+            </li>
+          </ul>
       </div>
     </div>
   </div>
@@ -330,16 +341,20 @@
 </div>
 <!-- Admin -->
 <div class="main" *ngIf="user.role === 'admin'">
-  <div class="card ">
-    <div class="card-header bg-danger pt-4"></div>
-    <div class="card-body pt-3 pb-2">
+  <div class="card side-header-admin">
+    <div class="pt-5 pb-2">
       <img [src]="user.image" alt="" class="profile-pic" />
-      <h5 class="text-center ">
+      <h5 class="text-left text-light pl-3 pt-4">
         {{ user.name.first }} {{ user.name.last }}
       </h5>
-      <h6 class="text-center text-secondary text-capitalize mt-1">
-        {{ user.role }}
+      <h6 class="text-left pl-3 text-light text-capitalize">
+       Moderator
       </h6>
+      <a
+      class="text-light float-right pr-2 profile-link"
+      [routerLink]="['/profile']"
+      routerLinkActive="router-link-active"
+      >View Profile</a>
     </div>
   </div>
 
@@ -359,15 +374,28 @@
   <div class="card mt-2" *ngIf="selectedClass.name.trim() === ''">
     <div class="card-body p-0">
       <div class="list-group">
-        <button
-          type="button"
-          class="list-group-item list-group-item-action"
-          [routerLink]="['/manage-instructors']"
-          routerLinkActive="router-link-active"
-        >
-          <i class="icon ion-md-contact  mr-3"></i
-          ><span class="">Instructors</span>
-        </button>
+        <div class="list-group">
+          <a
+            href="#classes"
+            data-toggle="collapse"
+            aria-expanded="false"
+            class="list-group-item list-group-item-action text-primary dropdown-toggle"
+            ><i class="icon ion-md-people mr-3"></i>
+            Records
+          </a>
+          <ul class="collapse list-unstyled bg-side" id="classes">
+            <li>
+              <button
+                type="button"
+                class="list-group-item list-group-item-action"
+                [routerLink]="['/manage-instructors']"
+                routerLinkActive="router-link-active"
+              >
+                <i class="icon ion-md-contact  mr-3"></i
+                ><span class="">Manage Instructors</span>
+              </button>
+            </li>
+          </ul>
         <!-- <button
           type="button"
           class="list-group-item list-group-item-action"
@@ -403,7 +431,7 @@
 <!-- Parent -->
 <div class="main" *ngIf="user.role === 'parent'">
   <div class="card ">
-    <div class="card-header bg-danger pt-4"></div>
+    <div class="card-header bg-primary pt-4"></div>
     <div class="card-body pt-3 pb-2">
       <img [src]="user.image" alt="" class="profile-pic" />
       <h5 class="text-center ">
@@ -455,9 +483,9 @@
 <!-- Modals -->
 
 <ng-template #addClassModal let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title ">
-      {{ user.role == 'instructor' ? 'Add Class' : 'Join Class' }}
+  <div class="modal-header bg-primary">
+    <h4 class="modal-title text-light">
+      {{ user.role == 'instructor' ? 'New Class' : 'Join Class' }}
     </h4>
     <button
       type="button"
@@ -465,7 +493,7 @@
       aria-label="Close"
       (click)="d('Cross click')"
     >
-      <span aria-hidden="true" class="">&times;</span>
+      <span aria-hidden="true" class="text-light">&times;</span>
     </button>
   </div>
   <div class="modal-body">
@@ -499,9 +527,13 @@
           <option class="text-dark" value="red">Red</option>
           <option class="text-dark" value="orange">Orange</option>
           <option class="text-dark" value="yellow">Yellow</option>
+          <option class="text-dark" value="lime">Lime</option>
           <option class="text-dark" value="blue">Blue</option>
+          <option class="text-dark" value="purple">Purple</option>
+          <option class="text-dark" value="fuchsia">Fuchsia</option>
+          <option class="text-dark" value="aqua">Aqua</option>
           <option class="text-dark" value="green">Green</option>
-          <option class="text-dark" value="grey">Grey</option>
+          <option class="text-dark" value="teal">Teal</option>
         </select>
       </div>
     </div>

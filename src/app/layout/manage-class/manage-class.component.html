@@ -2,7 +2,7 @@
 <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-10">
       <div class="card bg-primary p-5" *ngIf="false">
         <h2 class="text-center text-dark">
           No Class Created
@@ -68,10 +68,10 @@
       <div>
         <div class="card bg-primary mb-3" *ngFor="let class of classList">
           <div class="card-header py-2 pl-4 pr-0">
-            <div class="text-dark">
+            <div class="text-light">
               {{ class.name }}
               <button
-                class="btn bg-transparent float-right text-dark mr-2"
+                class="btn bg-transparent float-right t mr-2"
                 (click)="setSelectedClass(updateClassModal, class)"
               >
                 <i class="fa fa-pencil-square-o"></i>
@@ -88,30 +88,12 @@
       </div>
     </div>
     <!-- Notif -->
-    <div class="col-md-4">
-      <div class="card bg-primary">
-        <div class="card-header text-dark">
-          <i class="fa fa-bell mr-2"></i>Notification
-        </div>
-        <div class="card-body p-0">
-          <ul class="list-group">
-            <!-- <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li> -->
-            <li class="list-group-item pl-3 text-secondary">
-              No New Notification
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
 <ng-template #updateClassModal let-c="close" let-d="dismiss">
   <div class="modal-header bg-primary">
-    <h4 class="modal-title text-dark">Add Class</h4>
+    <h4 class="modal-title text-dark">New Class</h4>
     <button
       type="button"
       class="close"

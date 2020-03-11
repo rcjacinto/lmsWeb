@@ -43,7 +43,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-8" *ngIf="!isOnView">
+    <div class="col-md-10" *ngIf="!isOnView">
       <!-- activity list -->
       <div class="activity-list" *ngIf="!loading">
         <div
@@ -215,7 +215,7 @@
         </p>
       </div>
     </div>
-    <div class="col-md-8" *ngIf="isOnView">
+    <div class="col-md-10" *ngIf="isOnView">
       <div *ngIf="!loading">
         <app-view-activity
           [activity]="selectedActivity"

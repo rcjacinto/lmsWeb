@@ -4,24 +4,27 @@
 }
 
 .profile-pic {
-  width: 80px;
-  height: 80px;
-  border-radius: 5px;
+  width: 120px;
+  height: 120px;
   position: absolute;
-  top: 10px;
-  left: 50px;
+  top: -10px;
+  left: 25px;
   transform: translateX(-50%);
 }
 
 .user-name,
 .user-email {
-  margin: 0 120px;
+  margin: 0 80px;
 }
-
+.user-name {
+  font-size:24px;
+}
 .instructor {
   cursor: pointer;
 }
 
 .instructor:hover {
-  box-shadow: 2px 2px 5px black;
+  .card-header{
+    background-color: gray !important;
+  }
 }

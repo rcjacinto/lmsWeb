@@ -2,7 +2,7 @@
 <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="row">
-    <div class="col-md-8" *ngIf="selectedClass?.id != ''">
+    <div class="col-md-10" *ngIf="selectedClass?.id != ''">
       <!-- Add post -->
       <div class="card p-1 mb-2">
         <div class="card bg-light">
@@ -55,7 +55,7 @@
         >
           <img [src]="file.url" alt="" class="upload-file" />
           <button
-            class="remove-file-btn btn bg-danger btn-sm rounded-circle"
+            class="remove-file-btn btn bg-primary btn-sm rounded-circle"
             (click)="removeFile(i)"
             [disabled]="loading"
           >
@@ -167,7 +167,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-8" *ngIf="selectedClass?.id == ''">
+    <div class="col-md-10" *ngIf="selectedClass?.id == ''">
       <div class="card mb-2 pt-2" *ngIf="postsList.length == 0">
         <h1 class="text-center">
           <i class="icon ion-md-people"></i>
@@ -182,23 +182,6 @@
     </div>
 
     <!-- Notif -->
-    <div class="col-md-4">
-      <div class="card bg-light">
-        <div class="card-header text-dark">
-        </div>
-        <div class="card-body p-0">
-          <ul class="list-group">
-            <!-- <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li> -->
-            <li class="list-group-item pl-3 text-secondary">
-              No New Notification
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
   </div>
   <app-footer></app-footer>
 </div>
