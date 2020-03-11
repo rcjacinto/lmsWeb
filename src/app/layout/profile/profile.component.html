@@ -5,7 +5,7 @@
     <div class="col-md-10">
       <div class="card bg-primary mb-2">
         <div class="card-header bg-primary p-2 pt-3">
-          <h5 class="text-dark user-name">
+          <h5 class="text-light user-name">
             {{ newUser.name.first }} {{ newUser.name.last }}
           </h5>
         </div>
@@ -17,10 +17,10 @@
           />
           <input type="file" hidden #fileInput (change)="uploadImage($event)" />
           <button
-            class="btn bg-primary py-1 px-2 upload-btn border border-danger"
+            class="btn bg-dark py-1 px-2 upload-btn"
             (click)="fileInput.click()"
           >
-            <i class="fa fa-folder-open text-dark"></i>
+            <i class="fa fa-camera text-light"></i>
           </button>
           <h6 class="text-secondary user-email">
             {{ newUser.email }}
@@ -90,9 +90,10 @@
         </div>
       </div>
       <button
-        class="btn btn-dark border border-danger w-100"
+        class="btn btn-primary btn-lg float-right"
         (click)="updateProfile()"
       >
+      <i class="fa fa-camera"></i>
         Update
       </button>
     </div>

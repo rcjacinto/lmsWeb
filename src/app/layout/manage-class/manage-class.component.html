@@ -5,13 +5,8 @@
     <div class="col-md-10">
       <div class="card bg-primary p-5" *ngIf="false">
         <h2 class="text-center text-dark">
-          No Class Created
+          No Records yet
         </h2>
-        <p class="text-center text-dark">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-          nulla perspiciatis id voluptates placeat dolores soluta numquam
-          corporis ipsam quo?
-        </p>
       </div>
 
       <div class="loading-div" *ngIf="loading">
@@ -69,16 +64,16 @@
         <div class="card bg-primary mb-3" *ngFor="let class of classList">
           <div class="card-header py-2 pl-4 pr-0">
             <div class="text-light">
-              {{ class.name }}
+              <span style="font-size:24px"><i [class]="'p-1 mr-2 fa fa-archive text-' + class.color"></i> {{ class.name }}</span>
               <button
-                class="btn bg-transparent float-right t mr-2"
+                class="btn btn-light text-primary mr-3 float-right"
                 (click)="setSelectedClass(updateClassModal, class)"
               >
-                <i class="fa fa-pencil-square-o"></i>
+                <i class="fa fa-pencil-square-o"></i> Edit
               </button>
             </div>
-            <span class="text-secondary class-code"
-              >Code: {{ class.code }}</span
+            <span class="text-light class-code" style="font-size:18px"
+              >Class ID: {{ class.code }}</span
             >
           </div>
           <div class="card-body bg-light">
@@ -118,11 +113,11 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="">Description:</span>
       </div>
-      <input
-        type="text"
+      <textarea
+        type="textarea"
         class="form-control"
         [(ngModel)]="selectedClass.description"
-      />
+      ></textarea>
     </div>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
@@ -136,13 +131,17 @@
         "
         [(ngModel)]="selectedClass.color"
       >
-        <option selected>Choose...</option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="blue">Blue</option>
-        <option value="green">Green</option>
-        <option value="grey">Grey</option>
+      <option class="text-dark" selected>Choose...</option>
+      <option class="text-dark" value="red">Red</option>
+      <option class="text-dark" value="orange">Orange</option>
+      <option class="text-dark" value="yellow">Yellow</option>
+      <option class="text-dark" value="lime">Lime</option>
+      <option class="text-dark" value="blue">Blue</option>
+      <option class="text-dark" value="purple">Purple</option>
+      <option class="text-dark" value="fuchsia">Fuchsia</option>
+      <option class="text-dark" value="aqua">Aqua</option>
+      <option class="text-dark" value="green">Green</option>
+      <option class="text-dark" value="teal">Teal</option>
       </select>
     </div>
   </div>
