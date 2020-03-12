@@ -114,8 +114,7 @@
           (click)="saveActivity(1)"
           [ngClass]="{ 'text-dark': selectedClass.color != 'yellow' }"
         >
-          <i class="fa fa-fw fa-wpforms"></i> Post to {{ selectedClass.name }}
-        </button>
+          <i class="fa fa-fw fa-wpforms"></i> Post</button>
         <button
           class="btn btn-dark w-100 mb-2"
           *ngIf="questions.length > 0"
@@ -240,7 +239,7 @@
         </div>
         <div class="tof-options" *ngSwitchCase="'tof'">
           <div class="form-group">
-            <label class="text-dark">Correct Answer</label>
+            <label class="text-dark">Answer</label>
             <select
               name=""
               id=""
@@ -254,7 +253,7 @@
         </div>
         <div class="sa-answer" *ngSwitchCase="'sa'">
           <div class="form-group">
-            <label class="text-dark">Correct Answer</label>
+            <label class="text-dark">Answer</label>
             <input
               type="text"
               class="form-control"

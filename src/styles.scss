@@ -96,3 +96,34 @@ button:focus {
 .text-teal {
   color: teal !important;
 }
+.bg-primary {
+  background-color: #29D148 !important;
+}
+.bg-primary:hover,
+button.bg-primary:hover,
+a.bg-primary:hover {
+  background-color: rgb(21, 144, 44) !important;
+}
+.bg-primary:focus,
+button.bg-primary:focus,
+a.bg-primary:focus
+ {
+  background-color: rgb(21, 144, 44) !important;
+}
+.bg-light {
+  background-color: #E5F9E9 !important;
+}
+.text-primary {
+  color: #29D148 !important;
+}
+.text-primary:hover,
+button.text-primary:hover,
+a.text-primary:hover {
+  color: rgb(21, 144, 44) !important;
+}
+
+.text-primary:focus,
+button.text-primary:focus,
+a.text-primary:focus {
+  color: rgb(21, 144, 44) !important;
+}

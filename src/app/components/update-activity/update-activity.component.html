@@ -106,44 +106,45 @@
       </table>
     </div>
 
-    <div>
-      <button
-        [class]="'btn w-100 mb-2 bg-' + selectedClass.color"
+    <div class="row">
+      <div class="col">
+        <button
+        class="btn w-100 mb-2 bg-success text-light"
         *ngIf="activity.questions.length > 0"
         (click)="saveActivity(1)"
-        [ngClass]="{ 'text-dark': selectedClass.color != 'yellow' }"
       >
-        <i class="fa fa-fw fa-wpforms"></i> Post to {{ selectedClass.name }}
-      </button>
-      <button
+        <i class="fa fa-fw fa-file-alt"></i> Post</button>
+      </div>
+      <div class="col">
+        <button
         class="btn btn-primary w-100 mb-2"
         *ngIf="activity.questions.length > 0"
         (click)="saveActivity(0)"
       >
-        <i class="fa fa-fw fa-save"></i> Save
-        <span class="text-capitalize">{{ activity.type }}</span>
+        <i class="fa fa-fw fa-save"></i> Save Draft
       </button>
-
-      <button class="btn btn-dark w-100" (click)="back()">
-        <i class="fa fa-fw fa-reply"></i> Cancel
-      </button>
+      </div>
+      <div class="col">
+        <button class="btn btn-secondary w-100" (click)="back()">
+        <i class="fa fa-fw fa-times"></i> Cancel
+      </button></div>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <label class="text-dark">Question #</label>
+      <label class="text-dark">Item #</label>
       <input type="number" class="form-control" [(ngModel)]="question.number" />
     </div>
     <div class="form-group">
-      <label class="text-dark">Question Type</label>
+      <label class="text-dark">Type</label>
       <select [(ngModel)]="question.type" class="custom-select">
-        <option value="mc">Multiple Choices</option>
+        <option value="mc">Multiple Choice</option>
         <option value="sa">Short Answer</option>
         <option value="tof">True or False</option>
       </select>
     </div>
     <div class="form-group">
-      <label class="text-dark">Question Text</label>
+      <label class="text-dark">Question</label>
       <textarea
         name=""
         id=""
@@ -155,91 +156,103 @@
     </div>
     <div [ngSwitch]="question.type">
       <div class="mc-options" *ngSwitchCase="'mc'">
-        <div class="input-group input-group-sm mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">A</span>
-          </div>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="mcOptions[0].value"
-          />
-          <div class="input-group-append">
-            <div class="input-group-text">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-primary text-light">A</span>
+              </div>
               <input
-                type="radio"
-                name="mc-correct"
-                id="A"
-                checked
-                (click)="setAsCorrectAnswer(0)"
+                type="text"
+                class="form-control"
+                [(ngModel)]="mcOptions[0].value"
               />
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <input
+                    type="radio"
+                    name="mc-correct"
+                    id="A"
+                    checked
+                    (click)="setAsCorrectAnswer(0)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-primary text-light">B</span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="mcOptions[1].value"
+              />
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <input
+                    type="radio"
+                    name="mc-correct"
+                    id="B"
+                    (click)="setAsCorrectAnswer(1)"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="input-group input-group-sm mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">B</span>
-          </div>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="mcOptions[1].value"
-          />
-          <div class="input-group-append">
-            <div class="input-group-text">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-primary text-light">C</span>
+              </div>
               <input
-                type="radio"
-                name="mc-correct"
-                id="B"
-                (click)="setAsCorrectAnswer(1)"
+                type="text"
+                class="form-control"
+                [(ngModel)]="mcOptions[2].value"
               />
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <input
+                    type="radio"
+                    name="mc-correct"
+                    id="C"
+                    (click)="setAsCorrectAnswer(2)"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="input-group input-group-sm mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">C</span>
-          </div>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="mcOptions[2].value"
-          />
-          <div class="input-group-append">
-            <div class="input-group-text">
+          <div class="col-md-6">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-primary text-light">D</span>
+              </div>
               <input
-                type="radio"
-                name="mc-correct"
-                id="C"
-                (click)="setAsCorrectAnswer(2)"
+                type="text"
+                class="form-control"
+                [(ngModel)]="mcOptions[3].value"
               />
-            </div>
-          </div>
-        </div>
-        <div class="input-group input-group-sm mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">D</span>
-          </div>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="mcOptions[3].value"
-          />
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <input
-                type="radio"
-                name="mc-correct"
-                id="D"
-                (click)="setAsCorrectAnswer(3)"
-              />
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <input
+                    type="radio"
+                    name="mc-correct"
+                    id="D"
+                    (click)="setAsCorrectAnswer(3)"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="tof-options" *ngSwitchCase="'tof'">
         <div class="form-group">
-          <label class="text-dark">Correct Answer</label>
+          <label class="text-dark">Answer</label>
           <select
             name=""
             id=""
@@ -253,7 +266,7 @@
       </div>
       <div class="sa-answer" *ngSwitchCase="'sa'">
         <div class="form-group">
-          <label class="text-dark">Correct Answer</label>
+          <label class="text-dark">Answer</label>
           <input
             type="text"
             class="form-control"
@@ -268,14 +281,14 @@
     </div>
 
     <button
-      class="btn btn-primary w-100"
+      class="btn btn-primary float-right"
       (click)="addQuestion()"
       *ngIf="!editing"
     >
       <i class="fa fa-fw fa-plus"></i> Add Question
     </button>
     <button
-      class="btn btn-primary w-100 mb-2"
+      class="btn btn-primary mb-2 float-right"
       (click)="updateQuestion()"
       *ngIf="editing"
     >

@@ -2,46 +2,46 @@
 <div class="main">
   <div class="row" *ngIf="!isOnView">
     <div class="col-md-3">
+      <button
+        class="btn bg-primary text-light border w-100 p-2"
+        [routerLink]="['/create-activities']"
+        routerLinkActive="router-link-active"
+      > Create
+      </button>
+      <hr/>
       <div class="card-body p-0 mb-2">
         <ul class="list-group">
           <li
             class="list-group-item cursor"
             (click)="!loading ? setSelectedTerm('prelim') : ''"
-            [ngClass]="{ 'bg-primary text-dark': term == 'prelim' }"
+            [ngClass]="{ 'bg-info text-light': term == 'prelim' }"
           >
             Prelim
           </li>
           <li
             class="list-group-item cursor"
             (click)="!loading ? setSelectedTerm('midterm') : ''"
-            [ngClass]="{ 'bg-primary text-dark': term == 'midterm' }"
+            [ngClass]="{ 'bg-info text-light': term == 'midterm' }"
           >
             Midterm
           </li>
           <li
             class="list-group-item cursor"
             (click)="!loading ? setSelectedTerm('pre-finals') : ''"
-            [ngClass]="{ 'bg-primary text-dark': term == 'pre-finals' }"
+            [ngClass]="{ 'bg-info text-light': term == 'pre-finals' }"
           >
             Pre-Finals
           </li>
           <li
             class="list-group-item cursor"
             (click)="!loading ? setSelectedTerm('finals') : ''"
-            [ngClass]="{ 'bg-primary text-dark': term == 'finals' }"
+            [ngClass]="{ 'bg-info text-light': term == 'finals' }"
           >
             Finals
           </li>
         </ul>
       </div>
 
-      <button
-        class="btn btn-dark border w-100"
-        [routerLink]="['/create-activities']"
-        routerLinkActive="router-link-active"
-      >
-        <i class="fa fa-plus-circle" aria-hidden="true"></i> Create
-      </button>
     </div>
     <div class="col-md-9">
       <!-- activity list -->
@@ -52,20 +52,22 @@
           (click)="setSelectedActivity(activity)"
         >
           <div>
-            <h5 class="overflow-wrap m-0">{{ activity.title }}</h5>
-            <p class="overflow-wrap m-0">
-              {{ activity.instruction }}
-            </p>
+            <h5 class="overflow-wrap m-0">{{ activity.title }}
+              <span class="badge badge-success p-1 pr-2 pl-2 m-2" style="font-size:18px" *ngIf="activity.status==2; else inactive">Posted</span>
+              <ng-template #inactive>
+                <span class="badge badge-dark text-light p-1 pr-2 pl-2 m-2" style="font-size:18px">Draft</span>
+              </ng-template></h5>
           </div>
           <hr class="m-0 mb-1" />
           <div class="row">
             <div class="col-md-5">
-              <span class="text-capitalize">{{ activity.type }}</span> |
-              {{ activity.questions.length }} Questions
+              ({{ activity.questions.length }}) Items
+              <span class="text-capitalize text-primary" style="font-size:18px">{{ activity.type }}</span>
             </div>
-            <div class="col-md-3"></div>
-            <div class="col-md-4">
-              Status: {{ activity.status == 0 ? 'Unposted' : 'Posted' }}
+            <div class="col-md-12">
+              <hr/>
+              <b>Instructions:</b>
+              {{activity.instruction}}
             </div>
           </div>
         </div>

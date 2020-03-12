@@ -126,17 +126,6 @@
                 ><span class="">Exams</span>
               </button>
             </li>
-            <li>
-              <button
-                type="button"
-                class="list-group-item list-group-item-action"
-                [routerLink]="['/create-activities']"
-                routerLinkActive="router-link-active"
-              >
-                <i class="icon ion-md-add mx-3 "></i
-                ><span class="">Create</span>
-              </button>
-            </li>
           </ul>
         </div>
 
@@ -149,7 +138,7 @@
           <i
             [class]="'icon ion-ios-peoples mr-3 text-' + selectedClass.color"
           ></i
-          ><span class="">Libraries</span>
+          ><span class="">Activities Draft</span>
         </button>
         <button
           type="button"
@@ -554,33 +543,6 @@
     >
       Save
     </button>
-  </div>
-</ng-template>
-
-<ng-template #aboutModal let-c="close" let-d="dismiss">
-  <div class="modal-body about">
-    <ul class="list-unstyled ml-5   developers">
-      <li class="mb-3">Developers:</li>
-      <li>Anthony Veloria</li>
-      <li>Hiroshi Cruz</li>
-      <li>Shaina Masinahon</li>
-    </ul>
-    <div class="copyright ">
-      ALL RIGHTS RESERVE | COPYRIGHT &copy; 2019 TRIMEX COLLEGES
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #logoutModal let-modal>
-  <div class="modal-header ">Confirm</div>
-  <div class="modal-body">
-    Are you sure you want to logout?
-  </div>
-  <div class="modal-footer ">
-    <button class="btn btn-dark m-2" (click)="modal.dismiss()">
-      Cancel
-    </button>
-    <button class="btn btn-primary mx-2" (click)="logOut()">Logout</button>
   </div>
 </ng-template>
 
