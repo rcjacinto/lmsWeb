@@ -138,15 +138,17 @@
           <i
             [class]="'icon ion-ios-peoples mr-3 text-' + selectedClass.color"
           ></i
-          ><span class="">Activities Draft</span>
+          ><span class="">Collections</span>
         </button>
         <button
           type="button"
           class="list-group-item list-group-item-action"
+        >
+        <!--
           [routerLink]="['/grades']"
           routerLinkActive="router-link-active"
-        >
-          <i [class]="'icon ion-md-pie mr-3 text-' + selectedClass.color"></i
+         -->
+          <i [class]="'icon fa fa-calculator mr-3 text-' + selectedClass.color"></i
           ><span class="">Grades</span>
         </button>
       </div>
@@ -184,10 +186,12 @@
         <button
           type="button"
           class="list-group-item list-group-item-action"
+        >
+        <!--
           [routerLink]="['/view-student-grade']"
           routerLinkActive="router-link-active"
-        >
-          <i [class]="'icon ion-md-pie mr-3 text-' + selectedClass.color"></i
+         -->
+          <i [class]="'icon fa fa-calculator mr-3 text-' + selectedClass.color"></i
           ><span class="">My Grades</span>
         </button>
       </div>
@@ -489,19 +493,19 @@
     <div *ngIf="user.role == 'instructor'">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="">Class name:</span>
+          <span class="input-group-text bg-primary text-light" id="">Class name:</span>
         </div>
         <input type="text" class="form-control" [(ngModel)]="newClassname" />
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="">Description:</span>
+          <span class="input-group-text bg-primary text-light" id="">Description:</span>
         </div>
         <input type="text" class="form-control" [(ngModel)]="newDescription" />
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" for="inputColors">Class Color:</span>
+          <span class="input-group-text bg-primary text-light" for="inputColors">Class Color:</span>
         </div>
         <select
           [class]="

@@ -11,7 +11,14 @@
   left: 25px;
   transform: translateX(-50%);
 }
-
+.pending-pic {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 30px;
+  left: 45px;
+  transform: translateX(-50%);
+}
 .user-name,
 .user-email {
   margin: 0 80px;

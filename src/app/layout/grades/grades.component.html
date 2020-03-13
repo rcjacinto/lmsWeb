@@ -3,12 +3,18 @@
 <div class="main">
   <div class="row">
     <div class="col-md-10">
-      <input
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend" style="border-right:0;">
+          <span class="input-group-text bg-primary text-light"><i class="fa fa-search"></i></span>
+        </div>
+        <input
         type="text"
-        class="form-control bg-secondary mb-3 search-input"
-        placeholder="Search Student name or Student ID ..."
+        class="form-control input-lg"
+        placeholder="Search"
         [(ngModel)]="search"
       />
+      </div>
       <hr />
       <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -67,7 +73,7 @@
           >
         </li>
       </ul>
-      <div class="bg-light p-3">
+      <div class="p-3">
         <div class="row">
           <div class="col">
             <table class="table table-light table-striped">

@@ -54,8 +54,8 @@
           (click)="setSelectedActivity(activity)"
         >
           <div>
-            <h5 class="overflow-wrap m-0">{{ activity.title }}
-              <span class="badge badge-success p-1 pr-2 pl-2 m-2" style="font-size:18px" *ngIf="activity.status==2; else inactive">Posted</span>
+            <h5 class="overflow-wrap m-0">{{ activity.title }}{{ activity.status }}
+              <span class="badge badge-success p-1 pr-2 pl-2 m-2" style="font-size:18px" *ngIf="activity.status==1; else inactive">Posted</span>
               <ng-template #inactive>
                 <span class="badge badge-dark text-light p-1 pr-2 pl-2 m-2" style="font-size:18px">Draft</span>
               </ng-template></h5>
