@@ -170,7 +170,18 @@
           <i [class]="'icon ion-md-school mr-3 text-' + selectedClass.color"></i
           ><span class="">Dashboard</span>
         </button>
-
+        <button
+          type="button"
+          class="list-group-item list-group-item-action"
+          [routerLink]="['/view-class']"
+          routerLinkActive="router-link-active"
+        >
+        <!--
+          [routerLink]="['/view-student-grade']"
+         -->
+          <i [class]="'icon fa fa-archive mr-3 text-' + selectedClass.color"></i
+          ><span class="">Overview</span>
+        </button>
         <button
           type="button"
           class="list-group-item list-group-item-action"
@@ -180,7 +191,7 @@
           <i
             [class]="'icon ion-ios-paper mr-3 text-' + selectedClass.color"
           ></i>
-          <span class="">My Activities</span>
+          <span class="">Activities</span>
         </button>
 
         <button
@@ -192,8 +203,9 @@
           routerLinkActive="router-link-active"
          -->
           <i [class]="'icon fa fa-calculator mr-3 text-' + selectedClass.color"></i
-          ><span class="">My Grades</span>
+          ><span class="">Grades</span>
         </button>
+
       </div>
     </div>
   </div>

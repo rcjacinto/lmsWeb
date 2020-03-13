@@ -2,7 +2,7 @@
 <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="container" *ngIf="!timerStarted && submit?.status != 2">
-    <div class="card bg-light p-3 text-left mb-2">
+    <!-- <div class="card p-3 text-left mb-2">
       <div class="row">
         <div class="col-md-5">
           <img
@@ -64,37 +64,72 @@
           {{ computeTotalPoints(activity.questions) }} points
         </div>
       </div>
-    </div>
-    <div *ngIf="!loading">
-      <button class="btn btn-dark w-100 mb-2" (click)="startActivity()">
-        {{ continuing ? 'Continue' : 'Start' }}
-      </button>
-      <button
-        class="btn bg-grey w-100 mb-2"
-        [routerLink]="['/view-class']"
-        routerLinkActive="router-link-active"
-      >
-        Back
-      </button>
+    </div> -->
+
+    <div class="card p-3 text-left">
+      <div class="row">
+        <div class="col-md-4">
+          <span class="text-capitalize">
+            <span class="badge badge-success">{{ activity.term }}</span>
+            <i class="fa fa-angle-right text-primary ml-1 mr-1"></i><span class="badge badge-info">{{ activity.type }}</span>
+          </span>
+        </div>
+        <div class="col-md-4">
+          {{ activity.questions?.length }} Questions |
+          <i class="fa fa-clock mr-1"></i>{{ activity.time_limit }} mins
+        </div>
+        <div class="col-md-4">
+          {{ activity.deadline.seconds * 1000 | date: 'dd MMM yyyy' }}
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3">
+          <img
+            src="https://static.vecteezy.com/system/resources/previews/000/105/507/original/technology-vector.jpg"
+            class="mr-3 activities-img"
+            style="width:50%;"
+            alt="..."
+          />
+        </div>
+        <div class="col-md-9">
+          <div *ngIf="!loading" class="float-right">
+            <button class="btn btn-success mb-2" (click)="startActivity()">
+              {{ continuing ? 'Continue' : 'Start' }}
+            </button>
+          </div>
+          <h5 class="overflow-wrap">{{ activity.title }}</h5>
+          <p class="overflow-wrap">
+            Instructions: {{ activity.instruction }}
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="contaier" *ngIf="timerStarted">
-    <div class="card p-2 mb-2 bg-primary text-dark" *ngIf="!submitted">
-      <div class="d-flex">
-        <div class="mx-2 mt-2">
-          <i class="fa fa-book check" aria-hidden="true"></i>
+  <div class="col-10" *ngIf="timerStarted">
+    <div class="card p-2 mb-2 text-dark" *ngIf="!submitted">
+      <div class="row">
+        <div class="col-1 text-center pt-2">
+          <i class="fa fa-calendar-check check text-primary" aria-hidden="true"></i>
         </div>
-        <div class="ml-2">
+        <div class="col-11">
+          <button
+            class="btn btn-success btn-lg float-right mt-3"
+            (click)="submitActivity()"
+          >
+          <i class="fa fa-check"></i>
+            Submit
+          </button>
           <div>
-            Title:
-            <span class="text-secondary"> {{ activity.title }} </span>
+            <span class="text-secondary h5"> {{ activity.title }} </span>
           </div>
           <div>
-            Type:
-            <span class="text-secondary text-capitalize"
-              >{{ activity.type }} | {{ activity.term }}</span
-            >
+            <span class="text-capitalize"
+              >
+              <span class="badge badge-success">{{ activity.term }}</span>&nbsp;
+              <span class="badge badge-info">{{ activity.type }}</span>
+            </span>
           </div>
           <div>
             Deadline:
@@ -110,7 +145,7 @@
     </div>
 
     <div
-      class="card p-2 mb-2 bg-primary text-dark"
+      class="card p-2 mb-2 text-dark"
       *ngIf="submitted || submit.status == 2"
     >
       <div class="d-flex">
@@ -122,17 +157,14 @@
         </div>
         <div class="ml-2">
           <div>
-            Title:
-            <span class="text-secondary"> {{ activity.title }} </span>
+            <span class="badge badge-success"> {{ activity.title }} </span>
           </div>
-          <div>
-            Your Score:
+          <div>Score:
             <span class="text-secondary text-capitalize">
               {{ submit.score }} / {{ submit.total_items }} Points
             </span>
           </div>
-          <div>
-            Date Submitted:
+          <div>Submitted:
             <span class="text-secondary">
               {{
                 submit.date.submitted?.seconds * 1000
@@ -145,31 +177,49 @@
     </div>
     <hr />
     <div class="row" *ngIf="!submitted">
-      <div class="col-sm-3">
-        <div class="w-100 btn-group-vertical question-nums mb-3" role="group">
+      <div class="col-1 text-center">
+        <div class="btn-group-vertical question-nums mb-3" role="group">
           <button
             type="button"
-            class="btn w-100 "
+            class="btn rounded-circle m-1 float-left"
             *ngFor="let question of activity.questions"
             [ngClass]="{
-              'btn-dark': question.number == selectedQuestion?.number
+              'btn-info': question.number == selectedQuestion?.number
             }"
             (click)="setSelectedQuestion(question)"
           >
-            Question #{{ question.number }}
+          {{ question.number }}
           </button>
         </div>
         <div>
-          <button
-            class="btn btn-dark   w-100"
-            (click)="submitActivity()"
-          >
-            Submit
-          </button>
+
         </div>
       </div>
       <div class="col-sm-9">
-        <div class="card bg-light py-2 px-3 mb-2">
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-info float-left" (click)="prevQuestion()">
+              <i class="fa fa-angle-left"></i> Prev
+            </button>
+          </div>
+
+          <div class="col timer py-2 px-3 text-center text-dark">
+            <i class="fa fa-clock-o"></i>
+            {{ trunc(submit?.timer_left / 60) }}:{{
+              submit?.timer_left % 60 | number: '2.0'
+            }}
+          </div>
+
+          <div class="col">
+            <button class="btn btn-info float-right" (click)="nextQuestion()">
+              Next <i class="fa fa-angle-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="py-2 px-3 mb-2">
           {{
             selectedQuestion.type == 'mc'
               ? 'Multiple Questions'
@@ -179,7 +229,8 @@
           }}
           ({{ selectedQuestion.points }} points)
         </div>
-        <div class="card bg-light py-2 px-3 text-capitalize question-text">
+        <hr/>
+        <div class="py-2 px-3 text-capitalize question-text">
           {{ selectedQuestion.text }}
         </div>
         <hr />
@@ -193,7 +244,7 @@
                 *ngFor="let option of selectedQuestion?.options"
               >
                 <div class="input-group-prepend">
-                  <span class="input-group-text">{{ option.key }}</span>
+                  <span class="input-group-text bg-primary text-light">{{ option.key }}</span>
                 </div>
                 <input
                   type="text"
@@ -202,7 +253,7 @@
                   readonly
                   (click)="setMcAnswer(option)"
                   [ngClass]="{
-                    'bg-primary text-dark':
+                    'text-dark':
                       selectedQuestion.answer?.key == option.key
                   }"
                 />
@@ -214,7 +265,7 @@
               <div class="form-group">
                 <label class="text-dark">Answer</label>
                 <select
-                  class="custom-select bg-light"
+                  class="custom-select"
                   (change)="setTofAnswer($event)"
                 >
                   <option value=""></option>
@@ -238,7 +289,7 @@
                 <label class="text-dark">Answer</label>
                 <input
                   type="text"
-                  class="form-control bg-light"
+                  class="form-control"
                   [value]="
                     selectedQuestion.answer
                       ? selectedQuestion.answer?.value
@@ -250,56 +301,31 @@
             </div>
           </div>
         </div>
-
-        <hr />
-
-        <div class="row">
-          <div class="col">
-            <button class="btn btn-dark float-left" (click)="prevQuestion()">
-              <i class="fa fa-angle-left"></i> Prev
-            </button>
-          </div>
-
-          <div class="col timer py-2 px-3 text-center text-dark">
-            <i class="fa fa-clock-o"></i>
-            {{ trunc(submit?.timer_left / 60) }}:{{
-              submit?.timer_left % 60 | number: '2.0'
-            }}
-          </div>
-
-          <div class="col">
-            <button class="btn btn-dark float-right" (click)="nextQuestion()">
-              Next <i class="fa fa-angle-right"></i>
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 
   <!-- Results -->
   <div *ngIf="!submitted && submit?.status == 2">
-    <div class="card p-2 mb-2 bg-primary text-dark">
+    <div class="card p-2 mb-2 text-dark">
       <div class="d-flex">
         <div class="mx-2 mt-2">
           <i
-            class="fa fa-check-square-o check text-success"
+            class="fa fa-file check text-success"
             aria-hidden="true"
           ></i>
         </div>
         <div class="ml-2">
           <div>
-            Title:
-            <span class="text-secondary"> {{ activity.title }} </span>
+            <span class="text-secondary h4"> {{ activity.title }} </span>
           </div>
-          <div>
-            Your Score:
-            <span class="text-secondary text-capitalize">
-              {{ submit.score }} / {{ submit.total_items }} Points
+          <div class="mt-1">
+            Score:
+            <span class="h5 text-secondary text-capitalize">
+              {{ submit.score }} / {{ submit.total_items }}
             </span>
           </div>
           <div>
-            Date Submitted:
             <span class="text-secondary">
               {{
                 submit.date.submitted?.seconds * 1000
@@ -322,23 +348,38 @@
       class="row"
       *ngIf="!loading && today > convertToDate(activity.deadline?.seconds)"
     >
-      <div class="col-sm-3">
-        <div class="w-100 btn-group-vertical question-nums mb-3" role="group">
+      <div class="col-1 text-center">
+        <div class="btn-group-vertical question-nums mb-3" role="group">
           <button
             type="button"
-            class="btn w-100 "
+            class="btn rounded-circle m-1 float-left"
             *ngFor="let question of activity?.questions"
             [ngClass]="{
-              'btn-dark': question.number == selectedQuestion?.number
+              'btn-info': question.number == selectedQuestion?.number
             }"
             (click)="setSelectedQuestion(question)"
-          >
-            Question #{{ question.number }}
+          >{{ question.number }}
           </button>
         </div>
       </div>
       <div class="col-sm-9">
-        <div class="card bg-light py-2 px-3 mb-2">
+          <div class="row">
+            <div class="col">
+              <button class="btn btn-info float-left" (click)="prevQuestion()">
+                <i class="fa fa-angle-left"></i> Prev
+              </button>
+            </div>
+
+            <div class="col timer py-2 px-3 text-center text-dark"></div>
+
+            <div class="col">
+              <button class="btn btn-info float-right" (click)="nextQuestion()">
+                Next <i class="fa fa-angle-right"></i>
+              </button>
+            </div>
+          </div>
+          <hr/>
+        <div class="card py-2 px-3 mb-2">
           {{
             selectedQuestion?.type == 'mc'
               ? 'Multiple Questions'
@@ -348,7 +389,7 @@
           }}
           ({{ selectedQuestion?.points }} points)
         </div>
-        <div class="card bg-light py-2 px-3 text-capitalize question-text">
+        <div class="card py-2 px-3 text-capitalize question-text">
           {{ selectedQuestion?.text }}
         </div>
         <hr />
@@ -366,7 +407,7 @@
                     class="input-group-text"
                     [ngClass]="{
                       'bg-success text-dark': option.isCorrect,
-                      'bg-primary text-dark': !option.isCorrect
+                      'text-dark': !option.isCorrect
                     }"
                   >
                     <i
@@ -445,24 +486,6 @@
                   ></i>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <hr />
-
-          <div class="row">
-            <div class="col">
-              <button class="btn btn-dark float-left" (click)="prevQuestion()">
-                <i class="fa fa-angle-left"></i> Prev
-              </button>
-            </div>
-
-            <div class="col timer py-2 px-3 text-center text-dark"></div>
-
-            <div class="col">
-              <button class="btn btn-dark float-right" (click)="nextQuestion()">
-                Next <i class="fa fa-angle-right"></i>
-              </button>
             </div>
           </div>
         </div>

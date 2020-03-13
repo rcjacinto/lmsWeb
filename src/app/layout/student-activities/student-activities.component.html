@@ -3,7 +3,7 @@
   <div class="container">
     <div *ngIf="!loading && !onView">
       <div
-        class="card cursor p-2 mb-2 bg-primary text-dark"
+        class="card cursor p-2 mb-2 text-dark"
         *ngFor="let submit of submitList"
         (click)="setSelectedSubmit(submit)"
       >
@@ -15,7 +15,7 @@
               *ngIf="passed(submit.score, submit.total_items)"
             ></i>
             <i
-              class="fas fa-frown check text-secondary"
+              class="fas fa-close check text-danger"
               aria-hidden="true"
               *ngIf="!passed(submit.score, submit.total_items)"
             ></i>
@@ -66,13 +66,12 @@
         </div>
         <h3 class="text-center text-secondary">
           No activities taken <br />
-          in this Class yet.
         </h3>
       </div>
     </div>
 
     <div *ngIf="!loading && onView">
-      <div class="card p-2 mb-2 bg-primary text-dark">
+      <div class="card p-2 mb-2text-dark">
         <div class="d-flex">
           <div class="mx-2 mt-2">
             <i
@@ -183,7 +182,7 @@
                       class="input-group-text"
                       [ngClass]="{
                         'bg-success text-dark': option.isCorrect,
-                        'bg-primary text-dark': !option.isCorrect
+                        'text-dark': !option.isCorrect
                       }"
                     >
                       <i
@@ -212,7 +211,7 @@
                     [value]="option.value"
                     readonly
                     [ngClass]="{
-                      'bg-primary text-dark':
+                      'text-dark':
                         selectedQuestion.answer?.key == option.key
                     }"
                   />
@@ -294,7 +293,7 @@
       </div>
     </div>
 
-    <div class="card cursor p-2 mb-2 bg-primary text-dark" *ngIf="loading">
+    <div class="card cursor p-2 mb-2 text-dark" *ngIf="loading">
       <div class="d-flex">
         <div class="mx-2 mt-2">
           <i class="fas fa-spinner check text-secondary" aria-hidden="true"></i>
