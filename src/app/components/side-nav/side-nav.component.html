@@ -11,13 +11,14 @@
         {{ user.name.first }} {{ user.name.last }}
       </h5>
       <h6 class="text-left pl-3 text-light text-capitalize">
-        {{ user.role == 'instructor' ? user.role : user.student_number }}
+        {{ user.role == "instructor" ? user.role : user.student_number }}
       </h6>
       <a
-      class="text-light float-right pr-2 profile-link"
-      [routerLink]="['/profile']"
-      routerLinkActive="router-link-active"
-      >View Profile</a>
+        class="text-light float-right pr-2 profile-link"
+        [routerLink]="['/profile']"
+        routerLinkActive="router-link-active"
+        >View Profile</a
+      >
     </div>
   </div>
   <div class="card mt-2" *ngIf="selectedClass.name.trim() !== ''">
@@ -28,8 +29,7 @@
       [routerLink]="['/dashboard']"
       routerLinkActive="router-link-active"
     >
-      <i class="icon ion-md-people mr-3 "></i
-      ><span class="">Classes</span>
+      <i class="icon ion-md-people mr-3 "></i><span class="">Classes</span>
     </button>
   </div>
 
@@ -49,7 +49,9 @@
           ></i>
         </div>
         <div class="col-md-10">
-          <span [class]="'text-' + selectedClass.color">{{ selectedClass.name }}</span>
+          <span [class]="'text-' + selectedClass.color">{{
+            selectedClass.name
+          }}</span>
         </div>
       </div>
     </button>
@@ -205,7 +207,7 @@
           aria-expanded="false"
           class="list-group-item list-group-item-action text-primary dropdown-toggle bg-light"
           ><i class="icon ion-md-people mr-3"></i
-          >{{ user.role == 'instructor' ? 'Class List' : 'My Classes' }}
+          >{{ user.role == "instructor" ? "Class List" : "My Classes" }}
         </a>
         <ul class="collapse show list-unstyled" id="classes">
           <li *ngIf="classList?.length == 0">
@@ -237,37 +239,37 @@
           </li>
         </ul>
         <a
-            href="#manage"
-            data-toggle="collapse"
-            aria-expanded="true"
-            class="list-group-item list-group-item-action text-light bg-primary dropdown-toggle"
-            ><i class="icon ion-md-people mr-3"></i>
-            Class Management
-          </a>
-          <ul class="collapse list-unstyled bg-side show" id="manage">
-            <li>
-              <button
-                type="button"
-                class="list-group-item list-group-item-action text-primary"
-                (click)="openSmModal(addClassModal)"
-              >
-                <i class="icon ion-md-add-circle  mr-3"></i
-                ><span class="">New Class</span>
-              </button>
-            </li>
-            <li>
-              <button
-                  type="button"
-                  class="list-group-item list-group-item-action text-primary"
-                  [routerLink]="['/manage-class']"
-                  routerLinkActive="router-link-active"
-                  *ngIf="user.role == 'instructor'"
-                >
-                  <i class="icon ion-md-stats  mr-3"></i
-                  ><span class="">Overview</span>
-                </button>
-            </li>
-          </ul>
+          href="#manage"
+          data-toggle="collapse"
+          aria-expanded="true"
+          class="list-group-item list-group-item-action text-light bg-primary dropdown-toggle"
+          ><i class="icon ion-md-people mr-3"></i>
+          Class Management
+        </a>
+        <ul class="collapse list-unstyled bg-side show" id="manage">
+          <li>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action text-primary"
+              (click)="openSmModal(addClassModal)"
+            >
+              <i class="icon ion-md-add-circle  mr-3"></i
+              ><span class="">New Class</span>
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action text-primary"
+              [routerLink]="['/manage-class']"
+              routerLinkActive="router-link-active"
+              *ngIf="user.role == 'instructor'"
+            >
+              <i class="icon ion-md-stats  mr-3"></i
+              ><span class="">Overview</span>
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -321,8 +323,7 @@
           class="list-group-item list-group-item-action"
           (click)="logOut()"
         >
-          <i class="icon ion-md-log-out  mr-3"></i
-          ><span class="">Logout</span>
+          <i class="icon ion-md-log-out  mr-3"></i><span class="">Logout</span>
         </button>
       </div>
     </div>
@@ -337,13 +338,14 @@
         {{ user.name.first }} {{ user.name.last }}
       </h5>
       <h6 class="text-left pl-3 text-light text-capitalize">
-       Moderator
+        Moderator
       </h6>
       <a
-      class="text-light float-right pr-2 profile-link"
-      [routerLink]="['/profile']"
-      routerLinkActive="router-link-active"
-      >View Profile</a>
+        class="text-light float-right pr-2 profile-link"
+        [routerLink]="['/profile']"
+        routerLinkActive="router-link-active"
+        >View Profile</a
+      >
     </div>
   </div>
 
@@ -385,7 +387,7 @@
               </button>
             </li>
           </ul>
-        <!-- <button
+          <!-- <button
           type="button"
           class="list-group-item list-group-item-action"
           [routerLink]="['/manage-students']"
@@ -394,6 +396,7 @@
           <i class="icon ion-md-contacts  mr-3"></i
           ><span class="">Student</span>
         </button> -->
+        </div>
       </div>
     </div>
   </div>
@@ -409,8 +412,7 @@
           class="list-group-item list-group-item-action"
           (click)="logOut()"
         >
-          <i class="icon ion-md-log-out  mr-3"></i
-          ><span class="">Logout</span>
+          <i class="icon ion-md-log-out  mr-3"></i><span class="">Logout</span>
         </button>
       </div>
     </div>
@@ -423,9 +425,7 @@
     <div class="card-header bg-primary pt-4"></div>
     <div class="card-body pt-3 pb-2">
       <img [src]="user.image" alt="" class="profile-pic" />
-      <h5 class="text-center ">
-        {{ user.name.first }} {{ user.name.last }}
-      </h5>
+      <h5 class="text-center ">{{ user.name.first }} {{ user.name.last }}</h5>
       <h6 class="text-center text-secondary text-capitalize mt-1">
         {{ user.role }}
       </h6>
@@ -461,8 +461,7 @@
           class="list-group-item list-group-item-action"
           (click)="logOut()"
         >
-          <i class="icon ion-md-log-out  mr-3"></i
-          ><span class="">Logout</span>
+          <i class="icon ion-md-log-out  mr-3"></i><span class="">Logout</span>
         </button>
       </div>
     </div>
@@ -474,7 +473,7 @@
 <ng-template #addClassModal let-c="close" let-d="dismiss">
   <div class="modal-header bg-primary">
     <h4 class="modal-title text-light">
-      {{ user.role == 'instructor' ? 'New Class' : 'Join Class' }}
+      {{ user.role == "instructor" ? "New Class" : "Join Class" }}
     </h4>
     <button
       type="button"
