@@ -212,7 +212,7 @@
             <div class="row">
               <div class="col-md-2"></div>
               <div class="col-md-10 mt-2">
-                <span class="text-secondary">No class added</span>
+                <span class="text-secondary">No Class Found</span>
               </div>
             </div>
           </li>
@@ -288,7 +288,7 @@
           ><span class="">Messages</span>
         </button> -->
 
-        <button
+        <!-- <button
           type="button"
           class="list-group-item list-group-item-action"
           [routerLink]="['/student-parents']"
@@ -297,7 +297,7 @@
         >
           <i class="icon ion-ios-contacts  mr-3"></i
           ><span class="">Parents</span>
-        </button>
+        </button> -->
 
         <!-- <button
           type="button"
@@ -397,7 +397,7 @@
       </div>
     </div>
   </div>
-
+  </div>
   <!-- Profile | Messages | About -->
   <!-- Logout -->
 
@@ -529,7 +529,7 @@
     <div *ngIf="user.role == 'student'">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="">Class code:</span>
+          <span class="input-group-text text-light bg-primary" id="">Class #</span>
         </div>
         <input type="text" class="form-control" [(ngModel)]="newClassCode" />
       </div>
@@ -538,10 +538,10 @@
   <div class="modal-footer">
     <button
       type="button"
-      class="btn btn-outline-dark"
+      class="btn btn-success"
       (click)="user.role == 'instructor' ? addNewClass() : joinClass()"
     >
-      Save
+      Confirm
     </button>
   </div>
 </ng-template>

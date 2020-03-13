@@ -110,7 +110,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument(),
     ReactiveFormsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({positionClass:'toast-top-center',toastClass:'ngx-toastr mt-4'}),
     NgbModule,
     NgxSpinnerModule,
     Ng5SliderModule,
