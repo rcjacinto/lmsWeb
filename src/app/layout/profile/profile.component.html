@@ -2,8 +2,7 @@
 <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-9">
+    <div class="col-md-9 ml-4">
       <div class="card bg-primary mb-2">
         <div class="card-header bg-primary p-2 pt-3">
           <h5 class="text-light user-name">
@@ -18,7 +17,8 @@
           />
           <input type="file" hidden #fileInput (change)="uploadImage($event)" />
           <button
-            class="btn bg-dark py-1 px-2 upload-btn"
+            class="btn bg-dark py-1 px-2 upload-btn rounded-circle"
+            style="margin-left:-25px;"
             (click)="fileInput.click()"
           >
             <i class="fa fa-camera text-light"></i>
