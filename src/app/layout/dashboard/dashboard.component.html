@@ -4,48 +4,63 @@
   <div class="row">
     <div class="col-md-10" *ngIf="selectedClass?.id != ''">
       <!-- Add post -->
-      <div class="card p-1 mb-2">
-        <div class="card bg-light">
-          <textarea [(ngModel)]="message" rows="3" class="w-100 p-2"></textarea>
-          <div class="px-2">
-            <div class="float-right">
-              <input
-                type="file"
-                hidden
-                #fileInput
-                [readonly]="loading"
-                (change)="addFileUpload(fileInput.files)"
-              />
-              <button
-                class="btn btn-light"
-                (click)="fileInput.click()"
-                [disabled]="loading"
-              >
-                <i class="icon ion-md-attach"></i>
-              </button>
-              <button
-                class="btn btn-sm btn-primary my-1"
-                (click)="addPost()"
-                [disabled]="loading"
-              >
-                Post
-              </button>
-            </div>
-            <div
-              class="float-left mt-1 text-secondary"
-              *ngIf="user.role == 'instructor'"
-            >
-              <select class="form-control-sm border-0" [(ngModel)]="postType">
-                <option value="0">Message</option>
-                <option value="1">Announcement</option>
-                <option value="2">Assignment</option>
-              </select>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card p-1 mb-2">
+            <div class="card">
+              <textarea [(ngModel)]="message" rows="3" class="w-100 p-2"></textarea>
+                <div class="row">
+                  <div class="col-md-7"><div
+                    class="mt-1 text-secondary"
+                    *ngIf="user.role == 'instructor'"
+                  >
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-outline-success active">
+                        <input type="radio" [(ngModel)]="postType" value="0" checked>
+                        <i class="fa fa-file mr-1"></i>Messages
+                      </label>
+                      <label class="btn btn-outline-success">
+                        <input type="radio" [(ngModel)]="postType" value="1">
+                        <i class="fa fa-calendar mr-1"></i>Announcement
+                      </label>
+                      <label class="btn btn-outline-success">
+                        <input type="radio" [(ngModel)]="postType" value="2">
+                        <i class="fa fa-briefcase mr-1"></i>Assignment
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 text-right mt-1">
+                  <input
+                  type="file"
+                  hidden
+                  #fileInput
+                  [readonly]="loading"
+                  (change)="addFileUpload(fileInput.files)"
+                />
+                <button
+                  class="btn btn-outline-dark mr-2"
+                  (click)="fileInput.click()"
+                  [disabled]="loading"
+                >
+                  <i class="icon ion-md-attach"></i>
+                  Attachment
+                </button>
+                  </div>
+                  <div class="col-md-2 mt-1 pb-1">
+                    <button
+                      class="btn btn-info"
+                      (click)="addPost()"
+                      [disabled]="loading"
+                    >
+                      Post
+                    </button></div>
+                </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div
+        <div class="col-md-6">
+          <div
         class="d-flex w-100 upload-container p-2"
         *ngIf="fileUploads.length > 0"
       >
@@ -73,18 +88,20 @@
           </div>
         </div>
       </div>
+        </div>
+      </div>
       <hr />
 
       <!-- Posts -->
       <div class="card mb-2 pt-2" *ngIf="postsList.length == 0">
         <h1 class="text-center">
-          <i class="fa fa-bullhorn text-secondary" aria-hidden="true"></i>
+          <i class="fa fa-bullhorn text-primary" aria-hidden="true"></i>
         </h1>
         <h3 class="text-center text-secondary mb-0">
-          No Activities or Activities Yet
+          No Messages or Activities Yet
         </h3>
-        <p class="text-center text-secondary">
-          Start by posting Messages, Announcement or Assignments
+        <p class="text-center text-primary">
+          Post Messages, Announcement or Assignments
         </p>
       </div>
       <div class="card mb-2" *ngFor="let post of postsList">
@@ -165,10 +182,10 @@
     <div class="col-md-10" *ngIf="selectedClass?.id == ''">
       <div class="card mb-2 pt-2" *ngIf="postsList.length == 0">
         <h1 class="text-center">
-          <i class="icon ion-md-people"></i>
+          <i class="icon fa fa-address-card text-primary"></i>
         </h1>
         <h3 class="text-center text-secondary mb-0">
-          No Class Selected
+          No Class
         </h3>
         <p class="text-center text-secondary">
           Click Classes to select or Add new Class

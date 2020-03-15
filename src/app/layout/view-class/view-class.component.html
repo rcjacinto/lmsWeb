@@ -2,7 +2,7 @@
 <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-9">
       <!-- Class Info -->
       <div class="card bg-primary mb-3">
         <div class="card-header py-2 pl-4 pr-0">
@@ -11,7 +11,7 @@
               {{ selectedClass.name }}
             </h5>
           </div>
-          <span class="text-secondary class-code"
+          <span class="text-light class-code"
             >Instructor: {{ selectedClass.instructor.name }}</span
           >
         </div>
@@ -25,53 +25,52 @@
       <hr />
       <div class="activity-list" *ngIf="!loading">
         <div class="mb-2" *ngFor="let activity of activityList">
-          <div class="card bg-light p-3 text-left">
-            <div class="row">
-              <div class="col-md-5">
-                <img
-                  src="https://cdn-images-1.medium.com/max/800/0*ngXgBNNdx6iiWP8q.png"
-                  class="mr-3 activities-img"
-                  alt="..."
-                />
-              </div>
-              <div class="col-md-7">
-                <h5 class="overflow-wrap">{{ activity.title }}</h5>
-                <p class="overflow-wrap">
-                  {{ activity.instruction }}
-                </p>
-              </div>
-            </div>
-            <hr />
+          <div class="card p-3 text-left">
             <div class="row">
               <div class="col-md-4">
                 <span class="text-capitalize">
-                  Type: {{ activity.type }} | Term: {{ activity.term }}
+                  <span class="badge badge-success">{{ activity.term }}</span>
+                  <i class="fa fa-angle-right text-primary ml-1 mr-1"></i><span class="badge badge-info">{{ activity.type }}</span>
                 </span>
               </div>
               <div class="col-md-4">
                 {{ activity.questions?.length }} Questions |
-                {{ activity.time_limit }} mins
+                <i class="fa fa-clock mr-1"></i>{{ activity.time_limit }} mins
               </div>
               <div class="col-md-4">
-                Submits: {{ activity.submits ? activity.submits.length : 0 }} |
+                Total Submissions: {{ activity.submits ? activity.submits.length : 0 }} |
                 {{ activity.deadline.seconds * 1000 | date: 'dd MMM yyyy' }}
               </div>
             </div>
-          </div>
-          <div class="card bg-primary" *ngIf="user.role == 'student'">
-            <button
-              class="btn btn-dark float-right"
-              [routerLink]="['/take-exam']"
-              routerLinkActive="router-link-active"
-              (click)="takeExam(activity)"
-              [disabled]="today > convertToDate(activity.deadline?.seconds)"
-            >
-              <span class="text-capitalize">{{
-                today > convertToDate(activity.deadline?.seconds)
-                  ? 'Ended'
-                  : 'Start'
-              }}</span>
-            </button>
+            <hr/>
+            <div class="row">
+              <div class="col-md-3">
+                <img
+                  src="https://static.vecteezy.com/system/resources/previews/000/105/507/original/technology-vector.jpg"
+                  class="mr-3 activities-img"
+                  alt="..."
+                />
+              </div>
+              <div class="col-md-9">
+                <button
+                class="btn btn-success float-right btn-lg"
+                [routerLink]="['/take-exam']"
+                routerLinkActive="router-link-active"
+                (click)="takeExam(activity)"
+                [disabled]="today > convertToDate(activity.deadline?.seconds)"
+              >
+                <span class="text-capitalize">{{
+                  today > convertToDate(activity.deadline?.seconds)
+                    ? 'Ended'
+                    : 'Start'
+                }}</span>
+              </button>
+                <h5 class="overflow-wrap">{{ activity.title }}</h5>
+                <p class="overflow-wrap">
+                  Instructions: {{ activity.instruction }}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -210,38 +209,39 @@
         No ongoing activity
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card bg-primary">
-        <div class="card-header text-dark p-2">
-          <i class="fa fa-fw fa-id-badge"></i> Class Members
-        </div>
-        <div class="card-body p-2">
-          <p class="text-secondary pl-4" *ngIf="members.length == 0">
-            No Members
-          </p>
-          <ul class="list-group">
-            <li
-              class="list-group-item d-flex bg-light p-2 mb-2"
-              *ngFor="let member of members"
-            >
-              <img
-                [src]="member.image"
-                class="mr-3 profile-img rounded-circle"
-                alt="..."
-              />
-              <div>
-                <div class="stud-name">
-                  {{ member.name.first }} {{ member.name.last }}
+    <div class="col-md-3">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header text-dark p-2">
+            <i class="fa fa-fw fa-people"></i>Members
+          </div>
+          <div class="card-body p-2">
+            <p class="text-secondary pl-4" *ngIf="members.length == 0">
+              No Members
+            </p>
+            <ul class="list-group">
+              <li
+                class="list-group-item d-flex bg-light p-2 mb-2"
+                *ngFor="let member of members"
+              >
+                <img
+                  [src]="member.image"
+                  class="mr-3 profile-img rounded-circle"
+                  alt="..."
+                />
+                <div>
+                  <div class="stud-name">
+                    {{ member.name.first }} {{ member.name.last }}
+                  </div>
+                  <div class="stud-id">
+                    {{ member.student_number }}
+                    {{ member.course ? '| ' + member.course : '' }}
+                  </div>
                 </div>
-                <div class="stud-id">
-                  {{ member.student_number }}
-                  {{ member.course ? '| ' + member.course : '' }}
-                </div>
-              </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="card-footer"></div>
       </div>
     </div>
   </div>

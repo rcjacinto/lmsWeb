@@ -140,15 +140,17 @@
           <i
             [class]="'icon ion-ios-peoples mr-3 text-' + selectedClass.color"
           ></i
-          ><span class="">Activities Draft</span>
+          ><span class="">Collections</span>
         </button>
         <button
           type="button"
           class="list-group-item list-group-item-action"
+        >
+        <!--
           [routerLink]="['/grades']"
           routerLinkActive="router-link-active"
-        >
-          <i [class]="'icon ion-md-pie mr-3 text-' + selectedClass.color"></i
+         -->
+          <i [class]="'icon fa fa-calculator mr-3 text-' + selectedClass.color"></i
           ><span class="">Grades</span>
         </button>
       </div>
@@ -170,7 +172,18 @@
           <i [class]="'icon ion-md-school mr-3 text-' + selectedClass.color"></i
           ><span class="">Dashboard</span>
         </button>
-
+        <button
+          type="button"
+          class="list-group-item list-group-item-action"
+          [routerLink]="['/view-class']"
+          routerLinkActive="router-link-active"
+        >
+        <!--
+          [routerLink]="['/view-student-grade']"
+         -->
+          <i [class]="'icon fa fa-archive mr-3 text-' + selectedClass.color"></i
+          ><span class="">Overview</span>
+        </button>
         <button
           type="button"
           class="list-group-item list-group-item-action"
@@ -180,18 +193,21 @@
           <i
             [class]="'icon ion-ios-paper mr-3 text-' + selectedClass.color"
           ></i>
-          <span class="">My Activities</span>
+          <span class="">Activities</span>
         </button>
 
         <button
           type="button"
           class="list-group-item list-group-item-action"
+        >
+        <!--
           [routerLink]="['/view-student-grade']"
           routerLinkActive="router-link-active"
-        >
-          <i [class]="'icon ion-md-pie mr-3 text-' + selectedClass.color"></i
-          ><span class="">My Grades</span>
+         -->
+          <i [class]="'icon fa fa-calculator mr-3 text-' + selectedClass.color"></i
+          ><span class="">Grades</span>
         </button>
+
       </div>
     </div>
   </div>
@@ -214,7 +230,7 @@
             <div class="row">
               <div class="col-md-2"></div>
               <div class="col-md-10 mt-2">
-                <span class="text-secondary">No class added</span>
+                <span class="text-secondary">No Class Found</span>
               </div>
             </div>
           </li>
@@ -290,7 +306,7 @@
           ><span class="">Messages</span>
         </button> -->
 
-        <button
+        <!-- <button
           type="button"
           class="list-group-item list-group-item-action"
           [routerLink]="['/student-parents']"
@@ -299,7 +315,7 @@
         >
           <i class="icon ion-ios-contacts  mr-3"></i
           ><span class="">Parents</span>
-        </button>
+        </button> -->
 
         <!-- <button
           type="button"
@@ -400,7 +416,7 @@
       </div>
     </div>
   </div>
-
+  </div>
   <!-- Profile | Messages | About -->
   <!-- Logout -->
 
@@ -488,19 +504,19 @@
     <div *ngIf="user.role == 'instructor'">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="">Class name:</span>
+          <span class="input-group-text bg-primary text-light" id="">Class name:</span>
         </div>
         <input type="text" class="form-control" [(ngModel)]="newClassname" />
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="">Description:</span>
+          <span class="input-group-text bg-primary text-light" id="">Description:</span>
         </div>
         <input type="text" class="form-control" [(ngModel)]="newDescription" />
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" for="inputColors">Class Color:</span>
+          <span class="input-group-text bg-primary text-light" for="inputColors">Class Color:</span>
         </div>
         <select
           [class]="
@@ -528,7 +544,7 @@
     <div *ngIf="user.role == 'student'">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="">Class code:</span>
+          <span class="input-group-text text-light bg-primary" id="">Class #</span>
         </div>
         <input type="text" class="form-control" [(ngModel)]="newClassCode" />
       </div>
@@ -537,10 +553,10 @@
   <div class="modal-footer">
     <button
       type="button"
-      class="btn btn-outline-dark"
+      class="btn btn-success"
       (click)="user.role == 'instructor' ? addNewClass() : joinClass()"
     >
-      Save
+      Confirm
     </button>
   </div>
 </ng-template>

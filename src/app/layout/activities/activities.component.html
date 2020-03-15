@@ -9,7 +9,7 @@
 <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="row">
-    <div class="col-md-4" *ngIf="!isOnView">
+    <div class="col-md-3" *ngIf="!isOnView">
       <div class="card-body p-0">
         <ul class="list-group">
           <li
@@ -43,18 +43,30 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-10" *ngIf="!isOnView">
+    <div class="col-md-9" *ngIf="!isOnView">
       <!-- activity list -->
       <div class="activity-list" *ngIf="!loading">
         <div
           class="card p-3 btn text-left mb-2"
           *ngFor="let activity of activityList"
-          (click)="setSelectedActivity(activity)"
         >
+        <!-- (click)="setSelectedActivity(activity)" -->
+        <div class="row">
+          <div class="col-md-2">
+            <span class="badge badge-success text-capitalize">{{ activity.type }}</span>
+            {{ activity.deadline.seconds * 1000 | date: 'dd MMM yyyy' }}
+          </div>
+          <div class="col-md-4">
+            <i class="fa fa-clock mr-2 text-primary"></i>{{ activity.time_limit }} mins</div>
+          <div class="col-md-4 text-right">
+            Submits: {{ activity.submits ? activity.submits.length : 0 }}
+          </div>
+        </div>
+        <hr/>
           <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-2">
               <img
-                src="https://cdn-images-1.medium.com/max/800/0*ngXgBNNdx6iiWP8q.png"
+                src="https://static.vecteezy.com/system/resources/previews/000/105/507/original/technology-vector.jpg"
                 class="mr-3 activities-img"
                 alt="..."
               />
@@ -64,17 +76,6 @@
               <p class="overflow-wrap">
                 {{ activity.instruction }}
               </p>
-            </div>
-          </div>
-          <hr />
-          <div class="row">
-            <div class="col-md-5">
-              <span class="text-capitalize">{{ activity.type }}</span> |
-              {{ activity.deadline.seconds * 1000 | date: 'dd MMM yyyy' }}
-            </div>
-            <div class="col-md-3">{{ activity.time_limit }} mins</div>
-            <div class="col-md-4">
-              Submits: {{ activity.submits ? activity.submits.length : 0 }}
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
 <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-6">
       <input
         type="text"
         name=""
@@ -40,14 +40,14 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <ul class="list-group" *ngIf="!loading">
-        <li class="list-group-item bg-primary text-dark">Requests</li>
+        <li class="list-group-item bg-primary text-light">Pending Registration</li>
         <li class="list-group-item" *ngIf="!loading && requestList.length == 0">
           No account request
         </li>
         <li class="list-group-item" *ngFor="let instructor of requestList">
-          <div class="row">
+          <!-- <div class="row">
             <div class="col">
               <i class="fa fa-user-circle-o"></i>
               <span class="text-capitalize">
@@ -56,11 +56,34 @@
               </span>
             </div>
             <div class="col text-right">
-              <button class="btn btn-sm btn-dark" (click)="approve(instructor)">
+              <button class="btn btn-sm btn-success" (click)="approve(instructor)">
                 Approve
               </button>
             </div>
-          </div>
+          </div> -->
+          <div
+              class="card"
+            >
+              <div class="card-header bg-secondary">
+                <p class="text-capitalize text-light pr-4 user-name">
+                  {{ instructor.name.first }}
+                  {{ instructor.name.last }}
+                </p>
+              </div>
+              <div class="card-body p-2 pb-4">
+                <img
+                  [src]="instructor.image"
+                  alt=""
+                  class="pending-pic border border-dark rounded-circle"
+                />
+                <h6 class="text-secondary user-email">
+                  {{ instructor.email }}
+                </h6>
+                <button class="btn btn-sm btn-success float-right" (click)="approve(instructor)">
+                  Accept
+                </button>
+              </div>
+            </div>
         </li>
       </ul>
     </div>

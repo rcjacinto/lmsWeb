@@ -257,7 +257,7 @@ export class LoginComponent implements OnInit {
               last: lname,
               mi: ''
             },
-            status: 0,
+            status: 1,
             address: '',
             dob: new Date(),
             gender: '',
