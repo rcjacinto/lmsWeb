@@ -2,10 +2,10 @@
 <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="row">
-    <div class="col-md-10" *ngIf="selectedClass?.id != ''">
+    <div class="col-md-12" *ngIf="selectedClass?.id != ''">
       <!-- Add post -->
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-10">
           <div class="card p-1 mb-2">
             <div class="card">
               <textarea [(ngModel)]="message" rows="3" class="w-100 p-2"></textarea>
@@ -179,7 +179,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-10" *ngIf="selectedClass?.id == ''">
+    <div class="col-md-12" *ngIf="selectedClass?.id == ''">
       <div class="card mb-2 pt-2" *ngIf="postsList.length == 0">
         <h1 class="text-center">
           <i class="icon fa fa-address-card text-primary"></i>

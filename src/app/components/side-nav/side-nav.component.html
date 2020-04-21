@@ -145,11 +145,9 @@
         <button
           type="button"
           class="list-group-item list-group-item-action"
-        >
-        <!--
           [routerLink]="['/grades']"
           routerLinkActive="router-link-active"
-         -->
+        >
           <i [class]="'icon fa fa-calculator mr-3 text-' + selectedClass.color"></i
           ><span class="">Grades</span>
         </button>
@@ -199,11 +197,9 @@
         <button
           type="button"
           class="list-group-item list-group-item-action"
-        >
-        <!--
           [routerLink]="['/view-student-grade']"
           routerLinkActive="router-link-active"
-         -->
+        >
           <i [class]="'icon fa fa-calculator mr-3 text-' + selectedClass.color"></i
           ><span class="">Grades</span>
         </button>
@@ -213,7 +209,7 @@
           [routerLink]="['/view-student-grade']"
           routerLinkActive="router-link-active"
         >
-          <i [class]="'icon ion-md-file mr-3 text-' + selectedClass.color"></i
+          <i [class]="'icon fa fa-file mr-3 text-' + selectedClass.color"></i
           ><span class="">Teacher's Evaluation</span>
         </button>
       </div>
@@ -426,23 +422,6 @@
   </div>
   </div>
   <!-- Profile | Messages | About -->
-  <!-- Logout -->
-
-  <div class="card mt-2">
-    <div class="card-body p-0">
-      <div class="list-group">
-        <button
-          type="button"
-          class="list-group-item list-group-item-action"
-          (click)="logOut()"
-        >
-          <i class="icon ion-md-log-out  mr-3"></i><span class="">Logout</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Parent -->
 <div class="main" *ngIf="user.role === 'parent'">
   <div class="card ">
