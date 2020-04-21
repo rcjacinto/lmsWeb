@@ -43,6 +43,7 @@ export class LibraryComponent implements OnInit {
             .getActivityByClass(this.selectedClass.id)
             .subscribe(list => {
               this.allActivities = list;
+              console.log(list,'list');
               this.activityList = this.allActivities.filter(
                 li => li.term == this.term
               );
