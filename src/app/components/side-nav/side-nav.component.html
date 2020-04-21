@@ -190,6 +190,15 @@
           <i [class]="'icon ion-md-pie mr-3 text-' + selectedClass.color"></i
           ><span class="">My Grades</span>
         </button>
+        <button
+          type="button"
+          class="list-group-item list-group-item-action"
+          [routerLink]="['/view-student-grade']"
+          routerLinkActive="router-link-active"
+        >
+          <i [class]="'icon ion-md-file mr-3 text-' + selectedClass.color"></i
+          ><span class="">Teacher's Evaluation</span>
+        </button>
       </div>
     </div>
   </div>

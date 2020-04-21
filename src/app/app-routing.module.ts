@@ -24,6 +24,8 @@ import { StudentParentsComponent } from './layout/student-parents/student-parent
 import { ViewStudentActivityComponent } from './components/view-student-activity/view-student-activity.component';
 import { StudentGradesComponent } from './layout/student-grades/student-grades.component';
 import { MyStudentComponent } from './layout/my-student/my-student.component';
+import { TeacherEvalComponent } from './components/teacher-eval/teacher-eval.component';
+import { StudentEvalComponent } from './components/student-eval/student-eval.component';
 
 const routes: Routes = [
   {
@@ -149,7 +151,18 @@ const routes: Routes = [
     path: 'view-my-student',
     component: MyStudentComponent,
     canActivate: [AuthGuard]
-  }
+  },
+  {
+    path: 'teacher-eval',
+    component: TeacherEvalComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'student-eval',
+    component: StudentEvalComponent,
+    canActivate: [AuthGuard]
+  },
+
 ];
 
 @NgModule({
