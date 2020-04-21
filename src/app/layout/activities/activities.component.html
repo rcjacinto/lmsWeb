@@ -9,11 +9,11 @@
 <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="row">
-    <div class="col-md-3" *ngIf="!isOnView">
-      <div class="card-body p-0">
-        <ul class="list-group">
+    <div class="col-md-12 mb-4" *ngIf="!isOnView">
+        <ul class="list-group-horizontal" style="width:inherit;">
           <li
             class="list-group-item cursor"
+            style="width:25%;"
             (click)="!loading ? setSelectedTerm('prelim') : ''"
             [ngClass]="{ 'bg-primary text-dark': term == 'prelim' }"
           >
@@ -21,6 +21,7 @@
           </li>
           <li
             class="list-group-item cursor"
+            style="width:25%;"
             (click)="!loading ? setSelectedTerm('midterm') : ''"
             [ngClass]="{ 'bg-primary text-dark': term == 'midterm' }"
           >
@@ -28,6 +29,7 @@
           </li>
           <li
             class="list-group-item cursor"
+            style="width:25%;"
             (click)="!loading ? setSelectedTerm('pre-finals') : ''"
             [ngClass]="{ 'bg-primary text-dark': term == 'pre-finals' }"
           >
@@ -35,15 +37,15 @@
           </li>
           <li
             class="list-group-item cursor"
+            style="width:25%;"
             (click)="!loading ? setSelectedTerm('finals') : ''"
             [ngClass]="{ 'bg-primary text-dark': term == 'finals' }"
           >
             Finals
           </li>
         </ul>
-      </div>
     </div>
-    <div class="col-md-9" *ngIf="!isOnView">
+    <div class="col-md-12" *ngIf="!isOnView">
       <!-- activity list -->
       <div class="activity-list" *ngIf="!loading">
         <div

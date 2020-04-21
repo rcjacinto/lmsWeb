@@ -2,7 +2,15 @@
   margin-left: 250px;
   padding: 80px 20px;
 }
+ul.list-group:after {
+  clear: both !important;
+  display: block !important;
+  content: "" !important;
+}
 
+.list-group-item {
+    float: left !important;
+}
 .profile-img {
   width: 70px;
 }

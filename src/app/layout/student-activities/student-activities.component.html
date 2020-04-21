@@ -1,6 +1,7 @@
 <app-top-nav title=""> </app-top-nav> <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="container">
+    <h3>Activities</h3>
     <div *ngIf="!loading && !onView">
       <div
         class="card cursor p-2 mb-2 text-dark"
@@ -21,11 +22,11 @@
             ></i>
           </div>
           <div class="ml-2">
-            <div>
-              {{ submit.activity.title }}
+            <div class="text-bold">
+              <b>{{ submit.activity.title }}</b>
             </div>
             <div class="text-capitalize">
-              {{ submit.activity.type }} | {{ submit.activity.term }}
+              {{ submit.activity.type }} | <button class="btn btn-primary btn-sm" style="padding:0px 10px;text-transform: uppercase;">{{ submit.activity.term }}</button>
             </div>
             <div>
               Your Score:
