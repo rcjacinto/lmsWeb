@@ -51,8 +51,8 @@
         <div
           class="card p-3 btn text-left mb-2"
           *ngFor="let activity of activityList"
+          (click)="setSelectedActivity(activity)"
         >
-        <!-- (click)="setSelectedActivity(activity)" -->
         <div class="row">
           <div class="col-md-2">
             <span class="badge badge-success text-capitalize">{{ activity.type }}</span>
@@ -218,7 +218,11 @@
         </p>
       </div>
     </div>
-    <div class="col-md-10" *ngIf="isOnView">
+    <div class="col-md-12" *ngIf="isOnView">
+      <a href="javascript:void(0);" (click)="clearSelectedActivity()" class="mb-4">
+        Back to List
+      </a>
+      <hr/>
       <div *ngIf="!loading">
         <app-view-activity
           [activity]="selectedActivity"
@@ -226,34 +230,7 @@
           [selectedClass]="selectedClass"
         >
         </app-view-activity
-        ><button (click)="clearSelectedActivity()" class="btn btn-dark w-100">
-          Back
-        </button>
-      </div>
-    </div>
-    <div class="col-md-4" *ngIf="isOnView">
-      <div class="card bg-primary">
-        <div class="card-header text-dark">
-          <i class="fa fa-calendar-check-o fa-fw" aria-hidden="true"></i>
-          Submits
-        </div>
-        <div class="card-body p-0">
-          <ul class="list-group">
-            <li
-              class="list-group-item text-secondary"
-              *ngIf="submitList?.length == 0"
-            >
-              No Submissions yet
-            </li>
-            <li
-              class="list-group-item cursor"
-              *ngFor="let submit of submitList"
-            >
-              {{ submit.student.student_number }} |
-              {{ submit.student.name.first }} {{ submit.student.name.last }}
-            </li>
-          </ul>
-        </div>
+        >
       </div>
     </div>
   </div>

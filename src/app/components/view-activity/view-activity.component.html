@@ -1,31 +1,31 @@
-<div class="chart mb-3 card">
-  <div class="card-header bg-primary">
-    <p class="text-center m-0 text-center text-dark">Exam Pie Chart</p>
+<div class="row">
+  <div class="col-md-4">
+    <div class="chart mb-3 card">
+    <div class="card-header bg-light">
+      <p class="text-center m-0 text-center text-dark">Overview</p>
+    </div>
+    <div class="card-body">
+      <canvas
+        baseChart
+        [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [colors]="pieChartColors"
+        [legend]="pieChartLegend"
+      >
+      </canvas>
+    </div>
   </div>
-  <div class="card-body">
-    <canvas
-      baseChart
-      [data]="pieChartData"
-      [labels]="pieChartLabels"
-      [chartType]="pieChartType"
-      [options]="pieChartOptions"
-      [colors]="pieChartColors"
-      [legend]="pieChartLegend"
-    >
-    </canvas>
-  </div>
-</div>
-
-<div class="card mb-3">
   <table class="table">
     <thead>
-      <tr class="bg-primary">
-        <th colspan="13" class="text-center text-dark">Item Analysis</th>
+      <tr class="bg-light">
+        <th colspan="13" class="text-center text-dark">Question Statistics</th>
       </tr>
       <tr>
         <th>#</th>
-        <th class="text-center">Correct Responses</th>
-        <th class="text-center">Incorrect Responses</th>
+        <th class="text-center">Correct</th>
+        <th class="text-center">Incorrect</th>
       </tr>
     </thead>
     <tbody>
@@ -42,15 +42,14 @@
     </tbody>
   </table>
 </div>
-
-<div class="card mb-3">
+<div class="col-md-8">
   <table class="table">
     <thead>
-      <tr class="bg-primary">
-        <th colspan="13" class="text-center text-dark">Submit List</th>
+      <tr class="bg-light">
+        <th colspan="13" class="text-center text-dark">Student List</th>
       </tr>
       <tr>
-        <th>ID</th>
+        <th>#</th>
         <th>Name</th>
         <th>Score</th>
         <th></th>
@@ -60,15 +59,16 @@
       <tr *ngFor="let submit of submits">
         <td>{{ submit.student.student_number }}</td>
         <td>{{ submit.student.name.first }} {{ submit.student.name.last }}</td>
-        <td>{{ submit.score }} / {{ submit.total_items }} Points</td>
+        <td>{{ submit.score }}</td>
         <td>
-          <button class="btn btn-sm btn-primary" (click)="viewActivity(submit)">
+          <button class="btn btn-sm btn-green" (click)="viewActivity(submit)">
             View
           </button>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
 </div>
 <ng-template #answersModal let-c="close" let-d="dismiss">
   <div class="modal-body">

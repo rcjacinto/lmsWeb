@@ -38,8 +38,8 @@ export class ViewActivityComponent implements OnInit {
   };
   public pieChartLabels: Label[] = ["Passed", "Failed", "Unsubmitted"];
   public pieChartData: number[] = [0, 0, 0];
-  public pieChartType: ChartType = "pie";
-  public pieChartLegend = true;
+  public pieChartType: ChartType = "bar";
+  public pieChartLegend = false;
   public pieChartColors = [
     {
       backgroundColor: [
