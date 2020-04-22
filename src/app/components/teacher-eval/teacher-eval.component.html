@@ -1,1 +1,156 @@
-<p>teacher-eval works!</p>
+<app-top-nav
+  title="Manage Evaluation"
+>
+</app-top-nav>
+<app-side-nav> </app-side-nav>
+<div class="main">
+  <!-- Tabs -->
+  <div class="row">
+    <div class="col-md-12 mb-4">
+      <h3>Manage Evaluation</h3>
+      <ul class="nav nav-tabs nav-fill">
+        <li class="nav-item">
+          <a class="nav-link"
+          [ngClass]="{
+            active: selectedTab === 1
+          }"
+          (click)="setSelectedTab(1)"
+           href="javascript:void(0);"><b>Evaluation List</b></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"
+          [ngClass]="{
+            active: selectedTab === 2
+          }"
+          (click)="setSelectedTab(2)"
+           href="javascript:void(0);"><b>Questionnaire</b></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Result -->
+  <div class="row" *ngIf="selectedTab===1">
+    <div class="col-md-12">
+      <table class="table table-light table-striped">
+        <thead>
+          <tr>
+            <th class="text-center" scope="col">Instructors Name</th>
+            <th class="text-center" scope="col">Class ID</th>
+            <th class="text-center" scope="col">Rating</th>
+            <th class="text-center" scope="col">Action</th>
+          </tr>
+        </thead>
+        </table>
+    </div>
+  </div>
+  <!-- Questionaires -->
+  <div class="row" *ngIf="selectedTab===2">
+    <div class="col-md-12">
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <button class="btn btn-success" (click)="openModal(newEval)"><i class="icon fa fa-plus mr-2"></i>New</button>
+        </div>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Question</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let quest of questionaire">
+            <td><small><a href="javascript:void(0)" class="text-primary">{{quest.id}}</a></small></td>
+            <td><small>{{quest.question}}</small></td>
+            <td><b>{{quest.status}}</b></td>
+            <td><button class="btn btn-success btn-sm" (click)="editModal(editEval, quest)">Edit</button></td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<ng-template #newEval let-c="close" let-d="dismiss">
+  <div class="modal-header bg-primary">
+    <h4 class="modal-title text-light">
+     Evaluation Questionaire
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    >
+      <span aria-hidden="true" class="text-light">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <textarea class="form-control" [(ngModel)]="question" placeholder="Evaluation Question"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="addQuestion()"
+    >
+      Confirm
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #editEval let-c="close" let-d="dismiss">
+  <div class="modal-header bg-primary">
+    <h4 class="modal-title text-light">
+     Evaluation Questionaire
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    >
+      <span aria-hidden="true" class="text-light">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" *ngIf="editQuestionaire">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="nav nav-pills nav-fill mb-4">
+          <li class="nav-item">
+            <a class="nav-link"
+            [ngClass]="{
+              active: editQuestionaire.status == 'Active'
+            }"
+            (click)="toggleStatus(1)"
+             href="javascript:void(0);"><b>Active</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"
+            [ngClass]="{
+              active: editQuestionaire.status == 'Inactive'
+            }"
+            (click)="toggleStatus(0)"
+             href="javascript:void(0);"><b>Inactive</b></a>
+          </li>
+        </ul>
+        <textarea class="form-control" [(ngModel)]="editQuestionaire.question" placeholder="Evaluation Question"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="updateQuestion()"
+    >
+      Confirm
+    </button>
+  </div>
+</ng-template>

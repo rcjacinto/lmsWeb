@@ -389,12 +389,12 @@
           <a
             href="#classes"
             data-toggle="collapse"
-            aria-expanded="false"
+            aria-expanded="true"
             class="list-group-item list-group-item-action text-primary dropdown-toggle"
             ><i class="icon ion-md-people mr-3"></i>
             Records
           </a>
-          <ul class="collapse list-unstyled bg-side" id="classes">
+          <ul class="collapse list-unstyled bg-side show" id="classes">
             <li>
               <button
                 type="button"
@@ -404,6 +404,17 @@
               >
                 <i class="icon ion-md-contact  mr-3"></i
                 ><span class="">Manage Instructors</span>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="list-group-item list-group-item-action"
+                [routerLink]="['/teacher-eval']"
+                routerLinkActive="router-link-active"
+              >
+                <i class="icon fa fa-file  mr-3"></i
+                ><span class="">Manage Evaluation</span>
               </button>
             </li>
           </ul>
@@ -416,6 +427,19 @@
           <i class="icon ion-md-contacts  mr-3"></i
           ><span class="">Student</span>
         </button> -->
+        </div>
+      </div>
+      <div class="card mt-2">
+        <div class="card-body p-0">
+          <div class="list-group">
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              (click)="logOut()"
+            >
+              <i class="icon ion-md-log-out  mr-3"></i><span class="">Logout</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
