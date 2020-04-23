@@ -4,6 +4,7 @@ import { selectUser, selectClass, RootState } from 'src/app/store';
 import { ClassService } from 'src/app/services/class.service';
 import { EvaluationService } from 'src/app/services/evaluation.service';
 import { EvaluatedService } from 'src/app/services/evaluated.service';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-student-eval',
@@ -19,10 +20,12 @@ export class StudentEvalComponent implements OnInit {
   evalInfo : any = null;
   questionInfo: any = null;
   dataInfo : any = [];
+  comments: any = [];
   constructor(private classes: ClassService,
     private store: Store<RootState>,
     private evalQuestion: EvaluationService,
-    private evaluated: EvaluatedService
+    private evaluated: EvaluatedService,
+    public toastr: ToastrService
     ) { }
 
   ngOnInit() {
@@ -41,9 +44,12 @@ export class StudentEvalComponent implements OnInit {
     }
   }
   getEvalInfo(userInfo,classInfo) {
+    this.userInfo = userInfo;
+    this.classInfo = classInfo;
     this.evaluated.getEvalByInfo(userInfo.id,classInfo.id).subscribe(res=>{
+      console.log(res);
       if (res.length!==0) {
-        this.evalInfo = res;
+        this.evalInfo = res[0];
       } else {
         this.getEvalQuestion();
       }
@@ -65,7 +71,38 @@ export class StudentEvalComponent implements OnInit {
     this.questionInfo[id].answer = val;
   }
   submitEval() {
-    console.log(this.questionInfo,this.userInfo,this.classInfo);
+    let totalAns = 0;
+    let validForm = 0;
+    let totalQ = this.questionInfo.length;
+    let totalScore = 0;
+    this.questionInfo.filter(f=>{
+      if(f.answer===0){
+        validForm = 1;
+      }
+      totalAns += f.answer;
+    });
+    if(validForm){
+      this.toastr.error('Kindly select the corresponding rating for each item!');
+    }else{
+      totalScore = totalAns / totalQ;
+      console.log(totalScore,this.comments);
+      let payload = {
+        id:'',
+        student_id:this.userInfo.id,
+        class_id:this.classInfo.id,
+        instructor_id:this.classInfo.instructor.id,
+        total_rating: totalScore,
+        date_rated: new Date(),
+        eval_data: this.questionInfo,
+        comments: this.comments
+      }
+      this.evaluated.addEval(payload).then(res=>{
+        payload.id = res.id
+        this.evaluated.updateEval(payload);
+        this.toastr.success("Class Instructor Evaluated");
+        this.getEvalInfo(this.userInfo,this.classInfo);
+      })
+    }
   }
 
 }

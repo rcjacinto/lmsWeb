@@ -5,5 +5,6 @@ export interface Evaluated {
   instructor_id:any,
   total_rating:any,
   date_rated:any,
-  eval_data:any
+  eval_data:any,
+  comments:any
 }

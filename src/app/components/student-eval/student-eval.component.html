@@ -7,14 +7,36 @@
 <div *ngIf="evalInfo">
   <div class="row">
     <div class="col-md-12 text-center">
-      <h3>Evaluation already Submitted</h3>
+      <h3>Evaluation Submitted</h3>
+      <h4><font [color]="classInfo.color">{{classInfo.instructor.name}} | {{classInfo.name}}</font></h4>
+      <hr/>
+      <div class="row">
+        <div class="col-md-8">
+          <h5>Evaluation Overview</h5>
+          <table class="table table-striped pa-4">
+            <tr>
+              <td>Question</td>
+              <td>Rating</td>
+            </tr>
+            <tr *ngFor="let ans of evalInfo.eval_data;">
+              <td class="text-left">{{ans.question}}</td>
+              <td class="text-center" >{{ans.answer}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h4 class="mb-10">Submitted Score: <b>{{evalInfo.total_rating}}</b></h4>
+          <h6 class="text-left"><b>Your Remarks:</b> {{evalInfo.comments}}</h6>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <div *ngIf="!evalInfo">
   <div class="row">
     <div class="col-md-12 text-center">
-      <h3>Evaluation Questionnaire</h3>
+      <h3>Evaluation Form</h3>
+      <h4><font [color]="classInfo.color">{{classInfo.instructor.name}} | {{classInfo.name}}</font></h4>
     </div>
     <table class="table table-striped pa-4">
       <tr class="text-center">
@@ -62,6 +84,10 @@
     </table>
   </div>
   <div class="row">
+    <div class="col-md-12 mb-4">
+      <hr/>
+      <textarea [(ngModel)]="comments" rows="3" class="form-control" placeholder="Remarks"></textarea>
+    </div>
     <div class="col-md-10"><br/></div>
     <div class="col-md-2 text-right">
       <button class="btn btn-success btn-block" (click)="submitEval()">Evaluate</button>
