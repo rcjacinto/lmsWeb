@@ -1,1 +1,71 @@
-<p>student-eval works!</p>
+<app-top-nav
+  title="Manage Evaluation"
+>
+</app-top-nav>
+<app-side-nav> </app-side-nav>
+<div class="main">
+<div *ngIf="evalInfo">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3>Evaluation already Submitted</h3>
+    </div>
+  </div>
+</div>
+<div *ngIf="!evalInfo">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3>Evaluation Questionnaire</h3>
+    </div>
+    <table class="table table-striped pa-4">
+      <tr class="text-center">
+        <th>Question</th>
+        <th>Rating</th>
+      </tr>
+      <tr *ngFor="let qs of questionInfo;let i = index">
+        <td>{{qs.question}}</td>
+        <td class="answer">
+          <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a class="nav-link"
+              [ngClass]="{
+                active: qs.answer === 5
+              }"
+              (click)="toggleAns(5, i)" href="javascript:void(0);"><b>5</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+              [ngClass]="{
+                active: qs.answer === 4
+              }" (click)="toggleAns(4, i)" href="javascript:void(0);"><b>4</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+              [ngClass]="{
+                active: qs.answer === 3
+              }" (click)="toggleAns(3, i)" href="javascript:void(0);"><b>3</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+              [ngClass]="{
+                active: qs.answer === 2
+              }" (click)="toggleAns(2, i)" href="javascript:void(0);"><b>2</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+              [ngClass]="{
+                active: qs.answer === 1
+              }" (click)="toggleAns(1,i)" href="javascript:void(0);"><b>1</b></a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="row">
+    <div class="col-md-10"><br/></div>
+    <div class="col-md-2 text-right">
+      <button class="btn btn-success btn-block" (click)="submitEval()">Evaluate</button>
+    </div>
+  </div>
+</div>
+</div>
