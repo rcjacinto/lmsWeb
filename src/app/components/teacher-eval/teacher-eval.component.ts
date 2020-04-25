@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EvaluationService } from 'src/app/services/evaluation.service';
+import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from "ngx-toastr";
+import { EvaluatedService } from 'src/app/services/evaluated.service';
 
 @Component({
   selector: 'app-teacher-eval',
@@ -13,12 +15,42 @@ export class TeacherEvalComponent implements OnInit {
   question:any = null;
   questionaire: any = null;
   editQuestionaire: any = null;
+  instructorList: any = null;
   constructor(
     private config: NgbModalConfig,
     private evaluate: EvaluationService,
+    private evaluated: EvaluatedService,
     private modalService: NgbModal,
     private toastr: ToastrService,
-    ) { }
+    private userS: UserService,
+    ) {
+      this.userS.getApprovedInstructor().subscribe(instructors => {
+        this.instructorList = instructors;
+        this.instructorList.map(insResult=>{
+          insResult.rating = 0;
+          insResult.total_rating = 0;
+          insResult.rating_data = [];
+          this.evaluated.getEvalByInstructor(insResult.id).subscribe(res=>{
+            let total = 0;
+            let avg = 0
+            if(res.length !==0){
+            let getCount = res;
+            insResult.rating_data = res;
+            insResult.total_rating = res.length;
+              getCount.filter(e=>{
+                total += e.total_rating
+                avg = total / res.length
+                insResult.rating = avg;
+              });
+            }
+          });
+        });
+        this.instructorList.sort((a,b)=>{
+          return a.rating - b.rating;
+        })
+        console.log(this.instructorList);
+      });
+    }
 
   ngOnInit() {
     this.evaluate.getEval().subscribe(res=>{

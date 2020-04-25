@@ -2,7 +2,8 @@
 <app-side-nav> </app-side-nav>
 <div class="main">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-12">
+      <h5>Class List</h5>
       <div
         class="card bg-light text-center mb-2 p-3"
         *ngIf="!loading && members.length == 0"
@@ -55,7 +56,7 @@
               {{ member.student_number }}
               {{ member.course ? '| ' + member.course : '' }}
             </p>
-            <i class="fa fa-id-badge stud-logo"></i>
+            <i class="fa fa-user stud-logo"></i>
           </div>
         </div>
       </div>

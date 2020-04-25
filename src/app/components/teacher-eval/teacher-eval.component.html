@@ -31,16 +31,36 @@
   <!-- Result -->
   <div class="row" *ngIf="selectedTab===1">
     <div class="col-md-12">
-      <table class="table table-light table-striped">
-        <thead>
-          <tr>
-            <th class="text-center" scope="col">Instructors Name</th>
-            <th class="text-center" scope="col">Class ID</th>
-            <th class="text-center" scope="col">Rating</th>
-            <th class="text-center" scope="col">Action</th>
-          </tr>
-        </thead>
-        </table>
+      <div class="accordion" id="instructorList">
+        <div class="row">
+          <div class="col-md-8 text-center"><h4>Instructor</h4></div>
+          <div class="col-md-4 text-center"><h4>Rating</h4></div>
+        </div>
+        <div class="card" *ngFor="let inst of instructorList;let i = index">
+          <div class="card-header bg-white" [id]="inst.id+'_'+i" data-toggle="collapse" [attr.data-target]="'#'+inst.id" aria-expanded="true" [attr.aria-controls]="inst.id">
+            <div class="row">
+              <div class="col-md-8"><h6 class="text-primary"><img [src]="inst.image" class="border border-success rounded-circle mr-4" style="width:32px"/>{{inst.name.last}},{{inst.name.last}}</h6></div>
+              <div class="col-md-4 text-center align-middle"><h4>{{inst.rating}} / 5</h4></div>
+            </div>
+          </div>
+
+          <div [id]="inst.id" class="collapse" [attr.aria-labelledby]="inst.id" data-parent="#instructorList">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4"><b>Number of Ratings:</b> {{inst.total_rating}}</div>
+                <div class="col-md-6">
+                  <b>Comments / Remarks:</b>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item" *ngFor="let rates of inst.rating_data">
+                      {{rates.comments}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <!-- Questionaires -->

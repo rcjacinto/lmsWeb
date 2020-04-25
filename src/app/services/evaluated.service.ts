@@ -25,6 +25,20 @@ export class EvaluatedService {
   updateEval(evaluation: Evaluated) {
     return this.evalCollection.doc(evaluation.id).update(evaluation);
   }
+  getEvalByInstructor(instructorId:any){
+    return this.db.collection<Evaluated>('evaluated', ref=>
+    ref
+    .where('instructor_id', '==', instructorId)
+    ).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    )
+  }
   getEvalByInfo(studentId: any,classId:any) {
     return this.db
       .collection<Evaluated>('evaluated', ref =>
