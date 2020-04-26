@@ -71,7 +71,7 @@
           [routerLink]="['/dashboard']"
           routerLinkActive="router-link-active"
         >
-          <i [class]="'icon ion-md-school mr-3 text-' + selectedClass.color"></i
+          <i [class]="'icon fa fa-columns mr-3 text-' + selectedClass.color"></i
           ><span class="">Dashboard</span>
         </button>
         <button
@@ -81,7 +81,7 @@
           routerLinkActive="router-link-active"
         >
           <i
-            [class]="'icon ion-ios-contacts mr-3 text-' + selectedClass.color"
+            [class]="'icon fa fa-address-card mr-3 text-' + selectedClass.color"
           ></i
           ><span class="">Students</span>
         </button>
@@ -138,7 +138,7 @@
           routerLinkActive="router-link-active"
         >
           <i
-            [class]="'icon ion-ios-peoples mr-3 text-' + selectedClass.color"
+            [class]="'icon fa fa-book-open mr-3 text-' + selectedClass.color"
           ></i
           ><span class="">Collections</span>
         </button>
@@ -167,7 +167,7 @@
           [routerLink]="['/dashboard']"
           routerLinkActive="router-link-active"
         >
-          <i [class]="'icon ion-md-school mr-3 text-' + selectedClass.color"></i
+          <i [class]="'icon fa fa-columns mr-3 text-' + selectedClass.color"></i
           ><span class="">Dashboard</span>
         </button>
         <button
@@ -317,7 +317,7 @@
           routerLinkActive="router-link-active"
           *ngIf="user.role === 'student'"
         >
-          <i class="icon ion-ios-contacts  mr-3"></i
+          <i class="icon fa fa-address-card  mr-3"></i
           ><span class="">Parents</span>
         </button> -->
 
@@ -469,7 +469,7 @@
           routerLinkActive="router-link-active"
           *ngIf="!loading"
         >
-          <i class="icon ion-ios-contacts  mr-3"></i
+          <i class="icon fa fa-address-card  mr-3"></i
           ><span class=""
             >{{ student?.name.first }} {{ student?.name.last }}</span
           >
