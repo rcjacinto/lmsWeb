@@ -26,6 +26,7 @@ import { StudentGradesComponent } from './layout/student-grades/student-grades.c
 import { MyStudentComponent } from './layout/my-student/my-student.component';
 import { TeacherEvalComponent } from './components/teacher-eval/teacher-eval.component';
 import { StudentEvalComponent } from './components/student-eval/student-eval.component';
+import { GradeOverviewComponent } from './components/grade-overview/grade-overview.component';
 
 const routes: Routes = [
   {
@@ -160,6 +161,11 @@ const routes: Routes = [
   {
     path: 'student-eval',
     component: StudentEvalComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'grade-overview',
+    component: GradeOverviewComponent,
     canActivate: [AuthGuard]
   },
 

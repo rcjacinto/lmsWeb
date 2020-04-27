@@ -387,10 +387,9 @@
       <div class="list-group">
         <div class="list-group">
           <a
-            href="#classes"
-            data-toggle="collapse"
+            href="javascript:void(0);"
             aria-expanded="true"
-            class="list-group-item list-group-item-action text-primary dropdown-toggle"
+            class="list-group-item list-group-item-action text-primary"
             ><i class="icon ion-md-people mr-3"></i>
             Records
           </a>
@@ -404,6 +403,17 @@
               >
                 <i class="icon ion-md-contact  mr-3"></i
                 ><span class="">Manage Instructors</span>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="list-group-item list-group-item-action"
+                [routerLink]="['/grade-overview']"
+                routerLinkActive="router-link-active"
+              >
+                <i class="icon fa fa-address-card  mr-3"></i
+                ><span class="">Performance Overview</span>
               </button>
             </li>
             <li>

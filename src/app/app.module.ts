@@ -61,6 +61,7 @@ import { ViewStudentParentListComponent } from "./layout/view-student-parent-lis
 import { ProgressBarModule } from "angular-progress-bar";
 import { TeacherEvalComponent } from './components/teacher-eval/teacher-eval.component';
 import { StudentEvalComponent } from './components/student-eval/student-eval.component';
+import { GradeOverviewComponent } from './components/grade-overview/grade-overview.component';
 const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 
 @NgModule({
@@ -99,7 +100,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     ViewInstructorClassesComponent,
     ViewStudentParentListComponent,
     TeacherEvalComponent,
-    StudentEvalComponent
+    StudentEvalComponent,
+    GradeOverviewComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,48 @@
+<app-top-nav
+  title="Manage Evaluation"
+>
+</app-top-nav>
+<app-side-nav> </app-side-nav>
+<div class="main">
+  <div class="accordion" id="instructorList">
+    <div class="row">
+      <div class="col-md-8 text-center"><h4>Class</h4></div>
+      <div class="col-md-4 text-center"><h4>Color</h4></div>
+    </div>
+    <div class="card" *ngFor="let inst of allClass;let i = index">
+      <div class="card-header bg-white" [id]="inst.id+'_'+i" data-toggle="collapse" [attr.data-target]="'#'+inst.id" aria-expanded="true" [attr.aria-controls]="inst.id">
+        <div class="row">
+          <div class="col-md-8"><h6><b>{{inst.code}}</b> - <span class="text-uppercase">{{inst.description}}</span></h6></div>
+          <div class="col-md-4 text-center align-middle"><h4><font [color]="inst.color"><i class="fa fa-adjust"></i></font></h4></div>
+        </div>
+      </div>
+
+      <div [id]="inst.id" class="collapse" [attr.aria-labelledby]="inst.id" data-parent="#instructorList">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <b>Students</b>
+                  <table class="table">
+                    <tr>
+                      <td>Name</td>
+                      <td>Prelim</td>
+                      <td>Midterm</td>
+                      <td>Pre-Finals</td>
+                      <td>Finals</td>
+                    </tr>
+                    <tr *ngFor="let student of inst.student_info">
+                    <td><img [src]="student.image" class="border border-success rounded-circle mr-4" style="width:32px"/><small>{{student.name.last}} {{student.name.first}}</small></td>
+                    <td>{{student.term[0].value}}</td>
+                    <td>{{student.term[1].value}}</td>
+                    <td>{{student.term[2].value}}</td>
+                    <td>{{student.term[3].value}}</td>
+
+                  </tr>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

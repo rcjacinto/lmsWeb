@@ -16,7 +16,7 @@ export class ClassService {
   userData$ = this.store.pipe(select(selectUser));
   private classCollection: AngularFirestoreCollection<Class>;
 
-  private classes: Observable<Class[]>;
+  public classes: Observable<Class[]>;
 
   constructor(public db: AngularFirestore, public store: Store<RootState>) {
     this.classCollection = db.collection<Class>('class');
@@ -31,7 +31,17 @@ export class ClassService {
       })
     );
   }
-
+  getClassOverview(){
+    return this.classCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+  }
   getAllclasses(user_id) {
     return this.db
       .collection<Class>('class', ref =>
